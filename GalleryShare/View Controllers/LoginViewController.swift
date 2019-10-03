@@ -25,7 +25,7 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        modalPresentationStyle = .fullScreen
         // Do any additional setup after loading the view.
         setUpElements()
 
@@ -63,6 +63,8 @@ class LogInViewController: UIViewController {
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 UserDefaults.standard.synchronize()
                 let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? HomeViewController
+                
+                homeViewController?.modalPresentationStyle = .fullScreen
                 
                 self.view.window?.rootViewController = homeViewController
                 self.view.window?.makeKeyAndVisible()

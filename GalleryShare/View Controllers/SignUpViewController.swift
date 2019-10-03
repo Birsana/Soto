@@ -32,6 +32,7 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var errorLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        modalPresentationStyle = .fullScreen
         setUpElements()
         ref = Database.database().reference()
         // Do any additional setup after loading the view.
@@ -70,7 +71,7 @@ class SignUpViewController: UIViewController {
                 usernameTaken = false
             }
         })
-      /**  ref!.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
+     /**  ref!.child("users").observeSingleEvent(of: DataEventType.value, with: { (snapshot) in
             
             if snapshot.hasChild(emailTrim!){
                 
@@ -137,6 +138,8 @@ class SignUpViewController: UIViewController {
                             
                             UserDefaults.standard.set(true, forKey: "isLoggedIn")
                             UserDefaults.standard.synchronize()
+                        UserDefaults.standard.set(true, forKey: "firstTime")
+                           UserDefaults.standard.synchronize()
                             self.transitiontoHome()
                         }
                         
@@ -158,11 +161,26 @@ class SignUpViewController: UIViewController {
         errorLabel.alpha = 1
     }
     func transitiontoHome(){
-        let homeViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? HomeViewController
+       if UserDefaults.standard.bool(forKey: "firstTime"){
+         
+      /**  let tempViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.temphomeViewController) as? FaceSubmitPageViewController
         
+        self.present(tempViewController!, animated: true, completion: nil) **/
+        
+                  let tempViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.firstLogIn) as? IntroPageViewController
+                                      tempViewController?.modalPresentationStyle = .fullScreen
+                                      view.window?.rootViewController = tempViewController
+                                      view.window?.makeKeyAndVisible()
+        
+        
+                    }
+        
+        else{
+        let homeViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? HomeViewController
+        homeViewController?.modalPresentationStyle = .fullScreen
         view.window?.rootViewController = homeViewController
         view.window?.makeKeyAndVisible()
-        
+        }
     }
   
 

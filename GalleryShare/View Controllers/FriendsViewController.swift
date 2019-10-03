@@ -21,6 +21,10 @@ class FriendsViewController: UIViewController {
         }
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
         UserDefaults.standard.synchronize()
+        let firstViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.firstViewController) as? ViewController
+              firstViewController?.modalPresentationStyle = .fullScreen
+              view.window?.rootViewController = firstViewController
+              view.window?.makeKeyAndVisible()
     }
     
     

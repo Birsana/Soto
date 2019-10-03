@@ -20,14 +20,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        if UserDefaults.standard.bool(forKey: "isLoggedIn"){
+   if UserDefaults.standard.bool(forKey: "firstTime"){
+            
+            let tempViewController = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.firstLogIn) as? IntroPageViewController
+                      tempViewController?.modalPresentationStyle = .fullScreen
+                      self.window?.rootViewController = tempViewController
+                      self.window?.makeKeyAndVisible()
+            
+              }
+     else if UserDefaults.standard.bool(forKey: "isLoggedIn"){
             
             let homeViewController = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? HomeViewController
-            
+            homeViewController?.modalPresentationStyle = .fullScreen
             self.window?.rootViewController = homeViewController
             self.window?.makeKeyAndVisible()
         }
-        
+      
         FirebaseApp.configure()
         return true
     }

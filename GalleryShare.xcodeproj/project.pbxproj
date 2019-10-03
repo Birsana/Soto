@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		670BEFE02325E01200A04E97 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670BEFDF2325E01200A04E97 /* Utilities.swift */; };
 		670BEFE22325E01900A04E97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670BEFE12325E01900A04E97 /* Constants.swift */; };
+		6734765D233B24AD005469FC /* FaceRecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6734765C233B24AD005469FC /* FaceRecViewController.swift */; };
+		67347663233D7FE0005469FC /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67347662233D7FE0005469FC /* PageCell.swift */; };
+		673476652341246E005469FC /* IntroPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 673476642341246E005469FC /* IntroPageViewController.swift */; };
+		67347667234124C6005469FC /* FR2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67347666234124C6005469FC /* FR2ViewController.swift */; };
+		6734766923412559005469FC /* FR3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6734766823412559005469FC /* FR3ViewController.swift */; };
+		6734766B234125E5005469FC /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6734766A234125E5005469FC /* GuideViewController.swift */; };
+		6734766D23430FA6005469FC /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6734766C23430FA6005469FC /* Checkbox.swift */; };
+		6734766F23446F6D005469FC /* SwipingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6734766E23446F6D005469FC /* SwipingController.swift */; };
 		6797F3882322E32B006A3C0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6797F3872322E32B006A3C0D /* AppDelegate.swift */; };
 		6797F38D2322E32B006A3C0D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6797F38B2322E32B006A3C0D /* Main.storyboard */; };
 		6797F38F2322E32D006A3C0D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6797F38E2322E32D006A3C0D /* Assets.xcassets */; };
@@ -54,6 +62,14 @@
 		535EDE7C4A859C70EDDE7339 /* Pods-GalleryShareUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryShareUITests.release.xcconfig"; path = "Target Support Files/Pods-GalleryShareUITests/Pods-GalleryShareUITests.release.xcconfig"; sourceTree = "<group>"; };
 		670BEFDF2325E01200A04E97 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		670BEFE12325E01900A04E97 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		6734765C233B24AD005469FC /* FaceRecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceRecViewController.swift; sourceTree = "<group>"; };
+		67347662233D7FE0005469FC /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
+		673476642341246E005469FC /* IntroPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroPageViewController.swift; sourceTree = "<group>"; };
+		67347666234124C6005469FC /* FR2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FR2ViewController.swift; sourceTree = "<group>"; };
+		6734766823412559005469FC /* FR3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FR3ViewController.swift; sourceTree = "<group>"; };
+		6734766A234125E5005469FC /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
+		6734766C23430FA6005469FC /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		6734766E23446F6D005469FC /* SwipingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipingController.swift; path = "GalleryShare/View Controllers/SwipingController.swift"; sourceTree = SOURCE_ROOT; };
 		6797F3842322E32B006A3C0D /* GalleryShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalleryShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6797F3872322E32B006A3C0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6797F38C2322E32B006A3C0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -123,6 +139,7 @@
 		670BEFDD2325DDEF00A04E97 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6734766E23446F6D005469FC /* SwipingController.swift */,
 				67BC22822327432800653900 /* ViewController.swift */,
 				67BC2286232743AA00653900 /* HomeViewController.swift */,
 				67BC2288232743C800653900 /* LogInViewController.swift */,
@@ -130,6 +147,11 @@
 				67BC2292232C5E8500653900 /* FriendsViewController.swift */,
 				67BC228C2328B21400653900 /* AddFriendsTableViewController.swift */,
 				67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */,
+				6734765C233B24AD005469FC /* FaceRecViewController.swift */,
+				673476642341246E005469FC /* IntroPageViewController.swift */,
+				67347666234124C6005469FC /* FR2ViewController.swift */,
+				6734766823412559005469FC /* FR3ViewController.swift */,
+				6734766A234125E5005469FC /* GuideViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -141,6 +163,8 @@
 				670BEFDF2325E01200A04E97 /* Utilities.swift */,
 				67BC2290232B757100653900 /* FriendCell.swift */,
 				67BC2298232E046A00653900 /* RequestCell.swift */,
+				67347662233D7FE0005469FC /* PageCell.swift */,
+				6734766C23430FA6005469FC /* Checkbox.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -441,16 +465,24 @@
 			files = (
 				670BEFE22325E01900A04E97 /* Constants.swift in Sources */,
 				67BC2299232E046A00653900 /* RequestCell.swift in Sources */,
+				6734766F23446F6D005469FC /* SwipingController.swift in Sources */,
 				67BC228D2328B21400653900 /* AddFriendsTableViewController.swift in Sources */,
 				67BC228B2327483B00653900 /* SignUpViewController.swift in Sources */,
+				6734766D23430FA6005469FC /* Checkbox.swift in Sources */,
 				670BEFE02325E01200A04E97 /* Utilities.swift in Sources */,
 				67BC2291232B757100653900 /* FriendCell.swift in Sources */,
+				67347667234124C6005469FC /* FR2ViewController.swift in Sources */,
+				67347663233D7FE0005469FC /* PageCell.swift in Sources */,
 				67BC22832327432800653900 /* ViewController.swift in Sources */,
 				67BC2293232C5E8500653900 /* FriendsViewController.swift in Sources */,
+				673476652341246E005469FC /* IntroPageViewController.swift in Sources */,
 				67BC2289232743C800653900 /* LogInViewController.swift in Sources */,
 				6797F3882322E32B006A3C0D /* AppDelegate.swift in Sources */,
 				67BC2297232DD7DA00653900 /* FriendRequestsTableViewController.swift in Sources */,
+				6734766923412559005469FC /* FR3ViewController.swift in Sources */,
+				6734766B234125E5005469FC /* GuideViewController.swift in Sources */,
 				67BC229C232F43C300653900 /* MainNavigationController.swift in Sources */,
+				6734765D233B24AD005469FC /* FaceRecViewController.swift in Sources */,
 				67BC2287232743AA00653900 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

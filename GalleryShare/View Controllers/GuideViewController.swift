@@ -1,20 +1,18 @@
 //
-//  ViewController.swift
+//  GuideViewController.swift
 //  GalleryShare
 //
-//  Created by Andre Birsan on 2019-09-09.
+//  Created by Andre Birsan on 2019-09-29.
 //  Copyright © 2019 Andre Birsan. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class GuideViewController: UIViewController {
 
-    @IBOutlet weak var signInButton: UIButton!
-    @IBOutlet weak var signUpButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+
         // Do any additional setup after loading the view.
     }
     

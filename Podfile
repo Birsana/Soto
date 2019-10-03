@@ -12,6 +12,7 @@ pod 'GoogleSignIn'
 pod 'Firebase/Core'
 pod 'Firebase/Firestore'
 pod 'Firebase/Database'
+
   target 'GalleryShareTests' do
     inherit! :search_paths
     # Pods for testing
