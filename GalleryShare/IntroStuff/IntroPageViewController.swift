@@ -17,7 +17,18 @@ var pic1Chose = false
 var pic2Chose = false
 var pic3Chose = false
 
-class IntroPageViewController: UIPageViewController, UIPageViewControllerDataSource {
+
+var f1pic = UIImage()
+var f2pic = UIImage()
+
+var appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
+
+
+
+class IntroPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    
+    
+    var pageControl = UIPageControl()
 
     lazy var viewControllerList:[UIViewController] = {
         let sb = UIStoryboard(name: "Main", bundle: nil)
@@ -26,17 +37,25 @@ class IntroPageViewController: UIPageViewController, UIPageViewControllerDataSou
         let vc3 = sb.instantiateViewController(withIdentifier: "third")
         let vc4 = sb.instantiateViewController(withIdentifier: "fourth")
         
-      
-        
+    
         
         return [vc1,  vc2, vc3, vc4]
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+     
+
 
         // Do any additional setup after loading the view.
         self.dataSource = self
+        self.delegate = self
+        configurePageControl()
         
 
         
@@ -45,6 +64,23 @@ class IntroPageViewController: UIPageViewController, UIPageViewControllerDataSou
             self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
         }
     }
+    
+    func configurePageControl(){
+        pageControl = UIPageControl(frame: CGRect(x: 0, y: UIScreen.main.bounds.maxY-50, width: UIScreen.main.bounds.width, height: 50))
+        pageControl.numberOfPages = viewControllerList.count
+        pageControl.currentPage = 0
+        pageControl.tintColor = UIColor.red
+        pageControl.pageIndicatorTintColor = UIColor.black
+        pageControl.currentPageIndicatorTintColor = UIColor.blue
+        self.view.addSubview(pageControl)
+    }
+    
+    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        let pageContentViewController = pageViewController.viewControllers![0]
+        self.pageControl.currentPage = viewControllerList.index(of: pageContentViewController)!
+    }
+    
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         

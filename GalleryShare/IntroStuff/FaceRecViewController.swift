@@ -8,15 +8,24 @@
 
 import UIKit
 
+extension UIImageView{
 
+    func asCircle(){
+        
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = self.frame.size.width / 2
+        
+    }
+}
 
-
-class FaceRecViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    
-    
-
+class FaceRecViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
+   
     @IBOutlet weak var imageToSelect: UIImageView!
+    var mypageview = IntroPageViewController()
     
+    
+   var selectedImage: UIImage?
+
     
     @IBOutlet weak var check: Checkbox!
     
@@ -26,6 +35,9 @@ class FaceRecViewController: UIViewController, UINavigationControllerDelegate, U
     
     override func viewDidLoad() {
         
+        //imageToSelect.frame = CGRect(x: 0,y: 0, width: 200, height: 200)
+        imageToSelect.asCircle()
+    
         super.viewDidLoad()
         check.borderStyle = .square
         check.checkmarkStyle = .tick
@@ -71,10 +83,9 @@ class FaceRecViewController: UIViewController, UINavigationControllerDelegate, U
     }
     */
     
-   
      func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-               var selectedImage: UIImage?
-                 if let editedImage = info[.editedImage] as? UIImage {
+             // var selectedImage: UIImage?
+                if let editedImage = info[.editedImage] as? UIImage {
                      selectedImage = editedImage
                      self.imageToSelect.image = selectedImage!
                      picker.dismiss(animated: true, completion: nil)
@@ -83,11 +94,16 @@ class FaceRecViewController: UIViewController, UINavigationControllerDelegate, U
                      self.imageToSelect.image = selectedImage!
                      picker.dismiss(animated: true, completion: nil)
                  }
+        
+       
+       
         pic1Chose = true
+        f1pic = selectedImage!
         print("1")
 
           }
     }
+
 
 
 

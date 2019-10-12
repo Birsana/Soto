@@ -10,6 +10,9 @@ import UIKit
 
 class FR2ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+
+    
+    var selectedImage: UIImage?
     
     @IBOutlet weak var imageSelect: UIImageView!
     
@@ -21,6 +24,7 @@ class FR2ViewController: UIViewController, UINavigationControllerDelegate, UIIma
        override func viewDidLoad() {
            
            super.viewDidLoad()
+           imageSelect.asCircle()
            check.borderStyle = .square
            check.checkmarkStyle = .tick
     
@@ -65,7 +69,7 @@ class FR2ViewController: UIViewController, UINavigationControllerDelegate, UIIma
     }
     
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            var selectedImage: UIImage?
+           // var selectedImage: UIImage?
               if let editedImage = info[.editedImage] as? UIImage {
                   selectedImage = editedImage
                   self.imageSelect.image = selectedImage!
@@ -77,6 +81,7 @@ class FR2ViewController: UIViewController, UINavigationControllerDelegate, UIIma
               }
     pic2Chose = true
     print("2")
+    f2pic = selectedImage!
 
        }
     
