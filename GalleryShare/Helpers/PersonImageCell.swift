@@ -7,7 +7,14 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseStorage
+import FirebaseDatabase
 
 class PersonImageCell: UICollectionViewCell {
-    
+
+    //var profilePic: UIImage!
+    var friendName: UILabel!
+
+     
 }

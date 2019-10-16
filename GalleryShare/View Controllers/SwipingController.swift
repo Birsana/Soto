@@ -9,7 +9,7 @@ import UIKit
 import Foundation
 
 class SwipingController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
-   
+    
     private let prevButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("PREV", for: .normal)
@@ -20,7 +20,6 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
     }()
     
     
-    
     private let nextButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("NEXT", for: .normal)
@@ -28,17 +27,17 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.systemPink, for: .normal)
         
-       // button.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
+        // button.addTarget(self, action: #selector(handleNext), for: .touchUpInside)
         
         return button
     }()
     
-  /**  @objc private func handleNext(){
-    var nextIndex = pageControl.currentPage + 1
-        nextIndex = 2
-        nextIndex = 3
-        
-    } **/
+    /**  @objc private func handleNext(){
+     var nextIndex = pageControl.currentPage + 1
+     nextIndex = 2
+     nextIndex = 3
+     
+     } **/
     
     private let pageControl: UIPageControl = {
         let pc = UIPageControl()
@@ -72,7 +71,7 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
         setupBottomControls()
         
         collectionView?.backgroundColor = .white
-        collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
+        //    collectionView?.register(PageCell.self, forCellWithReuseIdentifier: "cellId")
         collectionView?.isPagingEnabled = true
     }
     

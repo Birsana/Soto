@@ -8,6 +8,8 @@
 
 import UIKit
 
+//MAKE IT FIVE PICTURES, SAY ONLY NEED TO DO THIS ONCE, I THINK
+
 
 var check1Clicked = false
 var check2Clicked = false

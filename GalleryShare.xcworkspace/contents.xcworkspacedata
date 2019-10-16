@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/andreb/Desktop/GalleryShare/GalleryShare/PrivateViewController.swift">
+   </FileRef>
+   <FileRef
       location = "group:GalleryShare.xcodeproj">
    </FileRef>
    <FileRef

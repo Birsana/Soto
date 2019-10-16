@@ -15,7 +15,7 @@ extension FriendRequestsTableViewController: RequestCellDelegate{
     func declineFriend(requester: String, dbRef: DatabaseReference) {
         let user = Auth.auth().currentUser
         let uid = user?.uid
-        
+    
         dbRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
             let value = snapshot.value as? NSDictionary
             let username = value?["username"] as? String
@@ -62,7 +62,6 @@ extension FriendRequestsTableViewController: RequestCellDelegate{
                         let componentArray = myData.allKeys
                         let otherUID = componentArray.first as? String
                         
-                         //this why still, requester just a string, currentUser is user
                         let matchingRef = dbRef.child("Friends").child(username!).child(otherUID!)
                         let myDataRef2 = dbRef.child("users").child(otherUID!)
                         
@@ -96,10 +95,6 @@ extension FriendRequestsTableViewController: RequestCellDelegate{
       
     }
     
-
-    
-
-
 
 
 class FriendRequestsTableViewController: UITableViewController {
@@ -144,14 +139,6 @@ class FriendRequestsTableViewController: UITableViewController {
             }
         }
 
-    
-        
-    
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
     }
     

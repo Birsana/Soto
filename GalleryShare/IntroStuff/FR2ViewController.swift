@@ -29,8 +29,8 @@ class FR2ViewController: UIViewController, UINavigationControllerDelegate, UIIma
            check.checkmarkStyle = .tick
     
             check.valueChanged = { (isChecked) in
-                check2Clicked = true
                 check1Clicked = false
+                check2Clicked = !check2Clicked
                 check3Clicked = false
             }
            // Do any additional setup after loading the view.
@@ -39,7 +39,6 @@ class FR2ViewController: UIViewController, UINavigationControllerDelegate, UIIma
     
     override func viewWillAppear(_ animated: Bool) {
          if check1Clicked || check3Clicked{
-             
              check.isChecked = false
          }
      }

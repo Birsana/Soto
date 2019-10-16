@@ -20,36 +20,35 @@ class FR3ViewController: UIViewController, UINavigationControllerDelegate, UIIma
  var selectedImage: UIImage?
     
     @IBOutlet weak var check: Checkbox!
-    
-    
-    
     @IBOutlet weak var goNext: UIButton!
-    
     @IBOutlet weak var imageSelect: UIImageView!
     
-     var imagePicker = UIImagePickerController()
+    var imagePicker = UIImagePickerController()
     var anyCheck = false
        
        override func viewDidLoad() {
            super.viewDidLoad()
         
         imageSelect.asCircle()
-         let currentUserID = Auth.auth().currentUser?.uid
-         var DatabaseRef = Database.database().reference()
-         var StorageRef = Storage.storage().reference()
+        let currentUserID = Auth.auth().currentUser?.uid
+        var DatabaseRef = Database.database().reference()
+        var StorageRef = Storage.storage().reference()
         
         
               
-              if check1Clicked || check2Clicked || check3Clicked{
+        if check1Clicked || check2Clicked || check3Clicked{
                   anyCheck = true
               }
         
-        if !pic1Chose || !pic2Chose || !pic3Chose && anyCheck{
+        if !pic1Chose || !pic2Chose || !pic3Chose{
             goNext.isEnabled = false
-            print("p")
+            
+        }
+        else if !anyCheck{
+            goNext.isEnabled = false
         }
         else{
-            print("please")
+            
             goNext.isEnabled = true
         }
     
@@ -58,15 +57,15 @@ class FR3ViewController: UIViewController, UINavigationControllerDelegate, UIIma
         check.checkmarkStyle = .tick
         
            check.valueChanged = { (isChecked) in
-               check3Clicked = true
                check1Clicked = false
                check2Clicked = false
+               check3Clicked = !check3Clicked
            }
 
            // Do any additional setup after loading the view.
        }
 
-    override func viewWillAppear(_ animated: Bool) {
+  /**  override func viewWillAppear(_ animated: Bool) {
          if check1Clicked || check2Clicked{
                     
                     check.isChecked = false
@@ -82,28 +81,27 @@ class FR3ViewController: UIViewController, UINavigationControllerDelegate, UIIma
                        goNext.isEnabled = true
                    
                    }
-     }
+     }**/
+    
     
     override func viewDidAppear(_ animated: Bool) {
         
         
-        if check1Clicked || check2Clicked || check3Clicked{
-            anyCheck = true
-        }
-        
-        if !pic1Chose || !pic2Chose || !pic3Chose {
-                goNext.isEnabled = false
-                print("p")
-            }
+          if check1Clicked || check2Clicked || check3Clicked{
+                        anyCheck = true
+                    }
+              
+          if !pic1Chose || !pic2Chose || !pic3Chose{
+                  goNext.isEnabled = false
+                  
+              }
+         else if !anyCheck{
+                  goNext.isEnabled = false
+              }
           else{
-            if anyCheck{
-                print("please")
-                goNext.isEnabled = true
-            }
-            else{
-                goNext.isEnabled = false
-            }
-            }
+                  
+                  goNext.isEnabled = true
+              }
         
         }
     /*
@@ -146,10 +144,11 @@ class FR3ViewController: UIViewController, UINavigationControllerDelegate, UIIma
                picker.dismiss(animated: true, completion: nil)
            
            }
-         pic3Chose = true
+        pic3Chose = true
         if pic1Chose && pic2Chose && pic3Chose{
+            if anyCheck{
                 goNext.isEnabled = true
-                
+            }            
             }
 
         

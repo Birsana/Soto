@@ -43,7 +43,7 @@ class FaceRecViewController: UIViewController, UINavigationControllerDelegate, U
         check.checkmarkStyle = .tick
         
         check.valueChanged = { (isChecked) in
-               check1Clicked = true
+               check1Clicked = !check1Clicked
                check2Clicked = false
                check3Clicked = false
            }

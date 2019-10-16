@@ -138,8 +138,8 @@ class SignUpViewController: UIViewController {
                             
                             UserDefaults.standard.set(true, forKey: "isLoggedIn")
                             UserDefaults.standard.synchronize()
-                        UserDefaults.standard.set(true, forKey: "firstTime")
-                           UserDefaults.standard.synchronize()
+                            UserDefaults.standard.set(true, forKey: "firstTime")
+                            UserDefaults.standard.synchronize()
                             self.transitiontoHome()
                         }
                         
@@ -176,7 +176,7 @@ class SignUpViewController: UIViewController {
                     }
         
         else{
-        let homeViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? HomeViewController
+        let homeViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainTabViewController
         homeViewController?.modalPresentationStyle = .fullScreen
         view.window?.rootViewController = homeViewController
         view.window?.makeKeyAndVisible()

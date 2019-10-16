@@ -7,9 +7,23 @@
 //
 
 import UIKit
+import Firebase
+
+
+protocol SendCellDelegate {
+    func sendPic(sendTo: String)
+}
 
 class SendCell: UITableViewCell {
-
+    
+    @IBOutlet weak var sendPic: UIButton!
+    
+    @IBOutlet weak var profilePicture: UIImageView!
+    
+    @IBOutlet weak var username: UILabel!
+    
+    var delegate: SendCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -21,4 +35,9 @@ class SendCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    
+    @IBAction func sendPicTapped(_ sender: Any) {
+        delegate?.sendPic(sendTo: username.text!)
+    }
+    
 }

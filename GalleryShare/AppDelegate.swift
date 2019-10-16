@@ -8,7 +8,8 @@
 
 import UIKit
 import Firebase
-
+import Photos
+import AWSCore
 
 
 @UIApplicationMain
@@ -18,27 +19,83 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         
-   if UserDefaults.standard.bool(forKey: "firstTime"){
-            
-            let tempViewController = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.firstLogIn) as? IntroPageViewController
-                      tempViewController?.modalPresentationStyle = .fullScreen
-                      self.window?.rootViewController = tempViewController
-                      self.window?.makeKeyAndVisible()
-            
-              }
-     else if UserDefaults.standard.bool(forKey: "isLoggedIn"){
-            
-            let homeViewController = storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? HomeViewController
-            homeViewController?.modalPresentationStyle = .fullScreen
-            self.window?.rootViewController = homeViewController
-            self.window?.makeKeyAndVisible()
+        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2,
+        identityPoolId:"us-east-2:a42a1b9d-f776-4499-96bd-05c5f1c5e401")
+        let configuration = AWSServiceConfiguration(region:.USEast2, credentialsProvider:credentialsProvider)
+        AWSServiceManager.default().defaultServiceConfiguration = configuration
+
+       
+              let photos = PHPhotoLibrary.authorizationStatus()
+              if photos == .notDetermined {
+                  PHPhotoLibrary.requestAuthorization({status in
+                      if status == .authorized{
+                          
+                          if UserDefaults.standard.bool(forKey: "firstTime"){
+                                    
+                            let tempViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.firstLogIn) as? IntroPageViewController
+                                              tempViewController?.modalPresentationStyle = .fullScreen
+                                              self.window?.rootViewController = tempViewController
+                                              self.window?.makeKeyAndVisible()
+                                      }
+                             else if UserDefaults.standard.bool(forKey: "isLoggedIn"){
+                            let homeViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainTabViewController
+                                    homeViewController?.modalPresentationStyle = .fullScreen
+                                    self.window?.rootViewController = homeViewController
+                                    self.window?.makeKeyAndVisible()
+                            
+                                 
+                                }
+                      }
+                      else {
+                       
+                  /**      let tempViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.firstLogIn) as? IntroPageViewController
+                                                tempViewController?.modalPresentationStyle = .fullScreen
+                                               self.window?.rootViewController = tempViewController
+                                                    self.window?.makeKeyAndVisible()
+                          let alert = UIAlertController(title: "Photos Access Denied", message: "App needs access to photos library.", preferredStyle: .alert)
+                          alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.window?.rootViewController?.present(alert, animated: true, completion: nil)
+
+                              **/
+                      }
+                  })
+                
         }
+              else if photos == .authorized{
+                
+                  
+                if UserDefaults.standard.bool(forKey: "firstTime"){
+                                                                    
+                    let tempViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.firstLogIn) as? IntroPageViewController
+                         tempViewController?.modalPresentationStyle = .fullScreen
+                        self.window?.rootViewController = tempViewController
+                             self.window?.makeKeyAndVisible()
+                                                            
+                                                                      }
+                     else if UserDefaults.standard.bool(forKey: "isLoggedIn"){
+                       let homeViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainTabViewController
+                          homeViewController?.modalPresentationStyle = .fullScreen
+                         self.window?.rootViewController = homeViewController
+                        self.window?.makeKeyAndVisible()
+                                                        
+                                                                }
+        }
+        // Override point for customization after application launch.
+ 
       
-        FirebaseApp.configure()
+        
+        
+      
+      //  FirebaseApp.configure()
         return true
     }
+    
+    override init() {
+       FirebaseApp.configure()
+        Database.database().isPersistenceEnabled = true
+    }
+    
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -64,4 +121,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
 

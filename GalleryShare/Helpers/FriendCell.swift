@@ -24,6 +24,9 @@ class FriendCell: UITableViewCell {
     
     @IBOutlet weak var Person: UILabel!
     
+    
+    @IBOutlet weak var profilePic: UIImageView!
+    
     @IBOutlet weak var addFriend: UIButton!
     
     

@@ -7,84 +7,121 @@
 //
 
 import UIKit
+import Firebase
+
+extension SendTableViewController: SendCellDelegate{
+    func sendPic(sendTo: String) {
+        
+        let currentUser = Auth.auth().currentUser
+        var StorageRef = Storage.storage().reference()
+        var DatabaseRef = Database.database().reference()
+        let imageData = picToSend!.jpegData(compressionQuality: 1.0)
+        var picURL: String?
+        let imageName = NSUUID().uuidString
+        let fromID = currentUser!.uid
+        let timestamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
+        var toID: String?
+        let picToSendStorageRef = StorageRef.child("users").child("imageMessages").child("\(imageName).jpg")
+        
+        
+        DatabaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
+              let myData = snapshot.value as! NSDictionary
+              toID = myData[sendTo] as! String
+              let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil)
+                         {metadata, error in
+                             
+                              guard let metadata = metadata else {
+                                // Uh-oh, an error occurred!
+                                return
+                              }
+                             let size = metadata.size
+                             
+                             picToSendStorageRef.downloadURL { (url, error) in
+                             guard let downloadURL = url
+                                 
+                                 else {
+                               // Uh-oh, an error occurred!
+                               return
+                             }
+                                picURL = downloadURL.absoluteString
+                                let values = ["imageURL": picURL, "fromID": fromID, "toID": toID]
+                                DatabaseRef.child("sentPics").childByAutoId().updateChildValues(values)
+                             }
+                         }
+            
+        }
+    
+        if let vc = (storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? MainTabViewController) {
+            self.present(vc, animated: false, completion: nil)
+        }
+    }
+    
+    
+}
 
 class SendTableViewController: UITableViewController {
-
+    
+    @IBOutlet var table: UITableView!
+    
+    var friends = [NSDictionary?]()
+    var databaseRef = Database.database().reference()
+    let user = Auth.auth().currentUser
+    var picToSend: UIImage?
+    var passedIndex = IndexPath()
+    var username = ""
+    var nameAtCell : String?
+    var passedArray = [UIImage]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let uid = Auth.auth().currentUser?.uid
+        databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
+                   if let dictionary = snapshot.value as? [String: AnyObject]{
+                       self.username = (dictionary["username"] as? String)!
+                    
+                    self.databaseRef.child("Friends").child(self.username).observe(.childAdded, with: { (snapshot) in
+                    
+                            self.friends.append(snapshot.value as? NSDictionary)
+                            self.table.insertRows(at: [IndexPath(row:self.friends.count-1, section:0)], with: UITableView.RowAnimation.automatic)
+                            
+                            
+                        }) { (error) in
+                            print(error.localizedDescription
+                            )
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+        }
+    }
     }
 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+           let cell = tableView.dequeueReusableCell(withIdentifier: "SendCell", for: indexPath) as! SendCell
+           
+            let user: NSDictionary?
+           
+           user = self.friends[indexPath.row]
+           
+           cell.username.text = user?["username"] as? String
+           nameAtCell = user?["username"] as? String
+           //cell.myTableViewController = self
+        
+           cell.delegate = self
+           return cell
+           }
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.friends.count
     }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+  
 }
