@@ -27,7 +27,7 @@ extension AddFriendsTableViewController: FriendCellDelegate{
     }
     
     
-   
+    
 }
 
 class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdating {
@@ -35,15 +35,15 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
     var currentUsername = ""
     @IBOutlet var searchUsers: UITableView!
     
- let searchController = UISearchController(searchResultsController: nil)
+    let searchController = UISearchController(searchResultsController: nil)
     
- var usersArray = [NSDictionary?]()
+    var usersArray = [NSDictionary?]()
     var filteredUsers = [NSDictionary?]()
     
     //var databaseRef = Database.database().reference()
     
     
-   // var picURL = ""
+    // var picURL = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,30 +56,30 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
         let uid = user?.uid
         
         databaseRef.child("users").queryOrdered(byChild: "username").observe(.childAdded, with: { (snapshot) in
-          
+            
             self.usersArray.append(snapshot.value as? NSDictionary)
             self.searchUsers.insertRows(at: [IndexPath(row:self.usersArray.count-2, section:0)], with: UITableView.RowAnimation.automatic)
             
             databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 self.currentUsername = value?["username"] as! String
-         
+                
             }
             
-    
+            
         }) { (error) in
-         print(error.localizedDescription
+            print(error.localizedDescription
             )
         }
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if searchController.isActive && searchController.searchBar.text != ""{
@@ -87,54 +87,54 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
         }
         return self.usersArray.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as! FriendCell
         // Configure the cell...
-
-
+        
+        
         let user: NSDictionary?
         if searchController.isActive && searchController.searchBar.text != ""{
-        user = filteredUsers[indexPath.row]
+            user = filteredUsers[indexPath.row]
         }
         else{
-        user = self.usersArray[indexPath.row]
+            user = self.usersArray[indexPath.row]
         }
         if user?["username"] as? String != self.currentUsername{
-         cell.Person.text = user?["username"] as? String
+            cell.Person.text = user?["username"] as? String
         }
-
+        
         if let picURL = user?["profilePic"] as? String{
-        let imageStorageRef = Storage.storage().reference(forURL: picURL)
-                         imageStorageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
-                             if let error = error {
-                               // ruh roh
-                             }else {
-                                 let image = UIImage(data: data!)
-                                 cell.profilePic.image = image
-                             }
-                         }
+            let imageStorageRef = Storage.storage().reference(forURL: picURL)
+            imageStorageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+                if let error = error {
+                    // ruh roh
+                }else {
+                    let image = UIImage(data: data!)
+                    cell.profilePic.image = image
+                }
+            }
         }
-
-
+        
+        
         cell.delegate = self
         return cell
-        }
-
-
-
-func updateSearchResults(for searchController: UISearchController) {
+    }
+    
+    
+    
+    func updateSearchResults(for searchController: UISearchController) {
         //update the search results
         filterContent(searchText: self.searchController.searchBar.text!)
-        }
-        func filterContent(searchText:String){
+    }
+    func filterContent(searchText:String){
         self.filteredUsers = self.usersArray.filter{ user in
-        let username = user!["username"] as? String
-        return(username?.lowercased().contains(searchText.lowercased()))!
+            let username = user!["username"] as? String
+            return(username?.lowercased().contains(searchText.lowercased()))!
         }
         tableView.reloadData()
-        }
-
-
+    }
+    
+    
 }

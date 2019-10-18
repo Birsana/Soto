@@ -33,7 +33,6 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     var imageArray=[UIImage]()
     var myCollectionViewFriends: UICollectionView!
     
-    //var profilePicArray = [UIImage]()
     var profilePicURL = [String]()
     var usernameArray = [String]()
     //in did load populate these arrays, then copy tutorial
@@ -57,9 +56,12 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         }
         else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ACell", for: indexPath) as! PersonImageCell
-            
-            cell.friendName?.text = usernameArray[indexPath.row]
-            cell.backgroundColor = indexPath.item % 2 == 0 ?.black : .green
+            let nameToUse = usernameArray[indexPath.row]
+            print(nameToUse)
+            cell.friendName?.text = nameToUse
+    
+            //print(cell.friendName?.text)
+            cell.backgroundColor = indexPath.item % 2 == 0 ?.blue : .green
             
             return cell
         }
@@ -78,7 +80,10 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
              if let vc = (storyboard?.instantiateViewController(withIdentifier: "myFriend") as? FriendViewController) {
                 self.definesPresentationContext = true
                 vc.modalPresentationStyle = .overCurrentContext
+               // vc.username.text = usernameArray[indexPath.row]
+                vc.labelText = "tropic"
                 self.present(vc, animated: true, completion: nil)
+            
                    }
         }
         

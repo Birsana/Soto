@@ -44,16 +44,19 @@ extension SendTableViewController: SendCellDelegate{
                                return
                              }
                                 picURL = downloadURL.absoluteString
-                                let values = ["imageURL": picURL, "fromID": fromID, "toID": toID]
-                                DatabaseRef.child("sentPics").childByAutoId().updateChildValues(values)
+                                let values = ["imageURL": picURL, "toID": toID]
+                                //DatabaseRef.child("sentPics").childByAutoId().updateChildValues(values)
+                                DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values)
                              }
                          }
             
         }
     
-        if let vc = (storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? MainTabViewController) {
-            self.present(vc, animated: false, completion: nil)
-        }
+        //if let vc = (storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? MainTabViewController) {
+          //  self.present(vc, animated: false, completion: nil)
+       // }
+        self.dismiss(animated: true, completion: nil)
+
     }
     
     

@@ -13,8 +13,7 @@ class PrivateViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var privatePhotos: UICollectionView!
     //var privatePhotos: UICollectionView!
     var privateArray = [NSDictionary?]()
-    var imageArray=[UIImage]()
-    var finished = false
+    var imageArray = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,25 +29,23 @@ class PrivateViewController: UIViewController, UICollectionViewDelegate, UIColle
                 
                 for imageURL in allURLs {
                     var imageRef = Storage.storage().reference(forURL: imageURL as! String)
-                        imageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
-                            if error != nil {
-                                // uh oh
-                                print("Error loading image")
-                            } else{
-                                print("Loaded image")
-                                let image = UIImage(data: data!)
-                                self.imageArray.append(image!)
-                                DispatchQueue.main.async {
-                                    self.privatePhotos.reloadData()
-                                }
+                    imageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+                        if error != nil {
+                            // uh oh
+                            print("Error loading image")
+                        } else{
+                            print("Loaded image")
+                            let image = UIImage(data: data!)
+                            self.imageArray.append(image!)
+                            DispatchQueue.main.async {
+                                self.privatePhotos.reloadData()
                             }
                         }
-                    
-
+                    }
                 }
-
+                
             }
-             
+            
         }) { (error) in
             print(error.localizedDescription)
         }

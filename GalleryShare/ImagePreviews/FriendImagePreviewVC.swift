@@ -1,4 +1,13 @@
 //
+//  FriendImagePreviewVC.swift
+//  GalleryShare
+//
+//  Created by Andre Birsan on 2019-10-17.
+//  Copyright © 2019 Andre Birsan. All rights reserved.
+//
+
+import Foundation
+//
 //  File.swift
 //  GalleryShare
 //
@@ -9,7 +18,7 @@
 import UIKit
 import Firebase
 
-class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
+class FriendImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
 
     var myCollectionView: UICollectionView!
     var imgArray = [UIImage]()
@@ -18,11 +27,11 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
    
        private let addButton: UIButton = {
              let button = UIButton(type: .system)
-             button.setTitle("Add", for: .normal)
+             button.setTitle("Save", for: .normal)
              button.translatesAutoresizingMaskIntoConstraints = false
              button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
              button.setTitleColor(.systemPink, for: .normal)
-             button.addTarget(self, action: #selector(getPic), for: .touchUpInside)
+             button.addTarget(self, action: #selector(savePic), for: .touchUpInside)
              return button
          }()
     
@@ -37,40 +46,21 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
             }()
     
     
-    @objc private func getPic(){
-        var pictoSend: UIImage!
+    @objc private func savePic(){
+        var pictoSave: UIImage!
         for cell in myCollectionView.visibleCells{
             let indexPriv = myCollectionView.indexPath(for: cell)
             let intPriv = indexPriv?.item
-            pictoSend = imgArray[intPriv!]
-            
+            pictoSave = imgArray[intPriv!]
         }
-        let imageName = NSUUID().uuidString
-        let currentUser = Auth.auth().currentUser
-        var StorageRef = Storage.storage().reference()
-        var DatabaseRef = Database.database().reference()
-        let imageData = pictoSend.jpegData(compressionQuality: 0.9)
-        let privatePicStorageRef = StorageRef.child("users/\(currentUser!.uid)/privatePics").child("\(imageName).jpg")
+        let imageData = pictoSave.jpegData(compressionQuality: 1)
+        let imgToSave = UIImage(data: imageData!)
+        UIImageWriteToSavedPhotosAlbum(imgToSave!, nil, nil, nil)
         
-         let uploadTask = privatePicStorageRef.putData(imageData!, metadata: nil)
-            {metadata, error in
-                
-                 guard let metadata = metadata else {
-                   // Uh-oh, an error occurred!
-                   return
-                 }
-                let size = metadata.size
-                
-                privatePicStorageRef.downloadURL { (url, error) in
-                guard let downloadURL = url
-                    
-                    else {
-                  // Uh-oh, an error occurred!
-                  return
-                }
-                    DatabaseRef.child("privatePics").child(currentUser!.uid).childByAutoId().child("url").setValue(downloadURL.absoluteString)
-                }
-            }
+        let alert = UIAlertController(title: "Saved", message: "Your image has been saved", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     @objc private func sendPic(){
@@ -89,6 +79,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         self.present(newController, animated: true, completion: nil)
         
+
     }
    
     override func viewDidLoad() {
@@ -107,7 +98,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         myCollectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         myCollectionView.delegate=self
         myCollectionView.dataSource=self
-        myCollectionView.register(ImagePreviewFullViewCell.self, forCellWithReuseIdentifier: "Cell")
+        myCollectionView.register(FriendImagePreviewFullViewCell.self, forCellWithReuseIdentifier: "Cell")
         myCollectionView.isPagingEnabled = true
         
       //  myCollectionView.scrollToItem(at: x, at: .left, animated: true)
@@ -131,7 +122,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImagePreviewFullViewCell
+        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! FriendImagePreviewFullViewCell
         cell.imgView.image=imgArray[indexPath.row]
         return cell
     }
@@ -168,7 +159,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
 }
 
 
-class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
+class FriendImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
     
     var scrollImg: UIScrollView!
     var imgView: UIImageView!
