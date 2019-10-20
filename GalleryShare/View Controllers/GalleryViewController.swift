@@ -59,7 +59,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
             let nameToUse = usernameArray[indexPath.row]
             print(nameToUse)
             cell.friendName?.text = nameToUse
-    
+            
             //print(cell.friendName?.text)
             cell.backgroundColor = indexPath.item % 2 == 0 ?.blue : .green
             
@@ -70,21 +70,21 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.myCollectionView{
-        let vc = ImagePreviewVC()
-        vc.imgArray = self.imageArray
-        
-        vc.passedContentOffset = indexPath
-        self.present(vc, animated: true, completion: nil)
+            let vc = ImagePreviewVC()
+            vc.imgArray = self.imageArray
+            
+            vc.passedContentOffset = indexPath
+            self.present(vc, animated: true, completion: nil)
         }
         else{
-             if let vc = (storyboard?.instantiateViewController(withIdentifier: "myFriend") as? FriendViewController) {
+            if let vc = (storyboard?.instantiateViewController(withIdentifier: "myFriend") as? FriendViewController) {
                 self.definesPresentationContext = true
                 vc.modalPresentationStyle = .overCurrentContext
-               // vc.username.text = usernameArray[indexPath.row]
+                // vc.username.text = usernameArray[indexPath.row]
                 vc.labelText = "tropic"
                 self.present(vc, animated: true, completion: nil)
-            
-                   }
+                
+            }
         }
         
     }
@@ -130,13 +130,13 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
                     self.friendArray.append(snapshot.value as? NSDictionary)
                     DispatchQueue.main.async {
                         for friend in self.friendArray{
-                        if !self.usernameArray.contains(friend?["username"] as! String){
-                           self.usernameArray.append(friend?["username"] as! String)
+                            if !self.usernameArray.contains(friend?["username"] as! String){
+                                self.usernameArray.append(friend?["username"] as! String)
+                            }
+                            if !self.profilePicURL.contains(friend?["profilePic"] as! String){
+                                self.profilePicURL.append(friend?["profilePic"] as! String)
+                            }
                         }
-                        if !self.profilePicURL.contains(friend?["profilePic"] as! String){
-                           self.profilePicURL.append(friend?["profilePic"] as! String)
-                        }
-                                     }
                         
                         self.myCollectionViewFriends.reloadData()
                         
@@ -216,7 +216,6 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
             } else {
                 print("You have no photos.")
             }
-            //    print("imageArray count: \(self.imageArray.count)")
             
             DispatchQueue.main.async {
                 

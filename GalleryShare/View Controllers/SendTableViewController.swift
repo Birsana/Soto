@@ -13,15 +13,15 @@ extension SendTableViewController: SendCellDelegate{
     func sendPic(sendTo: String) {
         
         let currentUser = Auth.auth().currentUser
-        var StorageRef = Storage.storage().reference()
-        var DatabaseRef = Database.database().reference()
+        let StorageRef = Storage.storage().reference()
+        let DatabaseRef = Database.database().reference()
         let imageData = picToSend!.jpegData(compressionQuality: 1.0)
         var picURL: String?
         let imageName = NSUUID().uuidString
         let fromID = currentUser!.uid
         let timestamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
         var toID: String?
-        let picToSendStorageRef = StorageRef.child("users").child("imageMessages").child("\(imageName).jpg")
+        let picToSendStorageRef = StorageRef.child("imageMessages").child("\(imageName).jpg")
         
         
         DatabaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
@@ -45,8 +45,7 @@ extension SendTableViewController: SendCellDelegate{
                              }
                                 picURL = downloadURL.absoluteString
                                 let values = ["imageURL": picURL, "toID": toID]
-                                //DatabaseRef.child("sentPics").childByAutoId().updateChildValues(values)
-                                DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values)
+                            DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values)
                              }
                          }
             

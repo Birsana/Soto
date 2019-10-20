@@ -39,11 +39,7 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
     
     var usersArray = [NSDictionary?]()
     var filteredUsers = [NSDictionary?]()
-    
-    //var databaseRef = Database.database().reference()
-    
-    
-    // var picURL = ""
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,9 +87,7 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as! FriendCell
-        // Configure the cell...
-        
-        
+     
         let user: NSDictionary?
         if searchController.isActive && searchController.searchBar.text != ""{
             user = filteredUsers[indexPath.row]

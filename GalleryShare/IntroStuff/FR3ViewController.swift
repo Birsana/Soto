@@ -133,7 +133,6 @@ class FR3ViewController: UIViewController, UINavigationControllerDelegate, UIIma
    
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-   //      var selectedImage: UIImage?
            if let editedImage = info[.editedImage] as? UIImage {
                selectedImage = editedImage
                self.imageSelect.image = selectedImage!

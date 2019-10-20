@@ -25,7 +25,6 @@ class RequestCell: UITableViewCell {
     
     @IBOutlet weak var Accept: UIButton!
     
-    
     @IBOutlet weak var Decline: UIButton!
     
     @IBAction func acceptTapped(_ sender: Any) {
@@ -35,7 +34,7 @@ class RequestCell: UITableViewCell {
     
     
     @IBAction func declineTapped(_ sender: Any) {
-        myTableViewController?.deleteCell(cell: self)
+      myTableViewController?.deleteCell(cell: self)
       delegate?.declineFriend(requester: (Person.text)!, dbRef: Database.database().reference())
         
 

@@ -438,10 +438,28 @@
                     <view key="view" contentMode="scaleToFill" id="AEj-Ct-ZRm">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADB-Wj-Kar" userLabel="Create">
+                                <rect key="frame" x="348" y="20" width="46" height="62"/>
+                                <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="createTapped:" destination="jEP-vy-H3s" eventType="touchUpInside" id="ssZ-fr-8oB"/>
+                                    <segue destination="NZE-Fs-4zr" kind="show" id="qwg-08-1Fl"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="ADB-Wj-Kar" firstAttribute="top" secondItem="uL2-rk-aaV" secondAttribute="top" constant="20" id="aRF-6K-630"/>
+                            <constraint firstItem="ADB-Wj-Kar" firstAttribute="trailing" secondItem="AEj-Ct-ZRm" secondAttribute="trailingMargin" id="lxV-oi-rnf"/>
+                            <constraint firstItem="uL2-rk-aaV" firstAttribute="bottom" secondItem="ADB-Wj-Kar" secondAttribute="bottom" constant="677" id="niE-cn-uqU"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="uL2-rk-aaV"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Albums" id="YwF-wh-6rj"/>
+                    <connections>
+                        <outlet property="createAlbum" destination="ADB-Wj-Kar" id="UV9-Uw-DSX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CKc-34-i15" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -486,6 +504,136 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4p3-pv-HnL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6789.8550724637689" y="910.71428571428567"/>
+        </scene>
+        <!--Album Friends Table View Controller-->
+        <scene sceneID="V1d-X1-q9y">
+            <objects>
+                <tableViewController storyboardIdentifier="AddPpl" id="d8o-pD-pQp" customClass="AlbumFriendsTableViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ExF-sI-0P7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="g17-qE-t2W">
+                            <rect key="frame" x="0.0" y="99.5" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZH6-Cf-EAZ">
+                                    <rect key="frame" x="184" y="7" width="46" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" title="Done"/>
+                                    <connections>
+                                        <action selector="done:" destination="d8o-pD-pQp" eventType="touchUpInside" id="PqK-zl-p8b"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlbumCell" id="W3b-Nw-aVK" customClass="AlbumCell" customModule="GalleryShare" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W3b-Nw-aVK" id="5NQ-gB-7WC">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vqz-Uz-c5p" userLabel="username">
+                                            <rect key="frame" x="47" y="11" width="80" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="r1L-vE-yVK" userLabel="profilePic">
+                                            <rect key="frame" x="97" y="-21" width="179" height="85"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qq2-5C-NLc" customClass="Checkbox" customModule="GalleryShare" customModuleProvider="target">
+                                            <rect key="frame" x="284" y="-21" width="159" height="85"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                            <connections>
+                                                <action selector="addTarget:" destination="W3b-Nw-aVK" eventType="valueChanged" id="ncU-j5-h6i"/>
+                                            </connections>
+                                        </view>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="checkbox" destination="qq2-5C-NLc" id="wty-T2-jF4"/>
+                                    <outlet property="profilePic" destination="r1L-vE-yVK" id="Mcq-xS-6rs"/>
+                                    <outlet property="username" destination="vqz-Uz-c5p" id="grb-eC-98f"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="d8o-pD-pQp" id="WUe-ua-sLS"/>
+                            <outlet property="delegate" destination="d8o-pD-pQp" id="MVC-2I-mMY"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="addFriends" destination="ExF-sI-0P7" id="n8E-nd-5gj"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="97A-cC-jZs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8079.7101449275369" y="270.53571428571428"/>
+        </scene>
+        <!--Create Album View Controller-->
+        <scene sceneID="Zf1-aU-k2p">
+            <objects>
+                <viewController storyboardIdentifier="makeAlbum" id="NZE-Fs-4zr" customClass="CreateAlbumViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UhS-ZB-vZP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YK7-sl-d0u">
+                                <rect key="frame" x="87" y="308" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3g-rI-u8h">
+                                <rect key="frame" x="184" y="593" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Create"/>
+                                <connections>
+                                    <action selector="createTapped:" destination="NZE-Fs-4zr" eventType="touchUpInside" id="T4c-XP-WcU"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0g-PW-I88">
+                                <rect key="frame" x="259" y="49" width="176" height="62"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Share with Friends"/>
+                                <connections>
+                                    <action selector="shareTapped:" destination="NZE-Fs-4zr" eventType="touchUpInside" id="zcl-Ab-D1r"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Album Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gby-mK-5Ut">
+                                <rect key="frame" x="159" y="183" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3z-OU-N1h">
+                                <rect key="frame" x="86" y="485" width="193" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add an optional cover photo"/>
+                                <connections>
+                                    <action selector="addCover:" destination="NZE-Fs-4zr" eventType="touchUpInside" id="IWp-LP-IPd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="HDf-hp-4xY"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="tND-GM-CkU"/>
+                    <connections>
+                        <outlet property="albumName" destination="gby-mK-5Ut" id="Afz-36-gC9"/>
+                        <outlet property="coverPhoto" destination="YK7-sl-d0u" id="ghF-ue-Yo8"/>
+                        <outlet property="create" destination="C3g-rI-u8h" id="VZV-mV-YEA"/>
+                        <outlet property="share" destination="a0g-PW-I88" id="GBx-GN-2Dz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tb1-4N-iCR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7644.9275362318849" y="937.5"/>
         </scene>
         <!--MainTab-->
         <scene sceneID="dkF-73-6aa">
@@ -643,7 +791,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qIP-PZ-uSV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3207" y="-159"/>
+            <point key="canvasLocation" x="3512" y="-159"/>
         </scene>
         <!--Intro Page View Controller-->
         <scene sceneID="49p-9g-0he">
@@ -651,7 +799,7 @@
                 <pageViewController storyboardIdentifier="firstLog" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="FZq-2l-qaJ" customClass="IntroPageViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4zC-3L-Xav" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4181" y="-161"/>
+            <point key="canvasLocation" x="4248" y="-159"/>
         </scene>
         <!--Face Rec View Controller-->
         <scene sceneID="AwB-kG-BgK">
@@ -890,6 +1038,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="Pw3-QK-DSy"/>
-        <segue reference="jWj-Ws-8bC"/>
+        <segue reference="amn-oW-FUh"/>
     </inferredMetricsTieBreakers>
 </document>
