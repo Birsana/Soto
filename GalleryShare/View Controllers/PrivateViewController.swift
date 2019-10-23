@@ -11,13 +11,14 @@ import Firebase
 class PrivateViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate{
     
     @IBOutlet weak var privatePhotos: UICollectionView!
-    //var privatePhotos: UICollectionView!
     var privateArray = [NSDictionary?]()
     var imageArray = [UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var databaseRef = Database.database().reference()
+    
+        
+        let databaseRef = Database.database().reference()
         let user = Auth.auth().currentUser
         let uid = Auth.auth().currentUser?.uid
         
@@ -28,10 +29,9 @@ class PrivateViewController: UIViewController, UICollectionViewDelegate, UIColle
                 let allURLs = Array(dictionary.values)
                 
                 for imageURL in allURLs {
-                    var imageRef = Storage.storage().reference(forURL: imageURL as! String)
-                    imageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+                    let imageRef = Storage.storage().reference(forURL: imageURL as! String)
+                    imageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
                         if error != nil {
-                            // uh oh
                             print("Error loading image")
                         } else{
                             print("Loaded image")

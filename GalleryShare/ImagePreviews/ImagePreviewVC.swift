@@ -10,31 +10,43 @@ import UIKit
 import Firebase
 
 class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
-
+    
     var myCollectionView: UICollectionView!
     var imgArray = [UIImage]()
     var passedContentOffset = IndexPath()
     
-   
-       private let addButton: UIButton = {
-             let button = UIButton(type: .system)
-             button.setTitle("Add", for: .normal)
-             button.translatesAutoresizingMaskIntoConstraints = false
-             button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-             button.setTitleColor(.systemPink, for: .normal)
-             button.addTarget(self, action: #selector(getPic), for: .touchUpInside)
-             return button
-         }()
     
-    private let sendButton: UIButton = {
+    private let addButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Add", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.systemPink, for: .normal)
+        button.addTarget(self, action: #selector(getPic), for: .touchUpInside)
+        return button
+    }()
+    
+    private let sendFriendButton: UIButton = {
+        //ADD SEARCH FUNCTIONALITY FOR ALBUM AND FRIENDS
         let button = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 110, y: 0, width: 90, height: 30))
-                button.setTitle("Send", for: .normal)
-                button.translatesAutoresizingMaskIntoConstraints = true
-                button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-                button.setTitleColor(.systemPink, for: .normal)
-                button.addTarget(self, action: #selector(sendPic), for: .touchUpInside)
-                return button
-            }()
+        button.setTitle("Send to Friend", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = true
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.systemPink, for: .normal)
+        button.addTarget(self, action: #selector(sendPic), for: .touchUpInside)
+        return button
+        
+    }()
+    
+    private let addAlbumButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 110, y: 300, width: 90, height: 30))
+        button.setTitle("Add to Album", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.systemPink, for: .normal)
+        button.addTarget(self, action: #selector(sendPic2), for: .touchUpInside)
+        return button
+    }()
     
     
     @objc private func getPic(){
@@ -47,33 +59,34 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         let imageName = NSUUID().uuidString
         let currentUser = Auth.auth().currentUser
-        var StorageRef = Storage.storage().reference()
-        var DatabaseRef = Database.database().reference()
+        let StorageRef = Storage.storage().reference()
+        let DatabaseRef = Database.database().reference()
         let imageData = pictoSend.jpegData(compressionQuality: 0.9)
         let privatePicStorageRef = StorageRef.child("users/\(currentUser!.uid)/privatePics").child("\(imageName).jpg")
         
-         let uploadTask = privatePicStorageRef.putData(imageData!, metadata: nil)
-            {metadata, error in
-                
-                 guard let metadata = metadata else {
-                   // Uh-oh, an error occurred!
-                   return
-                 }
-                let size = metadata.size
-                
-                privatePicStorageRef.downloadURL { (url, error) in
+        let uploadTask = privatePicStorageRef.putData(imageData!, metadata: nil)
+        {metadata, error in
+            
+            guard let metadata = metadata else {
+                // Uh-oh, an error occurred!
+                return
+            }
+            let size = metadata.size
+            
+            privatePicStorageRef.downloadURL { (url, error) in
                 guard let downloadURL = url
                     
                     else {
-                  // Uh-oh, an error occurred!
-                  return
+                        // Uh-oh, an error occurred!
+                        return
                 }
-                    DatabaseRef.child("privatePics").child(currentUser!.uid).childByAutoId().child("url").setValue(downloadURL.absoluteString)
-                }
+                DatabaseRef.child("privatePics").child(currentUser!.uid).childByAutoId().child("url").setValue(downloadURL.absoluteString)
             }
+        }
     }
     
     @objc private func sendPic(){
+        print("1")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let newController = storyboard.instantiateViewController(withIdentifier: "SendPic") as! SendTableViewController
         
@@ -89,12 +102,31 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         self.present(newController, animated: true, completion: nil)
         
-
+        
     }
-   
+    @objc private func sendPic2(){
+        print("2")
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let newController = storyboard.instantiateViewController(withIdentifier: "sendAlbum") as! SendAlbumTableViewController
+        
+        var transferPic: UIImage!
+        for cell in myCollectionView.visibleCells{
+            let indexPriv = myCollectionView.indexPath(for: cell)
+            let intPriv = indexPriv?.item
+            transferPic = imgArray[intPriv!]
+        }
+        newController.picToSend = transferPic
+        newController.passedIndex = passedContentOffset
+        newController.passedArray = imgArray
+        
+        self.present(newController, animated: true, completion: nil)
+        
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         self.view.backgroundColor=UIColor.black
@@ -111,11 +143,12 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         myCollectionView.register(ImagePreviewFullViewCell.self, forCellWithReuseIdentifier: "Cell")
         myCollectionView.isPagingEnabled = true
         
-      //  myCollectionView.scrollToItem(at: x, at: .left, animated: true)
+        //  myCollectionView.scrollToItem(at: x, at: .left, animated: true)
         
         self.view.addSubview(myCollectionView)
         self.view.addSubview(addButton)
-        self.view.addSubview(sendButton)
+        self.view.addSubview(sendFriendButton)
+        self.view.addSubview(addAlbumButton)
         
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
     }
@@ -123,9 +156,9 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     override func viewWillAppear(_ animated: Bool) {
         let x = passedContentOffset
         DispatchQueue.main.async {
-        self.myCollectionView.scrollToItem(at: x, at: .left, animated: false)
-                       }
-       
+            self.myCollectionView.scrollToItem(at: x, at: .left, animated: false)
+        }
+        
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return imgArray.count
@@ -165,7 +198,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
             self.myCollectionView.setContentOffset(newOffset, animated: false)
         }, completion: nil)
     }
-
+    
 }
 
 
@@ -173,7 +206,7 @@ class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
     
     var scrollImg: UIScrollView!
     var imgView: UIImageView!
-
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

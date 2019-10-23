@@ -105,11 +105,10 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
                     dict["name"] = albumNameClean
                     dict["coverPhoto"] = picURL
                     var counter = 1
-                    for friend in self.friendsToShareWith{
-                        dict["person\(String(counter))"] = friend
-                        counter += 1
+                    for friend in self.friendsToShareWith{ DatabaseRef.child("Albums").child(friend).childByAutoId().updateChildValues(dict)
+                        //dict["person\(String(counter))"] = friend
+                       // counter += 1
                     }
-                    DatabaseRef.child("Albums").childByAutoId().updateChildValues(dict)
                 }
             }
             

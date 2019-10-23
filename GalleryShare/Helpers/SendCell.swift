@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-protocol SendCellDelegate {
+protocol SendCellDelegate: class{
     func sendPic(sendTo: String)
 }
 
@@ -22,7 +22,7 @@ class SendCell: UITableViewCell {
     
     @IBOutlet weak var username: UILabel!
     
-    var delegate: SendCellDelegate?
+    weak var delegate: SendCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

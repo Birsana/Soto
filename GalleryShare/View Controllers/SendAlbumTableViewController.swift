@@ -1,17 +1,17 @@
 //
-//  SendTableViewController.swift
+//  SendAlbumTableViewController.swift
 //  GalleryShare
 //
-//  Created by Andre Birsan on 2019-10-12.
+//  Created by Andre Birsan on 2019-10-22.
 //  Copyright © 2019 Andre Birsan. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-extension SendTableViewController: SendCellDelegate{
-    func sendPic(sendTo: String) {
-        
+
+class SendAlbumTableViewController: UITableViewController, SendAlbumCellDelegate {
+    func sendPic(album: String) {
         let currentUser = Auth.auth().currentUser
         let StorageRef = Storage.storage().reference()
         let DatabaseRef = Database.database().reference()
@@ -19,23 +19,20 @@ extension SendTableViewController: SendCellDelegate{
         var picURL: String?
         let imageName = NSUUID().uuidString
         let fromID = currentUser!.uid
-        let timestamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
         var toID: String?
-        let picToSendStorageRef = StorageRef.child("imageMessages").child("\(imageName).jpg")
+        let picToSendStorageRef = StorageRef.child("albumMessages").child("\(imageName).jpg")
         
-        
-        DatabaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
+        DatabaseRef.child("Albums").child(username).queryOrdered(byChild: "name").queryEqual(toValue: album).observeSingleEvent(of: .value) { (snapshot) in
             let myData = snapshot.value as! NSDictionary
-            toID = myData[sendTo] as! String
-            let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil)
-            {metadata, error in
+            let componentArray = myData.allKeys
+            toID = componentArray.first as? String
+            let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil) { (metadata, error) in
                 
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
                     return
                 }
                 let size = metadata.size
-                
                 picToSendStorageRef.downloadURL { (url, error) in
                     guard let downloadURL = url
                         
@@ -45,8 +42,9 @@ extension SendTableViewController: SendCellDelegate{
                     }
                     picURL = downloadURL.absoluteString
                     let values = ["imageURL": picURL, "toID": toID]
-                    DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values)
+                    DatabaseRef.child("sentAlbumPics").child(fromID).childByAutoId().updateChildValues(values)
                 }
+                
             }
             
         }
@@ -55,21 +53,15 @@ extension SendTableViewController: SendCellDelegate{
     }
     
     
-}
-
-class SendTableViewController: UITableViewController {
-    
     @IBOutlet var table: UITableView!
     
-    var friends = [NSDictionary?]()
+    var albums = [NSDictionary?]()
     var databaseRef = Database.database().reference()
     let user = Auth.auth().currentUser
     var picToSend: UIImage?
     var passedIndex = IndexPath()
-    var username = ""
-    var nameAtCell : String?
     var passedArray = [UIImage]()
-    
+    var username = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,45 +70,39 @@ class SendTableViewController: UITableViewController {
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 self.username = (dictionary["username"] as? String)!
                 
-                self.databaseRef.child("Friends").child(self.username).observe(.childAdded, with: { (snapshot) in
-                    
-                    self.friends.append(snapshot.value as? NSDictionary)
-                    self.table.insertRows(at: [IndexPath(row:self.friends.count-1, section:0)], with: UITableView.RowAnimation.automatic)
-                    
-                    
-                }) { (error) in
-                    print(error.localizedDescription
-                    )
-                    
+                self.databaseRef.child("Albums").child(self.username).observe(.childAdded) { (snapshot) in
+                    self.albums.append(snapshot.value as? NSDictionary)
+                    self.table.insertRows(at: [IndexPath(row:self.albums.count-1, section:0)], with: UITableView.RowAnimation.automatic)
                 }
             }
         }
+        
+        
     }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SendCell", for: indexPath) as! SendCell
-        
-        let user: NSDictionary?
-        
-        user = self.friends[indexPath.row]
-        
-        cell.username.text = user?["username"] as? String
-        nameAtCell = user?["username"] as? String
-
-        cell.delegate = self
-        return cell
-    }
-    
     
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int {
+        
         return 1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.friends.count
+        // #warning Incomplete implementation, return the number of rows
+        return self.albums.count
     }
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SendAlbumCell", for: indexPath) as! SendAlbumCell
+        
+        let album: NSDictionary?
+        album = self.albums[indexPath.row]
+        cell.albumName.text = album?["name"] as? String
+        cell.delegate = self
+        return cell
+    }
+    
     
     
 }

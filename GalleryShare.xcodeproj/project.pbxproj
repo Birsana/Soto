@@ -25,6 +25,9 @@
 		67922A88235A4850004092C5 /* CreateAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A87235A4850004092C5 /* CreateAlbumViewController.swift */; };
 		67922A8C235A6385004092C5 /* AlbumFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */; };
 		67922A8E235A63BE004092C5 /* AlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A8D235A63BE004092C5 /* AlbumCell.swift */; };
+		67922A90235F63DD004092C5 /* SendAlbumTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A8F235F63DD004092C5 /* SendAlbumTableViewController.swift */; };
+		67922A92235F647A004092C5 /* SendAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A91235F647A004092C5 /* SendAlbumCell.swift */; };
+		67922A9423602C27004092C5 /* DisplayAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */; };
 		6792D9202347E41A00E6159E /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6792D91F2347E41A00E6159E /* MainTabViewController.swift */; };
 		6792D9222347ECA100E6159E /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6792D9212347ECA100E6159E /* GalleryViewController.swift */; };
 		6792D92423480C3D00E6159E /* ImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6792D92323480C3D00E6159E /* ImagePreviewVC.swift */; };
@@ -93,6 +96,9 @@
 		67922A87235A4850004092C5 /* CreateAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAlbumViewController.swift; sourceTree = "<group>"; };
 		67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumFriendsTableViewController.swift; sourceTree = "<group>"; };
 		67922A8D235A63BE004092C5 /* AlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumCell.swift; sourceTree = "<group>"; };
+		67922A8F235F63DD004092C5 /* SendAlbumTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAlbumTableViewController.swift; sourceTree = "<group>"; };
+		67922A91235F647A004092C5 /* SendAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAlbumCell.swift; sourceTree = "<group>"; };
+		67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAlbumViewController.swift; sourceTree = "<group>"; };
 		6792D91F2347E41A00E6159E /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		6792D9212347ECA100E6159E /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		6792D92323480C3D00E6159E /* ImagePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewVC.swift; sourceTree = "<group>"; };
@@ -169,7 +175,6 @@
 		670BEFDD2325DDEF00A04E97 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */,
 				6734766E23446F6D005469FC /* SwipingController.swift */,
 				67BC22822327432800653900 /* ViewController.swift */,
 				67BC2286232743AA00653900 /* HomeViewController.swift */,
@@ -181,11 +186,14 @@
 				6734766A234125E5005469FC /* GuideViewController.swift */,
 				6792D91F2347E41A00E6159E /* MainTabViewController.swift */,
 				6792D9212347ECA100E6159E /* GalleryViewController.swift */,
+				676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */,
 				6792D929234D8FE000E6159E /* AlbumsViewController.swift */,
-				67365DB223526B8200360D7D /* SendTableViewController.swift */,
 				676D2B392356744000D49B85 /* FriendViewController.swift */,
 				67922A87235A4850004092C5 /* CreateAlbumViewController.swift */,
 				67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */,
+				67365DB223526B8200360D7D /* SendTableViewController.swift */,
+				67922A8F235F63DD004092C5 /* SendAlbumTableViewController.swift */,
+				67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -196,13 +204,14 @@
 				670BEFE12325E01900A04E97 /* Constants.swift */,
 				670BEFDF2325E01200A04E97 /* Utilities.swift */,
 				67BC2290232B757100653900 /* FriendCell.swift */,
+				67922A8D235A63BE004092C5 /* AlbumCell.swift */,
 				6734766C23430FA6005469FC /* Checkbox.swift */,
 				6792D9252349D1E800E6159E /* PersonImageCell.swift */,
 				6792D927234A92A700E6159E /* PhotoItemCell.swift */,
-				67365DB023526A3B00360D7D /* SendCell.swift */,
 				676D2B3B2356CA4A00D49B85 /* Photo.swift */,
 				67BC2298232E046A00653900 /* RequestCell.swift */,
-				67922A8D235A63BE004092C5 /* AlbumCell.swift */,
+				67365DB023526A3B00360D7D /* SendCell.swift */,
+				67922A91235F647A004092C5 /* SendAlbumCell.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -537,6 +546,7 @@
 				67365DB123526A3B00360D7D /* SendCell.swift in Sources */,
 				67BC2291232B757100653900 /* FriendCell.swift in Sources */,
 				67347667234124C6005469FC /* FR2ViewController.swift in Sources */,
+				67922A9423602C27004092C5 /* DisplayAlbumViewController.swift in Sources */,
 				676D2B3A2356744000D49B85 /* FriendViewController.swift in Sources */,
 				67BC22832327432800653900 /* ViewController.swift in Sources */,
 				67BC2293232C5E8500653900 /* FriendsViewController.swift in Sources */,
@@ -557,8 +567,10 @@
 				67BC229C232F43C300653900 /* MainNavigationController.swift in Sources */,
 				67922A8C235A6385004092C5 /* AlbumFriendsTableViewController.swift in Sources */,
 				6734765D233B24AD005469FC /* FaceRecViewController.swift in Sources */,
+				67922A92235F647A004092C5 /* SendAlbumCell.swift in Sources */,
 				6792D92A234D8FE000E6159E /* AlbumsViewController.swift in Sources */,
 				67BC2287232743AA00653900 /* HomeViewController.swift in Sources */,
+				67922A90235F63DD004092C5 /* SendAlbumTableViewController.swift in Sources */,
 				67922A8E235A63BE004092C5 /* AlbumCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

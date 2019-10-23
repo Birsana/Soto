@@ -22,7 +22,6 @@ extension AlbumFriendsTableViewController: AlbumCellDelegate{
                 }
             }
         }
-        print(addedFriends)
     }
     
     
