@@ -869,7 +869,7 @@
         <!--Display Album View Controller-->
         <scene sceneID="xdo-7F-z3b">
             <objects>
-                <viewController id="Imw-ff-ssq" customClass="DisplayAlbumViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="display" id="Imw-ff-ssq" customClass="DisplayAlbumViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O1Y-OJ-gsa">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

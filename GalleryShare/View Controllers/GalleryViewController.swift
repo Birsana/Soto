@@ -35,8 +35,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
     
     var profilePicURL = [String]()
     var usernameArray = [String]()
-    //in did load populate these arrays, then copy tutorial
-    
+
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.myCollectionView{
@@ -188,8 +187,6 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
         
         grabPhotos()
-        
-        // Do any additional setup after loading the view.
     }
     
     func grabPhotos(){

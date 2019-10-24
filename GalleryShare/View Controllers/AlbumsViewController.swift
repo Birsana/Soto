@@ -38,6 +38,16 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+             if let vc = (storyboard?.instantiateViewController(withIdentifier: "display") as? DisplayAlbumViewController) {
+                 self.definesPresentationContext = true
+                 vc.modalPresentationStyle = .overCurrentContext
+                 vc.albumName = "future"
+                 self.present(vc, animated: true, completion: nil)
+                 
+             }
+         }
+    
     @IBOutlet weak var createAlbum: UIButton!
     @IBOutlet weak var albums: UICollectionView!
     

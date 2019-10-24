@@ -38,7 +38,7 @@ class FriendViewController: UIViewController, UICollectionViewDelegate, UICollec
             //self.fromID = myData[self.username.text!] as! String
             self.fromID = myData[self.labelText] as! String
             databaseRef.child("sentPics").child(self.fromID!).queryOrdered(byChild: "toID").queryEqual(toValue: uid).observeSingleEvent(of: .value) { (snapshot) in
-                
+                //print(snapshot)
                 for child in snapshot.children{
                     let snap = child as! DataSnapshot
                     let dict = snap.value as! [String: Any]
@@ -47,21 +47,21 @@ class FriendViewController: UIViewController, UICollectionViewDelegate, UICollec
                     
                 }
                 for imageURL in self.picURL {
-                               var imageRef = Storage.storage().reference(forURL: imageURL as! String)
-                               imageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
-                                   if error != nil {
-                                       // uh oh
-                                       print("Error loading image")
-                                   } else{
-                                       print("Loaded image")
-                                       let image = UIImage(data: data!)
-                                       self.imageArray.append(image!)
-                                       DispatchQueue.main.async {
-                                           self.sentPhotos.reloadData()
-                                       }
-                                   }
-                               }
-                           }
+                    var imageRef = Storage.storage().reference(forURL: imageURL as! String)
+                    imageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+                        if error != nil {
+                            // uh oh
+                            print("Error loading image")
+                        } else{
+                            print("Loaded image")
+                            let image = UIImage(data: data!)
+                            self.imageArray.append(image!)
+                            DispatchQueue.main.async {
+                                self.sentPhotos.reloadData()
+                            }
+                        }
+                    }
+                }
                 
             }
             

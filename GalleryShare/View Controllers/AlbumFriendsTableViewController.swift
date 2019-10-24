@@ -114,6 +114,12 @@ class AlbumFriendsTableViewController: UITableViewController, UISearchResultsUpd
         cell.checkbox.borderStyle = .square
         cell.checkbox.checkmarkStyle = .tick
         
+        let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 40))
+           title.textColor = UIColor.black
+           title.text = "T"
+           title.textAlignment = .center
+        cell.contentView.addSubview(title)
+        
         cell.delegate = self
         return cell
     }

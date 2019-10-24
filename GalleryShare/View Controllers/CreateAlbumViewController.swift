@@ -68,6 +68,7 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
     }
     
     @IBAction func createTapped(_ sender: Any) {
+        //IF SHARE WITH SOMEONE WHO ALREADY HAS ALBUM NAMED THIS, NAME BECOMES NAME 2 FOR THAT PERSON
         let error = validateName()
         
         //DO ERROR STUFF HERE
