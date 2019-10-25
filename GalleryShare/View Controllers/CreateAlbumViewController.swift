@@ -105,8 +105,11 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
                     var dict: [String: String] = [:]
                     dict["name"] = albumNameClean
                     dict["coverPhoto"] = picURL
+                    
+                    let uuid = NSUUID().uuidString
+                
                     var counter = 1
-                    for friend in self.friendsToShareWith{ DatabaseRef.child("Albums").child(friend).childByAutoId().updateChildValues(dict)
+                    for friend in self.friendsToShareWith{ DatabaseRef.child("Albums").child(friend).child(uuid).updateChildValues(dict)
                         //dict["person\(String(counter))"] = friend
                        // counter += 1
                     }
@@ -122,6 +125,11 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let newController = storyboard.instantiateViewController(withIdentifier: "AddPpl") as! AlbumFriendsTableViewController
         self.present(newController, animated: true, completion: nil)
+    }
+    
+    func randomString(length: Int) -> String {
+      let letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+      return String((0..<length).map{ _ in letters.randomElement()! })
     }
     
 }

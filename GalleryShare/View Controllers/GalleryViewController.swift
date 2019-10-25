@@ -57,7 +57,9 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ACell", for: indexPath) as! PersonImageCell
             let nameToUse = usernameArray[indexPath.row]
             print(nameToUse)
-            cell.friendName?.text = nameToUse
+            cell.username?.text = "HUUUUH"
+                               
+        
             
             //print(cell.friendName?.text)
             cell.backgroundColor = indexPath.item % 2 == 0 ?.blue : .green
@@ -181,7 +183,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         myCollectionViewFriends.register(PersonImageCell.self, forCellWithReuseIdentifier: "ACell")
         myCollectionViewFriends.backgroundColor=UIColor.red
         
-        self.view.addSubview(myCollectionViewFriends)
+        //self.view.addSubview(myCollectionViewFriends)
         
         
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))

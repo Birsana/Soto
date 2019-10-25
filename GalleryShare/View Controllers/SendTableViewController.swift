@@ -57,12 +57,12 @@ extension SendTableViewController: SendCellDelegate{
     
 }
 
-class SendTableViewController: UITableViewController {
+class SendTableViewController: UITableViewController, UISearchResultsUpdating {
     
     @IBOutlet var table: UITableView!
     
     var friends = [NSDictionary?]()
-    var databaseRef = Database.database().reference()
+    let databaseRef = Database.database().reference()
     let user = Auth.auth().currentUser
     var picToSend: UIImage?
     var passedIndex = IndexPath()
@@ -70,9 +70,17 @@ class SendTableViewController: UITableViewController {
     var nameAtCell : String?
     var passedArray = [UIImage]()
     
+    let searchController = UISearchController(searchResultsController: nil)
+    var filteredUsers = [NSDictionary?]()
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
         let uid = Auth.auth().currentUser?.uid
         databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
@@ -97,9 +105,12 @@ class SendTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SendCell", for: indexPath) as! SendCell
         
         let user: NSDictionary?
-        
+        if searchController.isActive && searchController.searchBar.text != ""{
+                   user = filteredUsers[indexPath.row]
+               }
+        else{
         user = self.friends[indexPath.row]
-        
+        }
         cell.username.text = user?["username"] as? String
         nameAtCell = user?["username"] as? String
 
@@ -115,7 +126,21 @@ class SendTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.isActive && searchController.searchBar.text != ""{
+            return filteredUsers.count
+        }
         return self.friends.count
+    }
+    func updateSearchResults(for searchController: UISearchController) {
+        //update the search results
+        filterContent(searchText: self.searchController.searchBar.text!)
+    }
+    func filterContent(searchText:String){
+        self.filteredUsers = self.friends.filter{ user in
+            let username = user!["username"] as? String
+            return(username?.lowercased().contains(searchText.lowercased()))!
+        }
+        tableView.reloadData()
     }
     
     

@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 
-class SendAlbumTableViewController: UITableViewController, SendAlbumCellDelegate {
+class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdating, SendAlbumCellDelegate {
     func sendPic(album: String) {
         let currentUser = Auth.auth().currentUser
         let StorageRef = Storage.storage().reference()
@@ -41,8 +41,8 @@ class SendAlbumTableViewController: UITableViewController, SendAlbumCellDelegate
                             return
                     }
                     picURL = downloadURL.absoluteString
-                    let values = ["imageURL": picURL, "toID": toID]
-                    DatabaseRef.child("sentAlbumPics").child(fromID).childByAutoId().updateChildValues(values)
+                    let values = ["imageURL": picURL, "fromID": fromID]
+                    DatabaseRef.child("sentAlbumPics").child(toID!).childByAutoId().updateChildValues(values)
                 }
                 
             }
@@ -63,8 +63,16 @@ class SendAlbumTableViewController: UITableViewController, SendAlbumCellDelegate
     var passedArray = [UIImage]()
     var username = ""
     
+    let searchController = UISearchController(searchResultsController: nil)
+    var filteredAlbums = [NSDictionary?]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+        
         let uid = Auth.auth().currentUser?.uid
         databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
@@ -88,7 +96,9 @@ class SendAlbumTableViewController: UITableViewController, SendAlbumCellDelegate
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        if searchController.isActive && searchController.searchBar.text != ""{
+            return filteredAlbums.count
+        }
         return self.albums.count
     }
     
@@ -97,12 +107,29 @@ class SendAlbumTableViewController: UITableViewController, SendAlbumCellDelegate
         let cell = tableView.dequeueReusableCell(withIdentifier: "SendAlbumCell", for: indexPath) as! SendAlbumCell
         
         let album: NSDictionary?
+        if searchController.isActive && searchController.searchBar.text != ""{
+            album = filteredAlbums[indexPath.row]
+        }
+        else{
         album = self.albums[indexPath.row]
+        }
         cell.albumName.text = album?["name"] as? String
         cell.delegate = self
         return cell
     }
-    
+    func updateSearchResults(for searchController: UISearchController) {
+           //update the search results
+           filterContent(searchText: self.searchController.searchBar.text!)
+       }
+       func filterContent(searchText:String){
+           self.filteredAlbums = self.albums.filter{ album in
+               let albumName = album!["name"] as? String
+               return(albumName?.lowercased().contains(searchText.lowercased()))!
+           }
+           tableView.reloadData()
+       }
     
     
 }
+
+//CHANGE FIREBASE LAYOUT SEND ALBUM PICS

@@ -13,8 +13,9 @@ import FirebaseDatabase
 
 class PersonImageCell: UICollectionViewCell {
 
-    var profilePic: UIImage!
-    var friendName: UILabel!
-
-     
+    
+    @IBOutlet weak var username: UILabel?
+    
+    @IBOutlet weak var profilePic: UIImageView?
+    
 }

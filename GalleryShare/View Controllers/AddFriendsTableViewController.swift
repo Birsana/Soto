@@ -5,7 +5,6 @@
 //  Created by Andre Birsan on 2019-09-11.
 //  Copyright © 2019 Andre Birsan. All rights reserved.
 //
-
 import UIKit
 import Firebase
 import FirebaseDatabase
@@ -39,11 +38,11 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
     
     var usersArray = [NSDictionary?]()
     var filteredUsers = [NSDictionary?]()
-
+    var existingFriendsArray = [NSDictionary?]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var databaseRef = Database.database().reference()
+        let databaseRef = Database.database().reference()
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
@@ -56,16 +55,18 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
             self.usersArray.append(snapshot.value as? NSDictionary)
             self.searchUsers.insertRows(at: [IndexPath(row:self.usersArray.count-2, section:0)], with: UITableView.RowAnimation.automatic)
             
-            databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
-                let value = snapshot.value as? NSDictionary
-                self.currentUsername = value?["username"] as! String
-                
-            }
-            
-            
         }) { (error) in
             print(error.localizedDescription
             )
+        }
+        databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            self.currentUsername = value?["username"] as! String
+            
+            databaseRef.child("Friends").child(self.currentUsername).queryOrdered(byChild: "username").observe(.childAdded) { (snapshot) in
+                self.existingFriendsArray.append(snapshot.value as? NSDictionary)
+            }
+            
         }
     }
     
@@ -98,17 +99,26 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
         if user?["username"] as? String != self.currentUsername{
             cell.Person.text = user?["username"] as? String
         }
+        for user in existingFriendsArray{
+            if user?["username"] as? String == cell.Person.text{
+                cell.addFriend.isHidden = true
+                print(user?["username"])
+                print(cell.Person.text)
+            }
+        }
         
         if let picURL = user?["profilePic"] as? String{
-            let imageStorageRef = Storage.storage().reference(forURL: picURL)
-            imageStorageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
-                if let error = error {
-                    // ruh roh
-                }else {
-                    let image = UIImage(data: data!)
-                    cell.profilePic.image = image
-                }
-            }
+              let url = NSURL(string: picURL)
+                  URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
+                      
+                      if error != nil{
+                          return
+                      }
+                      DispatchQueue.main.async {
+                          cell.profilePic?.image = UIImage(data: data!)
+                      }
+                      
+                  }).resume()
         }
         
         

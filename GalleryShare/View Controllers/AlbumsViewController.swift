@@ -42,7 +42,7 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
              if let vc = (storyboard?.instantiateViewController(withIdentifier: "display") as? DisplayAlbumViewController) {
                  self.definesPresentationContext = true
                  vc.modalPresentationStyle = .overCurrentContext
-                 vc.albumName = "future"
+                 vc.albumName = "T"
                  self.present(vc, animated: true, completion: nil)
                  
              }

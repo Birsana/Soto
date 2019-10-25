@@ -29,6 +29,7 @@
 		67922A92235F647A004092C5 /* SendAlbumCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A91235F647A004092C5 /* SendAlbumCell.swift */; };
 		67922A9423602C27004092C5 /* DisplayAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */; };
 		67922A9623602CF4004092C5 /* AlbumItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A9523602CF4004092C5 /* AlbumItemCell.swift */; };
+		67922A992361442C004092C5 /* FriendCellsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A982361442C004092C5 /* FriendCellsViewController.swift */; };
 		6792D9202347E41A00E6159E /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6792D91F2347E41A00E6159E /* MainTabViewController.swift */; };
 		6792D9222347ECA100E6159E /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6792D9212347ECA100E6159E /* GalleryViewController.swift */; };
 		6792D92423480C3D00E6159E /* ImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6792D92323480C3D00E6159E /* ImagePreviewVC.swift */; };
@@ -51,6 +52,7 @@
 		67BC2297232DD7DA00653900 /* FriendRequestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */; };
 		67BC2299232E046A00653900 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC2298232E046A00653900 /* RequestCell.swift */; };
 		67BC229C232F43C300653900 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC229B232F43C300653900 /* MainNavigationController.swift */; };
+		67F29EA62362D14900CA6CE5 /* AlbumImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F29EA52362D14900CA6CE5 /* AlbumImagePreviewVC.swift */; };
 		80C63EB690553E26C390470F /* Pods_GalleryShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA064BC434328A857080A3F /* Pods_GalleryShare.framework */; };
 		A15058CA34D615CDE4182548 /* Pods_GalleryShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86FCB92C7A5C5C68E729CC5D /* Pods_GalleryShareUITests.framework */; };
 		AE714EF866F1E236475CA0B1 /* Pods_GalleryShareTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE08FF0AC4940619EF2F61E /* Pods_GalleryShareTests.framework */; };
@@ -101,6 +103,7 @@
 		67922A91235F647A004092C5 /* SendAlbumCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendAlbumCell.swift; sourceTree = "<group>"; };
 		67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayAlbumViewController.swift; sourceTree = "<group>"; };
 		67922A9523602CF4004092C5 /* AlbumItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumItemCell.swift; sourceTree = "<group>"; };
+		67922A982361442C004092C5 /* FriendCellsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCellsViewController.swift; sourceTree = "<group>"; };
 		6792D91F2347E41A00E6159E /* MainTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
 		6792D9212347ECA100E6159E /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		6792D92323480C3D00E6159E /* ImagePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewVC.swift; sourceTree = "<group>"; };
@@ -127,6 +130,7 @@
 		67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestsTableViewController.swift; sourceTree = "<group>"; };
 		67BC2298232E046A00653900 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		67BC229B232F43C300653900 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		67F29EA52362D14900CA6CE5 /* AlbumImagePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumImagePreviewVC.swift; sourceTree = "<group>"; };
 		6827CA1F90E3A544C3676AC6 /* Pods-GalleryShareTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryShareTests.release.xcconfig"; path = "Target Support Files/Pods-GalleryShareTests/Pods-GalleryShareTests.release.xcconfig"; sourceTree = "<group>"; };
 		81478EAB71CE9C6067210F2A /* Pods-GalleryShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryShare.debug.xcconfig"; path = "Target Support Files/Pods-GalleryShare/Pods-GalleryShare.debug.xcconfig"; sourceTree = "<group>"; };
 		86FCB92C7A5C5C68E729CC5D /* Pods_GalleryShareUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GalleryShareUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -183,7 +187,6 @@
 				67BC2288232743C800653900 /* LogInViewController.swift */,
 				67BC228A2327483B00653900 /* SignUpViewController.swift */,
 				67BC2292232C5E8500653900 /* FriendsViewController.swift */,
-				67BC228C2328B21400653900 /* AddFriendsTableViewController.swift */,
 				67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */,
 				6734766A234125E5005469FC /* GuideViewController.swift */,
 				6792D91F2347E41A00E6159E /* MainTabViewController.swift */,
@@ -192,9 +195,10 @@
 				6792D929234D8FE000E6159E /* AlbumsViewController.swift */,
 				67922A87235A4850004092C5 /* CreateAlbumViewController.swift */,
 				67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */,
-				67365DB223526B8200360D7D /* SendTableViewController.swift */,
+				67BC228C2328B21400653900 /* AddFriendsTableViewController.swift */,
 				67922A8F235F63DD004092C5 /* SendAlbumTableViewController.swift */,
 				676D2B392356744000D49B85 /* FriendViewController.swift */,
+				67365DB223526B8200360D7D /* SendTableViewController.swift */,
 				67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */,
 			);
 			path = "View Controllers";
@@ -225,8 +229,17 @@
 				6792D92323480C3D00E6159E /* ImagePreviewVC.swift */,
 				67922A84235960CA004092C5 /* FriendImagePreviewVC.swift */,
 				6792D933234ED5BD00E6159E /* PrivImagePreviewVC.swift */,
+				67F29EA52362D14900CA6CE5 /* AlbumImagePreviewVC.swift */,
 			);
 			path = ImagePreviews;
+			sourceTree = "<group>";
+		};
+		67922A972361440E004092C5 /* Container View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				67922A982361442C004092C5 /* FriendCellsViewController.swift */,
+			);
+			path = "Container View Controllers";
 			sourceTree = "<group>";
 		};
 		6792D92F234D901400E6159E /* IntroStuff */ = {
@@ -263,6 +276,7 @@
 		6797F3862322E32B006A3C0D /* GalleryShare */ = {
 			isa = PBXGroup;
 			children = (
+				67922A972361440E004092C5 /* Container View Controllers */,
 				67922A8623596110004092C5 /* ImagePreviews */,
 				6792D92F234D901400E6159E /* IntroStuff */,
 				67BC229A232F435300653900 /* Navigation Controllers */,
@@ -541,6 +555,7 @@
 				6734766F23446F6D005469FC /* SwipingController.swift in Sources */,
 				67BC228D2328B21400653900 /* AddFriendsTableViewController.swift in Sources */,
 				67BC228B2327483B00653900 /* SignUpViewController.swift in Sources */,
+				67F29EA62362D14900CA6CE5 /* AlbumImagePreviewVC.swift in Sources */,
 				67922A85235960CA004092C5 /* FriendImagePreviewVC.swift in Sources */,
 				676D2B3E2356CC2400D49B85 /* PrivateViewController.swift in Sources */,
 				6734766D23430FA6005469FC /* Checkbox.swift in Sources */,
@@ -555,6 +570,7 @@
 				67BC2293232C5E8500653900 /* FriendsViewController.swift in Sources */,
 				673476652341246E005469FC /* IntroPageViewController.swift in Sources */,
 				6792D92423480C3D00E6159E /* ImagePreviewVC.swift in Sources */,
+				67922A992361442C004092C5 /* FriendCellsViewController.swift in Sources */,
 				676D2B3C2356CA4A00D49B85 /* Photo.swift in Sources */,
 				67BC2289232743C800653900 /* LogInViewController.swift in Sources */,
 				67365DB323526B8200360D7D /* SendTableViewController.swift in Sources */,

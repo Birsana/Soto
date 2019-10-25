@@ -116,7 +116,7 @@ class AlbumFriendsTableViewController: UITableViewController, UISearchResultsUpd
         
         let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 40))
            title.textColor = UIColor.black
-           title.text = "T"
+           title.text = "Uh"
            title.textAlignment = .center
         cell.contentView.addSubview(title)
         
