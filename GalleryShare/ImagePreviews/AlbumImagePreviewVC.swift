@@ -167,21 +167,21 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AlbumImagePreviewFullViewCell
-        cell.imgView.image=imgArray[indexPath.row]
+//        cell.imgView.image=imgArray[indexPath.row]
         let sender = sentArray[indexPath.row]
         
-         let databaseRef = Database.database().reference()
+        let databaseRef = Database.database().reference()
         databaseRef.child("users").child(sender).observeSingleEvent(of: .value) { (snapshot) in
             let dictionary = snapshot.value as? [String: AnyObject]
-            let profilePicURL = (dictionary!["username"] as? String)!
+            let profilePicURL = (dictionary!["profilePic"] as? String)!
             let url = NSURL(string: profilePicURL)
             URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
-                
                 if error != nil{
                     return
                 }
                 DispatchQueue.main.async {
-                    cell.senderView.image = UIImage(data: data!)
+                    cell.senderView?.image = UIImage(data: data!)
+                     print("1?")
                 }
                 
             }).resume()
@@ -254,6 +254,10 @@ class AlbumImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate 
         imgView.image = UIImage(named: "user3")
         scrollImg.addSubview(imgView!)
         imgView.contentMode = .scaleAspectFit
+        
+        senderView = UIImageView()
+        scrollImg.addSubview(senderView!)
+        senderView.contentMode = .scaleAspectFit
     }
     
     @objc func handleDoubleTapScrollView(recognizer: UITapGestureRecognizer) {

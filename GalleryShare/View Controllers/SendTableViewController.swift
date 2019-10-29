@@ -15,7 +15,7 @@ extension SendTableViewController: SendCellDelegate{
         let currentUser = Auth.auth().currentUser
         let StorageRef = Storage.storage().reference()
         let DatabaseRef = Database.database().reference()
-        let imageData = picToSend!.jpegData(compressionQuality: 1.0)
+        let imageData = picToSend?.jpegData(compressionQuality: 1.0)
         var picURL: String?
         let imageName = NSUUID().uuidString
         let fromID = currentUser!.uid
@@ -23,32 +23,64 @@ extension SendTableViewController: SendCellDelegate{
         var toID: String?
         let picToSendStorageRef = StorageRef.child("imageMessages").child("\(imageName).jpg")
         
-        
-        DatabaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
-            let myData = snapshot.value as! NSDictionary
-            toID = myData[sendTo] as! String
-            let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil)
-            {metadata, error in
-                
-                guard let metadata = metadata else {
-                    // Uh-oh, an error occurred!
-                    return
-                }
-                let size = metadata.size
-                
-                picToSendStorageRef.downloadURL { (url, error) in
-                    guard let downloadURL = url
+        if picsToSend.count > 0{
+            for image in picsToSend{
+                let imageDataM = image.jpegData(compressionQuality: 1.0)
+                let imageNameM = NSUUID().uuidString
+                let picToSendStorageRefM = StorageRef.child("imageMessages").child("\(imageNameM).jpg")
+                DatabaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
+                    let myData = snapshot.value as! NSDictionary
+                    toID = myData[sendTo] as! String
+                    let uploadTask = picToSendStorageRefM.putData(imageDataM!, metadata: nil)
+                    {metadata, error in
                         
-                        else {
+                        guard let metadata = metadata else {
                             // Uh-oh, an error occurred!
                             return
+                        }
+                        let size = metadata.size
+                        
+                        picToSendStorageRefM.downloadURL { (url, error) in
+                            guard let downloadURL = url
+                                
+                                else {
+                                    // Uh-oh, an error occurred!
+                                    return
+                            }
+                            picURL = downloadURL.absoluteString
+                            let values = ["imageURL": picURL, "toID": toID]
+                            DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values)
+                        }
                     }
-                    picURL = downloadURL.absoluteString
-                    let values = ["imageURL": picURL, "toID": toID]
-                    DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values)
                 }
             }
-            
+        }
+        else{
+            DatabaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
+                let myData = snapshot.value as! NSDictionary
+                toID = myData[sendTo] as! String
+                let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil)
+                {metadata, error in
+                    
+                    guard let metadata = metadata else {
+                        // Uh-oh, an error occurred!
+                        return
+                    }
+                    let size = metadata.size
+                    
+                    picToSendStorageRef.downloadURL { (url, error) in
+                        guard let downloadURL = url
+                            
+                            else {
+                                // Uh-oh, an error occurred!
+                                return
+                        }
+                        picURL = downloadURL.absoluteString
+                        let values = ["imageURL": picURL, "toID": toID]
+                        DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values)
+                    }
+                }
+            }
         }
         self.dismiss(animated: true, completion: nil)
         
@@ -69,10 +101,11 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
     var username = ""
     var nameAtCell : String?
     var passedArray = [UIImage]()
+    var picsToSend = [UIImage]()
     
     let searchController = UISearchController(searchResultsController: nil)
     var filteredUsers = [NSDictionary?]()
-
+    
     
     
     override func viewDidLoad() {
@@ -106,14 +139,14 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
         
         let user: NSDictionary?
         if searchController.isActive && searchController.searchBar.text != ""{
-                   user = filteredUsers[indexPath.row]
-               }
+            user = filteredUsers[indexPath.row]
+        }
         else{
-        user = self.friends[indexPath.row]
+            user = self.friends[indexPath.row]
         }
         cell.username.text = user?["username"] as? String
         nameAtCell = user?["username"] as? String
-
+        
         cell.delegate = self
         return cell
     }

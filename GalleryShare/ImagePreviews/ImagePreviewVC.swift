@@ -27,7 +27,6 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     }()
     
     private let sendFriendButton: UIButton = {
-        //ADD SEARCH FUNCTIONALITY FOR ALBUM AND FRIENDS
         let button = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 110, y: 0, width: 90, height: 30))
         button.setTitle("Send to Friend", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = true
@@ -37,6 +36,17 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         return button
         
     }()
+    
+    private let gridButton: UIButton = {
+           let button = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 110, y: 0, width: 90, height: 30))
+           button.setTitle("Grid", for: .normal)
+           button.translatesAutoresizingMaskIntoConstraints = true
+           button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+           button.setTitleColor(.systemPink, for: .normal)
+           button.addTarget(self, action: #selector(gridView), for: .touchUpInside)
+           return button
+           
+       }()
     
     private let addAlbumButton: UIButton = {
         let button = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 110, y: 300, width: 90, height: 30))
@@ -48,6 +58,15 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         return button
     }()
     
+    @objc private func gridView(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let newController = storyboard.instantiateViewController(withIdentifier: "Grid") as! GridImagesViewController
+        
+        newController.imgArray = self.imgArray
+        
+        self.present(newController, animated: true, completion: nil)
+        
+    }
     
     @objc private func getPic(){
         var pictoSend: UIImage!
@@ -100,6 +119,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         newController.passedIndex = passedContentOffset
         newController.passedArray = imgArray
         
+        
         self.present(newController, animated: true, completion: nil)
         
         
@@ -142,14 +162,14 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         myCollectionView.dataSource=self
         myCollectionView.register(ImagePreviewFullViewCell.self, forCellWithReuseIdentifier: "Cell")
         myCollectionView.isPagingEnabled = true
-        
-        //  myCollectionView.scrollToItem(at: x, at: .left, animated: true)
-        
+                
         self.view.addSubview(myCollectionView)
         self.view.addSubview(addButton)
         self.view.addSubview(sendFriendButton)
         self.view.addSubview(addAlbumButton)
-        
+        self.view.addSubview(gridButton)
+        gridButton.center = self.view.center
+       
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
     }
     
@@ -206,8 +226,7 @@ class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
     
     var scrollImg: UIScrollView!
     var imgView: UIImageView!
-    
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -231,6 +250,7 @@ class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
         imgView.image = UIImage(named: "user3")
         scrollImg.addSubview(imgView!)
         imgView.contentMode = .scaleAspectFit
+
     }
     
     @objc func handleDoubleTapScrollView(recognizer: UITapGestureRecognizer) {

@@ -15,38 +15,74 @@ class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdati
         let currentUser = Auth.auth().currentUser
         let StorageRef = Storage.storage().reference()
         let DatabaseRef = Database.database().reference()
-        let imageData = picToSend!.jpegData(compressionQuality: 1.0)
+        let imageData = picToSend?.jpegData(compressionQuality: 1.0)
         var picURL: String?
         let imageName = NSUUID().uuidString
         let fromID = currentUser!.uid
         var toID: String?
         let picToSendStorageRef = StorageRef.child("albumMessages").child("\(imageName).jpg")
         
-        DatabaseRef.child("Albums").child(username).queryOrdered(byChild: "name").queryEqual(toValue: album).observeSingleEvent(of: .value) { (snapshot) in
-            let myData = snapshot.value as! NSDictionary
-            let componentArray = myData.allKeys
-            toID = componentArray.first as? String
-            let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil) { (metadata, error) in
-                
-                guard let metadata = metadata else {
-                    // Uh-oh, an error occurred!
-                    return
-                }
-                let size = metadata.size
-                picToSendStorageRef.downloadURL { (url, error) in
-                    guard let downloadURL = url
-                        
-                        else {
-                            // Uh-oh, an error occurred!
-                            return
+        if picsToSend.count > 0{
+            for image in picsToSend{
+                let imageDataM = image.jpegData(compressionQuality: 1.0)
+                let imageNameM = NSUUID().uuidString
+                let picToSendStorageRefM = StorageRef.child("albumMessages").child("\(imageNameM).jpg")
+
+                DatabaseRef.child("Albums").child(username).queryOrdered(byChild: "name").queryEqual(toValue: album).observeSingleEvent(of: .value) { (snapshot) in
+                               let myData = snapshot.value as! NSDictionary
+                               let componentArray = myData.allKeys
+                               toID = componentArray.first as? String
+                               let uploadTask = picToSendStorageRefM.putData(imageDataM!, metadata: nil) { (metadata, error) in
+                                   
+                                   guard let metadata = metadata else {
+                                       // Uh-oh, an error occurred!
+                                       return
+                                   }
+                                   let size = metadata.size
+                                   picToSendStorageRefM.downloadURL { (url, error) in
+                                       guard let downloadURL = url
+                                           
+                                           else {
+                                               // Uh-oh, an error occurred!
+                                               return
+                                       }
+                                       picURL = downloadURL.absoluteString
+                                       let values = ["imageURL": picURL, "fromID": fromID]
+                                       DatabaseRef.child("sentAlbumPics").child(toID!).childByAutoId().updateChildValues(values)
+                                   }
+                                   
+                               }
+                               
+                           }
+            }
+        }
+        else{
+            DatabaseRef.child("Albums").child(username).queryOrdered(byChild: "name").queryEqual(toValue: album).observeSingleEvent(of: .value) { (snapshot) in
+                let myData = snapshot.value as! NSDictionary
+                let componentArray = myData.allKeys
+                toID = componentArray.first as? String
+                let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil) { (metadata, error) in
+                    
+                    guard let metadata = metadata else {
+                        // Uh-oh, an error occurred!
+                        return
                     }
-                    picURL = downloadURL.absoluteString
-                    let values = ["imageURL": picURL, "fromID": fromID]
-                    DatabaseRef.child("sentAlbumPics").child(toID!).childByAutoId().updateChildValues(values)
+                    let size = metadata.size
+                    picToSendStorageRef.downloadURL { (url, error) in
+                        guard let downloadURL = url
+                            
+                            else {
+                                // Uh-oh, an error occurred!
+                                return
+                        }
+                        picURL = downloadURL.absoluteString
+                        let values = ["imageURL": picURL, "fromID": fromID]
+                        DatabaseRef.child("sentAlbumPics").child(toID!).childByAutoId().updateChildValues(values)
+                    }
+                    
                 }
                 
             }
-            
         }
         self.dismiss(animated: true, completion: nil)
         
@@ -63,9 +99,11 @@ class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdati
     var passedArray = [UIImage]()
     var username = ""
     
+    var picsToSend = [UIImage]()
+    
     let searchController = UISearchController(searchResultsController: nil)
     var filteredAlbums = [NSDictionary?]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
@@ -111,23 +149,23 @@ class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdati
             album = filteredAlbums[indexPath.row]
         }
         else{
-        album = self.albums[indexPath.row]
+            album = self.albums[indexPath.row]
         }
         cell.albumName.text = album?["name"] as? String
         cell.delegate = self
         return cell
     }
     func updateSearchResults(for searchController: UISearchController) {
-           //update the search results
-           filterContent(searchText: self.searchController.searchBar.text!)
-       }
-       func filterContent(searchText:String){
-           self.filteredAlbums = self.albums.filter{ album in
-               let albumName = album!["name"] as? String
-               return(albumName?.lowercased().contains(searchText.lowercased()))!
-           }
-           tableView.reloadData()
-       }
+        //update the search results
+        filterContent(searchText: self.searchController.searchBar.text!)
+    }
+    func filterContent(searchText:String){
+        self.filteredAlbums = self.albums.filter{ album in
+            let albumName = album!["name"] as? String
+            return(albumName?.lowercased().contains(searchText.lowercased()))!
+        }
+        tableView.reloadData()
+    }
     
     
 }

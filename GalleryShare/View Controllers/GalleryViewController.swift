@@ -56,11 +56,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ACell", for: indexPath) as! PersonImageCell
             let nameToUse = usernameArray[indexPath.row]
-            print(nameToUse)
-            cell.username?.text = "HUUUUH"
-                               
-        
-            
+            cell.username?.text = nameToUse
             //print(cell.friendName?.text)
             cell.backgroundColor = indexPath.item % 2 == 0 ?.blue : .green
             
@@ -82,7 +78,7 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
                 self.definesPresentationContext = true
                 vc.modalPresentationStyle = .overCurrentContext
                 // vc.username.text = usernameArray[indexPath.row]
-                vc.labelText = "tropic"
+                vc.labelText = "forsure2"
                 self.present(vc, animated: true, completion: nil)
                 
             }
@@ -97,6 +93,13 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
             return CGSize(width: width/4 - 1, height: width/4 - 1)
         } else {
             return CGSize(width: width/6 - 1, height: width/6 - 1)
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if UserDefaults.standard.bool(forKey: "hasFriends"){
+            noFriends.isHidden = true
+            addFriends.isHidden = true
         }
     }
     

@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseMLVision
 
 extension UIImageView{
-
+    
     func asCircle(){
         
         self.layer.masksToBounds = true
@@ -19,35 +21,32 @@ extension UIImageView{
 }
 
 class FaceRecViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate{
-   
+    
     @IBOutlet weak var imageToSelect: UIImageView!
     var mypageview = IntroPageViewController()
-    
-    
-   var selectedImage: UIImage?
-
-    
+    var selectedImage: UIImage?
     @IBOutlet weak var check: Checkbox!
-    
-    
     var imagePicker = UIImagePickerController()
+    
+    let options = VisionFaceDetectorOptions()
+    lazy var vision = Vision.vision()
     
     
     override func viewDidLoad() {
-        
+      
         //imageToSelect.frame = CGRect(x: 0,y: 0, width: 200, height: 200)
         imageToSelect.asCircle()
-    
+        
         super.viewDidLoad()
         check.borderStyle = .square
         check.checkmarkStyle = .tick
         
         check.valueChanged = { (isChecked) in
-               check1Clicked = !check1Clicked
-               check2Clicked = false
-               check3Clicked = false
-           }
-
+            check1Clicked = !check1Clicked
+            check2Clicked = false
+            check3Clicked = false
+        }
+        
         // Do any additional setup after loading the view.
     }
     
@@ -58,51 +57,56 @@ class FaceRecViewController: UIViewController, UINavigationControllerDelegate, U
         }
     }
     
-  
+    
     @IBAction func clickChoose(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             
-             imagePicker.delegate = self
+            imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
             imagePicker.allowsEditing = true
             
             
             present(imagePicker, animated: true, completion: nil)
         }
-     
+        
         
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
-     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-             // var selectedImage: UIImage?
-                if let editedImage = info[.editedImage] as? UIImage {
-                     selectedImage = editedImage
-                     self.imageToSelect.image = selectedImage!
-                     picker.dismiss(animated: true, completion: nil)
-                 } else if let originalImage = info[.originalImage] as? UIImage {
-                     selectedImage = originalImage
-                     self.imageToSelect.image = selectedImage!
-                     picker.dismiss(animated: true, completion: nil)
-                 }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        // var selectedImage: UIImage?
+        if let editedImage = info[.editedImage] as? UIImage {
+            selectedImage = editedImage
+            self.imageToSelect.image = selectedImage!
+            picker.dismiss(animated: true, completion: nil)
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            selectedImage = originalImage
+            self.imageToSelect.image = selectedImage!
+            picker.dismiss(animated: true, completion: nil)
+        }
         
-       
-       
         pic1Chose = true
         f1pic = selectedImage!
-        print("1")
-
+        let faceDetector = vision.faceDetector(options: options)
+        let visionImage = VisionImage(image: selectedImage!)
+        faceDetector.process(visionImage) { faces, error in
+          guard error == nil, let faces = faces, !faces.isEmpty else {
+            print("no faces")
+            return
           }
+             print("faces")
+        }
     }
+}
 
 
 

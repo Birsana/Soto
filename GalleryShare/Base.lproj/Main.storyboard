@@ -664,6 +664,47 @@
             </objects>
             <point key="canvasLocation" x="7644.9275362318849" y="937.5"/>
         </scene>
+        <!--Grid Images View Controller-->
+        <scene sceneID="eLy-rM-GeH">
+            <objects>
+                <viewController storyboardIdentifier="Grid" id="wZf-Ox-rhB" customClass="GridImagesViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2SB-xm-Lp1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="swa-f8-za0">
+                                <rect key="frame" x="19" y="69" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Private"/>
+                                <connections>
+                                    <action selector="privateButton:" destination="wZf-Ox-rhB" eventType="touchUpInside" id="vhg-63-GNi"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JZA-sd-ehA">
+                                <rect key="frame" x="185" y="69" width="44" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Album"/>
+                                <connections>
+                                    <action selector="galleryButton:" destination="wZf-Ox-rhB" eventType="touchUpInside" id="F21-cW-tcP"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhG-11-0LM">
+                                <rect key="frame" x="333" y="69" width="44" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Friend"/>
+                                <connections>
+                                    <action selector="friendButton:" destination="wZf-Ox-rhB" eventType="touchUpInside" id="Bt7-eC-AZ1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="OKt-6A-jzJ"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ln4-0m-gDX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8763.7681159420299" y="773.4375"/>
+        </scene>
         <!--MainTab-->
         <scene sceneID="dkF-73-6aa">
             <objects>
@@ -1178,7 +1219,6 @@
                                                 <constraint firstAttribute="bottom" secondItem="eEy-Ma-jEt" secondAttribute="bottom" constant="10" id="04d-VD-XcA"/>
                                                 <constraint firstAttribute="trailing" secondItem="eEy-Ma-jEt" secondAttribute="trailing" constant="10" id="HVX-rS-K0S"/>
                                                 <constraint firstItem="eEy-Ma-jEt" firstAttribute="leading" secondItem="cSz-Be-AvW" secondAttribute="leading" constant="10" id="bPo-LN-OYb"/>
-                                                <constraint firstItem="eEy-Ma-jEt" firstAttribute="top" secondItem="cSz-Be-AvW" secondAttribute="top" constant="10" id="vPO-FI-nPg"/>
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="97" height="75"/>
@@ -1201,9 +1241,55 @@
             </objects>
             <point key="canvasLocation" x="7053.6231884057979" y="1595.7589285714284"/>
         </scene>
+        <!--Buttons Grid View Controller-->
+        <scene sceneID="6H8-D9-0Cj">
+            <objects>
+                <viewController id="atl-ua-B9a" customClass="ButtonsGridViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="icc-46-wd9">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sb5-j5-OZz">
+                                <rect key="frame" x="35" y="49" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Private"/>
+                                <connections>
+                                    <action selector="privateTapped:" destination="atl-ua-B9a" eventType="touchUpInside" id="Yj0-2f-ICg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAK-fF-XM1">
+                                <rect key="frame" x="184" y="49" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Gallery"/>
+                                <connections>
+                                    <action selector="galleryTapped:" destination="atl-ua-B9a" eventType="touchUpInside" id="853-KZ-ZlM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Zg-vG-zz8">
+                                <rect key="frame" x="327" y="49" width="44" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Friend"/>
+                                <connections>
+                                    <action selector="friendTapped:" destination="atl-ua-B9a" eventType="touchUpInside" id="Kgv-n5-AM6"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="Yc5-Jq-QKp"/>
+                    </view>
+                    <connections>
+                        <outlet property="friendButton" destination="8Zg-vG-zz8" id="H4t-YF-9gU"/>
+                        <outlet property="galleryButton" destination="GAK-fF-XM1" id="u02-av-Nrw"/>
+                        <outlet property="privateButton" destination="sb5-j5-OZz" id="oBW-25-1Cs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e1I-MD-rz4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9519" y="598"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Pw3-QK-DSy"/>
+        <segue reference="Nka-kN-Os1"/>
         <segue reference="amn-oW-FUh"/>
     </inferredMetricsTieBreakers>
 </document>

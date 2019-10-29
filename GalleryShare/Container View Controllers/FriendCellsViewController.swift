@@ -39,8 +39,7 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ACell", for: indexPath) as! PersonImageCell
         let nameToUse = usernameArray[indexPath.row]
-        //cell.username?.text = nameToUse
-        print("Y")
+        cell.username?.text = nameToUse
         cell.username?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
         cell.username?.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
         print(cell.username?.text)
@@ -64,6 +63,15 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let newController = storyboard.instantiateViewController(withIdentifier: "myFriend") as! FriendViewController
+        newController.labelText = usernameArray[indexPath.row]
+        self.present(newController, animated: true, completion: nil)
+    }
+    
+    
 
     @IBOutlet weak var myCollectionViewFriends: UICollectionView!
     
@@ -85,7 +93,7 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         viewLoadSetUp()
         myCollectionViewFriends.delegate = self
         myCollectionViewFriends.dataSource = self
-        myCollectionViewFriends.register(PersonImageCell.self, forCellWithReuseIdentifier: "ACell")
+        //myCollectionViewFriends.register(PersonImageCell.self, forCellWithReuseIdentifier: "ACell")
         myCollectionViewFriends.backgroundColor=UIColor.red
         myCollectionViewFriends.isPagingEnabled = true
         myCollectionViewFriends.collectionViewLayout = flowLayout

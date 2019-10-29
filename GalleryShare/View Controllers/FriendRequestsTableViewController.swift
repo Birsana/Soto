@@ -79,10 +79,8 @@ extension FriendRequestsTableViewController: RequestCellDelegate{
                         let componentArray = myData.allKeys
                         let toDelete = componentArray.first as? String
                         dbRef.child("FriendRequest").child(username!).child(toDelete!).removeValue()
-                        
-                        
-                
-                        
+                        UserDefaults.standard.set(true, forKey: "hasFriends")
+                        UserDefaults.standard.synchronize()
                     })
                 }
                 

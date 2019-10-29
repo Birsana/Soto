@@ -25,9 +25,7 @@ class FriendViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         username.text = labelText
-        
         var databaseRef = Database.database().reference()
         let user = Auth.auth().currentUser
         let uid = Auth.auth().currentUser?.uid
@@ -35,10 +33,9 @@ class FriendViewController: UIViewController, UICollectionViewDelegate, UICollec
         databaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
             
             let myData = snapshot.value as! NSDictionary
-            //self.fromID = myData[self.username.text!] as! String
-            self.fromID = myData[self.labelText] as! String
+            self.fromID = myData[self.username.text!] as! String
+            
             databaseRef.child("sentPics").child(self.fromID!).queryOrdered(byChild: "toID").queryEqual(toValue: uid).observeSingleEvent(of: .value) { (snapshot) in
-                //print(snapshot)
                 for child in snapshot.children{
                     let snap = child as! DataSnapshot
                     let dict = snap.value as! [String: Any]
