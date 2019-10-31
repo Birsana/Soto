@@ -20,10 +20,12 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoItemCell
+        let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Alboom", for: indexPath) as! AlbumTabCell
         
         let cellImage = imageArray[indexPath.row]
-        cell.img.image = cellImage
+        let cellName = nameArray[indexPath.row]
+        cell.coverPhoto.image = cellImage
+        cell.name.text = cellName
         
         return cell
     }
@@ -42,7 +44,8 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
              if let vc = (storyboard?.instantiateViewController(withIdentifier: "display") as? DisplayAlbumViewController) {
                  self.definesPresentationContext = true
                  vc.modalPresentationStyle = .overCurrentContext
-                 vc.albumName = "T"
+                vc.albumName = nameArray[indexPath.row]
+                print(vc.albumName)
                  self.present(vc, animated: true, completion: nil)
                  
              }
@@ -79,10 +82,10 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
             authUsername = myData["username"] as! String
             
             databaseRef.child("Albums").child(authUsername!).queryOrdered(byChild: "coverPhoto").observe(.childAdded) { (snapshot) in
-                //print(snapshot)
+               
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
                     if rest.key == "coverPhoto"{
-                        //self.picURLs.append(rest.value as! String)
+                        
                         let imageURL = rest.value as! String
                         
                         let imageRef = Storage.storage().reference(forURL: imageURL as! String)
@@ -110,9 +113,8 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
             
         }
         albums.delegate = self
-        albums.dataSource=self
-        albums.register(PhotoItemCell.self, forCellWithReuseIdentifier: "Cell")
-        albums.backgroundColor=UIColor.red
+        albums.dataSource = self
+        albums.backgroundColor = UIColor.red
     }
     
     

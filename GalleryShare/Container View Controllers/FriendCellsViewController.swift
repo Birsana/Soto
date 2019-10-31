@@ -7,13 +7,46 @@
 //
 
 import UIKit
+import Foundation
 import Firebase
 
-class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate{
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.friendArray.count
+class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate, UISearchBarDelegate{
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        isSearching = true
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        isSearching = false
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        isSearching = false
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let search = searchBar.text!
+        print(search)
+        filtered.removeAll(keepingCapacity: false)
+        filtered = usernameArray.filter { $0.contains(search.lowercased())}
+        print(filtered)
+        print(usernameArray)
+        isSearching = (filtered.count ==  0) ? false: true
+        myCollectionViewFriends.reloadData()
+        
+    }
+    
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if isSearching{
+            
+            print("Count is", filtered.count)
+            return filtered.count
+        }
+        else{
+            return self.friendArray.count
+        }
+    }
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let cellWidth : CGFloat = 97
 
         let numberOfCells = floor(self.view.frame.size.width / cellWidth)
@@ -21,9 +54,9 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
 
         return UIEdgeInsets(top: 15, left: edgeInsets, bottom: 0, right: edgeInsets)
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let noOfCellsInRow = self.friendArray.count
+       /** let noOfCellsInRow = self.friendArray.count
 
         let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
 
@@ -31,21 +64,37 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
             + flowLayout.sectionInset.right
             + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
 
-        let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow))
+        let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow)) **/
 
-        return CGSize(width: size, height: size)
+        return CGSize(width: 80, height: 80)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ACell", for: indexPath) as! PersonImageCell
+        cell.username?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+        cell.username?.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
+        
+        cell.username?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+        cell.username?.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
+        
+        cell.profilePic?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+        cell.profilePic?.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+       
+        if isSearching{
+            let nameToUse = filtered[indexPath.row]
+            cell.username?.text = nameToUse
+            return cell
+            
+        }
+        else{
+       
+       
         let nameToUse = usernameArray[indexPath.row]
         cell.username?.text = nameToUse
-        cell.username?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
-        cell.username?.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
-        print(cell.username?.text)
-        //print(cell.friendName?.text)
-        cell.backgroundColor = indexPath.item % 2 == 0 ?.blue : .green
+        
         let profileImageUrl = profilePicURL[indexPath.row]
+        
+        
             
         let url = NSURL(string: profileImageUrl)
         URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
@@ -59,8 +108,10 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
             
         }).resume()
         
-        
+        cell.profilePic?.asCircle()
         return cell
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -70,6 +121,7 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         newController.labelText = usernameArray[indexPath.row]
         self.present(newController, animated: true, completion: nil)
     }
+   
     
     
 
@@ -81,26 +133,36 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
     var profilePicURL = [String]()
     var usernameArray = [String]()
     
+    var filtered = [String]()
+    var isSearching: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width/2 - 10, height: 40)
+        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width/4 - 10, height: 100)
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumInteritemSpacing = 0.0
         
+        
         viewLoadSetUp()
         myCollectionViewFriends.delegate = self
+        myCollectionViewFriends.translatesAutoresizingMaskIntoConstraints = false
         myCollectionViewFriends.dataSource = self
-        //myCollectionViewFriends.register(PersonImageCell.self, forCellWithReuseIdentifier: "ACell")
-        myCollectionViewFriends.backgroundColor=UIColor.red
         myCollectionViewFriends.isPagingEnabled = true
         myCollectionViewFriends.collectionViewLayout = flowLayout
+        //myCollectionViewFriends.layer.borderWidth = 2
+        myCollectionViewFriends.layer.cornerRadius = 8
+       // myCollectionViewFriends.layer.borderColor = UIColor.black.cgColor
+        
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y:0, width: myCollectionViewFriends.frame.width, height: 40))
+        view.addSubview(searchBar)
+        searchBar.delegate = self
     }
     func viewLoadSetUp(){
            
-           var databaseRef = Database.database().reference()
+           let databaseRef = Database.database().reference()
            let user = Auth.auth().currentUser
            let uid = Auth.auth().currentUser?.uid
            

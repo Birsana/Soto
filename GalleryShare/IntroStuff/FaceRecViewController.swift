@@ -36,6 +36,7 @@ class FaceRecViewController: UIViewController, UINavigationControllerDelegate, U
       
         //imageToSelect.frame = CGRect(x: 0,y: 0, width: 200, height: 200)
         imageToSelect.asCircle()
+        imageToSelect.clipsToBounds = true
         
         super.viewDidLoad()
         check.borderStyle = .square
@@ -45,13 +46,15 @@ class FaceRecViewController: UIViewController, UINavigationControllerDelegate, U
             check1Clicked = !check1Clicked
             check2Clicked = false
             check3Clicked = false
+            check4Clicked = false
+            check5Clicked = false
         }
         
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if check2Clicked || check3Clicked{
+        if check2Clicked || check3Clicked || check4Clicked || check5Clicked{
             
             check.isChecked = false
         }
@@ -72,26 +75,20 @@ class FaceRecViewController: UIViewController, UINavigationControllerDelegate, U
         
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         // var selectedImage: UIImage?
         if let editedImage = info[.editedImage] as? UIImage {
             selectedImage = editedImage
+            selectedImage = makeSquare(image: selectedImage!)
             self.imageToSelect.image = selectedImage!
             picker.dismiss(animated: true, completion: nil)
         } else if let originalImage = info[.originalImage] as? UIImage {
             selectedImage = originalImage
+            selectedImage = makeSquare(image: selectedImage!)
             self.imageToSelect.image = selectedImage!
             picker.dismiss(animated: true, completion: nil)
+            
         }
         
         pic1Chose = true
@@ -101,10 +98,13 @@ class FaceRecViewController: UIViewController, UINavigationControllerDelegate, U
         faceDetector.process(visionImage) { faces, error in
           guard error == nil, let faces = faces, !faces.isEmpty else {
             print("no faces")
+            
             return
           }
              print("faces")
+            //use: for face in faces to get count
         }
+        
     }
 }
 

@@ -21,7 +21,7 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-       
+        
         if picsToSend.contains(imgArray[indexPath.item]){
             let itemToRemove = imgArray[indexPath.item]
             while picsToSend.contains(itemToRemove) {
@@ -35,11 +35,11 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
             picsToSend.append(imgArray[indexPath.item])
             print("YEET")
         }
-      }
-   
+    }
+    
     public var screenFourFifths: CGFloat {
-           return UIScreen.main.bounds.height/8
-       }
+        return UIScreen.main.bounds.height/8
+    }
     
     
     var imgArray = [UIImage]()
@@ -49,38 +49,40 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
     
-     var picsToSend = [UIImage]()
+    var picsToSend = [UIImage]()
     
-   
+    
     @IBAction func privateButton(_ sender: Any) {
         for image in picsToSend{
             let imageName = NSUUID().uuidString
-                   let currentUser = Auth.auth().currentUser
-                   let StorageRef = Storage.storage().reference()
-                   let DatabaseRef = Database.database().reference()
-                   let imageData = image.jpegData(compressionQuality: 0.9)
-                   let privatePicStorageRef = StorageRef.child("users/\(currentUser!.uid)/privatePics").child("\(imageName).jpg")
-                   
-                   let uploadTask = privatePicStorageRef.putData(imageData!, metadata: nil)
-                   {metadata, error in
-                       
-                       guard let metadata = metadata else {
-                           // Uh-oh, an error occurred!
-                           return
-                       }
-                       let size = metadata.size
-                       
-                       privatePicStorageRef.downloadURL { (url, error) in
-                           guard let downloadURL = url
-                               
-                               else {
-                                   // Uh-oh, an error occurred!
-                                   return
-                           }
-                           DatabaseRef.child("privatePics").child(currentUser!.uid).childByAutoId().child("url").setValue(downloadURL.absoluteString)
-                       }
-                   }
+            let currentUser = Auth.auth().currentUser
+            let StorageRef = Storage.storage().reference()
+            let DatabaseRef = Database.database().reference()
+            let imageData = image.jpegData(compressionQuality: 0.9)
+            let privatePicStorageRef = StorageRef.child("users/\(currentUser!.uid)/privatePics").child("\(imageName).jpg")
+            
+            let uploadTask = privatePicStorageRef.putData(imageData!, metadata: nil)
+            {metadata, error in
+                
+                guard let metadata = metadata else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+                let size = metadata.size
+                
+                privatePicStorageRef.downloadURL { (url, error) in
+                    guard let downloadURL = url
+                        
+                        else {
+                            // Uh-oh, an error occurred!
+                            return
+                    }
+                    DatabaseRef.child("privatePics").child(currentUser!.uid).childByAutoId().child("url").setValue(downloadURL.absoluteString)
+                }
+            }
         }
+        self.dismiss(animated: true, completion: nil)
+        
     }
     
     @IBAction func galleryButton(_ sender: Any) {
@@ -96,7 +98,7 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
         let newController = storyboard.instantiateViewController(withIdentifier: "SendPic") as! SendTableViewController
         newController.picsToSend = picsToSend
         self.present(newController, animated: true, completion: nil)
-
+        
         
     }
     
@@ -105,7 +107,7 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
         super.viewDidLoad()
         
         self.view.backgroundColor=UIColor.black
-
+        
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
         screenHeight = screenSize.height
@@ -124,6 +126,6 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
         self.view.addSubview(myCollectionView)
     }
     
-
-
+    
+    
 }

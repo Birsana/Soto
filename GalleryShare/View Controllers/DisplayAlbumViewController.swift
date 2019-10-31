@@ -24,7 +24,7 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
                
               let cellImage = imageArray[indexPath.row]
               cell.img.image = cellImage
-             /**  let profileImageUrl = self.picURL[indexPath.row]
+            /** let profileImageUrl = self.picURL[indexPath.row]
                    
                let url = NSURL(string: profileImageUrl)
                URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
@@ -34,9 +34,10 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
                    }
                    DispatchQueue.main.async {
                     cell.img.image = UIImage(data: data!)
+                    print("ay")
                    }
                    
-               }).resume()**/
+               }).resume() **/
                
                return cell
     }
@@ -100,7 +101,6 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
                 let myData = snapshot.value as! NSDictionary
                 let componentArray = myData.allKeys
                 self.albumID = componentArray.first as? String
-                print(self.albumID)
                 
                 DatabaseRef.child("sentAlbumPics").child(self.albumID!).observeSingleEvent(of: .value) { (snapshot) in
                     print(snapshot)
@@ -113,7 +113,6 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
                         self.whoSent.append(picSender)
                     }
                    for imageURL in self.picURL {
-                        //print(self.picURL)
                         var imageRef = Storage.storage().reference(forURL: imageURL as! String)
                         imageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
                             if error != nil {

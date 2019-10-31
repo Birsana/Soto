@@ -34,23 +34,6 @@ class FR3ViewController: UIViewController, UINavigationControllerDelegate, UIIma
         var DatabaseRef = Database.database().reference()
         var StorageRef = Storage.storage().reference()
         
-        
-              
-        if check1Clicked || check2Clicked || check3Clicked{
-                  anyCheck = true
-              }
-        
-        if !pic1Chose || !pic2Chose || !pic3Chose{
-            goNext.isEnabled = false
-            
-        }
-        else if !anyCheck{
-            goNext.isEnabled = false
-        }
-        else{
-            
-            goNext.isEnabled = true
-        }
     
         
         check.borderStyle = .square
@@ -60,28 +43,41 @@ class FR3ViewController: UIViewController, UINavigationControllerDelegate, UIIma
                check1Clicked = false
                check2Clicked = false
                check3Clicked = !check3Clicked
-           }
-
+               check4Clicked = false
+               check5Clicked = false
+            
+            if check3Clicked{
+                if !pic1Chose || !pic2Chose || !pic3Chose || !pic4Chose || !pic5Chose{
+                    self.goNext.isEnabled = false
+                    
+                }
+                else{
+                    self.goNext.isEnabled = true
+                }
+            }
+           
+        }
            // Do any additional setup after loading the view.
        }
 
-  /**  override func viewWillAppear(_ animated: Bool) {
-         if check1Clicked || check2Clicked{
-                    
-                    check.isChecked = false
-                }
-        var anyCheck = false
-        if !pic1Chose || !pic2Chose || !pic3Chose && anyCheck{
-            
-                       goNext.isEnabled = false
-                       print("p")
-                   }
-                 else{
-                       print("please")
-                       goNext.isEnabled = true
-                   
-                   }
-     }**/
+  override func viewWillAppear(_ animated: Bool) {
+           if check1Clicked || check2Clicked || check3Clicked || check4Clicked || check5Clicked{
+                        anyCheck = true
+                    }
+              
+    if !pic1Chose || !pic2Chose || !pic3Chose || !pic4Chose || !pic5Chose{
+                  goNext.isEnabled = false
+                  
+              }
+              else if !anyCheck{
+                  goNext.isEnabled = false
+              }
+              else{
+                  
+                  goNext.isEnabled = true
+              }
+     }
+    
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -135,10 +131,12 @@ class FR3ViewController: UIViewController, UINavigationControllerDelegate, UIIma
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
            if let editedImage = info[.editedImage] as? UIImage {
                selectedImage = editedImage
+            selectedImage = makeSquare(image: selectedImage!)
                self.imageSelect.image = selectedImage!
                picker.dismiss(animated: true, completion: nil)
            } else if let originalImage = info[.originalImage] as? UIImage {
                selectedImage = originalImage
+            selectedImage = makeSquare(image: selectedImage!)
                self.imageSelect.image = selectedImage!
                picker.dismiss(animated: true, completion: nil)
            

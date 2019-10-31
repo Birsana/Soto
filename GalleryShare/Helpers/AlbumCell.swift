@@ -21,7 +21,6 @@ class AlbumCell: UITableViewCell {
     
     @IBOutlet weak var profilePic: UIImageView!
     
-    //let tapCheck = UITapGestureRecognizer(target: self, action: #selector(checked))
     weak var delegate: AlbumCellDelegate?
     
     
