@@ -20,6 +20,7 @@ class RequestCell: UITableViewCell {
     
     var myTableViewController: FriendRequestsTableViewController?
     
+    @IBOutlet weak var profilePic: UIImageView!
     
     @IBOutlet weak var Person: UILabel!
     

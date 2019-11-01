@@ -16,8 +16,27 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoItemCell
+        
+        
+        cell.selectLabel = UILabel(frame: CGRect(x:50, y: 0, width: 30, height: 30))
+       
+        //selectLabel.translatesAutoresizingMaskIntoConstraints = false
+        cell.selectLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        cell.selectLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        cell.selectLabel.layer.cornerRadius = cell.selectLabel.frame.width/2
+        cell.selectLabel.layer.masksToBounds = true
+        cell.selectLabel.layer.borderWidth = 1
+        cell.selectLabel.layer.borderColor = UIColor.white.cgColor
+        cell.selectLabel.frame.origin.y = 0
+        cell.selectLabel.frame.origin.x = cell.frame.width - cell.selectLabel.frame.width
+        
+        cell.addSubview(cell.selectLabel)
+        
+        
+        
+        
         cell.img.image=imgArray[indexPath.item]
-        cell.layer.borderColor = UIColor.red.cgColor
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -28,12 +47,18 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
                 if let itemToRemoveIndex = picsToSend.firstIndex(of: itemToRemove) {
                     picsToSend.remove(at: itemToRemoveIndex)
                     print("YAH")
+                    let cell = myCollectionView.cellForItem(at: indexPath) as! PhotoItemCell
+                    cell.selectLabel.backgroundColor = UIColor.clear
                 }
             }
         }
         else{
             picsToSend.append(imgArray[indexPath.item])
             print("YEET")
+            let cell = myCollectionView.cellForItem(at: indexPath) as! PhotoItemCell
+            cell.selectLabel.backgroundColor = UIColor.blue
+            
+            
         }
     }
     

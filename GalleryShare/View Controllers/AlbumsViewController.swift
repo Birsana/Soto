@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 //PUT CREATE IN CONTAINER VIEW, ALBUM COLLECTION VIEW COVERS REST OF PAGE, PULL TO REFRESH
-
+//NAH DON'T THINK SO
 
 class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate{
     
@@ -58,18 +58,34 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
     var nameArray = [String]()
     var picURLs = [String]()
     
+    var screenSize: CGRect!
+    var screenWidth: CGFloat!
+    var screenHeight: CGFloat!
+    
     var refreshControl = UIRefreshControl()
     
       @objc func refresh(sender:AnyObject) {
           self.albums.reloadData()
       }
     
+    public var screenFourFifths: CGFloat {
+           return UIScreen.main.bounds.height/8
+       }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        
+        screenSize = UIScreen.main.bounds
+        screenWidth = screenSize.width
+        screenHeight = screenSize.height
         
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         self.albums.addSubview(refreshControl) // not required when using UITabl
+        
+        self.albums.frame = CGRect(x:0, y: screenFourFifths, width: self.view.frame.width, height: self.view.frame.height)
         
         let databaseRef = Database.database().reference()
         let user = Auth.auth().currentUser

@@ -123,6 +123,8 @@ class FriendRequestsTableViewController: UITableViewController {
                 self.username = (dictionary["username"] as? String)!
                 
                 
+                
+                
                 self.databaseRef.child("FriendRequest").child(self.username).observe(.childAdded, with: { (snapshot) in
             
                     self.friendRequests.append(snapshot.value as? NSDictionary)
@@ -161,12 +163,23 @@ class FriendRequestsTableViewController: UITableViewController {
         user = self.friendRequests[indexPath.row]
         
         cell.Person.text = user?["username"] as? String
-
-        // Configure the cell...
-     /*   let user: NSDictionary?
-        user = self.friendRequests[indexPath.row]
-        cell.Person.text = user?[userID] as? String
-        */
+        cell.Person.center = cell.center
+        
+        cell.profilePic.asCircle()
+        
+        let profileImageUrl = user?["profilePic"] as! String
+        let url = NSURL(string: profileImageUrl)
+        URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
+            
+            if error != nil{
+                return
+            }
+            DispatchQueue.main.async {
+                cell.profilePic?.image = UIImage(data: data!)
+            }
+            
+        }).resume()
+        
         cell.myTableViewController = self
         cell.delegate = self
         return cell

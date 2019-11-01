@@ -41,6 +41,7 @@ class FriendCell: UITableViewCell {
                 let userFriendRequestRef = dbRef.child("FriendRequest").child(friend).child(currentUser)
                 
                 userFriendRequestRef.updateChildValues(myData)
+                self.addFriend.isHidden = true
             }
         }
     }

@@ -170,6 +170,8 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
         cell.imgView.image=imgArray[indexPath.row]
         let sender = sentArray[indexPath.row]
         
+
+        
         let databaseRef = Database.database().reference()
         databaseRef.child("users").child(sender).observeSingleEvent(of: .value) { (snapshot) in
             let dictionary = snapshot.value as? [String: AnyObject]
@@ -182,17 +184,24 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
                 }
                 DispatchQueue.main.async {
                     cell.senderView?.image = UIImage(data: data!)
-                    
-                     print(profilePicURL)
-                   
                 }
                 
             }).resume()
         }
+     /**   cell.senderView?.translatesAutoresizingMaskIntoConstraints = false
+        cell.senderView?.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        cell.senderView?.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        cell.senderView?.heightAnchor.constraint(equalToConstant: 50).isActive = true **/
+        let tap = UIGestureRecognizer(target:self, action: #selector(handleTap(_:)))
+        cell.isUserInteractionEnabled = true
         
-        
-        
+        cell.senderView?.asCircle()
+        cell.senderView?.addGestureRecognizer(tap)
+        cell.senderView?.frame = CGRect(x: 150, y: 0, width: 100, height: 100)
         return cell
+    }
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        print("water")
     }
     
     override func viewWillLayoutSubviews() {

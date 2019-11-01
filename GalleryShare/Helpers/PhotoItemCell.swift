@@ -10,6 +10,7 @@ import UIKit
 class PhotoItemCell: UICollectionViewCell {
     
     var img = UIImageView()
+    var selectLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

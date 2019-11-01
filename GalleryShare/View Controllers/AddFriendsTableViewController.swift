@@ -23,6 +23,7 @@ extension AddFriendsTableViewController: FriendCellDelegate{
                 userFriendRequestRef.updateChildValues(myData)
             }
         }
+        
     }
     
     

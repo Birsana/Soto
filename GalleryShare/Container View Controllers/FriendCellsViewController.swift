@@ -5,7 +5,6 @@
 //  Created by Andre Birsan on 2019-10-23.
 //  Copyright © 2019 Andre Birsan. All rights reserved.
 //
-
 import UIKit
 import Foundation
 import Firebase
@@ -13,22 +12,31 @@ import Firebase
 class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate, UISearchBarDelegate{
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
         isSearching = true
     }
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
         isSearching = false
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        searchBar.endEditing(true)
         isSearching = false
+        myCollectionViewFriends.reloadData()
+
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let search = searchBar.text!
-        print(search)
         filtered.removeAll(keepingCapacity: false)
-        filtered = usernameArray.filter { $0.contains(search.lowercased())}
+        filtered = userDictionary.filter { $0.key.lowercased().contains(search.lowercased())}
         print(filtered)
-        print(usernameArray)
-        isSearching = (filtered.count ==  0) ? false: true
+        
+        if search == ""{
+            isSearching = false
+            
+        }
+        //isSearching = (filtered.count ==  0) ? false: true
         myCollectionViewFriends.reloadData()
         
     }
@@ -43,7 +51,7 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
             return filtered.count
         }
         else{
-            return self.friendArray.count
+            return self.userDictionary.count
         }
     }
    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -54,47 +62,65 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
 
         return UIEdgeInsets(top: 15, left: edgeInsets, bottom: 0, right: edgeInsets)
     }
-   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+   /**func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
        /** let noOfCellsInRow = self.friendArray.count
-
         let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
-
         let totalSpace = flowLayout.sectionInset.left
             + flowLayout.sectionInset.right
             + (flowLayout.minimumInteritemSpacing * CGFloat(noOfCellsInRow - 1))
-
         let size = Int((collectionView.bounds.width - totalSpace) / CGFloat(noOfCellsInRow)) **/
 
         return CGSize(width: 80, height: 80)
-    }
+    }**/
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ACell", for: indexPath) as! PersonImageCell
-        cell.username?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
-        cell.username?.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
+      /**cell.username?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+      cell.username?.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true **/
         
         cell.username?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
         cell.username?.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
         
-        cell.profilePic?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
-        cell.profilePic?.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+       // cell.profilePic?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+        //cell.profilePic?.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+        
+        /**cell.profilePic?.center = CGPoint(x: cell.contentView.bounds.size.width/2, y: cell.contentView.bounds.size.height/2)
+        cell.layer.borderColor = UIColor.green.cgColor **/
+        cell.layer.borderWidth = 2
        
         if isSearching{
-            let nameToUse = filtered[indexPath.row]
-            cell.username?.text = nameToUse
-            return cell
+                let nameToUse = Array(filtered.keys)[indexPath.row]
+                cell.username?.text = nameToUse
+                
+                let profileImageUrl = Array(filtered.values)[indexPath.row]
+                 print(nameToUse)
+                    print(profileImageUrl)
+                    
+                let url = NSURL(string: profileImageUrl)
+                URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
+                    
+                    if error != nil{
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        cell.profilePic?.image = UIImage(data: data!)
+                    }
+                    
+                }).resume()
+                
+                cell.profilePic?.asCircle()
+                return cell
             
         }
         else{
        
-       
-        let nameToUse = usernameArray[indexPath.row]
+            let nameToUse = Array(userDictionary.keys)[indexPath.row]
         cell.username?.text = nameToUse
         
-        let profileImageUrl = profilePicURL[indexPath.row]
-        
-        
+        let profileImageUrl = Array(userDictionary.values)[indexPath.row]
+         print(nameToUse)
+            print(profileImageUrl)
             
         let url = NSURL(string: profileImageUrl)
         URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
@@ -133,7 +159,9 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
     var profilePicURL = [String]()
     var usernameArray = [String]()
     
-    var filtered = [String]()
+    var userDictionary: [String: String] = [:]
+
+    var filtered: [String: String] = [:]
     var isSearching: Bool = false
     
     override func viewDidLoad() {
@@ -183,7 +211,8 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
                                    self.profilePicURL.append(friend?["profilePic"] as! String)
                                }
                            }
-                           
+                        
+                        self.userDictionary = self.makeDict(arr1: self.usernameArray, arr2: self.profilePicURL)
                            self.myCollectionViewFriends.reloadData()
                            
                        }
@@ -199,4 +228,12 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
            
            
        }
+    
+    func makeDict(arr1: [String], arr2: [String]) -> [String: String]{
+        var dictionary: [String: String] = [:]
+        for (index, element) in arr1.enumerated() {
+            dictionary[element] = arr2[index]
+        }
+        return dictionary
+    }
 }
