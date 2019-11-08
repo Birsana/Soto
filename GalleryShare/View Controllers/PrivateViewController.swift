@@ -13,6 +13,13 @@ class PrivateViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var privatePhotos: UICollectionView!
     var privateArray = [NSDictionary?]()
     var imageArray = [UIImage]()
+    var allURLs = [AnyObject]()
+    var passURLs = [AnyObject]()
+    
+    public var screenHeightHalf: CGFloat {
+        return UIScreen.main.bounds.height/8
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,23 +33,9 @@ class PrivateViewController: UIViewController, UICollectionViewDelegate, UIColle
             
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 self.privateArray.append(snapshot.value as? NSDictionary)
-                let allURLs = Array(dictionary.values)
-                
-                for imageURL in allURLs {
-                    let imageRef = Storage.storage().reference(forURL: imageURL as! String)
-                    imageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
-                        if error != nil {
-                            print("Error loading image")
-                        } else{
-                            print("Loaded image")
-                            let image = UIImage(data: data!)
-                            self.imageArray.append(image!)
-                            DispatchQueue.main.async {
-                                self.privatePhotos.reloadData()
-                            }
-                        }
-                    }
-                }
+                self.allURLs = Array(dictionary.values)
+                self.passURLs += Array(dictionary.values)
+              
                 
             }
             
@@ -53,17 +46,27 @@ class PrivateViewController: UIViewController, UICollectionViewDelegate, UIColle
         privatePhotos.delegate=self
         privatePhotos.dataSource=self
         privatePhotos.register(PhotoItemCell.self, forCellWithReuseIdentifier: "Cell")
-        privatePhotos.backgroundColor=UIColor.red
+
+        
+        
+        privatePhotos.translatesAutoresizingMaskIntoConstraints = false
+        privatePhotos.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        privatePhotos.heightAnchor.constraint(equalToConstant: screenHeightHalf).isActive = true
+        privatePhotos.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        privatePhotos.topAnchor.constraint(lessThanOrEqualTo: view.topAnchor, constant: 120).isActive = true
+        //FINISH THIS
         
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageArray.count
+        print("Count is", passURLs.count)
+        return passURLs.count
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let vc = PrivImagePreviewVC()
-        vc.imgArray = self.imageArray
+        
+        vc.allURLs = self.passURLs
         
         vc.passedContentOffset = indexPath
         self.present(vc, animated: true, completion: nil)
@@ -73,10 +76,10 @@ class PrivateViewController: UIViewController, UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         //if image is nil, placeholder, otherwise load image
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoItemCell
-        
-        let cellImage = imageArray[indexPath.row]
-        cell.img.image = cellImage
-        
+      
+        let url = URL(string: (self.passURLs[indexPath.row] as! String))
+       
+        cell.img.kf.setImage(with: url)
         return cell
     }
     

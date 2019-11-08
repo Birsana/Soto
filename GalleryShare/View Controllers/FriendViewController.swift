@@ -11,9 +11,13 @@ import Firebase
 
 class FriendViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate{
     
+    public var screenHeightHalf: CGFloat {
+          return UIScreen.main.bounds.height/4
+      }
+    
     @IBOutlet weak var sentPhotos: UICollectionView!
     @IBOutlet weak var username: UILabel!
-    
+    @IBOutlet weak var profilePic: UIImageView!
     var labelText: String?
     
     var picURL = [String]()
@@ -22,10 +26,15 @@ class FriendViewController: UIViewController, UICollectionViewDelegate, UICollec
     var fromID: String?
     var imageArray=[UIImage]()
     
+    var profilePicImage: UIImage?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        profilePic.asCircle()
         username.text = labelText
+        profilePic.image = profilePicImage
+        
         var databaseRef = Database.database().reference()
         let user = Auth.auth().currentUser
         let uid = Auth.auth().currentUser?.uid
@@ -41,44 +50,41 @@ class FriendViewController: UIViewController, UICollectionViewDelegate, UICollec
                     let dict = snap.value as! [String: Any]
                     let imageURL = dict["imageURL"] as! String
                     self.picURL.append(imageURL)
+                    DispatchQueue.main.async {
+                        self.sentPhotos.reloadData()
+                    }
                     
                 }
-                for imageURL in self.picURL {
-                    var imageRef = Storage.storage().reference(forURL: imageURL as! String)
-                    imageRef.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
-                        if error != nil {
-                            // uh oh
-                            print("Error loading image")
-                        } else{
-                            print("Loaded image")
-                            let image = UIImage(data: data!)
-                            self.imageArray.append(image!)
-                            DispatchQueue.main.async {
-                                self.sentPhotos.reloadData()
-                            }
-                        }
-                    }
-                }
-                
             }
             
         }
+        
+        
         sentPhotos.delegate=self
         sentPhotos.dataSource=self
         sentPhotos.register(PhotoItemCell.self, forCellWithReuseIdentifier: "Cell")
         sentPhotos.backgroundColor=UIColor.red
+        
+        sentPhotos.translatesAutoresizingMaskIntoConstraints = false
+        sentPhotos.heightAnchor.constraint(equalToConstant: screenHeightHalf).isActive = true
+        sentPhotos.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        sentPhotos.topAnchor.constraint(equalTo: view.topAnchor, constant: 250).isActive = true
+        sentPhotos.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+    
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageArray.count
+        print("Count is", picURL.count)
+        return picURL.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
         //if image is nil, placeholder, otherwise load image
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoItemCell
         
-        let cellImage = imageArray[indexPath.row]
-        cell.img.image = cellImage
+        let url = URL(string: picURL[indexPath.row])
+        cell.img.kf.setImage(with: url)
         
         return cell
     }

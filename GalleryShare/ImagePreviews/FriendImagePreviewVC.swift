@@ -74,8 +74,8 @@ class FriendImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollec
             transferPic = imgArray[intPriv!]
         }
         newController.picToSend = transferPic
-        newController.passedIndex = passedContentOffset
-        newController.passedArray = imgArray
+        //newController.passedIndex = passedContentOffset
+        //newController.passedArray = imgArray
         
         self.present(newController, animated: true, completion: nil)
         

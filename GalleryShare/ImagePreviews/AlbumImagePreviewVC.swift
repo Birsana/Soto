@@ -12,9 +12,14 @@ import Firebase
 class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
     var myCollectionView: UICollectionView!
-    var imgArray = [UIImage]()
     var passedContentOffset = IndexPath()
     var sentArray = [String]()
+    
+    var urlArr = [String]()
+    
+    var firstSender: UIImage?
+    var firstPic = true
+
     
     
     private let addButton: UIButton = {
@@ -54,8 +59,8 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
         var pictoSend: UIImage!
         for cell in myCollectionView.visibleCells{
             let indexPriv = myCollectionView.indexPath(for: cell)
-            let intPriv = indexPriv?.item
-            pictoSend = imgArray[intPriv!]
+             let currentcell = myCollectionView.cellForItem(at: indexPriv!) as! AlbumImagePreviewFullViewCell
+            pictoSend = currentcell.imgView.image
             
         }
         let imageName = NSUUID().uuidString
@@ -87,19 +92,18 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     @objc private func sendPic(){
-        print("1")
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let newController = storyboard.instantiateViewController(withIdentifier: "SendPic") as! SendTableViewController
         
         var transferPic: UIImage!
         for cell in myCollectionView.visibleCells{
             let indexPriv = myCollectionView.indexPath(for: cell)
-            let intPriv = indexPriv?.item
-            transferPic = imgArray[intPriv!]
+            let currentcell = myCollectionView.cellForItem(at: indexPriv!) as! AlbumImagePreviewFullViewCell
+            transferPic = currentcell.imgView.image
         }
         newController.picToSend = transferPic
-        newController.passedIndex = passedContentOffset
-        newController.passedArray = imgArray
+       // newController.passedIndex = passedContentOffset
+       // newController.passedArray = imgArray
         
         self.present(newController, animated: true, completion: nil)
         
@@ -113,12 +117,13 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
         var transferPic: UIImage!
         for cell in myCollectionView.visibleCells{
             let indexPriv = myCollectionView.indexPath(for: cell)
-            let intPriv = indexPriv?.item
-            transferPic = imgArray[intPriv!]
+            let currentcell = myCollectionView.cellForItem(at: indexPriv!) as! AlbumImagePreviewFullViewCell
+        
+            transferPic = currentcell.imgView.image
         }
         newController.picToSend = transferPic
-        newController.passedIndex = passedContentOffset
-        newController.passedArray = imgArray
+       // newController.passedIndex = passedContentOffset
+       // newController.passedArray = imgArray
         
         self.present(newController, animated: true, completion: nil)
         
@@ -150,6 +155,8 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
         self.view.addSubview(addButton)
         self.view.addSubview(sendFriendButton)
         self.view.addSubview(addAlbumButton)
+        addButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        addButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10)
         
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
     }
@@ -162,43 +169,41 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
         
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imgArray.count
+        return self.urlArr.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AlbumImagePreviewFullViewCell
-        cell.imgView.image=imgArray[indexPath.row]
+        let url = URL(string: (self.urlArr[indexPath.item] as! String))
+        cell.imgView.kf.setImage(with: url)
+        
+        cell.senderView?.translatesAutoresizingMaskIntoConstraints = false
+        cell.senderView?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+        cell.senderView?.topAnchor.constraint(equalTo: cell.topAnchor, constant: 30).isActive = true
+        cell.senderView?.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        cell.senderView?.heightAnchor.constraint(equalToConstant: 70).isActive = true
+       
+        cell.senderView.kf.setImage(with: url)
+    
+    
         let sender = sentArray[indexPath.row]
-        
-
-        
-        let databaseRef = Database.database().reference()
+     
+      let databaseRef = Database.database().reference()
         databaseRef.child("users").child(sender).observeSingleEvent(of: .value) { (snapshot) in
             let dictionary = snapshot.value as? [String: AnyObject]
             let profilePicURL = (dictionary!["profilePic"] as? String)!
-            let url = NSURL(string: profilePicURL)
+            let url = URL(string: profilePicURL)
             
-            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
-                if error != nil{
-                    return
-                }
-                DispatchQueue.main.async {
-                    cell.senderView?.image = UIImage(data: data!)
-                }
-                
-            }).resume()
+            cell.senderView.kf.setImage(with: url)
+            
         }
-     /**   cell.senderView?.translatesAutoresizingMaskIntoConstraints = false
-        cell.senderView?.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
-        cell.senderView?.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        cell.senderView?.heightAnchor.constraint(equalToConstant: 50).isActive = true **/
+     
         let tap = UIGestureRecognizer(target:self, action: #selector(handleTap(_:)))
         cell.isUserInteractionEnabled = true
         
         cell.senderView?.asCircle()
         cell.senderView?.addGestureRecognizer(tap)
-        cell.senderView?.frame = CGRect(x: 150, y: 0, width: 100, height: 100)
-        return cell
+                return cell
     }
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         print("water")
@@ -301,6 +306,7 @@ class AlbumImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate 
         super.layoutSubviews()
         scrollImg.frame = self.bounds
         imgView.frame = self.bounds
+
     }
     
     override func prepareForReuse() {

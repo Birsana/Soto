@@ -20,6 +20,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         let button = UIButton(type: .system)
         button.setTitle("Add", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        //button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.systemPink, for: .normal)
         button.addTarget(self, action: #selector(getPic), for: .touchUpInside)
@@ -40,7 +41,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     private let gridButton: UIButton = {
            let button = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 110, y: 0, width: 90, height: 30))
            button.setTitle("Grid", for: .normal)
-           button.translatesAutoresizingMaskIntoConstraints = true
+           button.translatesAutoresizingMaskIntoConstraints = false
            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
            button.setTitleColor(.systemPink, for: .normal)
            button.addTarget(self, action: #selector(gridView), for: .touchUpInside)
@@ -116,8 +117,8 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
             transferPic = imgArray[intPriv!]
         }
         newController.picToSend = transferPic
-        newController.passedIndex = passedContentOffset
-        newController.passedArray = imgArray
+       // newController.passedIndex = passedContentOffset
+       // newController.passedArray = imgArray
         
         
         self.present(newController, animated: true, completion: nil)
@@ -136,8 +137,8 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
             transferPic = imgArray[intPriv!]
         }
         newController.picToSend = transferPic
-        newController.passedIndex = passedContentOffset
-        newController.passedArray = imgArray
+       // newController.passedIndex = passedContentOffset
+       // newController.passedArray = imgArray
         
         self.present(newController, animated: true, completion: nil)
         
@@ -168,7 +169,14 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         self.view.addSubview(sendFriendButton)
         self.view.addSubview(addAlbumButton)
         self.view.addSubview(gridButton)
-        gridButton.center = self.view.center
+        addButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        addButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10).isActive = true
+        
+        
+        //gridButton.center = self.view.center
+        
+        gridButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        gridButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 750).isActive = true
        
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
     }

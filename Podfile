@@ -33,6 +33,7 @@ pod 'AWSSES'
 pod 'AWSSimpleDB'
 pod 'AWSSNS'
 pod 'AWSSQS'
+pod 'Kingfisher', '~> 5.0'
 
   target 'GalleryShareTests' do
     inherit! :search_paths

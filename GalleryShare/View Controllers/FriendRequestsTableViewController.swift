@@ -163,7 +163,11 @@ class FriendRequestsTableViewController: UITableViewController {
         user = self.friendRequests[indexPath.row]
         
         cell.Person.text = user?["username"] as? String
-        cell.Person.center = cell.center
+        cell.Person.translatesAutoresizingMaskIntoConstraints = false
+        cell.Person.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        cell.Person.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        cell.Person.centerXAnchor.constraint(equalTo: cell.centerXAnchor, constant: 1).isActive = true
+        cell.Person.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
         
         cell.profilePic.asCircle()
         

@@ -16,12 +16,15 @@ import FirebaseFirestore
 class GalleryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate{
     
     public var screenHeightHalf: CGFloat {
-        return UIScreen.main.bounds.height/2
+        return UIScreen.main.bounds.height/3
     }
     
     
     @IBOutlet weak var noFriends: UILabel!
     @IBOutlet weak var addFriends: UIButton!
+    
+    
+    @IBOutlet weak var friendView: UIView!
     
     var personsFriends = [] as Any
     var personsPics = [] as Any
@@ -82,9 +85,26 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         //CREATE SPECIAL CASE FOR WHEN ACCEPT FRIEND REQUEST
         
+       /** let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.text = "Photo Gallery"
+        titleLabel.textAlignment = .center
+        titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 500).isActive = true
+        titleLabel.backgroundColor = UIColor.red
+        titleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        titleLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        self.view.addSubview(titleLabel) **/
+        
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
         screenHeight = screenSize.height
+        
+        friendView.translatesAutoresizingMaskIntoConstraints = false
+        friendView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        friendView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        friendView.widthAnchor.constraint(equalToConstant: screenWidth).isActive = true
+        friendView.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         self.title = "Photos"
         let layout = UICollectionViewFlowLayout()

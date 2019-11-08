@@ -108,19 +108,9 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
             }
         }
         
-        if let picURL = user?["profilePic"] as? String{
-              let url = NSURL(string: picURL)
-                  URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
-                      
-                      if error != nil{
-                          return
-                      }
-                      DispatchQueue.main.async {
-                          cell.profilePic?.image = UIImage(data: data!)
-                      }
-                      
-                  }).resume()
-        }
+        let picURL = URL(string:((user?["profilePic"] as? String)!))
+            cell.profilePic.kf.setImage(with: picURL)
+        
         
         
         cell.delegate = self

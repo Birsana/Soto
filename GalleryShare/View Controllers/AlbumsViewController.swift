@@ -15,41 +15,48 @@ import Firebase
 class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageArray.count
+        return nameArray.count
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Alboom", for: indexPath) as! AlbumTabCell
         
-        let cellImage = imageArray[indexPath.row]
+        let cellImageURL = self.picURLs[indexPath.row]
+        let url = URL(string: cellImageURL)
         let cellName = nameArray[indexPath.row]
-        cell.coverPhoto.image = cellImage
+        //cell.coverPhoto.image = cellImage
+        cell.coverPhoto.kf.setImage(with: url)
         cell.name.text = cellName
+        
+        cell.coverPhoto.translatesAutoresizingMaskIntoConstraints = false
+        cell.coverPhoto?.topAnchor.constraint(equalTo: cell.topAnchor, constant: 10).isActive = true
+        cell.coverPhoto?.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        cell.coverPhoto?.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        cell.coverPhoto?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+        cell.coverPhoto?.layer.cornerRadius = 4
+        cell.coverPhoto?.clipsToBounds = true
+        
+        cell.name.translatesAutoresizingMaskIntoConstraints = false
+        cell.name.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+        cell.name.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
+        
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 2
         
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.frame.width
-        
-        if DeviceInfo.Orientation.isPortrait {
-            return CGSize(width: width/4 - 1, height: width/4 - 1)
-        } else {
-            return CGSize(width: width/6 - 1, height: width/6 - 1)
-        }
-    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-             if let vc = (storyboard?.instantiateViewController(withIdentifier: "display") as? DisplayAlbumViewController) {
-                 self.definesPresentationContext = true
-                 vc.modalPresentationStyle = .overCurrentContext
-                vc.albumName = nameArray[indexPath.row]
-                print(vc.albumName)
-                 self.present(vc, animated: true, completion: nil)
-                 
-             }
-         }
+        if let vc = (storyboard?.instantiateViewController(withIdentifier: "display") as? DisplayAlbumViewController) {
+            self.definesPresentationContext = true
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.albumName = nameArray[indexPath.row]
+            self.present(vc, animated: true, completion: nil)
+            
+        }
+    }
     
     @IBOutlet weak var createAlbum: UIButton!
     @IBOutlet weak var albums: UICollectionView!
@@ -64,13 +71,13 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     var refreshControl = UIRefreshControl()
     
-      @objc func refresh(sender:AnyObject) {
-          self.albums.reloadData()
-      }
+    @objc func refresh(sender:AnyObject) {
+        self.albums.reloadData()
+    }
     
     public var screenFourFifths: CGFloat {
-           return UIScreen.main.bounds.height/8
-       }
+        return UIScreen.main.bounds.height/8
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,11 +88,17 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
         screenWidth = screenSize.width
         screenHeight = screenSize.height
         
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: screenWidth / 3, height: screenWidth / 3)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
         self.albums.addSubview(refreshControl) // not required when using UITabl
         
         self.albums.frame = CGRect(x:0, y: screenFourFifths, width: self.view.frame.width, height: self.view.frame.height)
+        self.albums.collectionViewLayout = layout
         
         let databaseRef = Database.database().reference()
         let user = Auth.auth().currentUser
@@ -98,29 +111,30 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
             authUsername = myData["username"] as! String
             
             databaseRef.child("Albums").child(authUsername!).queryOrdered(byChild: "coverPhoto").observe(.childAdded) { (snapshot) in
-               
+                
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
                     if rest.key == "coverPhoto"{
                         
                         let imageURL = rest.value as! String
-                        
-                        let imageRef = Storage.storage().reference(forURL: imageURL as! String)
-                        imageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
-                            if error != nil {
-                                print(imageURL)
-                                print("Error loading image")
-                            } else{
-                                print("Loaded image")
-                                let image = UIImage(data: data!)
-                                self.imageArray.append(image!)
-                                DispatchQueue.main.async {
-                                    self.albums.reloadData()
-                                }
-                            }
-                        }
+                        self.picURLs.append(imageURL)
+                        /**  let imageRef = Storage.storage().reference(forURL: imageURL as! String)
+                         imageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
+                         if error != nil {
+                         print(imageURL)
+                         print("Error loading image")
+                         } else{
+                         print("Loaded image")
+                         let image = UIImage(data: data!)
+                         self.imageArray.append(image!)
+                         
+                         }
+                         }**/
                     }
                     else if rest.key == "name"{
                         self.nameArray.append(rest.value as! String)
+                    }
+                    DispatchQueue.main.async {
+                        self.albums.reloadData()
                     }
                 }
                 
@@ -130,7 +144,7 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
         }
         albums.delegate = self
         albums.dataSource = self
-        albums.backgroundColor = UIColor.red
+        
     }
     
     

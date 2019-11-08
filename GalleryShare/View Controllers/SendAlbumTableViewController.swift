@@ -95,8 +95,8 @@ class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdati
     var databaseRef = Database.database().reference()
     let user = Auth.auth().currentUser
     var picToSend: UIImage?
-    var passedIndex = IndexPath()
-    var passedArray = [UIImage]()
+    //var passedIndex = IndexPath()
+    //var passedArray = [UIImage]()
     var username = ""
     
     var picsToSend = [UIImage]()

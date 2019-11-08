@@ -192,9 +192,10 @@
 			isa = PBXGroup;
 			children = (
 				6734766E23446F6D005469FC /* SwipingController.swift */,
+				67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */,
+				676D2B392356744000D49B85 /* FriendViewController.swift */,
 				6792D9212347ECA100E6159E /* GalleryViewController.swift */,
 				67BC22822327432800653900 /* ViewController.swift */,
-				6792D929234D8FE000E6159E /* AlbumsViewController.swift */,
 				67BC2286232743AA00653900 /* HomeViewController.swift */,
 				67BC2288232743C800653900 /* LogInViewController.swift */,
 				67BC228A2327483B00653900 /* SignUpViewController.swift */,
@@ -202,14 +203,13 @@
 				67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */,
 				6734766A234125E5005469FC /* GuideViewController.swift */,
 				6792D91F2347E41A00E6159E /* MainTabViewController.swift */,
+				6792D929234D8FE000E6159E /* AlbumsViewController.swift */,
 				676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */,
 				67922A87235A4850004092C5 /* CreateAlbumViewController.swift */,
 				67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */,
 				67BC228C2328B21400653900 /* AddFriendsTableViewController.swift */,
-				676D2B392356744000D49B85 /* FriendViewController.swift */,
 				67922A8F235F63DD004092C5 /* SendAlbumTableViewController.swift */,
 				67365DB223526B8200360D7D /* SendTableViewController.swift */,
-				67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

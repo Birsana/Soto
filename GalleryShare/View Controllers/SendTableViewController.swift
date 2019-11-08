@@ -30,7 +30,7 @@ extension SendTableViewController: SendCellDelegate{
                 let picToSendStorageRefM = StorageRef.child("imageMessages").child("\(imageNameM).jpg")
                 DatabaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
                     let myData = snapshot.value as! NSDictionary
-                    toID = myData[sendTo] as! String
+                    toID = (myData[sendTo] as! String)
                     let uploadTask = picToSendStorageRefM.putData(imageDataM!, metadata: nil)
                     {metadata, error in
                         
@@ -97,10 +97,10 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
     let databaseRef = Database.database().reference()
     let user = Auth.auth().currentUser
     var picToSend: UIImage?
-    var passedIndex = IndexPath()
+    //var passedIndex = IndexPath()
     var username = ""
     var nameAtCell : String?
-    var passedArray = [UIImage]()
+    //var passedArray = [UIImage]()
     var picsToSend = [UIImage]()
     
     let searchController = UISearchController(searchResultsController: nil)

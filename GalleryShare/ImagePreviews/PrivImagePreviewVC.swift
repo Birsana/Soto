@@ -9,13 +9,83 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 
 class PrivImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
 
     var myCollectionView: UICollectionView!
     var imgArray = [UIImage]()
     var passedContentOffset = IndexPath()
-   
+    var allURLs = [AnyObject]()
+    
+    var stringURLs = [String]()
+    
+    
+    private let addButton: UIButton = {
+                let button = UIButton(type: .system)
+                button.setTitle("Save", for: .normal)
+                button.translatesAutoresizingMaskIntoConstraints = false
+                button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+                button.setTitleColor(.systemPink, for: .normal)
+                button.addTarget(self, action: #selector(savePic), for: .touchUpInside)
+                return button
+            }()
+    
+    private let deleteButton: UIButton = {
+                   let button = UIButton(type: .system)
+                   button.setTitle("Delete", for: .normal)
+                   button.translatesAutoresizingMaskIntoConstraints = false
+                   button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+                   button.setTitleColor(.systemPink, for: .normal)
+                   button.addTarget(self, action: #selector(deletePic), for: .touchUpInside)
+                   return button
+               }()
+   @objc private func savePic(){
+          var pictoSave: UIImage!
+          for cell in myCollectionView.visibleCells{
+              let indexPriv = myCollectionView.indexPath(for: cell)
+            let currentcell = myCollectionView.cellForItem(at: indexPriv!) as! PrivImagePreviewFullViewCell
+            pictoSave = currentcell.imgView.image
+           
+          }
+          let imageData = pictoSave.jpegData(compressionQuality: 1)
+          let imgToSave = UIImage(data: imageData!)
+          UIImageWriteToSavedPhotosAlbum(imgToSave!, nil, nil, nil)
+          
+          let alert = UIAlertController(title: "Saved", message: "Your image has been saved", preferredStyle: .alert)
+          let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+          alert.addAction(okAction)
+          self.present(alert, animated: true, completion: nil)
+      }
+    @objc private func deletePic(){
+        let storage = Storage.storage()
+        let databaseRef = Database.database().reference()
+        let user = Auth.auth().currentUser
+        let uid = Auth.auth().currentUser?.uid
+        
+        for cell in myCollectionView.visibleCells{
+            let urlIndex = myCollectionView.indexPath(for: cell)
+            let urlDelete = self.allURLs[urlIndex!.item] as! String
+            databaseRef.child("privatePics").child(uid!).queryOrdered(byChild: "url").queryEqual(toValue: urlDelete).observeSingleEvent(of: .value) { (snapshot) in
+                let myData = snapshot.value as! NSDictionary
+                let componentArray = myData.allKeys
+                let toDelete = componentArray.first as? String
+                databaseRef.child("privatePics").child(uid!).child(toDelete!).removeValue()
+                
+              
+                self.stringURLs = self.allURLs as! [String]
+                if let index = self.stringURLs.index(of: urlDelete){
+                    self.stringURLs.remove(at: index)
+                }
+                
+                self.allURLs = self.stringURLs as [AnyObject]
+                self.myCollectionView.reloadData()
+               
+            }
+            
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,26 +106,40 @@ class PrivImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollecti
         myCollectionView.register(PrivImagePreviewFullViewCell.self, forCellWithReuseIdentifier: "Cell")
         myCollectionView.isPagingEnabled = true
         
-      //  myCollectionView.scrollToItem(at: x, at: .left, animated: true)
+              //  myCollectionView.scrollToItem(at: x, at: .left, animated: true)
         
         self.view.addSubview(myCollectionView)
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
+        self.view.addSubview(addButton)
+        addButton.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
+        addButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10).isActive = true
+        addButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        addButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
+        self.view.addSubview(deleteButton)
+        addButton.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
+        addButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10).isActive = true
+        addButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        addButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
         let x = passedContentOffset
+        
         DispatchQueue.main.async {
         self.myCollectionView.scrollToItem(at: x, at: .left, animated: false)
                        }
        
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imgArray.count
+        return allURLs.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PrivImagePreviewFullViewCell
-        cell.imgView.image=imgArray[indexPath.row]
+        let url = URL(string: allURLs[indexPath.item] as! String)
+        cell.imgView.kf.setImage(with: url)
         return cell
     }
     
