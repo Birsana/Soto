@@ -85,16 +85,6 @@ class GalleryViewController: UIViewController, UICollectionViewDelegate, UIColle
         
         //CREATE SPECIAL CASE FOR WHEN ACCEPT FRIEND REQUEST
         
-       /** let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = "Photo Gallery"
-        titleLabel.textAlignment = .center
-        titleLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        titleLabel.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 500).isActive = true
-        titleLabel.backgroundColor = UIColor.red
-        titleLabel.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        titleLabel.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        self.view.addSubview(titleLabel) **/
         
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width

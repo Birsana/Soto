@@ -53,6 +53,7 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
             self.definesPresentationContext = true
             vc.modalPresentationStyle = .overCurrentContext
             vc.albumName = nameArray[indexPath.row]
+            vc.albumID = idArray[indexPath.row]
             self.present(vc, animated: true, completion: nil)
             
         }
@@ -64,6 +65,8 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
     var imageArray = [UIImage]()
     var nameArray = [String]()
     var picURLs = [String]()
+    
+    var idArray = [String]()
     
     var screenSize: CGRect!
     var screenWidth: CGFloat!
@@ -111,24 +114,13 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
             authUsername = myData["username"] as! String
             
             databaseRef.child("Albums").child(authUsername!).queryOrdered(byChild: "coverPhoto").observe(.childAdded) { (snapshot) in
-                
+                self.idArray.append(snapshot.key)
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                    
                     if rest.key == "coverPhoto"{
                         
                         let imageURL = rest.value as! String
                         self.picURLs.append(imageURL)
-                        /**  let imageRef = Storage.storage().reference(forURL: imageURL as! String)
-                         imageRef.getData(maxSize: 10 * 1024 * 1024) { (data, error) in
-                         if error != nil {
-                         print(imageURL)
-                         print("Error loading image")
-                         } else{
-                         print("Loaded image")
-                         let image = UIImage(data: data!)
-                         self.imageArray.append(image!)
-                         
-                         }
-                         }**/
                     }
                     else if rest.key == "name"{
                         self.nameArray.append(rest.value as! String)

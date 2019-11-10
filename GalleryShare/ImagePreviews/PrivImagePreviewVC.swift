@@ -57,6 +57,7 @@ class PrivImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollecti
           alert.addAction(okAction)
           self.present(alert, animated: true, completion: nil)
       }
+    
     @objc private func deletePic(){
         let storage = Storage.storage()
         let databaseRef = Database.database().reference()

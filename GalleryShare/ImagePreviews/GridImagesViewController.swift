@@ -33,8 +33,6 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.addSubview(cell.selectLabel)
         
         
-        
-        
         cell.img.image=imgArray[indexPath.item]
         
         return cell

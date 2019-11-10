@@ -106,12 +106,17 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
                     dict["name"] = albumNameClean
                     dict["coverPhoto"] = picURL
                     
-                    let uuid = NSUUID().uuidString
-                
+                    var dict2: [String: String] = [:]
                     var counter = 1
+                    for friend in self.friendsToShareWith{
+                        dict2["person\(counter)"] = friend
+                        counter += 1
+                    }
+                    
+                    let uuid = NSUUID().uuidString
+                    DatabaseRef.child("AlbumsRef").child(uuid).updateChildValues(dict2)
+                    
                     for friend in self.friendsToShareWith{ DatabaseRef.child("Albums").child(friend).child(uuid).updateChildValues(dict)
-                        //dict["person\(String(counter))"] = friend
-                       // counter += 1
                     }
                 }
             }

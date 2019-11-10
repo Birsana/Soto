@@ -18,6 +18,13 @@ class FriendViewController: UIViewController, UICollectionViewDelegate, UICollec
     @IBOutlet weak var sentPhotos: UICollectionView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var profilePic: UIImageView!
+    
+    
+    var screenSize: CGRect!
+    var screenWidth: CGFloat!
+    var screenHeight: CGFloat!
+    
+    
     var labelText: String?
     
     var picURL = [String]()
@@ -31,6 +38,12 @@ class FriendViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        screenSize = UIScreen.main.bounds
+        screenWidth = screenSize.width
+        screenHeight = screenSize.height
+        
+        
         profilePic.asCircle()
         username.text = labelText
         profilePic.image = profilePicImage
@@ -59,11 +72,16 @@ class FriendViewController: UIViewController, UICollectionViewDelegate, UICollec
             
         }
         
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: screenWidth / 3, height: screenWidth / 3)
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        
         
         sentPhotos.delegate=self
         sentPhotos.dataSource=self
         sentPhotos.register(PhotoItemCell.self, forCellWithReuseIdentifier: "Cell")
-        sentPhotos.backgroundColor=UIColor.red
+        sentPhotos.collectionViewLayout = layout
         
         sentPhotos.translatesAutoresizingMaskIntoConstraints = false
         sentPhotos.heightAnchor.constraint(equalToConstant: screenHeightHalf).isActive = true
@@ -93,6 +111,7 @@ class FriendViewController: UIViewController, UICollectionViewDelegate, UICollec
         
         let vc = FriendImagePreviewVC()
         vc.imgArray = self.imageArray
+        vc.urlArray = self.picURL
         
         vc.passedContentOffset = indexPath
         self.present(vc, animated: true, completion: nil)

@@ -11,6 +11,10 @@ import Firebase
 
 class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate {
     
+    @IBOutlet weak var name: UILabel!
+    
+    @IBOutlet weak var members: UIView!
+    
     public var screenHeightHalf: CGFloat {
         return UIScreen.main.bounds.height/2
     }
@@ -24,9 +28,9 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
         
         let cellImageURL = self.picURL[indexPath.row]
         let url = URL(string: cellImageURL)
-        print("Image URL is", url)
+        
         cell.img.kf.setImage(with: url)
-    
+        
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -53,7 +57,7 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
                     return
                 }
                 DispatchQueue.main.async {
-              
+                    
                     self.firstImage = UIImage(data: data!)!
                     vc.firstSender = self.firstImage
                     print(self.firstImage)
@@ -64,7 +68,7 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
         }
     }
     
-    
+    //ADD A COLLECTIONVIEW SIMILAR TO THE FIRST PAGE ONE THAT HAS EVERYONE IN THE ALBUM
     
     
     var imageArray=[UIImage]()
@@ -75,12 +79,41 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
     var picURL = [String]()
     var whoSent = [String]()
     
+    var screenSize: CGRect!
+    var screenWidth: CGFloat!
+    var screenHeight: CGFloat!
+    
+    
+    
     var firstImage: UIImage?
     
     
     var myCollectionView: UICollectionView!
+    
+    var containverVC: AlbumContainerViewController?
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "containerSegue"{
+            containverVC = segue.destination as? AlbumContainerViewController
+            containverVC?.albumID = self.albumID
+        }
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        screenSize = UIScreen.main.bounds
+        screenWidth = screenSize.width
+        screenHeight = screenSize.height
+        
+        members.translatesAutoresizingMaskIntoConstraints = false
+        members.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        members.topAnchor.constraint(equalTo: view.topAnchor, constant: 100).isActive = true
+        members.widthAnchor.constraint(equalToConstant: screenWidth).isActive = true
+        members.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        name.text = albumName
         
         let layout = UICollectionViewFlowLayout()
         
@@ -111,29 +144,23 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
             let dict = snapshot.value as? [String: AnyObject]
             self.username = (dict!["username"] as? String)!
             
-            DatabaseRef.child("Albums").child(self.username).queryOrdered(byChild: "name").queryEqual(toValue: self.albumName).observeSingleEvent(of: .value) { (snapshot) in
-                
-                if snapshot.exists(){
-                    let myData = snapshot.value as! NSDictionary
-                    let componentArray = myData.allKeys
-                    self.albumID = componentArray.first as? String
-                    
-                    DatabaseRef.child("sentAlbumPics").child(self.albumID!).observeSingleEvent(of: .value) { (snapshot) in
-                        for child in snapshot.children{
-                            let snap = child as! DataSnapshot
-                            let dict = snap.value as! [String: Any]
-                            let imageURL = dict["imageURL"] as! String
-                            let picSender = dict["fromID"] as! String
-                            self.picURL.append(imageURL)
-                            self.whoSent.append(picSender)
-                            DispatchQueue.main.async {
-                                self.myCollectionView.reloadData()
-                            }
-                        }
-                        
+            
+            DatabaseRef.child("sentAlbumPics").child(self.albumID!).observeSingleEvent(of: .value) { (snapshot) in
+                for child in snapshot.children{
+                    let snap = child as! DataSnapshot
+                    let dict = snap.value as! [String: Any]
+                    let imageURL = dict["imageURL"] as! String
+                    let picSender = dict["fromID"] as! String
+                    self.picURL.append(imageURL)
+                    self.whoSent.append(picSender)
+                    DispatchQueue.main.async {
+                        self.myCollectionView.reloadData()
                     }
                 }
+                
             }
+            
+            
             
         }
     }

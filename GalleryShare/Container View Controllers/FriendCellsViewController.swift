@@ -66,17 +66,11 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ACell", for: indexPath) as! PersonImageCell
-        /**cell.username?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
-         cell.username?.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true **/
+       
         
         cell.username?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
         cell.username?.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
         
-        // cell.profilePic?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
-        //cell.profilePic?.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
-        
-        /**cell.profilePic?.center = CGPoint(x: cell.contentView.bounds.size.width/2, y: cell.contentView.bounds.size.height/2)
-         cell.layer.borderColor = UIColor.green.cgColor **/
         cell.layer.borderWidth = 2
         
         
@@ -95,9 +89,7 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
             cell.profilePic?.asCircle()
             return cell
             
-            //PREPARE FOR RESUSE
-            
-            
+           
         }
         else{
             
@@ -124,11 +116,9 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         let newController = storyboard.instantiateViewController(withIdentifier: "myFriend") as! FriendViewController
         let currentcell = myCollectionViewFriends.cellForItem(at: indexPath) as! PersonImageCell
         newController.labelText = currentcell.username?.text
-       newController.profilePicImage = currentcell.profilePic?.image
+        newController.profilePicImage = currentcell.profilePic?.image
         self.present(newController, animated: true, completion: nil)
     }
-    
-    
     
     
     @IBOutlet weak var myCollectionViewFriends: UICollectionView!
@@ -160,11 +150,9 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         myCollectionViewFriends.dataSource = self
         myCollectionViewFriends.isPagingEnabled = true
         myCollectionViewFriends.collectionViewLayout = flowLayout
-        //myCollectionViewFriends.layer.borderWidth = 2
-        //myCollectionViewFriends.layer.cornerRadius = 8
-        // myCollectionViewFriends.layer.borderColor = UIColor.black.cgColor
         
-        myCollectionViewFriends.translatesAutoresizingMaskIntoConstraints = false
+        
+        
         myCollectionViewFriends.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         myCollectionViewFriends.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         myCollectionViewFriends.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true

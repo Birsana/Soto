@@ -46,6 +46,8 @@
 		67A9201D23692BED00DDEB86 /* square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A9201C23692BED00DDEB86 /* square.swift */; };
 		67A9201F23693A2700DDEB86 /* FR4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A9201E23693A2700DDEB86 /* FR4ViewController.swift */; };
 		67A9202123693A3300DDEB86 /* FR5ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67A9202023693A3300DDEB86 /* FR5ViewController.swift */; };
+		67BBB11323754E29007F4D3B /* AlbumContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BBB11223754E29007F4D3B /* AlbumContainerViewController.swift */; };
+		67BBB115237693D8007F4D3B /* AlbumPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BBB114237693D8007F4D3B /* AlbumPersonCell.swift */; };
 		67BC22832327432800653900 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC22822327432800653900 /* ViewController.swift */; };
 		67BC2287232743AA00653900 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC2286232743AA00653900 /* HomeViewController.swift */; };
 		67BC2289232743C800653900 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC2288232743C800653900 /* LogInViewController.swift */; };
@@ -129,6 +131,8 @@
 		67A9201C23692BED00DDEB86 /* square.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = square.swift; sourceTree = "<group>"; };
 		67A9201E23693A2700DDEB86 /* FR4ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FR4ViewController.swift; sourceTree = "<group>"; };
 		67A9202023693A3300DDEB86 /* FR5ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FR5ViewController.swift; sourceTree = "<group>"; };
+		67BBB11223754E29007F4D3B /* AlbumContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumContainerViewController.swift; sourceTree = "<group>"; };
+		67BBB114237693D8007F4D3B /* AlbumPersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPersonCell.swift; sourceTree = "<group>"; };
 		67BC22822327432800653900 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		67BC2286232743AA00653900 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		67BC2288232743C800653900 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
@@ -193,8 +197,9 @@
 			children = (
 				6734766E23446F6D005469FC /* SwipingController.swift */,
 				67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */,
-				676D2B392356744000D49B85 /* FriendViewController.swift */,
 				6792D9212347ECA100E6159E /* GalleryViewController.swift */,
+				676D2B392356744000D49B85 /* FriendViewController.swift */,
+				6792D929234D8FE000E6159E /* AlbumsViewController.swift */,
 				67BC22822327432800653900 /* ViewController.swift */,
 				67BC2286232743AA00653900 /* HomeViewController.swift */,
 				67BC2288232743C800653900 /* LogInViewController.swift */,
@@ -203,7 +208,6 @@
 				67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */,
 				6734766A234125E5005469FC /* GuideViewController.swift */,
 				6792D91F2347E41A00E6159E /* MainTabViewController.swift */,
-				6792D929234D8FE000E6159E /* AlbumsViewController.swift */,
 				676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */,
 				67922A87235A4850004092C5 /* CreateAlbumViewController.swift */,
 				67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */,
@@ -231,6 +235,7 @@
 				67922A9523602CF4004092C5 /* AlbumItemCell.swift */,
 				67A920162367EBE400DDEB86 /* AlbumTabCell.swift */,
 				67A9201C23692BED00DDEB86 /* square.swift */,
+				67BBB114237693D8007F4D3B /* AlbumPersonCell.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				67922A982361442C004092C5 /* FriendCellsViewController.swift */,
+				67BBB11223754E29007F4D3B /* AlbumContainerViewController.swift */,
 			);
 			path = "Container View Controllers";
 			sourceTree = "<group>";
@@ -584,6 +590,7 @@
 				676D2B3A2356744000D49B85 /* FriendViewController.swift in Sources */,
 				67BC22832327432800653900 /* ViewController.swift in Sources */,
 				67BC2293232C5E8500653900 /* FriendsViewController.swift in Sources */,
+				67BBB115237693D8007F4D3B /* AlbumPersonCell.swift in Sources */,
 				673476652341246E005469FC /* IntroPageViewController.swift in Sources */,
 				6792D92423480C3D00E6159E /* ImagePreviewVC.swift in Sources */,
 				67922A992361442C004092C5 /* FriendCellsViewController.swift in Sources */,
@@ -597,6 +604,7 @@
 				6734766923412559005469FC /* FR3ViewController.swift in Sources */,
 				67922A88235A4850004092C5 /* CreateAlbumViewController.swift in Sources */,
 				67A9201D23692BED00DDEB86 /* square.swift in Sources */,
+				67BBB11323754E29007F4D3B /* AlbumContainerViewController.swift in Sources */,
 				6792D934234ED5BD00E6159E /* PrivImagePreviewVC.swift in Sources */,
 				6792D928234A92A700E6159E /* PhotoItemCell.swift in Sources */,
 				6792D9202347E41A00E6159E /* MainTabViewController.swift in Sources */,

@@ -24,6 +24,8 @@ class FriendImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollec
     var imgArray = [UIImage]()
     var passedContentOffset = IndexPath()
     
+    var urlArray = [String]()
+    
    
        private let addButton: UIButton = {
              let button = UIButton(type: .system)
@@ -50,8 +52,8 @@ class FriendImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollec
         var pictoSave: UIImage!
         for cell in myCollectionView.visibleCells{
             let indexPriv = myCollectionView.indexPath(for: cell)
-            let intPriv = indexPriv?.item
-            pictoSave = imgArray[intPriv!]
+            let currentcell = myCollectionView.cellForItem(at: indexPriv!) as! FriendImagePreviewFullViewCell
+            pictoSave = currentcell.imgView.image
         }
         let imageData = pictoSave.jpegData(compressionQuality: 1)
         let imgToSave = UIImage(data: imageData!)
@@ -70,8 +72,8 @@ class FriendImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollec
         var transferPic: UIImage!
         for cell in myCollectionView.visibleCells{
             let indexPriv = myCollectionView.indexPath(for: cell)
-            let intPriv = indexPriv?.item
-            transferPic = imgArray[intPriv!]
+            let currentcell = myCollectionView.cellForItem(at: indexPriv!) as! FriendImagePreviewFullViewCell
+            transferPic = currentcell.imgView.image
         }
         newController.picToSend = transferPic
         //newController.passedIndex = passedContentOffset
@@ -118,12 +120,16 @@ class FriendImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollec
        
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imgArray.count
+        return urlArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! FriendImagePreviewFullViewCell
-        cell.imgView.image=imgArray[indexPath.row]
+        
+        let url = URL(string: urlArray[indexPath.row])
+        print(url)
+        cell.imgView.kf.setImage(with: url)
+        
         return cell
     }
     
