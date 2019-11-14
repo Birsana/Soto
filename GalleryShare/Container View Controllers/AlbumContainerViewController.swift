@@ -30,12 +30,15 @@ class AlbumContainerViewController: UIViewController, UICollectionViewDelegate, 
            let search = searchBar.text!
            filtered.removeAll(keepingCapacity: false)
            filtered = userDictionary.filter { $0.key.lowercased().contains(search.lowercased())}
-           print(filtered)
+        
            
            if search == ""{
                isSearching = false
                
            }
+         else{
+        isSearching = true
+         }
            //isSearching = (filtered.count ==  0) ? false: true
            myCollectionView.reloadData()
            
@@ -43,9 +46,15 @@ class AlbumContainerViewController: UIViewController, UICollectionViewDelegate, 
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-   
+        if isSearching{
+            return filtered.count
+        }
+        else{
         return self.userDictionary.count
+        }
     }
+    
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
            let cellWidth : CGFloat = 97
            
@@ -126,6 +135,7 @@ class AlbumContainerViewController: UIViewController, UICollectionViewDelegate, 
                
                
                if isSearching{
+                //print(filtered.keys)
                    let nameToUse = Array(filtered.keys)[indexPath.row]
                    cell.username?.text = nameToUse
                    
@@ -209,7 +219,6 @@ class AlbumContainerViewController: UIViewController, UICollectionViewDelegate, 
         let databaseRef = Database.database().reference()
         let user = Auth.auth().currentUser
         let uid = Auth.auth().currentUser?.uid
-        print(albumID)
         databaseRef.child("AlbumsRef").child(albumID!).observeSingleEvent(of: .value) { (snapshot) in
             let myData = snapshot.value as! NSDictionary
             self.usernameArray = Array(myData.allValues as! [String])

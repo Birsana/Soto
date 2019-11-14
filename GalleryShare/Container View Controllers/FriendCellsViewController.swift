@@ -30,11 +30,14 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         let search = searchBar.text!
         filtered.removeAll(keepingCapacity: false)
         filtered = userDictionary.filter { $0.key.lowercased().contains(search.lowercased())}
-        print(filtered)
         
-        if search == ""{
+       if search == ""{
             isSearching = false
+
             
+        }
+       else{
+        isSearching = true
         }
         //isSearching = (filtered.count ==  0) ? false: true
         myCollectionViewFriends.reloadData()
@@ -117,6 +120,11 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         let currentcell = myCollectionViewFriends.cellForItem(at: indexPath) as! PersonImageCell
         newController.labelText = currentcell.username?.text
         newController.profilePicImage = currentcell.profilePic?.image
+        
+        let databaseRef = Database.database().reference()
+        let user = Auth.auth().currentUser
+        let uid = Auth.auth().currentUser?.uid
+        
         self.present(newController, animated: true, completion: nil)
     }
     
