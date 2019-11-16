@@ -43,7 +43,6 @@ class FriendGalPageViewController: UIPageViewController, UIPageViewControllerDat
         pageControl = UIPageControl(frame: CGRect(x: 0, y: UIScreen.main.bounds.maxY-50, width: UIScreen.main.bounds.width, height: 50))
         pageControl.numberOfPages = viewControllerList.count
         pageControl.currentPage = 0
-        pageControl.tintColor = UIColor.red
         pageControl.pageIndicatorTintColor = UIColor.black
         pageControl.currentPageIndicatorTintColor = UIColor.blue
         self.view.addSubview(pageControl)

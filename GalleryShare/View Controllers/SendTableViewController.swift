@@ -19,7 +19,7 @@ extension SendTableViewController: SendCellDelegate{
         var picURL: String?
         let imageName = NSUUID().uuidString
         let fromID = currentUser!.uid
-        let timestamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
+        //let timestamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
         var toID: String?
         let picToSendStorageRef = StorageRef.child("imageMessages").child("\(imageName).jpg")
         
@@ -49,7 +49,9 @@ extension SendTableViewController: SendCellDelegate{
                             }
                             picURL = downloadURL.absoluteString
                             let values = ["imageURL": picURL, "toID": toID]
-                            DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values)
+                            let values2 = ["imageURL": picURL, "fromID": fromID]
+                            DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values as [AnyHashable : Any])
+                            DatabaseRef.child("sentPicsRef").child(toID!).childByAutoId().updateChildValues(values2 as [AnyHashable : Any])
                         }
                     }
                 }
@@ -77,7 +79,9 @@ extension SendTableViewController: SendCellDelegate{
                         }
                         picURL = downloadURL.absoluteString
                         let values = ["imageURL": picURL, "toID": toID]
-                        DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values)
+                        let values2 = ["imageURL": picURL, "fromID": fromID]
+                        DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values as [AnyHashable : Any])
+                        DatabaseRef.child("sentPicsRef").child(toID!).childByAutoId().updateChildValues(values2 as [AnyHashable : Any])
                     }
                 }
             }

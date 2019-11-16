@@ -61,6 +61,9 @@
 		67CC105B237A84F300FDC08D /* FriendGal1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC105A237A84F300FDC08D /* FriendGal1ViewController.swift */; };
 		67CC105D237A84FE00FDC08D /* FriendGal2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC105C237A84FE00FDC08D /* FriendGal2ViewController.swift */; };
 		67CC105F237A854D00FDC08D /* FriendGalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC105E237A854D00FDC08D /* FriendGalPageViewController.swift */; };
+		67CC1063237DFA9D00FDC08D /* HomeGal1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC1062237DFA9D00FDC08D /* HomeGal1ViewController.swift */; };
+		67CC1065237DFAA800FDC08D /* HomeGal2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC1064237DFAA800FDC08D /* HomeGal2ViewController.swift */; };
+		67CC1067237DFB5500FDC08D /* HomeGalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC1066237DFB5500FDC08D /* HomeGalPageViewController.swift */; };
 		67F29EA62362D14900CA6CE5 /* AlbumImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F29EA52362D14900CA6CE5 /* AlbumImagePreviewVC.swift */; };
 		67F29EA82366077C00CA6CE5 /* GridImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F29EA72366077C00CA6CE5 /* GridImagesViewController.swift */; };
 		80C63EB690553E26C390470F /* Pods_GalleryShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA064BC434328A857080A3F /* Pods_GalleryShare.framework */; };
@@ -149,6 +152,9 @@
 		67CC105A237A84F300FDC08D /* FriendGal1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendGal1ViewController.swift; sourceTree = "<group>"; };
 		67CC105C237A84FE00FDC08D /* FriendGal2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendGal2ViewController.swift; sourceTree = "<group>"; };
 		67CC105E237A854D00FDC08D /* FriendGalPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendGalPageViewController.swift; sourceTree = "<group>"; };
+		67CC1062237DFA9D00FDC08D /* HomeGal1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGal1ViewController.swift; sourceTree = "<group>"; };
+		67CC1064237DFAA800FDC08D /* HomeGal2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGal2ViewController.swift; sourceTree = "<group>"; };
+		67CC1066237DFB5500FDC08D /* HomeGalPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeGalPageViewController.swift; path = "/Users/andreb/Desktop/GalleryShare/GalleryShare/Container View Controllers/HomeGalPageViewController.swift"; sourceTree = "<absolute>"; };
 		67F29EA52362D14900CA6CE5 /* AlbumImagePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumImagePreviewVC.swift; sourceTree = "<group>"; };
 		67F29EA72366077C00CA6CE5 /* GridImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImagesViewController.swift; sourceTree = "<group>"; };
 		6827CA1F90E3A544C3676AC6 /* Pods-GalleryShareTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryShareTests.release.xcconfig"; path = "Target Support Files/Pods-GalleryShareTests/Pods-GalleryShareTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -202,8 +208,8 @@
 			isa = PBXGroup;
 			children = (
 				6734766E23446F6D005469FC /* SwipingController.swift */,
-				676D2B392356744000D49B85 /* FriendViewController.swift */,
 				67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */,
+				676D2B392356744000D49B85 /* FriendViewController.swift */,
 				6792D9212347ECA100E6159E /* GalleryViewController.swift */,
 				6792D929234D8FE000E6159E /* AlbumsViewController.swift */,
 				67BC22822327432800653900 /* ViewController.swift */,
@@ -266,6 +272,9 @@
 				67CC105A237A84F300FDC08D /* FriendGal1ViewController.swift */,
 				67CC105C237A84FE00FDC08D /* FriendGal2ViewController.swift */,
 				67CC105E237A854D00FDC08D /* FriendGalPageViewController.swift */,
+				67CC1066237DFB5500FDC08D /* HomeGalPageViewController.swift */,
+				67CC1062237DFA9D00FDC08D /* HomeGal1ViewController.swift */,
+				67CC1064237DFAA800FDC08D /* HomeGal2ViewController.swift */,
 			);
 			path = "Container View Controllers";
 			sourceTree = "<group>";
@@ -580,10 +589,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67CC1063237DFA9D00FDC08D /* HomeGal1ViewController.swift in Sources */,
 				67CC105F237A854D00FDC08D /* FriendGalPageViewController.swift in Sources */,
 				670BEFE22325E01900A04E97 /* Constants.swift in Sources */,
+				67CC1067237DFB5500FDC08D /* HomeGalPageViewController.swift in Sources */,
 				67BC2299232E046A00653900 /* RequestCell.swift in Sources */,
 				6734766F23446F6D005469FC /* SwipingController.swift in Sources */,
+				67CC1065237DFAA800FDC08D /* HomeGal2ViewController.swift in Sources */,
 				67BC228D2328B21400653900 /* AddFriendsTableViewController.swift in Sources */,
 				67BC228B2327483B00653900 /* SignUpViewController.swift in Sources */,
 				67F29EA62362D14900CA6CE5 /* AlbumImagePreviewVC.swift in Sources */,

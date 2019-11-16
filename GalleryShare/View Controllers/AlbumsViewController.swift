@@ -96,9 +96,9 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+       /** refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
-        self.albums.addSubview(refreshControl) // not required when using UITabl
+        self.albums.addSubview(refreshControl) // not required when using UITabl **/
         
         self.albums.frame = CGRect(x:0, y: screenFourFifths, width: self.view.frame.width, height: self.view.frame.height)
         self.albums.collectionViewLayout = layout

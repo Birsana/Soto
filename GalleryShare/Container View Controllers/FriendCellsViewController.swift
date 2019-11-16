@@ -120,10 +120,7 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         let currentcell = myCollectionViewFriends.cellForItem(at: indexPath) as! PersonImageCell
         newController.labelText = currentcell.username?.text
         newController.profilePicImage = currentcell.profilePic?.image
-        
-        let databaseRef = Database.database().reference()
-        let user = Auth.auth().currentUser
-        let uid = Auth.auth().currentUser?.uid
+    
         
         self.present(newController, animated: true, completion: nil)
     }
@@ -148,6 +145,7 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width/4 - 10, height: 100)
         flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         flowLayout.scrollDirection = .horizontal
         flowLayout.minimumInteritemSpacing = 0.0
         

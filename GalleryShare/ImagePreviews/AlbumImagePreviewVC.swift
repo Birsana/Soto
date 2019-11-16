@@ -102,9 +102,7 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
             transferPic = currentcell.imgView.image
         }
         newController.picToSend = transferPic
-       // newController.passedIndex = passedContentOffset
-       // newController.passedArray = imgArray
-        
+
         self.present(newController, animated: true, completion: nil)
         
         
@@ -122,9 +120,7 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
             transferPic = currentcell.imgView.image
         }
         newController.picToSend = transferPic
-       // newController.passedIndex = passedContentOffset
-       // newController.passedArray = imgArray
-        
+      
         self.present(newController, animated: true, completion: nil)
         
         
@@ -133,8 +129,7 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
-        
+      
         self.view.backgroundColor=UIColor.black
         
         let layout = UICollectionViewFlowLayout()
@@ -182,9 +177,6 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
         cell.senderView?.topAnchor.constraint(equalTo: cell.topAnchor, constant: 30).isActive = true
         cell.senderView?.widthAnchor.constraint(equalToConstant: 70).isActive = true
         cell.senderView?.heightAnchor.constraint(equalToConstant: 70).isActive = true
-       
-        cell.senderView.kf.setImage(with: url)
-    
     
         let sender = sentArray[indexPath.row]
      
@@ -193,9 +185,9 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
             let dictionary = snapshot.value as? [String: AnyObject]
             let profilePicURL = (dictionary!["profilePic"] as? String)!
             let url = URL(string: profilePicURL)
-            
-            cell.senderView.kf.setImage(with: url)
-            
+            DispatchQueue.main.async {
+                 cell.senderView.kf.setImage(with: url)
+            }
         }
      
         let tap = UIGestureRecognizer(target:self, action: #selector(handleTap(_:)))

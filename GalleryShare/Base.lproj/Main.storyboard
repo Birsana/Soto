@@ -383,6 +383,14 @@
             </objects>
             <point key="canvasLocation" x="6755" y="2661"/>
         </scene>
+        <!--Home Gal Page View Controller-->
+        <scene sceneID="lWg-YK-EhP">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="jjs-Oc-8W8" customClass="HomeGalPageViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s0j-54-2Px" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7001" y="2053"/>
+        </scene>
         <!--Friend Gal2 View Controller-->
         <scene sceneID="aKA-X9-Ld9">
             <objects>
@@ -424,6 +432,36 @@
             </objects>
             <point key="canvasLocation" x="7486" y="2660"/>
         </scene>
+        <!--Home Gal1 View Controller-->
+        <scene sceneID="J6j-5H-5yE">
+            <objects>
+                <viewController storyboardIdentifier="hgal1" id="TAr-xN-7cz" customClass="HomeGal1ViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aTU-Sa-8ka">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="zfx-8Q-SIU"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WeJ-7k-1et" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8416" y="2204"/>
+        </scene>
+        <!--Home Gal2 View Controller-->
+        <scene sceneID="vca-Zt-efV">
+            <objects>
+                <viewController storyboardIdentifier="hgal2" id="wuQ-ud-SKi" customClass="HomeGal2ViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="c2N-n4-bj6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="2pr-nS-bGt"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o6I-YF-P5d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="9175" y="2204"/>
+        </scene>
         <!--GalleryViewController-->
         <scene sceneID="KcY-40-Y1A">
             <objects>
@@ -464,6 +502,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LNk-v0-tpY">
+                                <rect key="frame" x="92" y="450" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="jjs-Oc-8W8" kind="embed" id="3uO-H5-ByW"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="lCh-Rs-Vxq"/>
@@ -473,6 +518,7 @@
                     <connections>
                         <outlet property="addFriends" destination="r8T-yB-Tl4" id="PJE-tf-ExI"/>
                         <outlet property="friendView" destination="DGa-Vc-ywr" id="SgC-iF-SBW"/>
+                        <outlet property="galleries" destination="LNk-v0-tpY" id="xFf-hR-UF6"/>
                         <outlet property="noFriends" destination="5tG-4S-IYs" id="2co-UW-yee"/>
                     </connections>
                 </viewController>
@@ -1127,13 +1173,6 @@
                                     <segue destination="jEP-vy-H3s" kind="show" id="1mu-v2-z5C"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWn-pq-B3m">
-                                <rect key="frame" x="68" y="82" width="278" height="54"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yGX-kR-8uv">
                                 <rect key="frame" x="87" y="165" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -1141,6 +1180,15 @@
                                     <segue destination="zBj-Vc-8st" kind="embed" identifier="containerSegue" id="4nf-nL-lBC"/>
                                 </connections>
                             </containerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWn-pq-B3m">
+                                <rect key="frame" x="68" y="301" width="278" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="tintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="mM5-Ym-DfV"/>

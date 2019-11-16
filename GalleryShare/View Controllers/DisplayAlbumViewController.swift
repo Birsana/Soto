@@ -16,12 +16,28 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
     @IBOutlet weak var members: UIView!
     
     public var screenHeightHalf: CGFloat {
-        return UIScreen.main.bounds.height/2
+        return UIScreen.main.bounds.height/3
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return picURL.count
     }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.width
+        
+        if DeviceInfo.Orientation.isPortrait {
+            return CGSize(width: width/4 - 1, height: width/4 - 1)
+        } else {
+            return CGSize(width: width/6 - 1, height: width/6 - 1)
+        }
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+          return 1.0
+      }
+      
+      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+          return 1.0
+      }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoItemCell
@@ -36,7 +52,7 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let vc = AlbumImagePreviewVC()
-        //vc.imgArray = self.imageArray
+  
         
         vc.urlArr = self.picURL
         vc.sentArray = self.whoSent
@@ -68,11 +84,6 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
         }
     }
     
-    //ADD A COLLECTIONVIEW SIMILAR TO THE FIRST PAGE ONE THAT HAS EVERYONE IN THE ALBUM
-    
-    
-    var imageArray=[UIImage]()
-    
     var albumName: String!
     var username = ""
     var albumID: String?
@@ -82,8 +93,6 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
-    
-    
     
     var firstImage: UIImage?
     
@@ -117,11 +126,7 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
         
         let layout = UICollectionViewFlowLayout()
         
-        let layout2 = UICollectionViewFlowLayout()
-        layout2.scrollDirection = .horizontal
-        
-        //self.view.frame = CGRect(x: 0, y: screenHeightHalf, width: 320, height: 480);
-        var thisFrame = CGRect(x: 0, y: screenHeightHalf, width: 320, height: 480);
+        var thisFrame = CGRect(x: 0, y: screenHeightHalf, width: view.frame.width, height: view.frame.height)
         myCollectionView = UICollectionView(frame: thisFrame, collectionViewLayout: layout)
         myCollectionView.delegate=self
         myCollectionView.dataSource=self
@@ -129,12 +134,13 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
         myCollectionView.backgroundColor=UIColor.white
         self.view.addSubview(myCollectionView)
         
+        //SAME STLYE AS PRIVATE PHOTOS
+        
         grabPhotos()
         
     }
     func grabPhotos(){
-        imageArray = []
-        
+      
         let currentUser = Auth.auth().currentUser
         let StorageRef = Storage.storage().reference()
         let DatabaseRef = Database.database().reference()
@@ -159,8 +165,6 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
                 }
                 
             }
-            
-            
             
         }
     }

@@ -16,7 +16,6 @@ class FriendViewController: UIViewController, UINavigationControllerDelegate{
       }
     
     @IBOutlet weak var galleries: UIView!
-    @IBOutlet weak var sentPhotos: UICollectionView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var profilePic: UIImageView!
     

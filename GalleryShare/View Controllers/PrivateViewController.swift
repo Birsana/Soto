@@ -92,10 +92,6 @@ class PrivateViewController: UIViewController, UICollectionViewDelegate, UIColle
             return CGSize(width: width/6 - 1, height: width/6 - 1)
         }
     }
-    /** override func viewWillLayoutSubviews() {
-     super.viewWillLayoutSubviews()
-     privatePhotos.collectionViewLayout.invalidateLayout()
-     }**/
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1.0
