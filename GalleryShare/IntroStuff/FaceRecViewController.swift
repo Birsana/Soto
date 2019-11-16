@@ -12,7 +12,7 @@ import FirebaseMLVision
 
 extension UIImageView{
     
-    func asCircle(){
+    func asCircle2(){
         
         self.layer.masksToBounds = true
         self.layer.cornerRadius = self.frame.size.width / 2

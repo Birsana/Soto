@@ -152,7 +152,7 @@ class SignUpViewController: UIViewController {
              
              self.present(tempViewController!, animated: true, completion: nil) **/
             
-            let tempViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.firstLogIn) as? IntroPageViewController
+            let tempViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.firstLogIn) as? ProfilePicViewController
             tempViewController?.modalPresentationStyle = .fullScreen
             view.window?.rootViewController = tempViewController
             view.window?.makeKeyAndVisible()

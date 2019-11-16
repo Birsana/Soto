@@ -941,221 +941,38 @@
             </objects>
             <point key="canvasLocation" x="1236" y="-143"/>
         </scene>
-        <!--FR5ViewController-->
-        <scene sceneID="QBz-xf-1uQ">
+        <!--Profile Pic View Controller-->
+        <scene sceneID="HeT-Fu-fUA">
             <objects>
-                <viewController storyboardIdentifier="sixth" id="7QD-Vn-etz" userLabel="FR5ViewController" customClass="FR5ViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="M7O-Xe-QCK">
+                <viewController storyboardIdentifier="firstLog" id="rGu-Lz-QAC" customClass="ProfilePicViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="vow-xJ-UQh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aUx-jq-9xH">
-                                <rect key="frame" x="87" y="285" width="200" height="200"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ugi-gN-5uo">
+                                <rect key="frame" x="107" y="217" width="200" height="200"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3x-7g-BNm">
-                                <rect key="frame" x="172" y="628" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RFL-50-G13">
+                                <rect key="frame" x="184" y="548" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Pick"/>
+                                <state key="normal" title="Done"/>
                                 <connections>
-                                    <action selector="clickChoose:" destination="7QD-Vn-etz" eventType="touchUpInside" id="404-qF-y5K"/>
+                                    <action selector="finishIntro:" destination="rGu-Lz-QAC" eventType="touchUpInside" id="Etj-Ez-dh4"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9BC-K7-w06" customClass="Checkbox" customModule="GalleryShare" customModuleProvider="target">
-                                <rect key="frame" x="87" y="666" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="5Eu-MR-0UA"/>
+                        <viewLayoutGuide key="safeArea" id="gbw-wz-Exr"/>
                     </view>
                     <connections>
-                        <outlet property="check" destination="9BC-K7-w06" id="bWi-Zx-j19"/>
-                        <outlet property="imageSelect" destination="aUx-jq-9xH" id="Nbl-i9-t4l"/>
+                        <outlet property="goNext" destination="RFL-50-G13" id="aFX-zO-2c2"/>
+                        <outlet property="imageSelect" destination="ugi-gN-5uo" id="pkt-Na-M1j"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rbi-eE-buS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KbZ-jS-b2S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1201" y="-828"/>
-        </scene>
-        <!--FR4ViewController-->
-        <scene sceneID="WKb-sR-ihl">
-            <objects>
-                <viewController storyboardIdentifier="fifth" id="YEH-9d-V3l" userLabel="FR4ViewController" customClass="FR4ViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="iED-kc-Wn0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wVe-NP-cT1">
-                                <rect key="frame" x="107" y="244" width="200" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFG-Wn-f1O">
-                                <rect key="frame" x="192" y="615" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Pick"/>
-                                <connections>
-                                    <action selector="clickChoose:" destination="YEH-9d-V3l" eventType="touchUpInside" id="9NI-AM-A6q"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m7z-aL-fQZ" customClass="Checkbox" customModule="GalleryShare" customModuleProvider="target">
-                                <rect key="frame" x="87" y="680" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="89a-ql-GrK">
-                                <rect key="frame" x="107" y="244" width="200" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="sFV-lO-gAf"/>
-                    </view>
-                    <connections>
-                        <outlet property="check" destination="m7z-aL-fQZ" id="ALo-QC-SFR"/>
-                        <outlet property="imageSelect" destination="89a-ql-GrK" id="1mf-YK-PBF"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KpG-uC-gx9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2312" y="-833"/>
-        </scene>
-        <!--FR3ViewController-->
-        <scene sceneID="oX8-xp-FgP">
-            <objects>
-                <viewController storyboardIdentifier="fourth" id="0r7-H1-BSO" userLabel="FR3ViewController" customClass="FR3ViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="DsH-wS-Pj8">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGm-0Q-TIE">
-                                <rect key="frame" x="192" y="479" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Pick"/>
-                                <connections>
-                                    <action selector="clickChoose:" destination="0r7-H1-BSO" eventType="touchUpInside" id="ec7-E6-X4J"/>
-                                </connections>
-                            </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OJt-8s-4s1">
-                                <rect key="frame" x="87" y="238" width="200" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQt-BW-kyF">
-                                <rect key="frame" x="191" y="593" width="32" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Next"/>
-                                <connections>
-                                    <action selector="finishIntro:" destination="0r7-H1-BSO" eventType="touchUpInside" id="PJJ-3r-h8e"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D9f-M6-IcA" userLabel="Check3" customClass="Checkbox" customModule="GalleryShare" customModuleProvider="target">
-                                <rect key="frame" x="87" y="658" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="H3o-2K-DtN"/>
-                    </view>
-                    <connections>
-                        <outlet property="check" destination="D9f-M6-IcA" id="gh7-ay-x3o"/>
-                        <outlet property="goNext" destination="YQt-BW-kyF" id="fPp-UP-SBj"/>
-                        <outlet property="imageSelect" destination="OJt-8s-4s1" id="DAA-yK-2Fd"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Roh-vd-4Ma" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2317" y="-159"/>
-        </scene>
-        <!--FR2ViewController-->
-        <scene sceneID="NCG-wl-Ftc">
-            <objects>
-                <viewController storyboardIdentifier="third" id="pcU-5X-KZz" userLabel="FR2ViewController" customClass="FR2ViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Wvr-Ww-4Kn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QDa-f0-hjU">
-                                <rect key="frame" x="87" y="230" width="200" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AdM-9m-uMJ" userLabel="Pick">
-                                <rect key="frame" x="192" y="511" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Pick"/>
-                                <connections>
-                                    <action selector="clickChoose:" destination="pcU-5X-KZz" eventType="touchUpInside" id="a7U-kN-xEd"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nAC-dM-BsL" userLabel="Check2" customClass="Checkbox" customModule="GalleryShare" customModuleProvider="target">
-                                <rect key="frame" x="87" y="614" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="NNr-mG-fFX"/>
-                    </view>
-                    <connections>
-                        <outlet property="check" destination="nAC-dM-BsL" id="D65-jQ-SKN"/>
-                        <outlet property="imageSelect" destination="QDa-f0-hjU" id="OQw-lm-CVn"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qIP-PZ-uSV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3512" y="-159"/>
-        </scene>
-        <!--Intro Page View Controller-->
-        <scene sceneID="49p-9g-0he">
-            <objects>
-                <pageViewController storyboardIdentifier="firstLog" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="FZq-2l-qaJ" customClass="IntroPageViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="4zC-3L-Xav" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4248" y="-159"/>
-        </scene>
-        <!--Face Rec View Controller-->
-        <scene sceneID="AwB-kG-BgK">
-            <objects>
-                <viewController storyboardIdentifier="second" modalPresentationStyle="fullScreen" id="kcX-Cd-fnR" customClass="FaceRecViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="CN2-5G-smf">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ouj-dk-4Hy" userLabel="Pick">
-                                <rect key="frame" x="194" y="533" width="30" height="30"/>
-                                <state key="normal" title="Pick"/>
-                                <connections>
-                                    <action selector="clickChoose:" destination="kcX-Cd-fnR" eventType="touchUpInside" id="CMl-ak-xTq"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="366-gb-Ylf" userLabel="Check1" customClass="Checkbox" customModule="GalleryShare" customModuleProvider="target">
-                                <rect key="frame" x="89" y="669" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8ru-8w-VKL">
-                                <rect key="frame" x="87" y="230" width="200" height="200"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="Ouj-dk-4Hy" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hrl-re-HSm" secondAttribute="leading" id="Rgy-UB-XTK"/>
-                            <constraint firstItem="hrl-re-HSm" firstAttribute="bottom" secondItem="Ouj-dk-4Hy" secondAttribute="bottom" constant="299" id="VXL-du-fWb"/>
-                            <constraint firstItem="hrl-re-HSm" firstAttribute="trailing" secondItem="Ouj-dk-4Hy" secondAttribute="trailing" constant="190" id="eHk-7q-JbK"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="hrl-re-HSm"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Xrp-UO-L7A"/>
-                    <connections>
-                        <outlet property="check" destination="366-gb-Ylf" id="BmU-ma-Vwx"/>
-                        <outlet property="imageToSelect" destination="8ru-8w-VKL" id="MM3-J9-zFB"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2Tu-yb-oGi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5114" y="60"/>
+            <point key="canvasLocation" x="4275" y="-280"/>
         </scene>
         <!--Display Album View Controller-->
         <scene sceneID="xdo-7F-z3b">

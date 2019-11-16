@@ -32,8 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                       if status == .authorized{
                           
                           if UserDefaults.standard.bool(forKey: "firstTime"){
-                                    
-                            let tempViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.firstLogIn) as? IntroPageViewController
+                            let tempViewController = self.storyboard.instantiateViewController(withIdentifier: "firstLog") as? ProfilePicViewController
                                               tempViewController?.modalPresentationStyle = .fullScreen
                                               self.window?.rootViewController = tempViewController
                                               self.window?.makeKeyAndVisible()
@@ -67,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                   
                 if UserDefaults.standard.bool(forKey: "firstTime"){
                                                                     
-                    let tempViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.firstLogIn) as? IntroPageViewController
+                    let tempViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.firstLogIn) as? ProfilePicViewController
                          tempViewController?.modalPresentationStyle = .fullScreen
                         self.window?.rootViewController = tempViewController
                              self.window?.makeKeyAndVisible()

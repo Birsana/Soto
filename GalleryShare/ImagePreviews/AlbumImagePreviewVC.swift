@@ -193,6 +193,7 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
         let tap = UIGestureRecognizer(target:self, action: #selector(handleTap(_:)))
         cell.isUserInteractionEnabled = true
         
+        cell.senderView.isUserInteractionEnabled = true
         cell.senderView?.asCircle()
         cell.senderView?.addGestureRecognizer(tap)
                 return cell
