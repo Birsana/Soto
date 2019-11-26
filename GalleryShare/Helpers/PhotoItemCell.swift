@@ -11,7 +11,13 @@ class PhotoItemCell: UICollectionViewCell {
     
     var img = UIImageView()
     var selectLabel = UILabel()
-    
+    var representedAssetIdentifier: String?
+
+       var thumbnailImage: UIImage! {
+           didSet {
+               img.image = thumbnailImage
+           }
+       }
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -19,6 +25,11 @@ class PhotoItemCell: UICollectionViewCell {
         img.clipsToBounds=true
         self.addSubview(img)
     }
+    
+    override func prepareForReuse() {
+           super.prepareForReuse()
+           img.image = nil
+       }
     
     override func layoutSubviews() {
         super.layoutSubviews()

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		67090872238750FB0070C01C /* picCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67090871238750FB0070C01C /* picCollection.xib */; };
+		67090874238777DB0070C01C /* AddFriendsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67090873238777DB0070C01C /* AddFriendsMasterViewController.swift */; };
 		670BEFE02325E01200A04E97 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670BEFDF2325E01200A04E97 /* Utilities.swift */; };
 		670BEFE22325E01900A04E97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670BEFE12325E01900A04E97 /* Constants.swift */; };
 		6734766B234125E5005469FC /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6734766A234125E5005469FC /* GuideViewController.swift */; };
@@ -15,7 +17,6 @@
 		67365DB123526A3B00360D7D /* SendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67365DB023526A3B00360D7D /* SendCell.swift */; };
 		67365DB323526B8200360D7D /* SendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67365DB223526B8200360D7D /* SendTableViewController.swift */; };
 		676D2B3A2356744000D49B85 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676D2B392356744000D49B85 /* FriendViewController.swift */; };
-		676D2B3C2356CA4A00D49B85 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676D2B3B2356CA4A00D49B85 /* Photo.swift */; };
 		676D2B3E2356CC2400D49B85 /* PrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */; };
 		67922A85235960CA004092C5 /* FriendImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A84235960CA004092C5 /* FriendImagePreviewVC.swift */; };
 		67922A88235A4850004092C5 /* CreateAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A87235A4850004092C5 /* CreateAlbumViewController.swift */; };
@@ -43,15 +44,14 @@
 		67BBB11323754E29007F4D3B /* AlbumContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BBB11223754E29007F4D3B /* AlbumContainerViewController.swift */; };
 		67BBB115237693D8007F4D3B /* AlbumPersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BBB114237693D8007F4D3B /* AlbumPersonCell.swift */; };
 		67BC22832327432800653900 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC22822327432800653900 /* ViewController.swift */; };
-		67BC2287232743AA00653900 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC2286232743AA00653900 /* HomeViewController.swift */; };
 		67BC2289232743C800653900 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC2288232743C800653900 /* LogInViewController.swift */; };
 		67BC228B2327483B00653900 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC228A2327483B00653900 /* SignUpViewController.swift */; };
 		67BC228D2328B21400653900 /* AddFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC228C2328B21400653900 /* AddFriendsTableViewController.swift */; };
 		67BC2291232B757100653900 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC2290232B757100653900 /* FriendCell.swift */; };
-		67BC2293232C5E8500653900 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC2292232C5E8500653900 /* FriendsViewController.swift */; };
 		67BC2297232DD7DA00653900 /* FriendRequestsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */; };
 		67BC2299232E046A00653900 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC2298232E046A00653900 /* RequestCell.swift */; };
 		67BC229C232F43C300653900 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BC229B232F43C300653900 /* MainNavigationController.swift */; };
+		67BEE075238522E500D63753 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67BEE074238522E500D63753 /* SettingsViewController.swift */; };
 		67CC105B237A84F300FDC08D /* FriendGal1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC105A237A84F300FDC08D /* FriendGal1ViewController.swift */; };
 		67CC105D237A84FE00FDC08D /* FriendGal2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC105C237A84FE00FDC08D /* FriendGal2ViewController.swift */; };
 		67CC105F237A854D00FDC08D /* FriendGalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC105E237A854D00FDC08D /* FriendGalPageViewController.swift */; };
@@ -89,6 +89,8 @@
 		4CAB2CB27C8110CC9F565DA5 /* Pods-GalleryShareUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryShareUITests.debug.xcconfig"; path = "Target Support Files/Pods-GalleryShareUITests/Pods-GalleryShareUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		52A49F67246B66278C985ED7 /* Pods-GalleryShare.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryShare.release.xcconfig"; path = "Target Support Files/Pods-GalleryShare/Pods-GalleryShare.release.xcconfig"; sourceTree = "<group>"; };
 		535EDE7C4A859C70EDDE7339 /* Pods-GalleryShareUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryShareUITests.release.xcconfig"; path = "Target Support Files/Pods-GalleryShareUITests/Pods-GalleryShareUITests.release.xcconfig"; sourceTree = "<group>"; };
+		67090871238750FB0070C01C /* picCollection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = picCollection.xib; sourceTree = "<group>"; };
+		67090873238777DB0070C01C /* AddFriendsMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsMasterViewController.swift; sourceTree = "<group>"; };
 		670BEFDF2325E01200A04E97 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		670BEFE12325E01900A04E97 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6734766A234125E5005469FC /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
@@ -97,7 +99,6 @@
 		67365DB023526A3B00360D7D /* SendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCell.swift; sourceTree = "<group>"; };
 		67365DB223526B8200360D7D /* SendTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTableViewController.swift; sourceTree = "<group>"; };
 		676D2B392356744000D49B85 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
-		676D2B3B2356CA4A00D49B85 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivateViewController.swift; path = "/Users/andreb/Desktop/GalleryShare/GalleryShare/View Controllers/PrivateViewController.swift"; sourceTree = "<absolute>"; };
 		67922A84235960CA004092C5 /* FriendImagePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendImagePreviewVC.swift; sourceTree = "<group>"; };
 		67922A87235A4850004092C5 /* CreateAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAlbumViewController.swift; sourceTree = "<group>"; };
@@ -129,15 +130,14 @@
 		67BBB11223754E29007F4D3B /* AlbumContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumContainerViewController.swift; sourceTree = "<group>"; };
 		67BBB114237693D8007F4D3B /* AlbumPersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumPersonCell.swift; sourceTree = "<group>"; };
 		67BC22822327432800653900 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		67BC2286232743AA00653900 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		67BC2288232743C800653900 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		67BC228A2327483B00653900 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		67BC228C2328B21400653900 /* AddFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsTableViewController.swift; sourceTree = "<group>"; };
 		67BC2290232B757100653900 /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
-		67BC2292232C5E8500653900 /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestsTableViewController.swift; sourceTree = "<group>"; };
 		67BC2298232E046A00653900 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		67BC229B232F43C300653900 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		67BEE074238522E500D63753 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		67CC105A237A84F300FDC08D /* FriendGal1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendGal1ViewController.swift; sourceTree = "<group>"; };
 		67CC105C237A84FE00FDC08D /* FriendGal2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendGal2ViewController.swift; sourceTree = "<group>"; };
 		67CC105E237A854D00FDC08D /* FriendGalPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendGalPageViewController.swift; sourceTree = "<group>"; };
@@ -194,28 +194,32 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		67090870238750CD0070C01C /* ML */ = {
+			isa = PBXGroup;
+			children = (
+				67090871238750FB0070C01C /* picCollection.xib */,
+			);
+			path = ML;
+			sourceTree = "<group>";
+		};
 		670BEFDD2325DDEF00A04E97 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				6734766E23446F6D005469FC /* SwipingController.swift */,
 				67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */,
 				676D2B392356744000D49B85 /* FriendViewController.swift */,
+				67BEE074238522E500D63753 /* SettingsViewController.swift */,
 				6792D9212347ECA100E6159E /* GalleryViewController.swift */,
 				6792D929234D8FE000E6159E /* AlbumsViewController.swift */,
-				67BC22822327432800653900 /* ViewController.swift */,
-				67BC2286232743AA00653900 /* HomeViewController.swift */,
-				67BC2288232743C800653900 /* LogInViewController.swift */,
-				67BC228A2327483B00653900 /* SignUpViewController.swift */,
-				67BC2292232C5E8500653900 /* FriendsViewController.swift */,
 				67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */,
 				6734766A234125E5005469FC /* GuideViewController.swift */,
 				6792D91F2347E41A00E6159E /* MainTabViewController.swift */,
 				676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */,
 				67922A87235A4850004092C5 /* CreateAlbumViewController.swift */,
 				67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */,
-				67BC228C2328B21400653900 /* AddFriendsTableViewController.swift */,
 				67922A8F235F63DD004092C5 /* SendAlbumTableViewController.swift */,
 				67365DB223526B8200360D7D /* SendTableViewController.swift */,
+				67090873238777DB0070C01C /* AddFriendsMasterViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -230,7 +234,6 @@
 				6734766C23430FA6005469FC /* Checkbox.swift */,
 				6792D9252349D1E800E6159E /* PersonImageCell.swift */,
 				6792D927234A92A700E6159E /* PhotoItemCell.swift */,
-				676D2B3B2356CA4A00D49B85 /* Photo.swift */,
 				67BC2298232E046A00653900 /* RequestCell.swift */,
 				67365DB023526A3B00360D7D /* SendCell.swift */,
 				67922A91235F647A004092C5 /* SendAlbumCell.swift */,
@@ -265,6 +268,7 @@
 				67CC1066237DFB5500FDC08D /* HomeGalPageViewController.swift */,
 				67CC1062237DFA9D00FDC08D /* HomeGal1ViewController.swift */,
 				67CC1064237DFAA800FDC08D /* HomeGal2ViewController.swift */,
+				67BC228C2328B21400653900 /* AddFriendsTableViewController.swift */,
 			);
 			path = "Container View Controllers";
 			sourceTree = "<group>";
@@ -273,6 +277,9 @@
 			isa = PBXGroup;
 			children = (
 				67CC10682380824500FDC08D /* ProfilePicViewController.swift */,
+				67BC228A2327483B00653900 /* SignUpViewController.swift */,
+				67BC2288232743C800653900 /* LogInViewController.swift */,
+				67BC22822327432800653900 /* ViewController.swift */,
 			);
 			path = IntroStuff;
 			sourceTree = "<group>";
@@ -300,6 +307,7 @@
 		6797F3862322E32B006A3C0D /* GalleryShare */ = {
 			isa = PBXGroup;
 			children = (
+				67090870238750CD0070C01C /* ML */,
 				67922A972361440E004092C5 /* Container View Controllers */,
 				67922A8623596110004092C5 /* ImagePreviews */,
 				6792D92F234D901400E6159E /* IntroStuff */,
@@ -447,6 +455,7 @@
 				6797F3BD23248160006A3C0D /* GoogleService-Info.plist in Resources */,
 				6797F38F2322E32D006A3C0D /* Assets.xcassets in Resources */,
 				6797F38D2322E32B006A3C0D /* Main.storyboard in Resources */,
+				67090872238750FB0070C01C /* picCollection.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,11 +603,9 @@
 				67922A9423602C27004092C5 /* DisplayAlbumViewController.swift in Sources */,
 				676D2B3A2356744000D49B85 /* FriendViewController.swift in Sources */,
 				67BC22832327432800653900 /* ViewController.swift in Sources */,
-				67BC2293232C5E8500653900 /* FriendsViewController.swift in Sources */,
 				67BBB115237693D8007F4D3B /* AlbumPersonCell.swift in Sources */,
 				6792D92423480C3D00E6159E /* ImagePreviewVC.swift in Sources */,
 				67922A992361442C004092C5 /* FriendCellsViewController.swift in Sources */,
-				676D2B3C2356CA4A00D49B85 /* Photo.swift in Sources */,
 				67F29EA82366077C00CA6CE5 /* GridImagesViewController.swift in Sources */,
 				67BC2289232743C800653900 /* LogInViewController.swift in Sources */,
 				67365DB323526B8200360D7D /* SendTableViewController.swift in Sources */,
@@ -607,7 +614,9 @@
 				67BC2297232DD7DA00653900 /* FriendRequestsTableViewController.swift in Sources */,
 				67922A88235A4850004092C5 /* CreateAlbumViewController.swift in Sources */,
 				67A9201D23692BED00DDEB86 /* square.swift in Sources */,
+				67BEE075238522E500D63753 /* SettingsViewController.swift in Sources */,
 				67CC10692380824500FDC08D /* ProfilePicViewController.swift in Sources */,
+				67090874238777DB0070C01C /* AddFriendsMasterViewController.swift in Sources */,
 				67BBB11323754E29007F4D3B /* AlbumContainerViewController.swift in Sources */,
 				6792D934234ED5BD00E6159E /* PrivImagePreviewVC.swift in Sources */,
 				67CC105B237A84F300FDC08D /* FriendGal1ViewController.swift in Sources */,
@@ -619,7 +628,6 @@
 				67922A8C235A6385004092C5 /* AlbumFriendsTableViewController.swift in Sources */,
 				67922A92235F647A004092C5 /* SendAlbumCell.swift in Sources */,
 				6792D92A234D8FE000E6159E /* AlbumsViewController.swift in Sources */,
-				67BC2287232743AA00653900 /* HomeViewController.swift in Sources */,
 				67922A90235F63DD004092C5 /* SendAlbumTableViewController.swift in Sources */,
 				67CC105D237A84FE00FDC08D /* FriendGal2ViewController.swift in Sources */,
 				67922A9623602CF4004092C5 /* AlbumItemCell.swift in Sources */,
@@ -797,7 +805,9 @@
 			baseConfigurationReference = 81478EAB71CE9C6067210F2A /* Pods-GalleryShare.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QHW6V724KF;
 				INFOPLIST_FILE = GalleryShare/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -815,7 +825,9 @@
 			baseConfigurationReference = 52A49F67246B66278C985ED7 /* Pods-GalleryShare.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_LIBRARY_FOR_DISTRIBUTION = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = QHW6V724KF;
 				INFOPLIST_FILE = GalleryShare/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

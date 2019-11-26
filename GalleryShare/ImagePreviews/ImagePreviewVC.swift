@@ -8,12 +8,18 @@
 
 import UIKit
 import Firebase
+import Photos
+import PhotosUI
 
 class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
+    
+    fileprivate let imageManager = PHCachingImageManager()
     
     var myCollectionView: UICollectionView!
     var imgArray = [UIImage]()
     var passedContentOffset = IndexPath()
+    
+    var fetchResult: PHFetchResult<PHAsset>!
     
     
     private let addButton: UIButton = {
@@ -63,7 +69,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let newController = storyboard.instantiateViewController(withIdentifier: "Grid") as! GridImagesViewController
         
-        newController.imgArray = self.imgArray
+        newController.fetchResult = self.fetchResult
         
         self.present(newController, animated: true, completion: nil)
         
@@ -73,8 +79,9 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         var pictoSend: UIImage!
         for cell in myCollectionView.visibleCells{
             let indexPriv = myCollectionView.indexPath(for: cell)
-            let intPriv = indexPriv?.item
-            pictoSend = imgArray[intPriv!]
+            let currentcell = myCollectionView.cellForItem(at: indexPriv!) as! ImagePreviewFullViewCell
+
+            pictoSend = currentcell.imgView.image
             
         }
         let imageName = NSUUID().uuidString
@@ -113,12 +120,11 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         var transferPic: UIImage!
         for cell in myCollectionView.visibleCells{
             let indexPriv = myCollectionView.indexPath(for: cell)
-            let intPriv = indexPriv?.item
-            transferPic = imgArray[intPriv!]
+            let currentcell = myCollectionView.cellForItem(at: indexPriv!) as! ImagePreviewFullViewCell
+            transferPic = currentcell.imgView.image
         }
         newController.picToSend = transferPic
-       // newController.passedIndex = passedContentOffset
-       // newController.passedArray = imgArray
+       
         
         
         self.present(newController, animated: true, completion: nil)
@@ -133,12 +139,12 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         var transferPic: UIImage!
         for cell in myCollectionView.visibleCells{
             let indexPriv = myCollectionView.indexPath(for: cell)
-            let intPriv = indexPriv?.item
-            transferPic = imgArray[intPriv!]
+            let currentcell = myCollectionView.cellForItem(at: indexPriv!) as! ImagePreviewFullViewCell
+
+            transferPic = currentcell.imgView.image
         }
         newController.picToSend = transferPic
-       // newController.passedIndex = passedContentOffset
-       // newController.passedArray = imgArray
+  
         
         self.present(newController, animated: true, completion: nil)
         
@@ -189,12 +195,20 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imgArray.count
+        return fetchResult.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImagePreviewFullViewCell
-        cell.imgView.image=imgArray[indexPath.row]
+        
+         let asset = fetchResult.object(at: indexPath.item)
+        cell.representedAssetIdentifier = asset.localIdentifier
+        imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: nil, resultHandler: { image, _ in
+            if cell.representedAssetIdentifier == asset.localIdentifier {
+                cell.imgView.image = image
+            }
+        })
+        
         return cell
     }
     
@@ -234,6 +248,8 @@ class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
     
     var scrollImg: UIScrollView!
     var imgView: UIImageView!
+    var representedAssetIdentifier: String?
+
 
     override init(frame: CGRect) {
         super.init(frame: frame)

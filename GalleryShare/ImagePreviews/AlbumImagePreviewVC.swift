@@ -189,14 +189,15 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
                  cell.senderView.kf.setImage(with: url)
             }
         }
-     
+        cell.bringSubviewToFront(cell.senderView)
         let tap = UIGestureRecognizer(target:self, action: #selector(handleTap(_:)))
         cell.isUserInteractionEnabled = true
-        
         cell.senderView.isUserInteractionEnabled = true
         cell.senderView?.asCircle()
         cell.senderView?.addGestureRecognizer(tap)
-                return cell
+        
+        
+        return cell
     }
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         print("water")

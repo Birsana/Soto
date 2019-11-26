@@ -121,13 +121,9 @@ class FriendRequestsTableViewController: UITableViewController {
         databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 self.username = (dictionary["username"] as? String)!
-                
-                
-                
-                
                 self.databaseRef.child("FriendRequest").child(self.username).observe(.childAdded, with: { (snapshot) in
-            
                     self.friendRequests.append(snapshot.value as? NSDictionary)
+
                     self.table.insertRows(at: [IndexPath(row:self.friendRequests.count-1, section:0)], with: UITableView.RowAnimation.automatic)
                     
                     

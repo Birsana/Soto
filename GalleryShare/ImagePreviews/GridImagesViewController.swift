@@ -8,10 +8,13 @@
 
 import UIKit
 import Firebase
+import Photos
+import PhotosUI
 
 class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate{
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imgArray.count
+        return fetchResult.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -32,27 +35,32 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
         
         cell.addSubview(cell.selectLabel)
         
-        
-        cell.img.image=imgArray[indexPath.item]
+        let asset = fetchResult.object(at: indexPath.item)
+               cell.representedAssetIdentifier = asset.localIdentifier
+               imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: nil, resultHandler: { image, _ in
+                   if cell.representedAssetIdentifier == asset.localIdentifier {
+                       cell.thumbnailImage = image
+                   }
+               })
         
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if picsToSend.contains(imgArray[indexPath.item]){
-            let itemToRemove = imgArray[indexPath.item]
-            while picsToSend.contains(itemToRemove) {
-                if let itemToRemoveIndex = picsToSend.firstIndex(of: itemToRemove) {
+        let currentCell = myCollectionView.cellForItem(at: indexPath) as! PhotoItemCell
+        let currentPic = currentCell.img.image
+        if picsToSend.contains(currentPic!){
+            let itemToRemove = currentPic
+            while picsToSend.contains(itemToRemove!) {
+                if let itemToRemoveIndex = picsToSend.firstIndex(of: itemToRemove!) {
                     picsToSend.remove(at: itemToRemoveIndex)
-                    print("YAH")
                     let cell = myCollectionView.cellForItem(at: indexPath) as! PhotoItemCell
                     cell.selectLabel.backgroundColor = UIColor.clear
                 }
             }
         }
         else{
-            picsToSend.append(imgArray[indexPath.item])
-            print("YEET")
+            picsToSend.append(currentPic!)
             let cell = myCollectionView.cellForItem(at: indexPath) as! PhotoItemCell
             cell.selectLabel.backgroundColor = UIColor.blue
             
@@ -64,8 +72,6 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
         return UIScreen.main.bounds.height/8
     }
     
-    
-    var imgArray = [UIImage]()
     var myCollectionView: UICollectionView!
     
     var screenSize: CGRect!
@@ -73,6 +79,11 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
     var screenHeight: CGFloat!
     
     var picsToSend = [UIImage]()
+    
+    
+    fileprivate let imageManager = PHCachingImageManager()
+    var fetchResult: PHFetchResult<PHAsset>!
+    
     
     
     @IBAction func privateButton(_ sender: Any) {

@@ -19,15 +19,11 @@ extension AddFriendsTableViewController: FriendCellDelegate{
             myDataRef.observeSingleEvent(of: .value) { (snapshot) in
                 let myData = snapshot.value as! Dictionary<String, String>
                 let userFriendRequestRef = dbRef.child("FriendRequest").child(friend).child(currentUser)
-                
                 userFriendRequestRef.updateChildValues(myData)
+                
             }
         }
-        
     }
-    
-    
-    
 }
 
 class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdating {
@@ -43,6 +39,7 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         let databaseRef = Database.database().reference()
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
@@ -85,6 +82,7 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
         }
         return self.usersArray.count
     }
+   
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -110,6 +108,7 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
         
         let picURL = URL(string:((user?["profilePic"] as? String)!))
             cell.profilePic.kf.setImage(with: picURL)
+            cell.profilePic.asCircle()
         
         
         
@@ -117,9 +116,7 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
         return cell
     }
     
-    
-    
-    func updateSearchResults(for searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {    
         //update the search results
         filterContent(searchText: self.searchController.searchBar.text!)
     }
@@ -130,6 +127,4 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
         }
         tableView.reloadData()
     }
-    
-    
 }

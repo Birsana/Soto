@@ -148,6 +148,12 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
         else{
             user = self.friends[indexPath.row]
         }
+     /**   cell.username.translatesAutoresizingMaskIntoConstraints = false
+        cell.username.widthAnchor.constraint(equalToConstant: 10).isActive = true
+        cell.username.heightAnchor.constraint(equalToConstant: 10).isActive = true
+        cell.username.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -10).isActive = true
+        cell.username.topAnchor.constraint(equalTo: cell.topAnchor).isActive = true **/
+        
         cell.username.text = user?["username"] as? String
         nameAtCell = user?["username"] as? String
         

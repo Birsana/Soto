@@ -14,7 +14,6 @@ import Kingfisher
 class PrivImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
 
     var myCollectionView: UICollectionView!
-    var imgArray = [UIImage]()
     var passedContentOffset = IndexPath()
     var allURLs = [AnyObject]()
     

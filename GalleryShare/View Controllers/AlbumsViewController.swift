@@ -9,15 +9,14 @@
 import UIKit
 import Firebase
 
-//PUT CREATE IN CONTAINER VIEW, ALBUM COLLECTION VIEW COVERS REST OF PAGE, PULL TO REFRESH
-//NAH DON'T THINK SO
 
 class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return nameArray.count
-        
     }
+    
+ 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Alboom", for: indexPath) as! AlbumTabCell

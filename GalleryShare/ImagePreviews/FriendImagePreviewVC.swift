@@ -23,10 +23,10 @@ class FriendImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollec
     var myCollectionView: UICollectionView!
     var imgArray = [UIImage]()
     var passedContentOffset = IndexPath()
+
     
     var urlArray = [String]()
     
-   
        private let addButton: UIButton = {
              let button = UIButton(type: .system)
              button.setTitle("Save", for: .normal)
@@ -76,8 +76,7 @@ class FriendImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollec
             transferPic = currentcell.imgView.image
         }
         newController.picToSend = transferPic
-        //newController.passedIndex = passedContentOffset
-        //newController.passedArray = imgArray
+       
         
         self.present(newController, animated: true, completion: nil)
         
