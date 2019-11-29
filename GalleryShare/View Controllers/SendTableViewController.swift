@@ -86,7 +86,7 @@ extension SendTableViewController: SendCellDelegate{
                 }
             }
         }
-        self.dismiss(animated: true, completion: nil)
+        self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
         
     }
     
@@ -101,10 +101,8 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
     let databaseRef = Database.database().reference()
     let user = Auth.auth().currentUser
     var picToSend: UIImage?
-    //var passedIndex = IndexPath()
     var username = ""
     var nameAtCell : String?
-    //var passedArray = [UIImage]()
     var picsToSend = [UIImage]()
     
     let searchController = UISearchController(searchResultsController: nil)

@@ -182,7 +182,8 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         //gridButton.center = self.view.center
         
         gridButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        gridButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 750).isActive = true
+        //gridButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 750).isActive = true
+        gridButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -30).isActive = true
        
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
     }
@@ -208,7 +209,8 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
                 cell.imgView.image = image
             }
         })
-        
+        cell.layer.shouldRasterize = true
+        cell.layer.rasterizationScale = UIScreen.main.scale
         return cell
     }
     

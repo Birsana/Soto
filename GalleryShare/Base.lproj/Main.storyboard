@@ -220,11 +220,11 @@
             <objects>
                 <viewController id="JKA-48-arN" customClass="AddFriendsMasterViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wym-lf-2a4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g10-It-Xtp">
-                                <rect key="frame" x="87" y="259" width="240" height="343"/>
+                                <rect key="frame" x="87" y="205" width="240" height="343"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="Xg7-fR-vUy" kind="embed" id="qMK-2T-BRT"/>
@@ -498,6 +498,22 @@
             </objects>
             <point key="canvasLocation" x="9175" y="2204"/>
         </scene>
+        <!--Camera View Controller-->
+        <scene sceneID="xdb-F8-6Ce">
+            <objects>
+                <viewController id="MQH-qb-R9M" customClass="CameraViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lg3-Kx-Naw">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="6cb-X2-EIM"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Z9Q-IV-3x7"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UEP-jK-rZ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4352" y="1278"/>
+        </scene>
         <!--Settings View Controller-->
         <scene sceneID="0g3-fS-rrM">
             <objects>
@@ -514,6 +530,14 @@
                                     <action selector="signOut:" destination="EcZ-TK-mbs" eventType="touchUpInside" id="W5a-Qw-AnS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyR-qP-d6y">
+                                <rect key="frame" x="181" y="160" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Temp"/>
+                                <connections>
+                                    <segue destination="MQH-qb-R9M" kind="show" id="ARo-Rf-Edy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="erD-az-SAd"/>
@@ -522,7 +546,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UDn-Ie-g94" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5648" y="1620"/>
+            <point key="canvasLocation" x="5647.826086956522" y="1619.8660714285713"/>
         </scene>
         <!--GalleryViewController-->
         <scene sceneID="KcY-40-Y1A">
@@ -916,7 +940,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NzP-Mj-2Ia" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4371" y="911"/>
+            <point key="canvasLocation" x="5729" y="984"/>
         </scene>
         <!--Guide View Controller-->
         <scene sceneID="cuj-B1-37G">
@@ -1388,7 +1412,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="umA-9U-cof"/>
-        <segue reference="naB-DC-6kU"/>
+        <segue reference="9YG-n4-74C"/>
         <segue reference="jWj-Ws-8bC"/>
     </inferredMetricsTieBreakers>
 </document>

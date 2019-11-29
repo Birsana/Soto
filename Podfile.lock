@@ -29,6 +29,12 @@ PODS:
   - Firebase/MLVision (6.8.0):
     - Firebase/CoreOnly
     - FirebaseMLVision (~> 0.18.0)
+  - Firebase/MLVisionAutoML (6.8.0):
+    - Firebase/CoreOnly
+    - FirebaseMLVisionAutoML (~> 0.18.0)
+  - Firebase/MLVisionFaceModel (6.8.0):
+    - Firebase/CoreOnly
+    - FirebaseMLVisionFaceModel (~> 0.18.0)
   - Firebase/Storage (6.8.0):
     - Firebase/CoreOnly
     - FirebaseStorage (~> 3.4.0)
@@ -100,6 +106,14 @@ PODS:
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - GTMSessionFetcher/Core (~> 1.1)
     - Protobuf (~> 3.5)
+  - FirebaseMLVisionAutoML (0.18.0):
+    - FirebaseCore (~> 6.2)
+    - FirebaseMLCommon (~> 0.18)
+    - FirebaseMLVision (~> 0.18)
+    - GTMSessionFetcher/Core (~> 1.1)
+    - TensorFlowLiteObjC (~> 1.14.0)
+  - FirebaseMLVisionFaceModel (0.18.0):
+    - FirebaseMLVision (~> 0.18)
   - FirebaseStorage (3.4.0):
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 6.0)
@@ -187,6 +201,9 @@ PODS:
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
   - Protobuf (3.9.0)
+  - TensorFlowLiteC (1.14.0)
+  - TensorFlowLiteObjC (1.14.0):
+    - TensorFlowLiteC (= 1.14.0)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -195,6 +212,8 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Firestore
   - Firebase/MLVision
+  - Firebase/MLVisionAutoML
+  - Firebase/MLVisionFaceModel
   - Firebase/Storage
   - GoogleSignIn
   - Kingfisher (~> 5.0)
@@ -229,9 +248,13 @@ SPEC REPOS:
   trunk:
     - FirebaseMLCommon
     - FirebaseMLVision
+    - FirebaseMLVisionAutoML
+    - FirebaseMLVisionFaceModel
     - GoogleAPIClientForREST
     - GoogleToolboxForMac
     - Kingfisher
+    - TensorFlowLiteC
+    - TensorFlowLiteObjC
 
 SPEC CHECKSUMS:
   AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
@@ -248,6 +271,8 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: 88932a31aba5a56cfd3a7541706436c71f7f4598
   FirebaseMLCommon: 45b456098f5d38c0fe023dd6dca3ee0f91256b2d
   FirebaseMLVision: 33745e08da6adc5375c7979b581b3521dc057f74
+  FirebaseMLVisionAutoML: 31f0cde3476fea96a3bdf45d5ac87db2358abf29
+  FirebaseMLVisionFaceModel: dc8b6f04d7f704a6ae135d4636e80e952b6988d7
   FirebaseStorage: 618dd8fd886b30adf6e5d1915b1f5c18cb5c3944
   GoogleAPIClientForREST: 4acfffd77f1c3c8741b6be9eaed0e603278efbde
   GoogleAppMeasurement: 86a82f0e1f20b8eedf8e20326530138fd71409de
@@ -264,7 +289,9 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   Protobuf: 1097ca58584c8d9be81bfbf2c5ff5975648dd87a
+  TensorFlowLiteC: a6702011fb661928634e59565b5fe262f69692d0
+  TensorFlowLiteObjC: ece71b1e78f3df5952996c1606934b1d5538c875
 
-PODFILE CHECKSUM: cd4ea828918534691077b708ab76ca1857ce4b97
+PODFILE CHECKSUM: d715202eb440007c3b6850969a7f912fbd0c52b4
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4

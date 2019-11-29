@@ -35,6 +35,8 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
         
         cell.addSubview(cell.selectLabel)
         
+        let thumbnailSize = CGSize(width: cell.frame.width, height: cell.frame.height)
+        
         let asset = fetchResult.object(at: indexPath.item)
                cell.representedAssetIdentifier = asset.localIdentifier
                imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: nil, resultHandler: { image, _ in
@@ -42,9 +44,12 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
                        cell.thumbnailImage = image
                    }
                })
-        
+        cell.layer.shouldRasterize = true
+        cell.layer.rasterizationScale = UIScreen.main.scale
         return cell
     }
+    
+   
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let currentCell = myCollectionView.cellForItem(at: indexPath) as! PhotoItemCell

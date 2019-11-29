@@ -49,8 +49,6 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if isSearching{
-            
-            print("Count is", filtered.count)
             return filtered.count
         }
         else{
