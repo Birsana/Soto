@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import FirebaseMLVision
 
 extension UIImageView{
     
@@ -59,20 +58,21 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
         
     }
     
-  func hasFaces(profilePic: UIImage){
-    let options = VisionFaceDetectorOptions()
-            let visionImage = VisionImage(image: profilePic)
-            //options.performanceMode = .accurate
-            //options.landmarkMode = .all
-           // options.classificationMode = .all
-            let faceDetector = vision.faceDetector(options: options)
-            faceDetector.process(visionImage) { faces, error in
-              guard error == nil, let faces = faces, !faces.isEmpty else {
-               print("how")
+    func hasFaces(profilePic: UIImage){
+        print("HIYA")
+        let options = VisionFaceDetectorOptions()
+        let visionImage = VisionImage(image: profilePic)
+        //options.performanceMode = .accurate
+        //options.landmarkMode = .all
+        // options.classificationMode = .all
+        let faceDetector = vision.faceDetector(options: options)
+        faceDetector.process(visionImage) { faces, error in
+            guard error == nil, let faces = faces, !faces.isEmpty else {
+                print("how")
                 return
-              }
-    print("hey")
-              }
+            }
+            print("hey")
+        }
       
     }
     
@@ -145,7 +145,13 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
             picker.dismiss(animated: true, completion: nil)
             
         }
-       
+        let faceDetector = vision.faceDetector()
+        let image = VisionImage(image: selectedImage!)
+        
+        faceDetector.process(image) { (faces, error) in
+            print("Fucking work")
+            print(faces)
+        }
         goNext.isEnabled = true
     }
 }
