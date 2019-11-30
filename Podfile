@@ -13,8 +13,6 @@ pod 'Firebase/Core'
 pod 'Firebase/Firestore'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
-pod 'Firebase/MLVision'
-pod 'Firebase/MLVisionFaceModel'
 pod 'Kingfisher', '~> 5.0'
 
 

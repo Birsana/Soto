@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Vision
 
 extension UIImageView{
     
@@ -31,7 +32,7 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
     
     var noFace: Bool?
     var multipleFaces: Bool?
-    lazy var vision = Vision.vision()
+    
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
@@ -59,30 +60,51 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
     }
     
     func hasFaces(profilePic: UIImage){
-        print("HIYA")
-        let options = VisionFaceDetectorOptions()
-        let visionImage = VisionImage(image: profilePic)
-        //options.performanceMode = .accurate
-        //options.landmarkMode = .all
-        // options.classificationMode = .all
-        let faceDetector = vision.faceDetector(options: options)
-        faceDetector.process(visionImage) { faces, error in
-            guard error == nil, let faces = faces, !faces.isEmpty else {
-                print("how")
+        let request = VNDetectFaceRectanglesRequest { (req, error) in
+            if let error = error{
+                //MAYBE NOT FACES
+                print("no faces")
+                self.noFace = true
+                self.multipleFaces = false
                 return
             }
-            print("hey")
+            if req.results!.count == 0{
+                self.noFace = true
+                self.multipleFaces = false
+            }
+            if req.results!.count > 1{
+                print("AIAI")
+                self.noFace = false
+                self.multipleFaces = true
+            }
+            if req.results!.count == 1{
+                self.noFace = false
+                self.multipleFaces = false
+            }
+            req.results?.forEach({ (res) in
+                print("am i here?")
+                print(req.results?.count)
+            })
         }
-      
+        let handler = VNImageRequestHandler(cgImage: profilePic.cgImage!, options: [:])
+        
+        do {
+            try handler.perform([request])
+        } catch let reqErr {
+            print(reqErr)
+        }
+        
     }
     
     @IBAction func finishIntro(_ sender: Any) {
         hasFaces(profilePic: imageSelect.image!)
+        
         if noFace!{
             let alert = UIAlertController(title: "Invalid Photo", message: "No faces were detected", preferredStyle: .alert)
             let okAction =  UIAlertAction(title: "Ok", style: .default, handler: nil)
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
+            
         }
         else if multipleFaces!{
             let alert = UIAlertController(title: "Invalid Photo", message: "Multiple faces were detected", preferredStyle: .alert)
@@ -90,49 +112,49 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
             alert.addAction(okAction)
             self.present(alert, animated: true, completion: nil)
         }
-        else{
+        else {
             UserDefaults.standard.set(false, forKey: "firstTime")
-            UserDefaults.standard.synchronize()
-            
-            let currentUser = Auth.auth().currentUser
-            var StorageRef = Storage.storage().reference()
-            var DatabaseRef = Database.database().reference()
-            
-            let imageData = imageSelect.image!.jpegData(compressionQuality: 0.9)
-            let profilePicStorageRef = StorageRef.child("users/\(currentUser!.uid)/profilePics")
-            
-            let uploadTask = profilePicStorageRef.putData(imageData!, metadata: nil)
-            {metadata, error in
-                
-                guard let metadata = metadata else {
-                    // Uh-oh, an error occurred!
-                    return
-                }
-                let size = metadata.size
-                
-                profilePicStorageRef.downloadURL { (url, error) in
-                    guard let downloadURL = url
-                        
-                        else {
-                            // Uh-oh, an error occurred!
-                            return
-                    }
-                    DatabaseRef.child("users").child(currentUser!.uid).child("profilePic").setValue(downloadURL.absoluteString)
-                }
-            }
-            let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainTabViewController
-            
-            homeViewController?.modalPresentationStyle = .fullScreen
-            
-            self.view.window?.rootViewController = homeViewController
-            self.view.window?.makeKeyAndVisible()
+             UserDefaults.standard.synchronize()
+             
+             let currentUser = Auth.auth().currentUser
+             var StorageRef = Storage.storage().reference()
+             var DatabaseRef = Database.database().reference()
+             
+             let imageData = imageSelect.image!.jpegData(compressionQuality: 0.9)
+             let profilePicStorageRef = StorageRef.child("users/\(currentUser!.uid)/profilePics")
+             
+             let uploadTask = profilePicStorageRef.putData(imageData!, metadata: nil)
+             {metadata, error in
+             
+             guard let metadata = metadata else {
+             // Uh-oh, an error occurred!
+             return
+             }
+             let size = metadata.size
+             
+             profilePicStorageRef.downloadURL { (url, error) in
+             guard let downloadURL = url
+             
+             else {
+             // Uh-oh, an error occurred!
+             return
+             }
+             DatabaseRef.child("users").child(currentUser!.uid).child("profilePic").setValue(downloadURL.absoluteString)
+             }
+             }
+             let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainTabViewController
+             
+             homeViewController?.modalPresentationStyle = .fullScreen
+             
+             self.view.window?.rootViewController = homeViewController
+             self.view.window?.makeKeyAndVisible()
             
         }
     }
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-       
+        
         if let editedImage = info[.editedImage] as? UIImage {
             selectedImage = editedImage
             selectedImage = makeSquare(image: selectedImage!)
@@ -145,13 +167,7 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
             picker.dismiss(animated: true, completion: nil)
             
         }
-        let faceDetector = vision.faceDetector()
-        let image = VisionImage(image: selectedImage!)
         
-        faceDetector.process(image) { (faces, error) in
-            print("Fucking work")
-            print(faces)
-        }
         goNext.isEnabled = true
     }
 }
