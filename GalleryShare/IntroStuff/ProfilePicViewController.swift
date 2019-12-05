@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import Vision
+import AWSRekognition
 
 extension UIImageView{
     
@@ -33,6 +34,7 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
     var noFace: Bool?
     var multipleFaces: Bool?
     
+    var rekoObject: AWSRekognition?
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
@@ -62,29 +64,27 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
     func hasFaces(profilePic: UIImage){
         let request = VNDetectFaceRectanglesRequest { (req, error) in
             if let error = error{
-                //MAYBE NOT FACES
-                print("no faces")
+                
+               // print("no faces")
                 self.noFace = true
                 self.multipleFaces = false
                 return
             }
             if req.results!.count == 0{
+                print("no faces")
                 self.noFace = true
                 self.multipleFaces = false
             }
-            if req.results!.count > 1{
-                print("AIAI")
+            else if req.results!.count > 1{
+                print("multiple faces")
                 self.noFace = false
                 self.multipleFaces = true
             }
-            if req.results!.count == 1{
+            else if req.results!.count == 1{
+                print("one face")
                 self.noFace = false
                 self.multipleFaces = false
             }
-            req.results?.forEach({ (res) in
-                print("am i here?")
-                print(req.results?.count)
-            })
         }
         let handler = VNImageRequestHandler(cgImage: profilePic.cgImage!, options: [:])
         
@@ -115,12 +115,40 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
         else {
             UserDefaults.standard.set(false, forKey: "firstTime")
              UserDefaults.standard.synchronize()
+            
+            rekoObject = AWSRekognition.default()
+            let colRequest = AWSRekognitionCreateCollectionRequest()
+            colRequest?.collectionId = Auth.auth().currentUser?.uid
+            rekoObject?.createCollection(colRequest!, completionHandler: { (response, error) in
+                if error == nil{
+                    //success!
+                }
+                else{
+                    print(error as Any)
+                }
+            })
+            
+            let indexReq = AWSRekognitionIndexFacesRequest()
+            indexReq?.collectionId = Auth.auth().currentUser?.uid
+            indexReq?.externalImageId = Auth.auth().currentUser!.uid + "_1"
+            
+            let image = AWSRekognitionImage()
+            image!.bytes = imageSelect.image!.jpegData(compressionQuality: 1)
+            indexReq?.image = image
+            rekoObject?.indexFaces(indexReq!, completionHandler: { (response, error) in
+                if error == nil{
+                    //success
+                }
+                else{
+                    print(error as Any)
+                }
+            })
              
              let currentUser = Auth.auth().currentUser
-             var StorageRef = Storage.storage().reference()
-             var DatabaseRef = Database.database().reference()
+             let StorageRef = Storage.storage().reference()
+             let DatabaseRef = Database.database().reference()
              
-             let imageData = imageSelect.image!.jpegData(compressionQuality: 0.9)
+            let imageData = imageSelect.image!.jpegData(compressionQuality: 0.9)
              let profilePicStorageRef = StorageRef.child("users/\(currentUser!.uid)/profilePics")
              
              let uploadTask = profilePicStorageRef.putData(imageData!, metadata: nil)

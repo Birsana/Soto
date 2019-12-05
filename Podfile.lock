@@ -163,12 +163,52 @@ PODS:
     - AppAuth/ExternalUserAgent (= 1.2.0)
   - AppAuth/Core (1.2.0)
   - AppAuth/ExternalUserAgent (1.2.0)
+  - AWSAutoScaling (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSCloudWatch (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSCognito (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSCognitoIdentityProvider (2.12.1):
+    - AWSCognitoIdentityProviderASF (= 1.0.1)
+    - AWSCore (= 2.12.1)
+  - AWSCognitoIdentityProviderASF (1.0.1)
+  - AWSCore (2.12.1)
+  - AWSDynamoDB (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSEC2 (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSElasticLoadBalancing (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSIoT (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSKinesis (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSLambda (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSMachineLearning (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSMobileAnalytics (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSRekognition (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSS3 (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSSES (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSSimpleDB (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSSNS (2.12.1):
+    - AWSCore (= 2.12.1)
+  - AWSSQS (2.12.1):
+    - AWSCore (= 2.12.1)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
+  - CameraManager (4.4.0)
   - Firebase/Analytics (6.13.0):
     - Firebase/Core
   - Firebase/Auth (6.13.0):
@@ -308,6 +348,25 @@ PODS:
   - nanopb/encode (0.3.9011)
 
 DEPENDENCIES:
+  - AWSAutoScaling
+  - AWSCloudWatch
+  - AWSCognito
+  - AWSCognitoIdentityProvider
+  - AWSDynamoDB
+  - AWSEC2
+  - AWSElasticLoadBalancing
+  - AWSIoT
+  - AWSKinesis
+  - AWSLambda
+  - AWSMachineLearning
+  - AWSMobileAnalytics
+  - AWSRekognition
+  - AWSS3
+  - AWSSES
+  - AWSSimpleDB
+  - AWSSNS
+  - AWSSQS
+  - CameraManager (~> 4.4)
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -325,7 +384,28 @@ SPEC REPOS:
     - GTMSessionFetcher
   trunk:
     - abseil
+    - AWSAutoScaling
+    - AWSCloudWatch
+    - AWSCognito
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSDynamoDB
+    - AWSEC2
+    - AWSElasticLoadBalancing
+    - AWSIoT
+    - AWSKinesis
+    - AWSLambda
+    - AWSMachineLearning
+    - AWSMobileAnalytics
+    - AWSRekognition
+    - AWSS3
+    - AWSSES
+    - AWSSimpleDB
+    - AWSSNS
+    - AWSSQS
     - BoringSSL-GRPC
+    - CameraManager
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -350,7 +430,28 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
   AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
+  AWSAutoScaling: 6df89faf56e126f1565370a6ad8ac873ae17ecf0
+  AWSCloudWatch: d093c7cd9fca4509d8cdb3375beefa3c854abe78
+  AWSCognito: 9d74863c9518b2a4cd31eb42e055578d7d0fa06c
+  AWSCognitoIdentityProvider: 4b453fa8ae677dd9646fe5cb137b520105f33d08
+  AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
+  AWSCore: 0a4431f74d9dbf084d420b887a6a21042b423c5c
+  AWSDynamoDB: 517a859d6b4615ca8f7e78f03bd33e3ad955d539
+  AWSEC2: f6a248330357f1fe4439e2560450b6ebcfe57742
+  AWSElasticLoadBalancing: fe80677378747d61a1079b988ed8eceb506390ea
+  AWSIoT: f8e75c66fa89d99c4496a34137d7204f5e2cbda9
+  AWSKinesis: 4e2100c2b829af18c3f5beb72c73dab35611fc37
+  AWSLambda: feff6dd5fda5d8066a1a89370fa97ad0accf865c
+  AWSMachineLearning: 89c47c0775f4a98edd7d264ac62a40efda57c2ae
+  AWSMobileAnalytics: c0e92cf688446df0d202b5ef3707cafd58186677
+  AWSRekognition: 95ccdecf21033c08d28feac4f8ebe07e6b02c79e
+  AWSS3: 640fad8279e2c5b02d803a82ff5dd6ee75d65c39
+  AWSSES: 3f276de92e8d4a19e0dfa61c84331f6792b07772
+  AWSSimpleDB: 2ed2c501176e3b12707928be509d56107ada9ba0
+  AWSSNS: 4deb2335662fe860216c0b95ba2e8f907eb27f48
+  AWSSQS: b12d7ed61618e296360d71bea9cb715cbcda4ea5
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
+  CameraManager: 583710502c42178d12ef046d9d4f7893feff8354
   Firebase: 458d109512200d1aca2e1b9b6cf7d68a869a4a46
   FirebaseAnalytics: 45f36d9c429fc91d206283900ab75390cd05ee8a
   FirebaseAuth: 7d0f84873926f6648bbd1391a318dfb1a26b5e4f
@@ -375,6 +476,6 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
 
-PODFILE CHECKSUM: 1e91d11ac0be79a4c152cfade1d233e0baeff0d2
+PODFILE CHECKSUM: 5ce92e60dbbfa3747b74edffd18326cfb4e5bfc7
 
 COCOAPODS: 1.8.4

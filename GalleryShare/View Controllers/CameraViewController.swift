@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import Firebase
 
+
 class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     let captureSession = AVCaptureSession()
@@ -17,14 +18,77 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     var captureDevice: AVCaptureDevice!
     var takePhoto = false
     
+    
+    
     var counter = 1
     
+    let minimumZoom: CGFloat = 1.0
+    let maximumZoom: CGFloat = 3.0
+    var lastZoomFactor: CGFloat = 1.0
     
     var photosTaken = [UIImage]()
     
     override func viewWillAppear(_ animated: Bool) {
-        
+
     }
+    
+    @objc func pinch(_ pinch: UIPinchGestureRecognizer) {
+        guard let device = captureDevice else { return }
+
+        // Return zoom value between the minimum and maximum zoom values
+        func minMaxZoom(_ factor: CGFloat) -> CGFloat {
+            return min(min(max(factor, minimumZoom), maximumZoom), device.activeFormat.videoMaxZoomFactor)
+        }
+
+        func update(scale factor: CGFloat) {
+            do {
+                try device.lockForConfiguration()
+                defer { device.unlockForConfiguration() }
+                device.videoZoomFactor = factor
+            } catch {
+                print("\(error.localizedDescription)")
+            }
+        }
+
+        let newScaleFactor = minMaxZoom(pinch.scale * lastZoomFactor)
+
+        switch pinch.state {
+        case .began: fallthrough
+        case .changed: update(scale: newScaleFactor)
+        case .ended:
+            lastZoomFactor = minMaxZoom(newScaleFactor)
+            update(scale: lastZoomFactor)
+        default: break
+        }
+    }
+    
+    /**override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let screenSize = self.view.bounds.size
+        if let touchPoint = touches.first {
+            let x = touchPoint.location(in: self.view).y / screenSize.height
+            let y = 1.0 - touchPoint.location(in: self.view).x / screenSize.width
+            let focusPoint = CGPoint(x: x, y: y)
+
+            if let device = captureDevice {
+                do {
+                    try device.lockForConfiguration()
+
+                    device.focusPointOfInterest = focusPoint
+                    //device.focusMode = .continuousAutoFocus
+                    device.focusMode = .autoFocus
+                    //device.focusMode = .locked
+                    device.exposurePointOfInterest = focusPoint
+                    device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
+                    device.unlockForConfiguration()
+                }
+                catch {
+                    // just ignore
+                }
+            }
+        }
+    } **/
+    
+    
     func createButtons(){
         let captureButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100 , height: 100))
         captureButton.backgroundColor = UIColor.clear
@@ -82,10 +146,11 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         } catch {
             print(error.localizedDescription)
         }
-        
+        let pinchRecognizer = UIPinchGestureRecognizer(target: self, action:#selector(pinch(_:)))
         let previewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         self.previewLayer = previewLayer
         let previewView = UIView(frame: view.frame)
+        previewView.addGestureRecognizer(pinchRecognizer)
         self.view.addSubview(previewView)
         self.previewLayer.frame = self.view.frame
         previewView.layer.addSublayer(self.previewLayer)
@@ -167,6 +232,8 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         for image in photosTaken{
             
             let imageData = image.jpegData(compressionQuality: 1.0)
+            let imgToSave = UIImage(data: imageData!)
+            UIImageWriteToSavedPhotosAlbum(imgToSave!, nil, nil, nil)
             var picURL: String?
             let imageName = NSUUID().uuidString
             let picToSendStorageRef = StorageRef.child("users").child("takenPhotos").child("\(imageName).jpg")
@@ -194,6 +261,8 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                 }
             }
         }
+        
+        
         
     }
     
