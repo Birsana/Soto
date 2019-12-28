@@ -52,36 +52,15 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let vc = AlbumImagePreviewVC()
-  
+        
         
         vc.urlArr = self.picURL
         vc.sentArray = self.whoSent
         vc.passedContentOffset = indexPath
         
+        self.present(vc, animated: true, completion: nil)
         
-        let DatabaseRef = Database.database().reference()
-        let tempPicSender = whoSent[indexPath.item]
-        
-        DatabaseRef.child("users").child(tempPicSender).observeSingleEvent(of: .value) { (snapshot) in
-            print(tempPicSender)
-            let dictionary = snapshot.value as? [String: AnyObject]
-            let profilePicURL = (dictionary!["profilePic"] as? String)!
-            let url = NSURL(string: profilePicURL)
-            
-            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
-                if error != nil{
-                    return
-                }
-                DispatchQueue.main.async {
-                    
-                    self.firstImage = UIImage(data: data!)!
-                    vc.firstSender = self.firstImage
-                    print(self.firstImage)
-                    print("is nil?")
-                    self.present(vc, animated: true, completion: nil)
-                }
-            }).resume()
-        }
+    
     }
     
     var albumName: String!

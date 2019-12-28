@@ -13,10 +13,14 @@ import AWSRekognition
 
 extension UIImageView{
     
-    func asCircle(){
+    func asCircle() {
         
         self.layer.masksToBounds = true
-        self.layer.cornerRadius = self.frame.size.width / 2
+        var radius = self.frame.size.width / 2
+        if radius > 100 {
+            radius = 35
+        }
+        self.layer.cornerRadius = radius
         
     }
 }

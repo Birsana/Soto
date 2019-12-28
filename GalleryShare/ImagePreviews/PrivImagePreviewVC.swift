@@ -74,7 +74,7 @@ class PrivImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollecti
                 
               
                 self.stringURLs = self.allURLs as! [String]
-                if let index = self.stringURLs.index(of: urlDelete){
+                if let index = self.stringURLs.firstIndex(of: urlDelete){
                     self.stringURLs.remove(at: index)
                 }
                 

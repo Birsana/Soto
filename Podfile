@@ -32,7 +32,10 @@ pod 'AWSSES'
 pod 'AWSSimpleDB'
 pod 'AWSSNS'
 pod 'AWSSQS'
-pod 'CameraManager', '~> 4.4'
+pod 'JPSVolumeButtonHandler'
+pod 'TensorFlowLiteSwift'
+ 
+
 
 
   target 'GalleryShareTests' do

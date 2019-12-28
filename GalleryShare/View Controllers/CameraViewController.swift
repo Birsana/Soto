@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 import Firebase
-
+import JPSVolumeButtonHandler
 
 class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
@@ -19,6 +19,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     var takePhoto = false
     
     
+    var volumeButtonHandler: JPSVolumeButtonHandler?
     
     var counter = 1
     
@@ -29,17 +30,19 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     var photosTaken = [UIImage]()
     
     override func viewWillAppear(_ animated: Bool) {
-
+        //listenVolumeButton()
+       
+       //VIEW DID DISSAPEAR
     }
     
     @objc func pinch(_ pinch: UIPinchGestureRecognizer) {
         guard let device = captureDevice else { return }
-
+        
         // Return zoom value between the minimum and maximum zoom values
         func minMaxZoom(_ factor: CGFloat) -> CGFloat {
             return min(min(max(factor, minimumZoom), maximumZoom), device.activeFormat.videoMaxZoomFactor)
         }
-
+        
         func update(scale factor: CGFloat) {
             do {
                 try device.lockForConfiguration()
@@ -49,9 +52,9 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                 print("\(error.localizedDescription)")
             }
         }
-
+        
         let newScaleFactor = minMaxZoom(pinch.scale * lastZoomFactor)
-
+        
         switch pinch.state {
         case .began: fallthrough
         case .changed: update(scale: newScaleFactor)
@@ -62,7 +65,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         }
     }
     
-    /**override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+  /**  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let screenSize = self.view.bounds.size
         if let touchPoint = touches.first {
             let x = touchPoint.location(in: self.view).y / screenSize.height
@@ -87,6 +90,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             }
         }
     } **/
+
     
     
     func createButtons(){
@@ -122,10 +126,13 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.volumeButtonHandler = JPSVolumeButtonHandler(up: {self.takePhoto = true}, downBlock: {self.takePhoto = true})
+        self.volumeButtonHandler?.start(true)
         prepareCameraBack()
         
         
     }
+    
     func prepareCameraBack(){
         captureSession.sessionPreset = AVCaptureSession.Preset.photo
         let avalailableDevices = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back).devices
@@ -172,9 +179,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     @objc private func capturePic(sender: UIButton!){
         takePhoto = true
-        print("ZOWEE")
-        
-        
     }
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
@@ -230,7 +234,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         let DatabaseRef = Database.database().reference()
         let uid = currentUser!.uid
         for image in photosTaken{
-            
+            print("here?")
             let imageData = image.jpegData(compressionQuality: 1.0)
             let imgToSave = UIImage(data: imageData!)
             UIImageWriteToSavedPhotosAlbum(imgToSave!, nil, nil, nil)

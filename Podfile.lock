@@ -208,7 +208,6 @@ PODS:
   - BoringSSL-GRPC/Implementation (0.0.3):
     - BoringSSL-GRPC/Interface (= 0.0.3)
   - BoringSSL-GRPC/Interface (0.0.3)
-  - CameraManager (4.4.0)
   - Firebase/Analytics (6.13.0):
     - Firebase/Core
   - Firebase/Auth (6.13.0):
@@ -337,6 +336,7 @@ PODS:
   - GTMSessionFetcher/Core (1.2.2)
   - GTMSessionFetcher/Full (1.2.2):
     - GTMSessionFetcher/Core (= 1.2.2)
+  - JPSVolumeButtonHandler (1.0.5)
   - Kingfisher (5.9.0):
     - Kingfisher/Core (= 5.9.0)
   - Kingfisher/Core (5.9.0)
@@ -346,6 +346,9 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - TensorFlowLiteC (2.0.0)
+  - TensorFlowLiteSwift (2.0.0):
+    - TensorFlowLiteC (= 2.0.0)
 
 DEPENDENCIES:
   - AWSAutoScaling
@@ -366,7 +369,6 @@ DEPENDENCIES:
   - AWSSimpleDB
   - AWSSNS
   - AWSSQS
-  - CameraManager (~> 4.4)
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -374,7 +376,9 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - GoogleSignIn
+  - JPSVolumeButtonHandler
   - Kingfisher (~> 5.0)
+  - TensorFlowLiteSwift
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -405,7 +409,6 @@ SPEC REPOS:
     - AWSSNS
     - AWSSQS
     - BoringSSL-GRPC
-    - CameraManager
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -423,9 +426,12 @@ SPEC REPOS:
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
+    - JPSVolumeButtonHandler
     - Kingfisher
     - leveldb-library
     - nanopb
+    - TensorFlowLiteC
+    - TensorFlowLiteSwift
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
@@ -451,7 +457,6 @@ SPEC CHECKSUMS:
   AWSSNS: 4deb2335662fe860216c0b95ba2e8f907eb27f48
   AWSSQS: b12d7ed61618e296360d71bea9cb715cbcda4ea5
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-  CameraManager: 583710502c42178d12ef046d9d4f7893feff8354
   Firebase: 458d109512200d1aca2e1b9b6cf7d68a869a4a46
   FirebaseAnalytics: 45f36d9c429fc91d206283900ab75390cd05ee8a
   FirebaseAuth: 7d0f84873926f6648bbd1391a318dfb1a26b5e4f
@@ -472,10 +477,13 @@ SPEC CHECKSUMS:
   gRPC-Core: c9aef9a261a1247e881b18059b84d597293c9947
   GTMAppAuth: 4deac854479704f348309e7b66189e604cf5e01e
   GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
+  JPSVolumeButtonHandler: 53110330c9168ed325def93eabff39f0fe3e8082
   Kingfisher: ff98240aebb7302bdc4f1ecd701761030ce18b16
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  TensorFlowLiteC: d22a94f77938edb2dfcb9674937f9548a3fcdb23
+  TensorFlowLiteSwift: dcd91bd74091f8e3e1b9b28a7d789f635dc26bea
 
-PODFILE CHECKSUM: 5ce92e60dbbfa3747b74edffd18326cfb4e5bfc7
+PODFILE CHECKSUM: 133ffa1ef5a8ffc46c6c7b1c2e3d40604cb20051
 
 COCOAPODS: 1.8.4

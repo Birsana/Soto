@@ -64,31 +64,8 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
         vc.urlArr = self.picURL
         vc.sentArray = self.whoSent
         vc.passedContentOffset = indexPath
-        
-        
-        let DatabaseRef = Database.database().reference()
-        let tempPicSender = whoSent[indexPath.item]
-        
-        DatabaseRef.child("users").child(tempPicSender).observeSingleEvent(of: .value) { (snapshot) in
-            let dictionary = snapshot.value as? [String: AnyObject]
-            let profilePicURL = (dictionary!["profilePic"] as? String)!
-            print(profilePicURL)
-        
-            let url = NSURL(string: profilePicURL)
-            
-            URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
-                if error != nil{
-                    return
-                }
-                DispatchQueue.main.async {
-                    
-                    self.firstImage = UIImage(data: data!)!
-                    vc.firstSender = self.firstImage
-                    print(self.whoSent)
-                    self.present(vc, animated: true, completion: nil)
-                }
-            }).resume()
-        }
+       
+        self.present(vc, animated: true, completion: nil)
     }
     
     override func viewDidLoad() {

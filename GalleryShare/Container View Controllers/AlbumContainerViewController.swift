@@ -65,16 +65,15 @@ class AlbumContainerViewController: UIViewController, UICollectionViewDelegate, 
        }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let currentcell = myCollectionView.cellForItem(at: indexPath) as! AlbumPersonCell
-        let userClicked = currentcell.username.text
+        let currentCell = myCollectionView.cellForItem(at: indexPath) as! AlbumPersonCell
+        let userClicked = currentCell.username.text
         var uidClicked: String!
-        var databaseRef = Database.database().reference()
+        let databaseRef = Database.database().reference()
         let currentUser = Auth.auth().currentUser
         let uid = currentUser?.uid
         
         var username: String!
 
-        
         databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
             let myData = snapshot.value as! NSDictionary
             username = (myData["username"] as! String)
@@ -88,12 +87,12 @@ class AlbumContainerViewController: UIViewController, UICollectionViewDelegate, 
                     if snapshot.hasChild(uidClicked){
                          let storyboard = UIStoryboard(name: "Main", bundle: nil)
                          let newController = storyboard.instantiateViewController(withIdentifier: "myFriend") as! FriendViewController
-                        newController.labelText = currentcell.username?.text
-                        newController.profilePicImage = currentcell.profilePic?.image
+                        newController.labelText = currentCell.username?.text
+                        newController.profilePicImage = currentCell.profilePic?.image
                         self.present(newController, animated: true, completion: nil)
                     }
                     else{
-                        let alert = UIAlertController(title: "Not Friends", message: "You are not friends with \(currentcell.username.text!)", preferredStyle: .alert)
+                        let alert = UIAlertController(title: "Not Friends", message: "You are not friends with \(currentCell.username.text!)", preferredStyle: .alert)
                         let requestAction = UIAlertAction(title: "Send Request", style: .default, handler: { action in
                             self.sendRequest(requestTo: userClicked!)
                         } )

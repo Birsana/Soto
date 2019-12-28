@@ -53,6 +53,8 @@ class GalleryViewController: UIViewController{
         
         //CREATE SPECIAL CASE FOR WHEN ACCEPT FRIEND REQUEST
         
+      
+        
         
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
