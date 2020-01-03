@@ -8,6 +8,7 @@
 import UIKit
 import Foundation
 import Firebase
+import Alamofire
 
 class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate, UISearchBarDelegate{
     
@@ -118,7 +119,6 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         let currentcell = myCollectionViewFriends.cellForItem(at: indexPath) as! PersonImageCell
         newController.labelText = currentcell.username?.text
         newController.profilePicImage = currentcell.profilePic?.image
-    
         
         self.present(newController, animated: true, completion: nil)
     }

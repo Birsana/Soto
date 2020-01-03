@@ -158,6 +158,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - Alamofire (5.0.0-rc.3)
   - AppAuth (1.2.0):
     - AppAuth/Core (= 1.2.0)
     - AppAuth/ExternalUserAgent (= 1.2.0)
@@ -351,6 +352,7 @@ PODS:
     - TensorFlowLiteC (= 2.0.0)
 
 DEPENDENCIES:
+  - Alamofire (~> 5.0.0-rc.3)
   - AWSAutoScaling
   - AWSCloudWatch
   - AWSCognito
@@ -388,6 +390,7 @@ SPEC REPOS:
     - GTMSessionFetcher
   trunk:
     - abseil
+    - Alamofire
     - AWSAutoScaling
     - AWSCloudWatch
     - AWSCognito
@@ -435,6 +438,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
+  Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
   AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
   AWSAutoScaling: 6df89faf56e126f1565370a6ad8ac873ae17ecf0
   AWSCloudWatch: d093c7cd9fca4509d8cdb3375beefa3c854abe78
@@ -484,6 +488,6 @@ SPEC CHECKSUMS:
   TensorFlowLiteC: d22a94f77938edb2dfcb9674937f9548a3fcdb23
   TensorFlowLiteSwift: dcd91bd74091f8e3e1b9b28a7d789f635dc26bea
 
-PODFILE CHECKSUM: 133ffa1ef5a8ffc46c6c7b1c2e3d40604cb20051
+PODFILE CHECKSUM: 6f491f2c56a55f38bec81589957c3599bc1682d4
 
 COCOAPODS: 1.8.4

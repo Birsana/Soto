@@ -12,6 +12,11 @@
 	<string>This app saves photos and videos to your photo library </string>
 	<key>NSCameraUsageDescription</key>
 	<string>This app can take photos</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>

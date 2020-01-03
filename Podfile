@@ -34,6 +34,7 @@ pod 'AWSSNS'
 pod 'AWSSQS'
 pod 'JPSVolumeButtonHandler'
 pod 'TensorFlowLiteSwift'
+pod 'Alamofire', '~> 5.0.0-rc.3'
  
 
 

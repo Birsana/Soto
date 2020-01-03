@@ -7,6 +7,7 @@
 //
 import UIKit
 import Foundation
+import Photos
 
 class SwipingController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
@@ -62,6 +63,7 @@ class SwipingController: UICollectionViewController, UICollectionViewDelegateFlo
             bottomControlsStackView.heightAnchor.constraint(equalToConstant: 50)
         ])
         
+
     }
     
     

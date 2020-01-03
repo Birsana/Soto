@@ -10,6 +10,7 @@ import UIKit
 import AVFoundation
 import Firebase
 import JPSVolumeButtonHandler
+import Alamofire
 
 class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
@@ -91,6 +92,34 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         }
     } **/
 
+    
+    func sendToServer(){
+        
+        //PUT THE FOLLOWING IN THE FIREBASE THING
+        var counter = 1
+        let parameters = [
+            "uid": "\(Auth.auth().currentUser!.uid)",
+            "picCount": "\(photosTaken.count)"]
+        
+        AF.upload(multipartFormData: { (multipartFormData) in
+            for photo in self.photosTaken{
+                let imgData = photo.jpegData(compressionQuality: 1)
+                multipartFormData.append(imgData!, withName: "photo_\(String(counter))", fileName: "photo_\(String(counter)).jpg", mimeType: "image/jpg")
+                counter += 1
+            }
+            for (key, value) in parameters{
+                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+            }
+        }, to: "http://soto.us-east-2.elasticbeanstalk.com/").responseJSON { (response) in
+            print(response)
+        }
+        
+    
+        
+  
+        
+    
+    }
     
     
     func createButtons(){
@@ -229,12 +258,12 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     
     @objc private func goBack(sender: UIButton){
         stopCaptureSession()
+        sendToServer()
         let currentUser = Auth.auth().currentUser
         let StorageRef = Storage.storage().reference()
         let DatabaseRef = Database.database().reference()
         let uid = currentUser!.uid
         for image in photosTaken{
-            print("here?")
             let imageData = image.jpegData(compressionQuality: 1.0)
             let imgToSave = UIImage(data: imageData!)
             UIImageWriteToSavedPhotosAlbum(imgToSave!, nil, nil, nil)

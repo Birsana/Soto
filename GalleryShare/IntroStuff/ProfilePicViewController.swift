@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import Vision
 import AWSRekognition
+import Alamofire
 
 extension UIImageView{
     
@@ -38,7 +39,6 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
     var noFace: Bool?
     var multipleFaces: Bool?
     
-    var rekoObject: AWSRekognition?
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
@@ -46,8 +46,6 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
             imagePicker.allowsEditing = true
-            
-            
             present(imagePicker, animated: true, completion: nil)
         }
     }
@@ -69,7 +67,7 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
         let request = VNDetectFaceRectanglesRequest { (req, error) in
             if let error = error{
                 
-               // print("no faces")
+                // print("no faces")
                 self.noFace = true
                 self.multipleFaces = false
                 return
@@ -118,68 +116,55 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
         }
         else {
             UserDefaults.standard.set(false, forKey: "firstTime")
-             UserDefaults.standard.synchronize()
+            UserDefaults.standard.synchronize()
             
-            rekoObject = AWSRekognition.default()
-            let colRequest = AWSRekognitionCreateCollectionRequest()
-            colRequest?.collectionId = Auth.auth().currentUser?.uid
-            rekoObject?.createCollection(colRequest!, completionHandler: { (response, error) in
-                if error == nil{
-                    //success!
-                }
-                else{
-                    print(error as Any)
-                }
-            })
-            
-            let indexReq = AWSRekognitionIndexFacesRequest()
-            indexReq?.collectionId = Auth.auth().currentUser?.uid
-            indexReq?.externalImageId = Auth.auth().currentUser!.uid + "_1"
-            
-            let image = AWSRekognitionImage()
-            image!.bytes = imageSelect.image!.jpegData(compressionQuality: 1)
-            indexReq?.image = image
-            rekoObject?.indexFaces(indexReq!, completionHandler: { (response, error) in
-                if error == nil{
-                    //success
-                }
-                else{
-                    print(error as Any)
-                }
-            })
-             
-             let currentUser = Auth.auth().currentUser
-             let StorageRef = Storage.storage().reference()
-             let DatabaseRef = Database.database().reference()
-             
+            let currentUser = Auth.auth().currentUser
             let imageData = imageSelect.image!.jpegData(compressionQuality: 0.9)
-             let profilePicStorageRef = StorageRef.child("users/\(currentUser!.uid)/profilePics")
-             
-             let uploadTask = profilePicStorageRef.putData(imageData!, metadata: nil)
-             {metadata, error in
-             
-             guard let metadata = metadata else {
-             // Uh-oh, an error occurred!
-             return
-             }
-             let size = metadata.size
-             
-             profilePicStorageRef.downloadURL { (url, error) in
-             guard let downloadURL = url
-             
-             else {
-             // Uh-oh, an error occurred!
-             return
-             }
-             DatabaseRef.child("users").child(currentUser!.uid).child("profilePic").setValue(downloadURL.absoluteString)
-             }
-             }
-             let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainTabViewController
-             
-             homeViewController?.modalPresentationStyle = .fullScreen
-             
-             self.view.window?.rootViewController = homeViewController
-             self.view.window?.makeKeyAndVisible()
+            let parameters = ["uid": currentUser!.uid]
+            
+            AF.upload(multipartFormData: { (multipartFormData) in
+                multipartFormData.append(imageData!, withName: "profilePics", fileName: "\(currentUser!.uid).jpg",
+                mimeType: "image/jpg")
+                for (key, value) in parameters{
+                    multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+                }    
+            }, to: "http://soto.us-east-2.elasticbeanstalk.com/add").responseString { (response) in
+                print(response)
+            }
+            
+            
+            let StorageRef = Storage.storage().reference()
+            let DatabaseRef = Database.database().reference()
+            
+            
+            let profilePicStorageRef = StorageRef.child("users/\(currentUser!.uid)/profilePics")
+            
+            let uploadTask = profilePicStorageRef.putData(imageData!, metadata: nil)
+            {metadata, error in
+                
+                guard let metadata = metadata else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+                let size = metadata.size
+                
+                profilePicStorageRef.downloadURL { (url, error) in
+                    guard let downloadURL = url
+                        
+                        else {
+                            // Uh-oh, an error occurred!
+                            return
+                    }
+                    DatabaseRef.child("users").child(currentUser!.uid).child("profilePic").setValue(downloadURL.absoluteString)
+                    DatabaseRef.child("collectionPics").child(currentUser!.uid).child(Auth.auth().currentUser!.uid + "_1").setValue(downloadURL.absoluteString)
+                }
+            }
+            let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainTabViewController
+            
+            homeViewController?.modalPresentationStyle = .fullScreen
+            
+            self.view.window?.rootViewController = homeViewController
+            self.view.window?.makeKeyAndVisible()
             
         }
     }

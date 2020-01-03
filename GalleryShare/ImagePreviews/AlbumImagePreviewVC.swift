@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Alamofire
 
 class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
     
@@ -198,8 +199,7 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
         cell.senderView.isUserInteractionEnabled = true
         cell.senderView?.asCircle()
         cell.senderView?.addGestureRecognizer(tap)
-        
-        
+      
         return cell
     }
     
