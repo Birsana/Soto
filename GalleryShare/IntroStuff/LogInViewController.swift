@@ -62,7 +62,7 @@ class LogInViewController: UIViewController {
             else {
                 UserDefaults.standard.set(true, forKey: "isLoggedIn")
                 UserDefaults.standard.synchronize()
-                let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainTabViewController
+                let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainPage
                 
                 homeViewController?.modalPresentationStyle = .fullScreen
                 

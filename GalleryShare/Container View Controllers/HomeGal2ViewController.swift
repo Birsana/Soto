@@ -95,6 +95,8 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
         let uid = Auth.auth().currentUser?.uid
         
         databaseRef.child("sentPicsRef").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
+            print("blue")
+            print(snapshot)
             for child in snapshot.children{
                 let snap = child as! DataSnapshot
                 let dict = snap.value as! [String: Any]

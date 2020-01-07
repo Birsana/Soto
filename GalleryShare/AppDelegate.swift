@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 import Photos
-import AWSCore
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,10 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:.USEast2,
-                                                                identityPoolId:"us-east-2:a42a1b9d-f776-4499-96bd-05c5f1c5e401")
-        let configuration = AWSServiceConfiguration(region:.USEast2, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
         
         let photos = PHPhotoLibrary.authorizationStatus()
         if photos == .notDetermined {

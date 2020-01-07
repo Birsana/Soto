@@ -202,42 +202,42 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     
     @objc func willResignActive(_ notification: Notification) {
         print("yikes")
-//        stopCaptureSession()
-//        sendToServer()
-//        let currentUser = Auth.auth().currentUser
-//        let StorageRef = Storage.storage().reference()
-//        let DatabaseRef = Database.database().reference()
-//        let uid = currentUser!.uid
-//        for image in photosTaken{
-//            let imageData = image.jpegData(compressionQuality: 1.0)
-//            let imgToSave = UIImage(data: imageData!)
-//            UIImageWriteToSavedPhotosAlbum(imgToSave!, nil, nil, nil)
-//            var picURL: String?
-//            let imageName = NSUUID().uuidString
-//            let picToSendStorageRef = StorageRef.child("users").child("takenPhotos").child("\(imageName).jpg")
-//            let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil)
-//            {metadata, error in
-//                guard let metadata = metadata else {
-//                    // Uh-oh, an error occurred!
-//                    return
-//                }
-//                let size = metadata.size
-//
-//                picToSendStorageRef.downloadURL { (url, error) in
-//                    guard let downloadURL = url
-//                        else {
-//                            // Uh-oh, an error occurred!
-//                            return
-//                    }
-//                    picURL = downloadURL.absoluteString
-//                    let values = ["imageURL": picURL]
-//
-//                    DatabaseRef.child("takenPhotos").child(uid).childByAutoId().updateChildValues(values as [AnyHashable: Any])
-//                }
-//            }
-//        }
-//        photosTaken.removeAll()
-//        self.viewPics.image = nil
+        //stopCaptureSession()
+        sendToServer()
+        let currentUser = Auth.auth().currentUser
+        let StorageRef = Storage.storage().reference()
+        let DatabaseRef = Database.database().reference()
+        let uid = currentUser!.uid
+        for image in photosTaken{
+            let imageData = image.jpegData(compressionQuality: 1.0)
+            let imgToSave = UIImage(data: imageData!)
+            UIImageWriteToSavedPhotosAlbum(imgToSave!, nil, nil, nil)
+            var picURL: String?
+            let imageName = NSUUID().uuidString
+            let picToSendStorageRef = StorageRef.child("users").child("takenPhotos").child("\(imageName).jpg")
+            let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil)
+            {metadata, error in
+                guard let metadata = metadata else {
+                    // Uh-oh, an error occurred!
+                    return
+                }
+                let size = metadata.size
+
+                picToSendStorageRef.downloadURL { (url, error) in
+                    guard let downloadURL = url
+                        else {
+                            // Uh-oh, an error occurred!
+                            return
+                    }
+                    picURL = downloadURL.absoluteString
+                    let values = ["imageURL": picURL]
+
+                    DatabaseRef.child("takenPhotos").child(uid).childByAutoId().updateChildValues(values as [AnyHashable: Any])
+                }
+            }
+        }
+        photosTaken.removeAll()
+        self.viewPics.image = nil
     }
     
     func prepareCameraBack(){
@@ -339,7 +339,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     
     @objc private func goBack(sender: UIButton){
-        stopCaptureSession()
+        //stopCaptureSession()
         sendToServer()
         let currentUser = Auth.auth().currentUser
         let StorageRef = Storage.storage().reference()
@@ -373,5 +373,7 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                 }
             }
         }
+        photosTaken.removeAll()
+        self.viewPics.image = nil
     }
 }

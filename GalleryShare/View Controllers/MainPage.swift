@@ -38,7 +38,7 @@ class MainPage: UIPageViewController, UIPageViewControllerDataSource, UIPageView
         pageControl.currentPage = 0
         pageControl.pageIndicatorTintColor = UIColor.black
         pageControl.currentPageIndicatorTintColor = UIColor.blue
-        self.view.addSubview(pageControl)
+        //self.view.addSubview(pageControl)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {

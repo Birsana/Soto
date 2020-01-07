@@ -138,7 +138,7 @@ class SignUpViewController: UIViewController {
         }
             
         else{
-            let homeViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainTabViewController
+            let homeViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainPage
             homeViewController?.modalPresentationStyle = .fullScreen
             view.window?.rootViewController = homeViewController
             view.window?.makeKeyAndVisible()

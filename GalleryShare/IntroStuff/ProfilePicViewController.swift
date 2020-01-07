@@ -8,8 +8,7 @@
 
 import UIKit
 import Firebase
-import Vision
-import AWSRekognition
+import Vision 
 import Alamofire
 
 extension UIImageView{
@@ -159,7 +158,7 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
                     DatabaseRef.child("collectionPics").child(currentUser!.uid).child(Auth.auth().currentUser!.uid + "_1").setValue(downloadURL.absoluteString)
                 }
             }
-            let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainTabViewController
+            let homeViewController = self.storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainPage
             
             homeViewController?.modalPresentationStyle = .fullScreen
             
