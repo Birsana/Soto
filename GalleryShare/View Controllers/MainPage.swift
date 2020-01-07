@@ -1,25 +1,26 @@
 //
-//  HomeGalPageViewController.swift
-//  
+//  MainPage.swift
+//  GalleryShare
 //
-//  Created by Andre Birsan on 2019-11-14.
+//  Created by Andre Birsan on 2020-01-07.
+//  Copyright © 2020 Andre Birsan. All rights reserved.
 //
 
 import UIKit
 
-class HomeGalPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+class MainPage: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     
     var pageControl = UIPageControl()
     
     lazy var viewControllerList:[UIViewController] = {
         let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc1 = sb.instantiateViewController(withIdentifier: "hgal1")
+        let vc1 = sb.instantiateViewController(withIdentifier: "camera")
         
-        let vc2 = sb.instantiateViewController(withIdentifier: "hgal2")
+        let vc2 = sb.instantiateViewController(withIdentifier: "Tabs")
         
         return [vc1, vc2]
     }()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.dataSource = self
@@ -28,9 +29,9 @@ class HomeGalPageViewController: UIPageViewController, UIPageViewControllerDataS
         if let firstViewController = viewControllerList.first{
             self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
         }
-        
+
+        // Do any additional setup after loading the view.
     }
-    
     func configurePageControl(){
         pageControl = UIPageControl(frame: CGRect(x: 0, y: UIScreen.main.bounds.maxY-50, width: UIScreen.main.bounds.width, height: 50))
         pageControl.numberOfPages = viewControllerList.count
@@ -44,8 +45,6 @@ class HomeGalPageViewController: UIPageViewController, UIPageViewControllerDataS
         let pageContentViewController = pageViewController.viewControllers![0]
         self.pageControl.currentPage = viewControllerList.firstIndex(of: pageContentViewController)!
     }
-    
-    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         
         guard let vcIndex = viewControllerList.firstIndex(of: viewController) else {
@@ -79,5 +78,4 @@ class HomeGalPageViewController: UIPageViewController, UIPageViewControllerDataS
         }
         return viewControllerList[nextIndex]
     }
-    
 }

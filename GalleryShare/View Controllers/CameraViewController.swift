@@ -19,8 +19,13 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     var captureDevice: AVCaptureDevice!
     var takePhoto = false
     
+    var username: String!
+    
+    
+    @IBOutlet weak var viewPics: UIImageView!
     
     var volumeButtonHandler: JPSVolumeButtonHandler?
+    
     
     var counter = 1
     
@@ -32,8 +37,12 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     
     override func viewWillAppear(_ animated: Bool) {
         //listenVolumeButton()
-       
-       //VIEW DID DISSAPEAR
+        
+        //VIEW DID DISSAPEAR
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.volumeButtonHandler?.stop()
     }
     
     @objc func pinch(_ pinch: UIPinchGestureRecognizer) {
@@ -66,60 +75,83 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         }
     }
     
-  /**  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let screenSize = self.view.bounds.size
-        if let touchPoint = touches.first {
-            let x = touchPoint.location(in: self.view).y / screenSize.height
-            let y = 1.0 - touchPoint.location(in: self.view).x / screenSize.width
-            let focusPoint = CGPoint(x: x, y: y)
-
-            if let device = captureDevice {
-                do {
-                    try device.lockForConfiguration()
-
-                    device.focusPointOfInterest = focusPoint
-                    //device.focusMode = .continuousAutoFocus
-                    device.focusMode = .autoFocus
-                    //device.focusMode = .locked
-                    device.exposurePointOfInterest = focusPoint
-                    device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
-                    device.unlockForConfiguration()
-                }
-                catch {
-                    // just ignore
-                }
-            }
-        }
-    } **/
-
+    /**  override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+     let screenSize = self.view.bounds.size
+     if let touchPoint = touches.first {
+     let x = touchPoint.location(in: self.view).y / screenSize.height
+     let y = 1.0 - touchPoint.location(in: self.view).x / screenSize.width
+     let focusPoint = CGPoint(x: x, y: y)
+     
+     if let device = captureDevice {
+     do {
+     try device.lockForConfiguration()
+     
+     device.focusPointOfInterest = focusPoint
+     //device.focusMode = .continuousAutoFocus
+     device.focusMode = .autoFocus
+     //device.focusMode = .locked
+     device.exposurePointOfInterest = focusPoint
+     device.exposureMode = AVCaptureDevice.ExposureMode.continuousAutoExposure
+     device.unlockForConfiguration()
+     }
+     catch {
+     // just ignore
+     }
+     }
+     }
+     } **/
+    
     
     func sendToServer(){
-        
-        //PUT THE FOLLOWING IN THE FIREBASE THING
+        let user = Auth.auth().currentUser
+        let uid = user?.uid
+        let databaseRef = Database.database().reference()
+        var friendArray = [String]()
         var counter = 1
-        let parameters = [
-            "uid": "\(Auth.auth().currentUser!.uid)",
+        var parameters = [
+            "uid": "\(uid!)",
             "picCount": "\(photosTaken.count)"]
         
-        AF.upload(multipartFormData: { (multipartFormData) in
-            for photo in self.photosTaken{
-                let imgData = photo.jpegData(compressionQuality: 1)
-                multipartFormData.append(imgData!, withName: "photo_\(String(counter))", fileName: "photo_\(String(counter)).jpg", mimeType: "image/jpg")
-                counter += 1
+        
+        databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
+            let dictionary = snapshot.value as? [String: AnyObject]
+            self.username = (dictionary!["username"] as? String)!
+            databaseRef.child("Friends").child(self.username).observeSingleEvent(of: .value) { (snapshot) in
+                var friendCounter = 1
+                for child in snapshot.children{
+                    friendArray.append((child as AnyObject).key as String)
+                    parameters["\(friendCounter)"] = (child as AnyObject).key as String
+                    friendCounter += 1
+                }
+                parameters["friendCount"] = "\(friendArray.count)"
+                AF.upload(multipartFormData: { (multipartFormData) in
+                    for photo in self.photosTaken{
+                        let imgData = photo.jpegData(compressionQuality: 1)
+                        multipartFormData.append(imgData!, withName: "photo_\(String(counter))", fileName: "photo_\(String(counter)).jpg", mimeType: "image/jpg")
+                        counter += 1
+                    }
+                    for (key, value) in parameters{
+                        multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
+                    }
+                }, to: "http://soto.us-east-2.elasticbeanstalk.com/").responseString { (response) in
+                    print(response)
+                }
             }
-            for (key, value) in parameters{
-                multipartFormData.append(value.data(using: String.Encoding.utf8)!, withName: key)
-            }
-        }, to: "http://soto.us-east-2.elasticbeanstalk.com/").responseJSON { (response) in
-            print(response)
+            
         }
+        //PUT THE FOLLOWING IN THE FIREBASE THING, SEND ONLY FIRST 20 PICTURES
         
-    
-        
-  
-        
-    
     }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
+        if photosTaken.count > 0{
+        let vc = CameraPreviewVCViewController()
+        vc.passedContentOffset = IndexPath(item: photosTaken.count-1, section: 0)
+        vc.imgArray = self.photosTaken
+        self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
     
     
     func createButtons(){
@@ -155,11 +187,57 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(willResignActive), name: UIApplication.willResignActiveNotification, object: nil)
+        let tap = UITapGestureRecognizer(target:self, action: #selector(handleTap(_:)))
+        tap.numberOfTapsRequired = 1
+        viewPics.isUserInteractionEnabled = true
+        viewPics.addGestureRecognizer(tap)
         self.volumeButtonHandler = JPSVolumeButtonHandler(up: {self.takePhoto = true}, downBlock: {self.takePhoto = true})
         self.volumeButtonHandler?.start(true)
         prepareCameraBack()
+        self.view.bringSubviewToFront(viewPics)
         
         
+    }
+    
+    @objc func willResignActive(_ notification: Notification) {
+        print("yikes")
+//        stopCaptureSession()
+//        sendToServer()
+//        let currentUser = Auth.auth().currentUser
+//        let StorageRef = Storage.storage().reference()
+//        let DatabaseRef = Database.database().reference()
+//        let uid = currentUser!.uid
+//        for image in photosTaken{
+//            let imageData = image.jpegData(compressionQuality: 1.0)
+//            let imgToSave = UIImage(data: imageData!)
+//            UIImageWriteToSavedPhotosAlbum(imgToSave!, nil, nil, nil)
+//            var picURL: String?
+//            let imageName = NSUUID().uuidString
+//            let picToSendStorageRef = StorageRef.child("users").child("takenPhotos").child("\(imageName).jpg")
+//            let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil)
+//            {metadata, error in
+//                guard let metadata = metadata else {
+//                    // Uh-oh, an error occurred!
+//                    return
+//                }
+//                let size = metadata.size
+//
+//                picToSendStorageRef.downloadURL { (url, error) in
+//                    guard let downloadURL = url
+//                        else {
+//                            // Uh-oh, an error occurred!
+//                            return
+//                    }
+//                    picURL = downloadURL.absoluteString
+//                    let values = ["imageURL": picURL]
+//
+//                    DatabaseRef.child("takenPhotos").child(uid).childByAutoId().updateChildValues(values as [AnyHashable: Any])
+//                }
+//            }
+//        }
+//        photosTaken.removeAll()
+//        self.viewPics.image = nil
     }
     
     func prepareCameraBack(){
@@ -211,14 +289,18 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     }
     
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        
         if takePhoto{
             takePhoto = false
             if let image = self.getImageFromSampleBuffer(buffer: sampleBuffer){
                 photosTaken.append(image)
                 print(photosTaken.count)
+                DispatchQueue.main.async {
+                    self.viewPics.image = image
+                }
             }
         }
+        
+        
     }
     
     func getImageFromSampleBuffer(buffer: CMSampleBuffer) -> UIImage?{
@@ -270,10 +352,8 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             var picURL: String?
             let imageName = NSUUID().uuidString
             let picToSendStorageRef = StorageRef.child("users").child("takenPhotos").child("\(imageName).jpg")
-            
             let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil)
             {metadata, error in
-                
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
                     return
@@ -282,7 +362,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                 
                 picToSendStorageRef.downloadURL { (url, error) in
                     guard let downloadURL = url
-                        
                         else {
                             // Uh-oh, an error occurred!
                             return
@@ -294,9 +373,5 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                 }
             }
         }
-        
-        
-        
     }
-    
 }

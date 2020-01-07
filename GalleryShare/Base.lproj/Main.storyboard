@@ -501,14 +501,23 @@
         <!--Camera View Controller-->
         <scene sceneID="xdb-F8-6Ce">
             <objects>
-                <viewController id="MQH-qb-R9M" customClass="CameraViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="camera" id="MQH-qb-R9M" customClass="CameraViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lg3-Kx-Naw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K1R-7O-SGQ" userLabel="viewPics">
+                                <rect key="frame" x="20" y="632" width="120" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="6cb-X2-EIM"/>
                     </view>
                     <navigationItem key="navigationItem" id="Z9Q-IV-3x7"/>
+                    <connections>
+                        <outlet property="viewPics" destination="K1R-7O-SGQ" id="ehw-CR-qnG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UEP-jK-rZ6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -551,7 +560,7 @@
         <!--GalleryViewController-->
         <scene sceneID="KcY-40-Y1A">
             <objects>
-                <viewController modalPresentationStyle="fullScreen" id="IIS-8Q-yXh" userLabel="GalleryViewController" customClass="GalleryViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="gallery" modalPresentationStyle="fullScreen" id="IIS-8Q-yXh" userLabel="GalleryViewController" customClass="GalleryViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bra-h9-7LM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -925,7 +934,7 @@
         <!--MainTab-->
         <scene sceneID="dkF-73-6aa">
             <objects>
-                <tabBarController storyboardIdentifier="HomeVC" modalPresentationStyle="fullScreen" id="XyZ-XY-ccT" userLabel="MainTab" customClass="MainTabViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="Tabs" modalPresentationStyle="fullScreen" id="XyZ-XY-ccT" userLabel="MainTab" customClass="MainTabViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Zqf-6I-uHX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -956,6 +965,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NQA-sM-FvP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1236" y="-143"/>
+        </scene>
+        <!--Main Page-->
+        <scene sceneID="I8S-da-T0X">
+            <objects>
+                <pageViewController storyboardIdentifier="HomeVC" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="cuX-9h-7E4" customClass="MainPage" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wS1-76-oCi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4207" y="469"/>
         </scene>
         <!--Profile Pic View Controller-->
         <scene sceneID="HeT-Fu-fUA">

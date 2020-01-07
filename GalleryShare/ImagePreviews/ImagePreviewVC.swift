@@ -21,7 +21,6 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var fetchResult: PHFetchResult<PHAsset>!
     
-    
     private let addButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Add", for: .normal)
@@ -169,7 +168,8 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         myCollectionView.dataSource=self
         myCollectionView.register(ImagePreviewFullViewCell.self, forCellWithReuseIdentifier: "Cell")
         myCollectionView.isPagingEnabled = true
-                
+         
+      
         self.view.addSubview(myCollectionView)
         self.view.addSubview(addButton)
         self.view.addSubview(sendFriendButton)
@@ -184,6 +184,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         gridButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         //gridButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 750).isActive = true
         gridButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -30).isActive = true
+        
        
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
     }
@@ -202,7 +203,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImagePreviewFullViewCell
         
-         let asset = fetchResult.object(at: indexPath.item)
+        let asset = fetchResult.object(at: indexPath.item)
         cell.representedAssetIdentifier = asset.localIdentifier
         imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: nil, resultHandler: { image, _ in
             if cell.representedAssetIdentifier == asset.localIdentifier {
@@ -211,6 +212,8 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         })
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
+        
+        
         return cell
     }
     

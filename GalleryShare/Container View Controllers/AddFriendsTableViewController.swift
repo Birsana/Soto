@@ -106,9 +106,9 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
             }
         }
         
-        let picURL = URL(string:((user?["profilePic"] as? String)!))
-            cell.profilePic.kf.setImage(with: picURL)
-            cell.profilePic.asCircle()
+        //let picURL = URL(string:((user?["profilePic"] as? String)!))
+           // cell.profilePic.kf.setImage(with: picURL)
+         //   cell.profilePic.asCircle()
         
         
         

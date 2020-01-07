@@ -180,11 +180,12 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
         cell.senderView?.heightAnchor.constraint(equalToConstant: 70).isActive = true
         
         let sender = sentArray[indexPath.row]
-        
+        print(sender)
         
         let databaseRef = Database.database().reference()
         databaseRef.child("users").child(sender).observeSingleEvent(of: .value) { (snapshot) in
             let dictionary = snapshot.value as? [String: AnyObject]
+            print(snapshot)
             let profilePicURL = (dictionary!["profilePic"] as? String)!
             let url = URL(string: profilePicURL)
             DispatchQueue.main.async {

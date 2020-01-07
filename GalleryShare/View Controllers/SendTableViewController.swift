@@ -60,7 +60,7 @@ extension SendTableViewController: SendCellDelegate{
         else{
             DatabaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
                 let myData = snapshot.value as! NSDictionary
-                toID = myData[sendTo] as! String
+                toID = (myData[sendTo] as! String)
                 let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil)
                 {metadata, error in
                     
@@ -113,7 +113,7 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
+        //searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         let uid = Auth.auth().currentUser?.uid

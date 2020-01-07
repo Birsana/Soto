@@ -14,11 +14,12 @@
 		671BF6F9238F191400CCEDB3 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 671BF6F8238F191400CCEDB3 /* CameraViewController.swift */; };
 		6734766B234125E5005469FC /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6734766A234125E5005469FC /* GuideViewController.swift */; };
 		6734766D23430FA6005469FC /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6734766C23430FA6005469FC /* Checkbox.swift */; };
-		6734766F23446F6D005469FC /* SwipingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6734766E23446F6D005469FC /* SwipingController.swift */; };
 		67365DB123526A3B00360D7D /* SendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67365DB023526A3B00360D7D /* SendCell.swift */; };
 		67365DB323526B8200360D7D /* SendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67365DB223526B8200360D7D /* SendTableViewController.swift */; };
 		676D2B3A2356744000D49B85 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676D2B392356744000D49B85 /* FriendViewController.swift */; };
 		676D2B3E2356CC2400D49B85 /* PrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */; };
+		678296BE23C45A4D00C2D730 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678296BD23C45A4D00C2D730 /* MainPage.swift */; };
+		678296C023C466FB00C2D730 /* CameraPreviewVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678296BF23C466FB00C2D730 /* CameraPreviewVCViewController.swift */; };
 		67922A85235960CA004092C5 /* FriendImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A84235960CA004092C5 /* FriendImagePreviewVC.swift */; };
 		67922A88235A4850004092C5 /* CreateAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A87235A4850004092C5 /* CreateAlbumViewController.swift */; };
 		67922A8C235A6385004092C5 /* AlbumFriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */; };
@@ -98,11 +99,12 @@
 		671BF6F8238F191400CCEDB3 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		6734766A234125E5005469FC /* GuideViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		6734766C23430FA6005469FC /* Checkbox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
-		6734766E23446F6D005469FC /* SwipingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwipingController.swift; path = "GalleryShare/View Controllers/SwipingController.swift"; sourceTree = SOURCE_ROOT; };
 		67365DB023526A3B00360D7D /* SendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCell.swift; sourceTree = "<group>"; };
 		67365DB223526B8200360D7D /* SendTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTableViewController.swift; sourceTree = "<group>"; };
 		676D2B392356744000D49B85 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
 		676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivateViewController.swift; path = "/Users/andreb/Desktop/GalleryShare/GalleryShare/View Controllers/PrivateViewController.swift"; sourceTree = "<absolute>"; };
+		678296BD23C45A4D00C2D730 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
+		678296BF23C466FB00C2D730 /* CameraPreviewVCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewVCViewController.swift; sourceTree = "<group>"; };
 		67922A84235960CA004092C5 /* FriendImagePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendImagePreviewVC.swift; sourceTree = "<group>"; };
 		67922A87235A4850004092C5 /* CreateAlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAlbumViewController.swift; sourceTree = "<group>"; };
 		67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumFriendsTableViewController.swift; sourceTree = "<group>"; };
@@ -209,22 +211,22 @@
 		670BEFDD2325DDEF00A04E97 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6734766E23446F6D005469FC /* SwipingController.swift */,
+				678296BD23C45A4D00C2D730 /* MainPage.swift */,
 				67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */,
 				671BF6F8238F191400CCEDB3 /* CameraViewController.swift */,
+				67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */,
+				67090873238777DB0070C01C /* AddFriendsMasterViewController.swift */,
 				67365DB223526B8200360D7D /* SendTableViewController.swift */,
 				676D2B392356744000D49B85 /* FriendViewController.swift */,
 				67BEE074238522E500D63753 /* SettingsViewController.swift */,
 				6792D9212347ECA100E6159E /* GalleryViewController.swift */,
 				6792D929234D8FE000E6159E /* AlbumsViewController.swift */,
-				67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */,
 				6734766A234125E5005469FC /* GuideViewController.swift */,
 				6792D91F2347E41A00E6159E /* MainTabViewController.swift */,
 				676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */,
 				67922A87235A4850004092C5 /* CreateAlbumViewController.swift */,
 				67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */,
 				67922A8F235F63DD004092C5 /* SendAlbumTableViewController.swift */,
-				67090873238777DB0070C01C /* AddFriendsMasterViewController.swift */,
 				67E7EC6C23A892C000F33B5D /* TestingViewController.swift */,
 			);
 			path = "View Controllers";
@@ -255,10 +257,11 @@
 			isa = PBXGroup;
 			children = (
 				67F29EA52362D14900CA6CE5 /* AlbumImagePreviewVC.swift */,
-				6792D92323480C3D00E6159E /* ImagePreviewVC.swift */,
 				67922A84235960CA004092C5 /* FriendImagePreviewVC.swift */,
 				6792D933234ED5BD00E6159E /* PrivImagePreviewVC.swift */,
 				67F29EA72366077C00CA6CE5 /* GridImagesViewController.swift */,
+				6792D92323480C3D00E6159E /* ImagePreviewVC.swift */,
+				678296BF23C466FB00C2D730 /* CameraPreviewVCViewController.swift */,
 			);
 			path = ImagePreviews;
 			sourceTree = "<group>";
@@ -594,7 +597,6 @@
 				670BEFE22325E01900A04E97 /* Constants.swift in Sources */,
 				67CC1067237DFB5500FDC08D /* HomeGalPageViewController.swift in Sources */,
 				67BC2299232E046A00653900 /* RequestCell.swift in Sources */,
-				6734766F23446F6D005469FC /* SwipingController.swift in Sources */,
 				67CC1065237DFAA800FDC08D /* HomeGal2ViewController.swift in Sources */,
 				67BC228D2328B21400653900 /* AddFriendsTableViewController.swift in Sources */,
 				67BC228B2327483B00653900 /* SignUpViewController.swift in Sources */,
@@ -627,6 +629,7 @@
 				67BBB11323754E29007F4D3B /* AlbumContainerViewController.swift in Sources */,
 				6792D934234ED5BD00E6159E /* PrivImagePreviewVC.swift in Sources */,
 				67CC105B237A84F300FDC08D /* FriendGal1ViewController.swift in Sources */,
+				678296C023C466FB00C2D730 /* CameraPreviewVCViewController.swift in Sources */,
 				6792D928234A92A700E6159E /* PhotoItemCell.swift in Sources */,
 				6792D9202347E41A00E6159E /* MainTabViewController.swift in Sources */,
 				6734766B234125E5005469FC /* GuideViewController.swift in Sources */,
@@ -634,6 +637,7 @@
 				671BF6F9238F191400CCEDB3 /* CameraViewController.swift in Sources */,
 				67BC229C232F43C300653900 /* MainNavigationController.swift in Sources */,
 				67922A8C235A6385004092C5 /* AlbumFriendsTableViewController.swift in Sources */,
+				678296BE23C45A4D00C2D730 /* MainPage.swift in Sources */,
 				67922A92235F647A004092C5 /* SendAlbumCell.swift in Sources */,
 				6792D92A234D8FE000E6159E /* AlbumsViewController.swift in Sources */,
 				67922A90235F63DD004092C5 /* SendAlbumTableViewController.swift in Sources */,

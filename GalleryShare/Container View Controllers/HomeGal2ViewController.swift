@@ -60,7 +60,7 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let vc = AlbumImagePreviewVC()
-        
+        print(self.whoSent)
         vc.urlArr = self.picURL
         vc.sentArray = self.whoSent
         vc.passedContentOffset = indexPath

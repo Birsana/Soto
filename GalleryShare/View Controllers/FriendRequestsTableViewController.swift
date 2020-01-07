@@ -168,17 +168,9 @@ class FriendRequestsTableViewController: UITableViewController {
         cell.profilePic.asCircle()
         
         let profileImageUrl = user?["profilePic"] as! String
-        let url = NSURL(string: profileImageUrl)
-        URLSession.shared.dataTask(with: url! as URL, completionHandler: { (data, response, error) in
-            
-            if error != nil{
-                return
-            }
-            DispatchQueue.main.async {
-                cell.profilePic?.image = UIImage(data: data!)
-            }
-            
-        }).resume()
+        let url = URL(string: profileImageUrl)
+        cell.profilePic?.kf.setImage(with: url)
+        
         
         cell.myTableViewController = self
         cell.delegate = self

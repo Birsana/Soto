@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         self.window?.makeKeyAndVisible()
                     }
                     else if UserDefaults.standard.bool(forKey: "isLoggedIn"){
-                        let homeViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainTabViewController
+                        let homeViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainPage
                         homeViewController?.modalPresentationStyle = .fullScreen
                         self.window?.rootViewController = homeViewController
                         self.window?.makeKeyAndVisible()
@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
             }
             else if UserDefaults.standard.bool(forKey: "isLoggedIn"){
-                let homeViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainTabViewController
+                let homeViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainPage
                 homeViewController?.modalPresentationStyle = .fullScreen
                 self.window?.rootViewController = homeViewController
                 self.window?.makeKeyAndVisible()
