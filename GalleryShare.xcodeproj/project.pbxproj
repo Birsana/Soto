@@ -17,7 +17,6 @@
 		67365DB123526A3B00360D7D /* SendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67365DB023526A3B00360D7D /* SendCell.swift */; };
 		67365DB323526B8200360D7D /* SendTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67365DB223526B8200360D7D /* SendTableViewController.swift */; };
 		676D2B3A2356744000D49B85 /* FriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676D2B392356744000D49B85 /* FriendViewController.swift */; };
-		676D2B3E2356CC2400D49B85 /* PrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */; };
 		678296BE23C45A4D00C2D730 /* MainPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678296BD23C45A4D00C2D730 /* MainPage.swift */; };
 		678296C023C466FB00C2D730 /* CameraPreviewVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 678296BF23C466FB00C2D730 /* CameraPreviewVCViewController.swift */; };
 		67922A85235960CA004092C5 /* FriendImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67922A84235960CA004092C5 /* FriendImagePreviewVC.swift */; };
@@ -67,6 +66,7 @@
 		80C63EB690553E26C390470F /* Pods_GalleryShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA064BC434328A857080A3F /* Pods_GalleryShare.framework */; };
 		A15058CA34D615CDE4182548 /* Pods_GalleryShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86FCB92C7A5C5C68E729CC5D /* Pods_GalleryShareUITests.framework */; };
 		AE714EF866F1E236475CA0B1 /* Pods_GalleryShareTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE08FF0AC4940619EF2F61E /* Pods_GalleryShareTests.framework */; };
+		D8D1DC2823C503A800ECAA58 /* PrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D1DC2723C503A800ECAA58 /* PrivateViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,7 +102,6 @@
 		67365DB023526A3B00360D7D /* SendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendCell.swift; sourceTree = "<group>"; };
 		67365DB223526B8200360D7D /* SendTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTableViewController.swift; sourceTree = "<group>"; };
 		676D2B392356744000D49B85 /* FriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendViewController.swift; sourceTree = "<group>"; };
-		676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PrivateViewController.swift; path = "/Users/andreb/Desktop/GalleryShare/GalleryShare/View Controllers/PrivateViewController.swift"; sourceTree = "<absolute>"; };
 		678296BD23C45A4D00C2D730 /* MainPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPage.swift; sourceTree = "<group>"; };
 		678296BF23C466FB00C2D730 /* CameraPreviewVCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPreviewVCViewController.swift; sourceTree = "<group>"; };
 		67922A84235960CA004092C5 /* FriendImagePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendImagePreviewVC.swift; sourceTree = "<group>"; };
@@ -157,6 +156,7 @@
 		81478EAB71CE9C6067210F2A /* Pods-GalleryShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryShare.debug.xcconfig"; path = "Target Support Files/Pods-GalleryShare/Pods-GalleryShare.debug.xcconfig"; sourceTree = "<group>"; };
 		86FCB92C7A5C5C68E729CC5D /* Pods_GalleryShareUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GalleryShareUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE08FF0AC4940619EF2F61E /* Pods_GalleryShareTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GalleryShareTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8D1DC2723C503A800ECAA58 /* PrivateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,7 +223,7 @@
 				6792D929234D8FE000E6159E /* AlbumsViewController.swift */,
 				6734766A234125E5005469FC /* GuideViewController.swift */,
 				6792D91F2347E41A00E6159E /* MainTabViewController.swift */,
-				676D2B3D2356CC2300D49B85 /* PrivateViewController.swift */,
+				D8D1DC2723C503A800ECAA58 /* PrivateViewController.swift */,
 				67922A87235A4850004092C5 /* CreateAlbumViewController.swift */,
 				67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */,
 				67922A8F235F63DD004092C5 /* SendAlbumTableViewController.swift */,
@@ -602,7 +602,6 @@
 				67BC228B2327483B00653900 /* SignUpViewController.swift in Sources */,
 				67F29EA62362D14900CA6CE5 /* AlbumImagePreviewVC.swift in Sources */,
 				67922A85235960CA004092C5 /* FriendImagePreviewVC.swift in Sources */,
-				676D2B3E2356CC2400D49B85 /* PrivateViewController.swift in Sources */,
 				67E7EC6D23A892C000F33B5D /* TestingViewController.swift in Sources */,
 				6734766D23430FA6005469FC /* Checkbox.swift in Sources */,
 				6792D9262349D1E900E6159E /* PersonImageCell.swift in Sources */,
@@ -611,6 +610,7 @@
 				67BC2291232B757100653900 /* FriendCell.swift in Sources */,
 				67922A9423602C27004092C5 /* DisplayAlbumViewController.swift in Sources */,
 				676D2B3A2356744000D49B85 /* FriendViewController.swift in Sources */,
+				D8D1DC2823C503A800ECAA58 /* PrivateViewController.swift in Sources */,
 				67BC22832327432800653900 /* ViewController.swift in Sources */,
 				67BBB115237693D8007F4D3B /* AlbumPersonCell.swift in Sources */,
 				6792D92423480C3D00E6159E /* ImagePreviewVC.swift in Sources */,
