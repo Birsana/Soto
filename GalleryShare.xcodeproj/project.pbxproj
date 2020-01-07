@@ -58,7 +58,6 @@
 		67CC105F237A854D00FDC08D /* FriendGalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC105E237A854D00FDC08D /* FriendGalPageViewController.swift */; };
 		67CC1063237DFA9D00FDC08D /* HomeGal1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC1062237DFA9D00FDC08D /* HomeGal1ViewController.swift */; };
 		67CC1065237DFAA800FDC08D /* HomeGal2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC1064237DFAA800FDC08D /* HomeGal2ViewController.swift */; };
-		67CC1067237DFB5500FDC08D /* HomeGalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC1066237DFB5500FDC08D /* HomeGalPageViewController.swift */; };
 		67CC10692380824500FDC08D /* ProfilePicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC10682380824500FDC08D /* ProfilePicViewController.swift */; };
 		67E7EC6D23A892C000F33B5D /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E7EC6C23A892C000F33B5D /* TestingViewController.swift */; };
 		67F29EA62362D14900CA6CE5 /* AlbumImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F29EA52362D14900CA6CE5 /* AlbumImagePreviewVC.swift */; };
@@ -67,6 +66,7 @@
 		A15058CA34D615CDE4182548 /* Pods_GalleryShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86FCB92C7A5C5C68E729CC5D /* Pods_GalleryShareUITests.framework */; };
 		AE714EF866F1E236475CA0B1 /* Pods_GalleryShareTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAE08FF0AC4940619EF2F61E /* Pods_GalleryShareTests.framework */; };
 		D8D1DC2823C503A800ECAA58 /* PrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D1DC2723C503A800ECAA58 /* PrivateViewController.swift */; };
+		D8D1DC2A23C5042100ECAA58 /* HomeGalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D1DC2923C5042100ECAA58 /* HomeGalPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,7 +147,6 @@
 		67CC105E237A854D00FDC08D /* FriendGalPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendGalPageViewController.swift; sourceTree = "<group>"; };
 		67CC1062237DFA9D00FDC08D /* HomeGal1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGal1ViewController.swift; sourceTree = "<group>"; };
 		67CC1064237DFAA800FDC08D /* HomeGal2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGal2ViewController.swift; sourceTree = "<group>"; };
-		67CC1066237DFB5500FDC08D /* HomeGalPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeGalPageViewController.swift; path = "/Users/andreb/Desktop/GalleryShare/GalleryShare/Container View Controllers/HomeGalPageViewController.swift"; sourceTree = "<absolute>"; };
 		67CC10682380824500FDC08D /* ProfilePicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePicViewController.swift; sourceTree = "<group>"; };
 		67E7EC6C23A892C000F33B5D /* TestingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingViewController.swift; sourceTree = "<group>"; };
 		67F29EA52362D14900CA6CE5 /* AlbumImagePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumImagePreviewVC.swift; sourceTree = "<group>"; };
@@ -157,6 +156,7 @@
 		86FCB92C7A5C5C68E729CC5D /* Pods_GalleryShareUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GalleryShareUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAE08FF0AC4940619EF2F61E /* Pods_GalleryShareTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GalleryShareTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8D1DC2723C503A800ECAA58 /* PrivateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateViewController.swift; sourceTree = "<group>"; };
+		D8D1DC2923C5042100ECAA58 /* HomeGalPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeGalPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -273,7 +273,7 @@
 				67CC105A237A84F300FDC08D /* FriendGal1ViewController.swift */,
 				67CC105C237A84FE00FDC08D /* FriendGal2ViewController.swift */,
 				67CC105E237A854D00FDC08D /* FriendGalPageViewController.swift */,
-				67CC1066237DFB5500FDC08D /* HomeGalPageViewController.swift */,
+				D8D1DC2923C5042100ECAA58 /* HomeGalPageViewController.swift */,
 				67CC1062237DFA9D00FDC08D /* HomeGal1ViewController.swift */,
 				67CC1064237DFAA800FDC08D /* HomeGal2ViewController.swift */,
 				67BBB11223754E29007F4D3B /* AlbumContainerViewController.swift */,
@@ -595,7 +595,6 @@
 				67CC1063237DFA9D00FDC08D /* HomeGal1ViewController.swift in Sources */,
 				67CC105F237A854D00FDC08D /* FriendGalPageViewController.swift in Sources */,
 				670BEFE22325E01900A04E97 /* Constants.swift in Sources */,
-				67CC1067237DFB5500FDC08D /* HomeGalPageViewController.swift in Sources */,
 				67BC2299232E046A00653900 /* RequestCell.swift in Sources */,
 				67CC1065237DFAA800FDC08D /* HomeGal2ViewController.swift in Sources */,
 				67BC228D2328B21400653900 /* AddFriendsTableViewController.swift in Sources */,
@@ -608,6 +607,7 @@
 				670BEFE02325E01200A04E97 /* Utilities.swift in Sources */,
 				67365DB123526A3B00360D7D /* SendCell.swift in Sources */,
 				67BC2291232B757100653900 /* FriendCell.swift in Sources */,
+				D8D1DC2A23C5042100ECAA58 /* HomeGalPageViewController.swift in Sources */,
 				67922A9423602C27004092C5 /* DisplayAlbumViewController.swift in Sources */,
 				676D2B3A2356744000D49B85 /* FriendViewController.swift in Sources */,
 				D8D1DC2823C503A800ECAA58 /* PrivateViewController.swift in Sources */,
