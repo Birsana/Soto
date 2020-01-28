@@ -326,16 +326,15 @@ DEPENDENCIES:
   - Kingfisher (~> 5.0)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
-    - AppAuth
-    - GoogleSignIn
-    - GTMAppAuth
-    - GTMSessionFetcher
   trunk:
     - abseil
     - Alamofire
+<<<<<<< HEAD
     - AWSCore
     - AWSRekognition
+=======
+    - AppAuth
+>>>>>>> 1bf784cf85dabc6434a01b8675afe5d285f593a9
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAnalytics
@@ -351,9 +350,12 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleDataTransportCCTSupport
+    - GoogleSignIn
     - GoogleUtilities
     - "gRPC-C++"
     - gRPC-Core
+    - GTMAppAuth
+    - GTMSessionFetcher
     - JPSVolumeButtonHandler
     - Kingfisher
     - leveldb-library
