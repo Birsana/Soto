@@ -12,6 +12,25 @@ import Firebase
 import JPSVolumeButtonHandler
 import Alamofire
 
+extension UIImage {
+
+
+    func updateImageOrientionUpSide() -> UIImage? {
+        if self.imageOrientation == .up {
+            return self
+        }
+
+        UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale)
+        self.draw(in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+        if let normalizedImage:UIImage = UIGraphicsGetImageFromCurrentImageContext() {
+            UIGraphicsEndImageContext()
+            return normalizedImage
+        }
+        UIGraphicsEndImageContext()
+        return nil
+    }
+}
+
 class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
     let captureSession = AVCaptureSession()
@@ -35,13 +54,10 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     
     var photosTaken = [UIImage]()
     
-    override func viewWillAppear(_ animated: Bool) {
-        //listenVolumeButton()
-        
-        //VIEW DID DISSAPEAR
-    }
+    
     
     override func viewDidDisappear(_ animated: Bool) {
+
         self.volumeButtonHandler?.stop()
     }
     
@@ -135,12 +151,15 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                     }
                 }, to: "http://soto.us-east-2.elasticbeanstalk.com/").responseString { (response) in
                     print(response)
+                    self.photosTaken.removeAll()
+                    self.viewPics.image = nil
                 }
             }
             
         }
         //PUT THE FOLLOWING IN THE FIREBASE THING, SEND ONLY FIRST 20 PICTURES
-        
+        //http://httpbin.org/post
+        //http://soto.us-east-2.elasticbeanstalk.com/
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -155,13 +174,14 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     
     
     func createButtons(){
-        let captureButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100 , height: 100))
+        let captureButton = UIButton(frame: CGRect(x: 0, y: 0, width: 90, height: 90))
         captureButton.backgroundColor = UIColor.clear
-        captureButton.center = self.view.center
+        captureButton.center.x = self.view.center.x
+        captureButton.frame.origin.y = self.view.frame.height - captureButton.frame.height
         captureButton.layer.cornerRadius = 0.5 * captureButton.bounds.size.width
         captureButton.clipsToBounds = true
         captureButton.layer.borderWidth = 1
-        captureButton.layer.borderColor = UIColor.white.cgColor
+        captureButton.layer.borderColor = UIColor.black.cgColor
         captureButton.addTarget(self, action: #selector(capturePic(sender:)), for: .touchUpInside)
         
         let switchCam = UIButton(frame: CGRect(x: 340, y: 100, width: 75, height: 75))
@@ -236,8 +256,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                 }
             }
         }
-        photosTaken.removeAll()
-        self.viewPics.image = nil
     }
     
     func prepareCameraBack(){
@@ -292,7 +310,11 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
         if takePhoto{
             takePhoto = false
             if let image = self.getImageFromSampleBuffer(buffer: sampleBuffer){
-                photosTaken.append(image)
+                if let updatedImage = image.updateImageOrientionUpSide() {
+                    photosTaken.append(updatedImage)
+                } else {
+                    photosTaken.append(image)
+                }
                 print(photosTaken.count)
                 DispatchQueue.main.async {
                     self.viewPics.image = image
@@ -368,12 +390,12 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
                     }
                     picURL = downloadURL.absoluteString
                     let values = ["imageURL": picURL]
-                    
+                    print("I am here")
                     DatabaseRef.child("takenPhotos").child(uid).childByAutoId().updateChildValues(values as [AnyHashable: Any])
                 }
             }
         }
-        photosTaken.removeAll()
+        //photosTaken.removeAll()
         self.viewPics.image = nil
     }
 }

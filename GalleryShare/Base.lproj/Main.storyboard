@@ -475,13 +475,27 @@
                     <view key="view" contentMode="scaleToFill" id="aTU-Sa-8ka">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Camera Roll" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hzk-GI-sGa">
+                                <rect key="frame" x="86" y="49" width="242" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="hzk-GI-sGa" firstAttribute="top" secondItem="zfx-8Q-SIU" secondAttribute="top" constant="5" id="fdC-WY-EOY"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="zfx-8Q-SIU"/>
                     </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="hzk-GI-sGa" id="Tkb-YS-35j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WeJ-7k-1et" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8416" y="2204"/>
+            <point key="canvasLocation" x="8415.9420289855079" y="2203.7946428571427"/>
         </scene>
         <!--Home Gal2 View Controller-->
         <scene sceneID="vca-Zt-efV">
@@ -490,20 +504,63 @@
                     <view key="view" contentMode="scaleToFill" id="c2N-n4-bj6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Recieved Images" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I6U-D6-FoG">
+                                <rect key="frame" x="21" y="49" width="373" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="I6U-D6-FoG" firstAttribute="top" secondItem="2pr-nS-bGt" secondAttribute="top" constant="5" id="0Ur-Ll-IcO"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="2pr-nS-bGt"/>
                     </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="I6U-D6-FoG" id="AVH-a9-a3Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o6I-YF-P5d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9175" y="2204"/>
+            <point key="canvasLocation" x="9173.9130434782619" y="2203.7946428571427"/>
+        </scene>
+        <!--Home Gal3 View Controller-->
+        <scene sceneID="55x-cR-G3F">
+            <objects>
+                <viewController storyboardIdentifier="hgal3" id="Rfa-hD-vhv" customClass="HomeGal3ViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zfm-SB-Z7E">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sent Images" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t40-4o-gfu">
+                                <rect key="frame" x="122" y="49" width="171" height="38.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="t40-4o-gfu" firstAttribute="top" secondItem="UlD-cm-OfN" secondAttribute="top" constant="5" id="dGS-fV-8FJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="UlD-cm-OfN"/>
+                    </view>
+                    <connections>
+                        <outlet property="titleLabel" destination="t40-4o-gfu" id="v6F-9G-FYE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zo4-UX-eId" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10045" y="2213"/>
         </scene>
         <!--Camera View Controller-->
         <scene sceneID="xdb-F8-6Ce">
             <objects>
                 <viewController storyboardIdentifier="camera" id="MQH-qb-R9M" customClass="CameraViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lg3-Kx-Naw">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K1R-7O-SGQ" userLabel="viewPics">
@@ -539,14 +596,6 @@
                                     <action selector="signOut:" destination="EcZ-TK-mbs" eventType="touchUpInside" id="W5a-Qw-AnS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyR-qP-d6y">
-                                <rect key="frame" x="181" y="160" width="83" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Temp"/>
-                                <connections>
-                                    <segue destination="MQH-qb-R9M" kind="show" id="ARo-Rf-Edy"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="erD-az-SAd"/>
@@ -573,9 +622,11 @@
                                     <segue destination="JKA-48-arN" kind="show" id="9YG-n4-74C"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add friends to be able to send and recieve photos!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tG-4S-IYs">
-                                <rect key="frame" x="20" y="132" width="385" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5tG-4S-IYs">
+                                <rect key="frame" x="25" y="132" width="192.5" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">Add friends to be able to 
+send and recieve photos!</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -590,13 +641,6 @@
                                     <segue destination="aBw-6Y-dPF" kind="embed" id="T2t-Ol-G89"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="My Gallery" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f5E-Kv-ceI">
-                                <rect key="frame" x="61" y="225" width="303" height="72"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LNk-v0-tpY">
                                 <rect key="frame" x="92" y="504" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -687,7 +731,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Albums" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4R2-pC-lc3">
-                                <rect key="frame" x="124" y="42" width="166" height="66"/>
+                                <rect key="frame" x="143" y="42" width="155" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <nil key="textColor"/>
@@ -732,8 +776,8 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADB-Wj-Kar" userLabel="Create">
-                                <rect key="frame" x="348" y="-3" width="46" height="111"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADB-Wj-Kar" userLabel="Create">
+                                <rect key="frame" x="348" y="69" width="46" height="30"/>
                                 <state key="normal" title="Create"/>
                                 <connections>
                                     <action selector="createTapped:" destination="jEP-vy-H3s" eventType="touchUpInside" id="ssZ-fr-8oB"/>
@@ -743,9 +787,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="ADB-Wj-Kar" firstAttribute="top" secondItem="uL2-rk-aaV" secondAttribute="top" constant="20" id="aRF-6K-630"/>
-                            <constraint firstItem="ADB-Wj-Kar" firstAttribute="trailing" secondItem="AEj-Ct-ZRm" secondAttribute="trailingMargin" id="lxV-oi-rnf"/>
-                            <constraint firstItem="uL2-rk-aaV" firstAttribute="bottom" secondItem="ADB-Wj-Kar" secondAttribute="bottom" constant="677" id="niE-cn-uqU"/>
+                            <constraint firstItem="ADB-Wj-Kar" firstAttribute="top" secondItem="uL2-rk-aaV" secondAttribute="top" constant="25" id="faq-re-65A"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="uL2-rk-aaV"/>
                     </view>
@@ -994,6 +1036,13 @@
                                     <action selector="finishIntro:" destination="rGu-Lz-QAC" eventType="touchUpInside" id="Etj-Ez-dh4"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a profile picture that contains  your face for facial recognition" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6I-9Z-zKM">
+                                <rect key="frame" x="-49" y="104" width="513" height="71"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="gbw-wz-Exr"/>
@@ -1005,7 +1054,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KbZ-jS-b2S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5036" y="226"/>
+            <point key="canvasLocation" x="5034.7826086956529" y="225.66964285714283"/>
         </scene>
         <!--Display Album View Controller-->
         <scene sceneID="xdo-7F-z3b">
@@ -1430,6 +1479,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="umA-9U-cof"/>
         <segue reference="9YG-n4-74C"/>
-        <segue reference="jWj-Ws-8bC"/>
+        <segue reference="amn-oW-FUh"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -17,7 +17,9 @@ class HomeGalPageViewController: UIPageViewController, UIPageViewControllerDataS
         
         let vc2 = sb.instantiateViewController(withIdentifier: "hgal2")
         
-        return [vc1, vc2]
+        let vc3 = sb.instantiateViewController(withIdentifier: "hgal3")
+        
+        return [vc1, vc2, vc3]
     }()
     
     override func viewDidLoad() {

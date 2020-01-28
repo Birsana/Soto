@@ -73,7 +73,7 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         cell.username?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
         cell.username?.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
         
-        cell.layer.borderWidth = 2
+       // cell.layer.borderWidth = 2
         
         
         

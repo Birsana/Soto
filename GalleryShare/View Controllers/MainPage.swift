@@ -12,8 +12,22 @@ class MainPage: UIPageViewController, UIPageViewControllerDataSource, UIPageView
     
     var pageControl = UIPageControl()
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        get {
+            return .portrait
+
+        }
+    }
+    
     lazy var viewControllerList:[UIViewController] = {
         let sb = UIStoryboard(name: "Main", bundle: nil)
+        #if targetEnvironment(simulator)
+            print("HEY")
+            let vc = sb.instantiateViewController(withIdentifier: "Tabs")
+            return [vc]
+        #endif
+        
+        print("wagwan")
         let vc1 = sb.instantiateViewController(withIdentifier: "camera")
         
         let vc2 = sb.instantiateViewController(withIdentifier: "Tabs")

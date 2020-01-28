@@ -1,30 +1,30 @@
 //
-//  HomeGal2ViewController.swift
+//  HomeGal3ViewController.swift
 //  GalleryShare
 //
-//  Created by Andre Birsan on 2019-11-14.
-//  Copyright © 2019 Andre Birsan. All rights reserved.
+//  Created by Andre Birsan on 2020-01-07.
+//  Copyright © 2020 Andre Birsan. All rights reserved.
 //
 
 import UIKit
 import Firebase
 
-class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate  {
+class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate {
     
     var myCollectionView: UICollectionView!
     var firstImage: UIImage?
     
     var picURL = [String]()
-    var whoSent = [String]()
+    var whoRecieves = [String]()
     
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
+    @IBOutlet weak var titleLabel: UILabel!
     
     public var screenHeightHalf: CGFloat {
         return UIScreen.main.bounds.height/2
     }
-    @IBOutlet weak var titleLabel: UILabel!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return picURL.count
@@ -61,9 +61,9 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let vc = AlbumImagePreviewVC()
-        print(self.whoSent)
+        print(self.whoRecieves)
         vc.urlArr = self.picURL
-        vc.sentArray = self.whoSent
+        vc.sentArray = self.whoRecieves
         vc.passedContentOffset = indexPath
        
         self.present(vc, animated: true, completion: nil)
@@ -86,7 +86,7 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         let layout = UICollectionViewFlowLayout()
         
-        var thisFrame = CGRect(x: 0, y: 55,  width: self.view.frame.width, height: self.view.frame.height-55)
+       var thisFrame = CGRect(x: 0, y: 55,  width: self.view.frame.width, height: self.view.frame.height-55)
         myCollectionView = UICollectionView(frame: thisFrame, collectionViewLayout: layout)
         myCollectionView.delegate=self
         myCollectionView.dataSource=self
@@ -104,16 +104,15 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
         let user = Auth.auth().currentUser
         let uid = Auth.auth().currentUser?.uid
         
-        databaseRef.child("sentPicsRef").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
-            
+        databaseRef.child("sentPics").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
+            print(snapshot)
             for child in snapshot.children{
                 let snap = child as! DataSnapshot
                 let dict = snap.value as! [String: Any]
                 let imageURL = dict["imageURL"] as! String
-                let picSender = dict["fromID"] as! String
+                let picReciever = dict["toID"] as! String
                 self.picURL.append(imageURL)
-                print(imageURL)
-                self.whoSent.append(picSender)
+                self.whoRecieves.append(picReciever)
                 DispatchQueue.main.async {
                     self.myCollectionView.reloadData()
                 }
@@ -121,5 +120,5 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
         
     }
-    
+
 }

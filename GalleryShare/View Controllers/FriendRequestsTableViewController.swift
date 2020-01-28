@@ -34,9 +34,9 @@ extension FriendRequestsTableViewController: RequestCellDelegate{
     
         }
     func acceptFriend(requester: String, dbRef: DatabaseReference) {
+        
         let user = Auth.auth().currentUser
         let uid = user?.uid
-       
         
         if let currentUser = Auth.auth().currentUser?.uid{
             let myDataRef = dbRef.child("users").child(currentUser)

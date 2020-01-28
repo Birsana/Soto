@@ -15,6 +15,7 @@ import FirebaseFirestore
 
 class GalleryViewController: UIViewController{
     
+    
     public var screenHeightHalf: CGFloat {
         return UIScreen.main.bounds.height/3
     }
@@ -28,8 +29,6 @@ class GalleryViewController: UIViewController{
     
     @IBOutlet weak var friendView: UIView!
     
-    var personsFriends = [] as Any
-    var personsPics = [] as Any
     
     var friendArray = [NSDictionary?]()
     var username = ""
@@ -51,10 +50,24 @@ class GalleryViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //CREATE SPECIAL CASE FOR WHEN ACCEPT FRIEND REQUEST
+        let databaseRef = Database.database().reference()
         
-      
+        databaseRef.child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value) { (snapshot) in
+            if let dictionary = snapshot.value as? [String: AnyObject]{
+                self.username = (dictionary["username"] as? String)!
+                print("heeee")
+                databaseRef.child("Friends").child(self.username).observeSingleEvent(of: .value, with: { (snapshot) in
+                    print("slatt")
+                    print(snapshot)
+                    if snapshot.value is NSNull{
+                        self.friendView.isHidden = true
+                    }
+                })
+            }
+        }
         
+        
+
         
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
@@ -78,8 +91,10 @@ class GalleryViewController: UIViewController{
         galleries.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         galleries.heightAnchor.constraint(equalToConstant: screenHeightHalf).isActive = true
         galleries.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        galleries.topAnchor.constraint(equalTo: view.topAnchor, constant: 300).isActive = true
+        galleries.topAnchor.constraint(equalTo: view.topAnchor, constant: 250).isActive = true
         galleries.backgroundColor = .red
+        
+        //50
       
     }
     

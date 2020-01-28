@@ -56,7 +56,7 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
         imageSelect.asCircle()
         imageSelect.isUserInteractionEnabled = true
         imageSelect.layer.borderWidth = 2
-        imageSelect.layer.borderColor = UIColor.red.cgColor
+        imageSelect.layer.borderColor = UIColor.black.cgColor
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
         imageSelect.addGestureRecognizer(tap)
         

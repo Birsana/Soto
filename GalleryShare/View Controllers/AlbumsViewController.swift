@@ -84,7 +84,14 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+//        createAlbum.translatesAutoresizingMaskIntoConstraints = false
+//        createAlbum.widthAnchor.constraint(equalToConstant: 45).isActive = true
+//        createAlbum.heightAnchor.constraint(equalToConstant: 60).isActive = true
+//        createAlbum.x
+//        
+//        createAlbum.setTitle("Create", for: .normal)
+//        createAlbum.frame.origin.y = 100
+//        createAlbum.frame.origin.x = self.view.frame.width - createAlbum.frame.width
         
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width

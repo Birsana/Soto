@@ -27,6 +27,8 @@ class HomeGal1ViewController: UIViewController, UICollectionViewDelegate, UIColl
     var fetchResult: PHFetchResult<PHAsset>!
     var assetCollection: PHAssetCollection!
     
+    @IBOutlet weak var titleLabel: UILabel!
+    
     fileprivate let imageManager = PHCachingImageManager()
     fileprivate var thumbnailSize: CGSize!
     //fileprivate var previousPreheatRect = CGRect.zero
@@ -39,6 +41,10 @@ class HomeGal1ViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        titleLabel.textAlignment = .center
+        titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 5)
         
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
@@ -57,8 +63,7 @@ class HomeGal1ViewController: UIViewController, UICollectionViewDelegate, UIColl
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
-        
-        var thisFrame = CGRect(x: 0, y: 0,  width: self.view.frame.width, height: self.view.frame.height)
+        var thisFrame = CGRect(x: 0, y: 55,  width: self.view.frame.width, height: self.view.frame.height-55)
         myCollectionView = UICollectionView(frame: thisFrame, collectionViewLayout: layout)
         myCollectionView.collectionViewLayout = layout
         myCollectionView.delegate=self
