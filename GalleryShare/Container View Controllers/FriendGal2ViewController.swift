@@ -42,20 +42,18 @@ class FriendGal2ViewController: UIViewController, UICollectionViewDelegate, UICo
         
         databaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
             let myData = snapshot.value as! NSDictionary
-            self.toID = myData[self.username] as! String
-            databaseRef.child("sentPics").child(uid!).queryOrdered(byChild: "toID").queryEqual(toValue: self.toID!).observeSingleEvent(of: .value) { (snapshot) in
-                print(snapshot)
-                for child in snapshot.children{
-                    let snap = child as! DataSnapshot
-                    let dict = snap.value as! [String: Any]
+            self.toID = (myData[self.username as Any] as! String)
+            print(self.toID as Any)
+            
+            databaseRef.child("sentPics").child(uid!).queryOrdered(byChild: "toID").queryEqual(toValue: self.toID).observe(.childAdded) { (snapshot) in
+                
+                    let dict = snapshot.value as! [String: Any]
                     let imageURL = dict["imageURL"] as! String
                     self.picURL.append(imageURL)
                     DispatchQueue.main.async {
                         self.sentPhotos?.reloadData()
                     }
-                    
-                }
-            }
+        }
         }
         
         let layout = UICollectionViewFlowLayout()

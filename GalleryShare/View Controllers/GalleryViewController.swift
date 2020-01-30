@@ -55,9 +55,8 @@ class GalleryViewController: UIViewController{
         databaseRef.child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value) { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
                 self.username = (dictionary["username"] as? String)!
-                print("heeee")
+                
                 databaseRef.child("Friends").child(self.username).observeSingleEvent(of: .value, with: { (snapshot) in
-                    print("slatt")
                     print(snapshot)
                     if snapshot.value is NSNull{
                         self.friendView.isHidden = true
@@ -94,7 +93,7 @@ class GalleryViewController: UIViewController{
         galleries.topAnchor.constraint(equalTo: view.topAnchor, constant: 250).isActive = true
         galleries.backgroundColor = .red
         
-        //50
+
       
     }
     

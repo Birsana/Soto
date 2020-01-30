@@ -60,7 +60,6 @@
 		67CC1063237DFA9D00FDC08D /* HomeGal1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC1062237DFA9D00FDC08D /* HomeGal1ViewController.swift */; };
 		67CC1065237DFAA800FDC08D /* HomeGal2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC1064237DFAA800FDC08D /* HomeGal2ViewController.swift */; };
 		67CC10692380824500FDC08D /* ProfilePicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67CC10682380824500FDC08D /* ProfilePicViewController.swift */; };
-		67E7EC6D23A892C000F33B5D /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67E7EC6C23A892C000F33B5D /* TestingViewController.swift */; };
 		67F29EA62362D14900CA6CE5 /* AlbumImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F29EA52362D14900CA6CE5 /* AlbumImagePreviewVC.swift */; };
 		67F29EA82366077C00CA6CE5 /* GridImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F29EA72366077C00CA6CE5 /* GridImagesViewController.swift */; };
 		80C63EB690553E26C390470F /* Pods_GalleryShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FA064BC434328A857080A3F /* Pods_GalleryShare.framework */; };
@@ -150,7 +149,6 @@
 		67CC1062237DFA9D00FDC08D /* HomeGal1ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGal1ViewController.swift; sourceTree = "<group>"; };
 		67CC1064237DFAA800FDC08D /* HomeGal2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeGal2ViewController.swift; sourceTree = "<group>"; };
 		67CC10682380824500FDC08D /* ProfilePicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePicViewController.swift; sourceTree = "<group>"; };
-		67E7EC6C23A892C000F33B5D /* TestingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingViewController.swift; sourceTree = "<group>"; };
 		67F29EA52362D14900CA6CE5 /* AlbumImagePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumImagePreviewVC.swift; sourceTree = "<group>"; };
 		67F29EA72366077C00CA6CE5 /* GridImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridImagesViewController.swift; sourceTree = "<group>"; };
 		6827CA1F90E3A544C3676AC6 /* Pods-GalleryShareTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryShareTests.release.xcconfig"; path = "Target Support Files/Pods-GalleryShareTests/Pods-GalleryShareTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -218,7 +216,6 @@
 				671BF6F8238F191400CCEDB3 /* CameraViewController.swift */,
 				67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */,
 				67090873238777DB0070C01C /* AddFriendsMasterViewController.swift */,
-				67365DB223526B8200360D7D /* SendTableViewController.swift */,
 				676D2B392356744000D49B85 /* FriendViewController.swift */,
 				67BEE074238522E500D63753 /* SettingsViewController.swift */,
 				6792D9212347ECA100E6159E /* GalleryViewController.swift */,
@@ -228,8 +225,8 @@
 				D8D1DC2723C503A800ECAA58 /* PrivateViewController.swift */,
 				67922A87235A4850004092C5 /* CreateAlbumViewController.swift */,
 				67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */,
+				67365DB223526B8200360D7D /* SendTableViewController.swift */,
 				67922A8F235F63DD004092C5 /* SendAlbumTableViewController.swift */,
-				67E7EC6C23A892C000F33B5D /* TestingViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -326,11 +323,11 @@
 				67BC229A232F435300653900 /* Navigation Controllers */,
 				670BEFDE2325DF5300A04E97 /* Helpers */,
 				670BEFDD2325DDEF00A04E97 /* View Controllers */,
-				6797F3BC23248160006A3C0D /* GoogleService-Info.plist */,
 				6797F38B2322E32B006A3C0D /* Main.storyboard */,
 				6797F3872322E32B006A3C0D /* AppDelegate.swift */,
 				6797F38E2322E32D006A3C0D /* Assets.xcassets */,
 				6797F3902322E32D006A3C0D /* LaunchScreen.storyboard */,
+				6797F3BC23248160006A3C0D /* GoogleService-Info.plist */,
 				6797F3932322E32D006A3C0D /* Info.plist */,
 			);
 			path = GalleryShare;
@@ -604,7 +601,6 @@
 				67BC228B2327483B00653900 /* SignUpViewController.swift in Sources */,
 				67F29EA62362D14900CA6CE5 /* AlbumImagePreviewVC.swift in Sources */,
 				67922A85235960CA004092C5 /* FriendImagePreviewVC.swift in Sources */,
-				67E7EC6D23A892C000F33B5D /* TestingViewController.swift in Sources */,
 				6734766D23430FA6005469FC /* Checkbox.swift in Sources */,
 				6792D9262349D1E900E6159E /* PersonImageCell.swift in Sources */,
 				670BEFE02325E01200A04E97 /* Utilities.swift in Sources */,

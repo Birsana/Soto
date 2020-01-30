@@ -39,12 +39,12 @@ class FriendGal1ViewController: UIViewController, UICollectionViewDelegate, UICo
         super.viewDidLoad()
         let databaseRef = Database.database().reference()
         let user = Auth.auth().currentUser
-        let uid = Auth.auth().currentUser?.uid
+        let uid = user!.uid
         
         databaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
             let myData = snapshot.value as! NSDictionary
             self.fromID = myData[self.username] as! String
-            databaseRef.child("sentPics").child(self.fromID!).queryOrdered(byChild: "toID").queryEqual(toValue: uid!).observe(.childAdded) { (snapshot) in
+            databaseRef.child("sentPics").child(self.fromID!).queryOrdered(byChild: "toID").queryEqual(toValue: uid).observe(.childAdded) { (snapshot) in
                 let dict = snapshot.value as! [String: Any]
                 let imageURL = dict["imageURL"] as! String
                 self.picURL.append(imageURL)

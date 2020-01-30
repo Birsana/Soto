@@ -54,7 +54,8 @@ class HomeGal1ViewController: UIViewController, UICollectionViewDelegate, UIColl
         allPhotosOptions.includeAssetSourceTypes = .typeiTunesSynced
         allPhotosOptions.includeAssetSourceTypes = .typeUserLibrary
         allPhotosOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-        fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
+        //fetchResult = PHAsset.fetchAssets(with: allPhotosOptions)
+        fetchResult = PHAsset.fetchAssets(with: .image, options: allPhotosOptions)
         numFetch = fetchResult.count
         
         self.title = "Photos"
