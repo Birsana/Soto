@@ -13,6 +13,9 @@ import PhotosUI
 
 class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate{
     
+    var options = PHImageRequestOptions()
+    var optionsToSend = PHImageRequestOptions()
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return fetchResult.count
     }
@@ -22,7 +25,7 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
         
         
         cell.selectLabel = UILabel(frame: CGRect(x:50, y: 0, width: 30, height: 30))
-       
+        
         //selectLabel.translatesAutoresizingMaskIntoConstraints = false
         cell.selectLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
         cell.selectLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
@@ -36,41 +39,47 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
         cell.addSubview(cell.selectLabel)
         
         let thumbnailSize = CGSize(width: cell.frame.width, height: cell.frame.height)
-        
+        options.deliveryMode = .highQualityFormat
         let asset = fetchResult.object(at: indexPath.item)
-               cell.representedAssetIdentifier = asset.localIdentifier
-               imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: nil, resultHandler: { image, _ in
-                   if cell.representedAssetIdentifier == asset.localIdentifier {
-                       cell.thumbnailImage = image
-                   }
-               })
+        cell.representedAssetIdentifier = asset.localIdentifier
+        imageManager.requestImage(for: asset, targetSize: thumbnailSize, contentMode: .aspectFill, options: options, resultHandler: { image, _ in
+            if cell.representedAssetIdentifier == asset.localIdentifier {
+                cell.thumbnailImage = image
+            }
+        })
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
         return cell
     }
     
-   
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        optionsToSend.deliveryMode = .highQualityFormat
+        var currentPic: UIImage!
         let currentCell = myCollectionView.cellForItem(at: indexPath) as! PhotoItemCell
-        let currentPic = currentCell.img.image
-        if picsToSend.contains(currentPic!){
-            let itemToRemove = currentPic
-            while picsToSend.contains(itemToRemove!) {
-                if let itemToRemoveIndex = picsToSend.firstIndex(of: itemToRemove!) {
-                    picsToSend.remove(at: itemToRemoveIndex)
-                    let cell = myCollectionView.cellForItem(at: indexPath) as! PhotoItemCell
-                    cell.selectLabel.backgroundColor = UIColor.clear
+        let asset = fetchResult.object(at: indexPath.item)
+        imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: optionsToSend) { image, _ in
+            currentPic = image
+            if self.picsToSend.contains(currentPic!){
+                let itemToRemove = currentPic
+                while self.picsToSend.contains(itemToRemove!) {
+                    if let itemToRemoveIndex = self.picsToSend.firstIndex(of: itemToRemove!) {
+                        self.picsToSend.remove(at: itemToRemoveIndex)
+                        let cell = self.myCollectionView.cellForItem(at: indexPath) as! PhotoItemCell
+                        cell.selectLabel.backgroundColor = UIColor.clear
+                    }
                 }
             }
+            else{
+                self.picsToSend.append(currentPic!)
+                let cell = self.myCollectionView.cellForItem(at: indexPath) as! PhotoItemCell
+                cell.selectLabel.backgroundColor = UIColor.blue
+                
+                
+            }
         }
-        else{
-            picsToSend.append(currentPic!)
-            let cell = myCollectionView.cellForItem(at: indexPath) as! PhotoItemCell
-            cell.selectLabel.backgroundColor = UIColor.blue
-            
-            
-        }
+        
+        
     }
     
     public var screenFourFifths: CGFloat {

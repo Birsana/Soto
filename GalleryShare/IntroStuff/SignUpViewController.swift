@@ -12,11 +12,37 @@ import Firebase
 import FirebaseDatabase
 
 
-class SignUpViewController: UIViewController {
+
+class SignUpViewController: UIViewController, UITextFieldDelegate {
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == email{
+            if emailFirstTime{
+                emailFirstTime = false
+                textField.text = ""
+            }
+        }
+        else if textField == password{
+            if passwordFirstTime{
+                passwordFirstTime = false
+                textField.text = ""
+            }
+        }
+        if textField == username{
+            if usernameFirstTime{
+                usernameFirstTime = false
+                textField.text = ""
+            }
+        }
+    }
     
     let characterset = CharacterSet(charactersIn:
         "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789")
     
+    var emailFirstTime = true
+    var usernameFirstTime = true
+    var passwordFirstTime = true
     
     @IBOutlet weak var back: UIButton!
     
@@ -30,10 +56,13 @@ class SignUpViewController: UIViewController {
     
     @IBOutlet weak var errorLabel: UILabel!
     override func viewDidLoad() {
+
         super.viewDidLoad()
         modalPresentationStyle = .fullScreen
         setUpElements()
-        
+        email.delegate = self
+        password.delegate = self
+        username.delegate = self
     }
     func setUpElements(){
         errorLabel.alpha = 0
