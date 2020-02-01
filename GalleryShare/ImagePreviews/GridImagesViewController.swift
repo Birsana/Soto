@@ -23,7 +23,6 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoItemCell
         
-        
         cell.selectLabel = UILabel(frame: CGRect(x:50, y: 0, width: 30, height: 30))
         
         //selectLabel.translatesAutoresizingMaskIntoConstraints = false

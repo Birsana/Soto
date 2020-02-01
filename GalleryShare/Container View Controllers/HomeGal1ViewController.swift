@@ -44,7 +44,7 @@ class HomeGal1ViewController: UIViewController, UICollectionViewDelegate, UIColl
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         titleLabel.textAlignment = .center
-        titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 5)
+        titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 5).isActive = true
         
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
@@ -64,7 +64,7 @@ class HomeGal1ViewController: UIViewController, UICollectionViewDelegate, UIColl
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
-        var thisFrame = CGRect(x: 0, y: 55,  width: self.view.frame.width, height: self.view.frame.height-55)
+        let thisFrame = CGRect(x: 0, y: 55,  width: self.view.frame.width, height: self.view.frame.height-300)
         myCollectionView = UICollectionView(frame: thisFrame, collectionViewLayout: layout)
         myCollectionView.collectionViewLayout = layout
         myCollectionView.delegate=self

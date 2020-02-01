@@ -92,6 +92,7 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
         myCollectionView.dataSource=self
         myCollectionView.register(PhotoItemCell.self, forCellWithReuseIdentifier: "Cell")
         myCollectionView.backgroundColor=UIColor.white
+        myCollectionView.alwaysBounceVertical = true
         self.view.addSubview(myCollectionView)
         
         grabPhotos()

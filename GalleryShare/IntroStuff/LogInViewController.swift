@@ -9,8 +9,25 @@
 import UIKit
 import FirebaseAuth
 
-class LogInViewController: UIViewController {
+class LogInViewController: UIViewController, UITextFieldDelegate {
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == emailLog{
+            if emailFirstTime{
+                emailFirstTime = false
+                textField.text = ""
+            }
+        }
+        else if textField == passwordLog{
+            if passwordFirstTime{
+                passwordFirstTime = false
+                textField.text = ""
+            }
+        }
+    }
+    
+    var emailFirstTime = true
+    var passwordFirstTime = true
     
     @IBOutlet weak var back: UIButton!
     
@@ -26,6 +43,8 @@ class LogInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         modalPresentationStyle = .fullScreen
+        emailLog.delegate = self
+        passwordLog.delegate = self
         // Do any additional setup after loading the view.
         setUpElements()
 

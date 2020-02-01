@@ -19,6 +19,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     var imgArray = [UIImage]()
     var passedContentOffset = IndexPath()
     
+    let options = PHImageRequestOptions()
     var fetchResult: PHFetchResult<PHAsset>!
     
     private let addButton: UIButton = {
@@ -189,11 +190,22 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
     }
     
+    override func viewDidLayoutSubviews() {
+                let x = passedContentOffset
+                DispatchQueue.main.async {
+                    self.myCollectionView.layoutIfNeeded()
+                    self.myCollectionView.scrollToItem(at: x, at: .left, animated: false)
+                    //self.myCollectionView.setNeedsLayout()
+                }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
-        let x = passedContentOffset
-        DispatchQueue.main.async {
-            self.myCollectionView.scrollToItem(at: x, at: .left, animated: false)
-        }
+//        let x = passedContentOffset
+//        DispatchQueue.main.async {
+//            self.myCollectionView.layoutIfNeeded()
+//            self.myCollectionView.scrollToItem(at: x, at: .left, animated: false)
+//            //self.myCollectionView.setNeedsLayout()
+//        }
         
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -203,16 +215,17 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! ImagePreviewFullViewCell
         
+        options.isNetworkAccessAllowed = true
         let asset = fetchResult.object(at: indexPath.item)
         cell.representedAssetIdentifier = asset.localIdentifier
-        imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: nil, resultHandler: { image, _ in
+        imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: options, resultHandler: { image, _ in
             if cell.representedAssetIdentifier == asset.localIdentifier {
                 cell.imgView.image = image
             }
         })
         cell.layer.shouldRasterize = true
         cell.layer.rasterizationScale = UIScreen.main.scale
-        
+      
         
         return cell
     }
@@ -254,6 +267,7 @@ class ImagePreviewFullViewCell: UICollectionViewCell, UIScrollViewDelegate {
     var scrollImg: UIScrollView!
     var imgView: UIImageView!
     var representedAssetIdentifier: String?
+
 
 
     override init(frame: CGRect) {
