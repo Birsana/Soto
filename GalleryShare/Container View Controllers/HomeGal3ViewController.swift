@@ -9,6 +9,12 @@
 import UIKit
 import Firebase
 
+struct reloadStuff{
+    
+    static var shouldReload = false
+    
+}
+
 class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate {
     
     var myCollectionView: UICollectionView!
@@ -22,11 +28,21 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
     var screenHeight: CGFloat!
     @IBOutlet weak var titleLabel: UILabel!
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if reloadStuff.shouldReload{
+            myCollectionView.reloadData()
+            reloadStuff.shouldReload = false
+            print("yahoo")
+        }
+    }
+
     public var screenHeightHalf: CGFloat {
         return UIScreen.main.bounds.height/2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(picURL.count)
         return picURL.count
     }
     
@@ -61,7 +77,6 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let vc = AlbumImagePreviewVC()
-        print(self.whoRecieves)
         vc.urlArr = self.picURL
         vc.sentArray = self.whoRecieves
         vc.passedContentOffset = indexPath
@@ -75,7 +90,7 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         titleLabel.textAlignment = .center
-        titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 5)
+        titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 5).isActive = true
         
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
@@ -86,7 +101,7 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         let layout = UICollectionViewFlowLayout()
         
-       var thisFrame = CGRect(x: 0, y: 55,  width: self.view.frame.width, height: self.view.frame.height-55)
+        let thisFrame = CGRect(x: 0, y: 55,  width: self.view.frame.width, height: self.view.frame.height-310)
         myCollectionView = UICollectionView(frame: thisFrame, collectionViewLayout: layout)
         myCollectionView.delegate=self
         myCollectionView.dataSource=self
@@ -105,19 +120,34 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
         let user = Auth.auth().currentUser
         let uid = Auth.auth().currentUser?.uid
         
-        databaseRef.child("sentPics").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
-            print(snapshot)
-            for child in snapshot.children{
-                let snap = child as! DataSnapshot
-                let dict = snap.value as! [String: Any]
-                let imageURL = dict["imageURL"] as! String
-                let picReciever = dict["toID"] as! String
-                self.picURL.append(imageURL)
-                self.whoRecieves.append(picReciever)
-                DispatchQueue.main.async {
-                    self.myCollectionView.reloadData()
-                }
-            }
+        //NOT SINGLE EVENT OF
+        
+//        databaseRef.child("sentPics").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
+//            for child in snapshot.children{
+//                let snap = child as! DataSnapshot
+//                let dict = snap.value as! [String: Any]
+//                let imageURL = dict["imageURL"] as! String
+//                let picReciever = dict["toID"] as! String
+//                self.picURL.append(imageURL)
+//                self.whoRecieves.append(picReciever)
+//                DispatchQueue.main.async {
+//                    self.myCollectionView.reloadData()
+//                }
+//            }
+//        }
+        
+        databaseRef.child("sentPics").child(uid!).observe(.value) { (snapshot) in
+                        for child in snapshot.children{
+                            let snap = child as! DataSnapshot
+                            let dict = snap.value as! [String: Any]
+                            let imageURL = dict["imageURL"] as! String
+                            let picReciever = dict["toID"] as! String
+                            self.picURL.append(imageURL)
+                            self.whoRecieves.append(picReciever)
+                            DispatchQueue.main.async {
+                                self.myCollectionView.reloadData()
+                            }
+                        }
         }
         
     }

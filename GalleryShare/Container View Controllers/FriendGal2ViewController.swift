@@ -43,7 +43,6 @@ class FriendGal2ViewController: UIViewController, UICollectionViewDelegate, UICo
         databaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
             let myData = snapshot.value as! NSDictionary
             self.toID = (myData[self.username as Any] as! String)
-            print(self.toID as Any)
             
             databaseRef.child("sentPics").child(uid!).queryOrdered(byChild: "toID").queryEqual(toValue: self.toID).observe(.childAdded) { (snapshot) in
                 
@@ -75,7 +74,7 @@ class FriendGal2ViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print("Count is", picURL.count)
+
         return picURL.count
     }
     

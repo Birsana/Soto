@@ -87,7 +87,7 @@ extension SendTableViewController: SendCellDelegate{
             }
         }
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-        
+         reloadStuff.shouldReload = true
     }
     
     

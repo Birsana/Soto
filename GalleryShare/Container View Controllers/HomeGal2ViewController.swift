@@ -61,7 +61,6 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let vc = AlbumImagePreviewVC()
-        print(self.whoSent)
         vc.urlArr = self.picURL
         vc.sentArray = self.whoSent
         vc.passedContentOffset = indexPath
@@ -75,7 +74,7 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         titleLabel.textAlignment = .center
-        titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 5)
+        titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 5).isActive = true
         
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
@@ -86,7 +85,7 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         let layout = UICollectionViewFlowLayout()
         
-        var thisFrame = CGRect(x: 0, y: 55,  width: self.view.frame.width, height: self.view.frame.height-55)
+        let thisFrame = CGRect(x: 0, y: 55,  width: self.view.frame.width, height: self.view.frame.height-310)
         myCollectionView = UICollectionView(frame: thisFrame, collectionViewLayout: layout)
         myCollectionView.delegate=self
         myCollectionView.dataSource=self
@@ -103,9 +102,9 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
     func grabPhotos(){
         let databaseRef = Database.database().reference()
         let user = Auth.auth().currentUser
-        let uid = Auth.auth().currentUser?.uid
+        let uid = user!.uid
         
-        databaseRef.child("sentPicsRef").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
+        databaseRef.child("sentPicsRef").child(uid).observe(.value) { (snapshot) in
             
             for child in snapshot.children{
                 let snap = child as! DataSnapshot
@@ -113,7 +112,6 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 let imageURL = dict["imageURL"] as! String
                 let picSender = dict["fromID"] as! String
                 self.picURL.append(imageURL)
-                print(imageURL)
                 self.whoSent.append(picSender)
                 DispatchQueue.main.async {
                     self.myCollectionView.reloadData()

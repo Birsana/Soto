@@ -130,7 +130,7 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
             self.username = (dict!["username"] as? String)!
             
             
-            DatabaseRef.child("sentAlbumPics").child(self.albumID!).observeSingleEvent(of: .value) { (snapshot) in
+            DatabaseRef.child("sentAlbumPics").child(self.albumID!).observe(.value) { (snapshot) in
                 for child in snapshot.children{
                     let snap = child as! DataSnapshot
                     let dict = snap.value as! [String: Any]

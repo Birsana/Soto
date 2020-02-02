@@ -42,6 +42,8 @@ class FriendViewController: UIViewController, UINavigationControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        print("jungle")
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
         screenHeight = screenSize.height

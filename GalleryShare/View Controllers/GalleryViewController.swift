@@ -57,7 +57,6 @@ class GalleryViewController: UIViewController{
                 self.username = (dictionary["username"] as? String)!
                 
                 databaseRef.child("Friends").child(self.username).observeSingleEvent(of: .value, with: { (snapshot) in
-                    print(snapshot)
                     if snapshot.value is NSNull{
                         self.friendView.isHidden = true
                     }
