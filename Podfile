@@ -15,8 +15,10 @@ pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'Kingfisher', '~> 5.0'
 pod 'JPSVolumeButtonHandler'
-pod 'Alamofire', '~> 5.0.0-rc.3'
-pod 'AWSRekognition'
+pod 'Alamofire', '~> 5.0'
+
+
+
 
 
 

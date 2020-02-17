@@ -49,7 +49,6 @@ class GalleryViewController: UIViewController{
   
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         let databaseRef = Database.database().reference()
         
         databaseRef.child("users").child(Auth.auth().currentUser!.uid).observeSingleEvent(of: .value) { (snapshot) in
@@ -90,7 +89,7 @@ class GalleryViewController: UIViewController{
         galleries.heightAnchor.constraint(equalToConstant: screenHeightHalf).isActive = true
         galleries.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         galleries.topAnchor.constraint(equalTo: view.topAnchor, constant: 250).isActive = true
-        galleries.backgroundColor = .red
+        
         
 
       

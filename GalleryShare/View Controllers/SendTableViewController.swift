@@ -9,6 +9,25 @@
 import UIKit
 import Firebase
 
+
+
+class HeaderView: UIView {
+    var sendButton: UIButton!
+    
+    override init (frame : CGRect) {
+        super.init(frame : frame)
+        sendButton = UIButton(frame: CGRect(x: 20, y: 20, width: 50, height: 50))
+        sendButton.setTitle("Send", for: .normal)
+        sendButton.setTitleColor(.black, for: .normal)
+        sendButton.addTarget(self, action: #selector(SendTableViewController.tapFunction(sender:)), for: .touchUpInside)
+        self.addSubview(sendButton)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 extension SendTableViewController: SendCellDelegate{
     func sendPic(sendTo: String) {
         
@@ -19,7 +38,9 @@ extension SendTableViewController: SendCellDelegate{
         var picURL: String?
         let imageName = NSUUID().uuidString
         let fromID = currentUser!.uid
-        //let timestamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
+        let timestamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
+        
+        
         var toID: String?
         let picToSendStorageRef = StorageRef.child("imageMessages").child("\(imageName).jpg")
         
@@ -48,8 +69,8 @@ extension SendTableViewController: SendCellDelegate{
                                     return
                             }
                             picURL = downloadURL.absoluteString
-                            let values = ["imageURL": picURL, "toID": toID]
-                            let values2 = ["imageURL": picURL, "fromID": fromID]
+                            let values = ["imageURL": picURL, "toID": toID, "timestamp": timestamp.stringValue]
+                            let values2 = ["imageURL": picURL, "fromID": fromID, "timestamp": timestamp.stringValue]
                             DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values as [AnyHashable : Any])
                             DatabaseRef.child("sentPicsRef").child(toID!).childByAutoId().updateChildValues(values2 as [AnyHashable : Any])
                         }
@@ -78,8 +99,8 @@ extension SendTableViewController: SendCellDelegate{
                                 return
                         }
                         picURL = downloadURL.absoluteString
-                        let values = ["imageURL": picURL, "toID": toID]
-                        let values2 = ["imageURL": picURL, "fromID": fromID]
+                        let values = ["imageURL": picURL, "toID": toID, "timestamp": timestamp.stringValue]
+                        let values2 = ["imageURL": picURL, "fromID": fromID, "timestamp": timestamp.stringValue]
                         DatabaseRef.child("sentPics").child(fromID).childByAutoId().updateChildValues(values as [AnyHashable : Any])
                         DatabaseRef.child("sentPicsRef").child(toID!).childByAutoId().updateChildValues(values2 as [AnyHashable : Any])
                     }
@@ -87,7 +108,7 @@ extension SendTableViewController: SendCellDelegate{
             }
         }
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
-         reloadStuff.shouldReload = true
+        reloadStuff.shouldReload = true
     }
     
     
@@ -104,6 +125,8 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
     var username = ""
     var nameAtCell : String?
     var picsToSend = [UIImage]()
+    var FriendsToSend = [String]()
+
     
     let searchController = UISearchController(searchResultsController: nil)
     var filteredUsers = [NSDictionary?]()
@@ -136,6 +159,18 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
         }
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        self.table.sectionHeaderHeight = 43.5
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.table.bounds.width, height: 43.5))
+        let sendButton = UIButton(type: .system)
+        sendButton.frame = CGRect(x: self.table.bounds.width/2 - 30, y: 10, width: 60, height: 43.5)
+        
+        sendButton.setTitle("Send", for: .normal)
+        sendButton.setTitleColor(.black, for: .normal)
+        sendButton.addTarget(self, action: #selector(tapFunction(sender:)), for: .touchUpInside)
+        view.addSubview(sendButton)
+        return view
+    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SendCell", for: indexPath) as! SendCell
         
@@ -146,19 +181,56 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
         else{
             user = self.friends[indexPath.row]
         }
-     /**   cell.username.translatesAutoresizingMaskIntoConstraints = false
-        cell.username.widthAnchor.constraint(equalToConstant: 10).isActive = true
-        cell.username.heightAnchor.constraint(equalToConstant: 10).isActive = true
-        cell.username.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -10).isActive = true
-        cell.username.topAnchor.constraint(equalTo: cell.topAnchor).isActive = true **/
+        
+        cell.sendLabel = UILabel(frame: CGRect(x: cell.frame.maxX - 40, y: 8, width: 30, height: 30))
+        
+        cell.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -20).isActive = true
+        cell.sendLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        cell.sendLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        cell.sendLabel.layer.cornerRadius = cell.sendLabel.frame.width/2
+        cell.sendLabel.layer.masksToBounds = true
+        cell.sendLabel.layer.borderWidth = 1
+        cell.sendLabel.layer.borderColor = UIColor.black.cgColor
+        
+        cell.addSubview(cell.sendLabel)
         
         cell.username.text = user?["username"] as? String
         nameAtCell = user?["username"] as? String
-        
         cell.delegate = self
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //let currentCell = myCollectionView.cellForItem(at: indexPath) as! SendCell
+        let currentCell = tableView.cellForRow(at: indexPath) as! SendCell
+        let friend = currentCell.username.text
+        if self.FriendsToSend.contains(friend!){
+            let itemToRemove = friend
+            while self.FriendsToSend.contains(itemToRemove!) {
+                if let itemToRemoveIndex = self.FriendsToSend.firstIndex(of: itemToRemove!) {
+                    self.FriendsToSend.remove(at: itemToRemoveIndex)
+                    currentCell.sendLabel.backgroundColor = UIColor.clear
+                }
+            }
+        }
+        else{
+            self.FriendsToSend.append(friend!)
+            currentCell.sendLabel.backgroundColor = UIColor.blue
+        }
+    }
+    
+    @objc func tapFunction(sender:UIButton!) {
+        if FriendsToSend.count > 0{
+            for user in FriendsToSend{
+                sendPic(sendTo: user)
+            }
+        }
+        else{
+            print("no can do")
+            return
+        }
+        
+    }
     
     // MARK: - Table view data source
     
@@ -167,6 +239,7 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         if searchController.isActive && searchController.searchBar.text != ""{
             return filteredUsers.count
         }

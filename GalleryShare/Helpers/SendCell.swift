@@ -16,7 +16,8 @@ protocol SendCellDelegate: class{
 
 class SendCell: UITableViewCell {
     
-    @IBOutlet weak var sendPic: UIButton!
+  
+    var sendLabel = UILabel()
     
     @IBOutlet weak var profilePicture: UIImageView!
     
@@ -36,8 +37,8 @@ class SendCell: UITableViewCell {
     }
 
     
-    @IBAction func sendPicTapped(_ sender: Any) {
+ /*   @IBAction func sendPicTapped(_ sender: Any) {
         delegate?.sendPic(sendTo: username.text!)
-    }
+    } */
     
 }

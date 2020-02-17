@@ -55,7 +55,6 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         optionsToSend.deliveryMode = .highQualityFormat
         var currentPic: UIImage!
-        let currentCell = myCollectionView.cellForItem(at: indexPath) as! PhotoItemCell
         let asset = fetchResult.object(at: indexPath.item)
         imageManager.requestImage(for: asset, targetSize: PHImageManagerMaximumSize, contentMode: .aspectFill, options: optionsToSend) { image, _ in
             currentPic = image
@@ -77,8 +76,6 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
                 
             }
         }
-        
-        
     }
     
     public var screenFourFifths: CGFloat {
@@ -163,7 +160,7 @@ class GridImagesViewController: UIViewController, UICollectionViewDelegate, UICo
         layout.itemSize = CGSize(width: screenWidth / 3, height: screenWidth / 3)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
-        var frame = CGRect(x:0, y: screenFourFifths, width: self.view.frame.width, height: self.view.frame.height)
+        let frame = CGRect(x:0, y: screenFourFifths, width: self.view.frame.width, height: self.view.frame.height)
         
         myCollectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
         myCollectionView.delegate=self

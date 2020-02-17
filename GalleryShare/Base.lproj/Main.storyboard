@@ -220,11 +220,11 @@
             <objects>
                 <viewController id="JKA-48-arN" customClass="AddFriendsMasterViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wym-lf-2a4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g10-It-Xtp">
-                                <rect key="frame" x="87" y="205" width="240" height="343"/>
+                                <rect key="frame" x="87" y="259" width="240" height="343"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <segue destination="Xg7-fR-vUy" kind="embed" id="qMK-2T-BRT"/>
@@ -1167,50 +1167,38 @@ send and recieve photos!</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SendCell" id="PBm-Zs-jgx" customClass="SendCell" customModule="GalleryShare" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SendCell" id="vep-Hx-1f9" customClass="SendCell" customModule="GalleryShare" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PBm-Zs-jgx" id="RSZ-dk-vWW">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vep-Hx-1f9" id="bKW-6C-hb1">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcy-d8-YVz">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQW-xn-fHG">
                                             <rect key="frame" x="50" y="11" width="42" height="21.5"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1cC-1K-gxn">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mob-Yd-6b8">
                                             <rect key="frame" x="112" y="0.0" width="205" height="85"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="205" id="ktk-I9-AUT"/>
+                                                <constraint firstAttribute="width" constant="205" id="h8F-oD-73v"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFF-ks-O0B">
-                                            <rect key="frame" x="353" y="6" width="36" height="31"/>
-                                            <state key="normal" title="Send"/>
-                                            <connections>
-                                                <action selector="sendPicTapped:" destination="PBm-Zs-jgx" eventType="touchUpInside" id="uo6-Bl-pos"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="xcy-d8-YVz" firstAttribute="firstBaseline" secondItem="XFF-ks-O0B" secondAttribute="baseline" id="Afh-l8-arm"/>
-                                        <constraint firstItem="XFF-ks-O0B" firstAttribute="leading" secondItem="1cC-1K-gxn" secondAttribute="trailing" constant="26" id="LVh-3g-boW"/>
-                                        <constraint firstItem="xcy-d8-YVz" firstAttribute="centerY" secondItem="XFF-ks-O0B" secondAttribute="centerY" id="OIo-UB-Jzc"/>
-                                        <constraint firstItem="xcy-d8-YVz" firstAttribute="centerY" secondItem="RSZ-dk-vWW" secondAttribute="centerY" id="Rhp-nw-tz9"/>
-                                        <constraint firstItem="1cC-1K-gxn" firstAttribute="leading" secondItem="xcy-d8-YVz" secondAttribute="trailing" constant="20" id="WQ3-SU-84K"/>
-                                        <constraint firstItem="xcy-d8-YVz" firstAttribute="firstBaseline" secondItem="XFF-ks-O0B" secondAttribute="firstBaseline" id="YOk-Go-Pbb"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="1cC-1K-gxn" secondAttribute="bottom" constant="-52.5" id="aaO-vF-ewA"/>
-                                        <constraint firstItem="1cC-1K-gxn" firstAttribute="top" secondItem="RSZ-dk-vWW" secondAttribute="topMargin" constant="-11" id="la1-xC-jFa"/>
-                                        <constraint firstItem="xcy-d8-YVz" firstAttribute="leading" secondItem="RSZ-dk-vWW" secondAttribute="leadingMargin" constant="30" id="qRq-sX-tIp"/>
-                                        <constraint firstItem="xcy-d8-YVz" firstAttribute="top" secondItem="RSZ-dk-vWW" secondAttribute="topMargin" id="s0e-Dj-wZP"/>
+                                        <constraint firstItem="dQW-xn-fHG" firstAttribute="centerY" secondItem="bKW-6C-hb1" secondAttribute="centerY" id="0mN-Sc-lVd"/>
+                                        <constraint firstItem="Mob-Yd-6b8" firstAttribute="leading" secondItem="dQW-xn-fHG" secondAttribute="trailing" constant="20" id="FF9-Oe-ifb"/>
+                                        <constraint firstItem="dQW-xn-fHG" firstAttribute="leading" secondItem="bKW-6C-hb1" secondAttribute="leadingMargin" constant="30" id="XK4-Vf-vSk"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Mob-Yd-6b8" secondAttribute="bottom" constant="-52.5" id="Z5Q-y1-QZ6"/>
+                                        <constraint firstItem="dQW-xn-fHG" firstAttribute="top" secondItem="bKW-6C-hb1" secondAttribute="topMargin" id="v38-Y0-Vk8"/>
+                                        <constraint firstItem="Mob-Yd-6b8" firstAttribute="top" secondItem="bKW-6C-hb1" secondAttribute="topMargin" constant="-11" id="yBL-D9-jPX"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="profilePicture" destination="1cC-1K-gxn" id="0bL-g0-vdO"/>
-                                    <outlet property="sendPic" destination="XFF-ks-O0B" id="5fg-Oh-IxE"/>
-                                    <outlet property="username" destination="xcy-d8-YVz" id="XFf-bM-Skl"/>
+                                    <outlet property="profilePicture" destination="Mob-Yd-6b8" id="hgH-zZ-1NP"/>
+                                    <outlet property="username" destination="dQW-xn-fHG" id="XGp-mO-Tod"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1478,7 +1466,7 @@ send and recieve photos!</string>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="umA-9U-cof"/>
-        <segue reference="9YG-n4-74C"/>
+        <segue reference="naB-DC-6kU"/>
         <segue reference="amn-oW-FUh"/>
     </inferredMetricsTieBreakers>
 </document>

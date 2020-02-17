@@ -101,8 +101,7 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
         for user in existingFriendsArray{
             if user?["username"] as? String == cell.Person.text{
                 cell.addFriend.isHidden = true
-                print(user?["username"])
-                print(cell.Person.text)
+           
             }
         }
         

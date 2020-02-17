@@ -16,6 +16,7 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     var picURL = [String]()
     var whoSent = [String]()
+    var timestamps = [String]()
     
     var screenSize: CGRect!
     var screenWidth: CGFloat!
@@ -98,26 +99,42 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         
     }
-    
     func grabPhotos(){
-        let databaseRef = Database.database().reference()
-        let user = Auth.auth().currentUser
-        let uid = user!.uid
+    let databaseRef = Database.database().reference()
+    let user = Auth.auth().currentUser
+    let uid = user!.uid
         
-        databaseRef.child("sentPicsRef").child(uid).observe(.value) { (snapshot) in
+    databaseRef.child("sentPicsRef").child(uid).observe(.value) { (snapshot) in
+        print(snapshot)
+        for child in snapshot.children{
+            let snap = child as! DataSnapshot
+            let dict = snap.value as! [String: Any]
+            let imageURL = dict["imageURL"] as! String
+            let picSender = dict["fromID"] as! String
+           //let timestamp = dict["timestamp"] as! String
+            self.picURL.append(imageURL)
+            self.whoSent.append(picSender)
+       //     self.timestamps.append(timestamp)
             
-            for child in snapshot.children{
-                let snap = child as! DataSnapshot
-                let dict = snap.value as! [String: Any]
-                let imageURL = dict["imageURL"] as! String
-                let picSender = dict["fromID"] as! String
-                self.picURL.append(imageURL)
-                self.whoSent.append(picSender)
-                DispatchQueue.main.async {
-                    self.myCollectionView.reloadData()
-                }
-            }
         }
+//        var dictImg: [String: String] = [:]
+//        var dictSent: [String: String] = [:]
+//        for (index, element) in self.timestamps.enumerated() {
+//            dictImg[element] = self.picURL[index]
+//            dictSent[element] = self.whoSent[index]
+//        }
+//        let sortedKeys = dictImg.keys.sorted()
+//        self.picURL.removeAll()
+//        self.whoSent.removeAll()
+//        for key in sortedKeys{
+//            self.picURL.append(dictImg[key]!)
+//            self.whoSent.append(dictSent[key]!)
+//        }
+        DispatchQueue.main.async {
+            self.myCollectionView.reloadData()
+        }
+    }
+    
         
     }
     

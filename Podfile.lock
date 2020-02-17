@@ -158,15 +158,12 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
-  - Alamofire (5.0.0-rc.3)
+  - Alamofire (5.0.0)
   - AppAuth (1.2.0):
     - AppAuth/Core (= 1.2.0)
     - AppAuth/ExternalUserAgent (= 1.2.0)
   - AppAuth/Core (1.2.0)
   - AppAuth/ExternalUserAgent (1.2.0)
-  - AWSCore (2.12.1)
-  - AWSRekognition (2.12.1):
-    - AWSCore (= 2.12.1)
   - BoringSSL-GRPC (0.0.3):
     - BoringSSL-GRPC/Implementation (= 0.0.3)
     - BoringSSL-GRPC/Interface (= 0.0.3)
@@ -313,8 +310,7 @@ PODS:
   - nanopb/encode (0.3.9011)
 
 DEPENDENCIES:
-  - Alamofire (~> 5.0.0-rc.3)
-  - AWSRekognition
+  - Alamofire (~> 5.0)
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -330,8 +326,6 @@ SPEC REPOS:
     - abseil
     - Alamofire
     - AppAuth
-    - AWSCore
-    - AWSRekognition
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAnalytics
@@ -360,10 +354,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
-  Alamofire: ca8c0de6906873be89d6deec5c8de279e00bf872
+  Alamofire: 58ff2bfb8daaacaa233d5c36e37b10a5248f59b1
   AppAuth: bce82c76043657c99d91e7882e8a9e1a93650cd4
-  AWSCore: 0a4431f74d9dbf084d420b887a6a21042b423c5c
-  AWSRekognition: 95ccdecf21033c08d28feac4f8ebe07e6b02c79e
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
   Firebase: 458d109512200d1aca2e1b9b6cf7d68a869a4a46
   FirebaseAnalytics: 45f36d9c429fc91d206283900ab75390cd05ee8a
@@ -390,6 +382,6 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
 
-PODFILE CHECKSUM: 71b015eda0629d789f0d0dc3f97cdd80f8894311
+PODFILE CHECKSUM: b3e1347708851a3736ab9b76dd208859ca94d65d
 
 COCOAPODS: 1.8.4

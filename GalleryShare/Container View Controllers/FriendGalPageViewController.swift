@@ -50,7 +50,7 @@ class FriendGalPageViewController: UIPageViewController, UIPageViewControllerDat
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         let pageContentViewController = pageViewController.viewControllers![0]
-        self.pageControl.currentPage = viewControllerList.index(of: pageContentViewController)!
+        self.pageControl.currentPage = viewControllerList.firstIndex(of: pageContentViewController)!
     }
     
     

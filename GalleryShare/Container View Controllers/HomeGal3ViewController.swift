@@ -22,6 +22,7 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     var picURL = [String]()
     var whoRecieves = [String]()
+    var timestamps = [String]()
     
     var screenSize: CGRect!
     var screenWidth: CGFloat!
@@ -31,18 +32,20 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     override func viewWillAppear(_ animated: Bool) {
         if reloadStuff.shouldReload{
-            myCollectionView.reloadData()
+            //self.picURL.removeAll()
+            //self.whoRecieves.removeAll()
+            //myCollectionView.reloadData()
+            grabPhotos()
+            
             reloadStuff.shouldReload = false
-            print("yahoo")
         }
     }
-
+    
     public var screenHeightHalf: CGFloat {
         return UIScreen.main.bounds.height/2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(picURL.count)
         return picURL.count
     }
     
@@ -80,7 +83,7 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
         vc.urlArr = self.picURL
         vc.sentArray = self.whoRecieves
         vc.passedContentOffset = indexPath
-       
+        
         self.present(vc, animated: true, completion: nil)
     }
     
@@ -109,7 +112,6 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
         myCollectionView.backgroundColor=UIColor.white
         myCollectionView.alwaysBounceVertical = true
         self.view.addSubview(myCollectionView)
-        
         grabPhotos()
         
         
@@ -117,39 +119,26 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     func grabPhotos(){
         let databaseRef = Database.database().reference()
-        let user = Auth.auth().currentUser
         let uid = Auth.auth().currentUser?.uid
+        //self.picURL.removeAll()
+       // self.whoRecieves.removeAll()
         
-        //NOT SINGLE EVENT OF
-        
-//        databaseRef.child("sentPics").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
-//            for child in snapshot.children{
-//                let snap = child as! DataSnapshot
-//                let dict = snap.value as! [String: Any]
-//                let imageURL = dict["imageURL"] as! String
-//                let picReciever = dict["toID"] as! String
-//                self.picURL.append(imageURL)
-//                self.whoRecieves.append(picReciever)
-//                DispatchQueue.main.async {
-//                    self.myCollectionView.reloadData()
-//                }
-//            }
-//        }
-        
-        databaseRef.child("sentPics").child(uid!).observe(.value) { (snapshot) in
-                        for child in snapshot.children{
-                            let snap = child as! DataSnapshot
-                            let dict = snap.value as! [String: Any]
-                            let imageURL = dict["imageURL"] as! String
-                            let picReciever = dict["toID"] as! String
-                            self.picURL.append(imageURL)
-                            self.whoRecieves.append(picReciever)
-                            DispatchQueue.main.async {
-                                self.myCollectionView.reloadData()
-                            }
-                        }
+        databaseRef.child("sentPics").child(uid!).queryOrdered(byChild: "timestamp").observe(.value) { (snapshot) in
+            for child in snapshot.children{
+                let snap = child as! DataSnapshot
+                let dict = snap.value as! [String: Any]
+                let imageURL = dict["imageURL"] as! String
+                let picReciever = dict["toID"] as! String
+                if !self.picURL.contains(imageURL){
+                self.picURL.append(imageURL)
+                self.whoRecieves.append(picReciever)
+                }
+            }
+            DispatchQueue.main.async {
+                self.myCollectionView.reloadData()
+            }
         }
         
     }
-
+    
 }
