@@ -112,7 +112,20 @@ class AlbumFriendsTableViewController: UITableViewController, UISearchResultsUpd
         cell.username.text = user?["username"] as? String
         
         cell.checkbox.borderStyle = .square
+        cell.checkbox.checkedBorderColor = .black
+        cell.checkbox.uncheckedBorderColor = .black
         cell.checkbox.checkmarkStyle = .tick
+        
+        cell.checkbox.translatesAutoresizingMaskIntoConstraints = false
+        cell.checkbox.widthAnchor.constraint(equalToConstant: 30).isActive = true
+        cell.checkbox.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        cell.checkbox.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -10).isActive = true
+        cell.checkbox.topAnchor.constraint(equalTo: cell.topAnchor, constant: (cell.bounds.height-30)/2).isActive = true
+        
+        if addedFriends.contains(cell.username.text!){
+            cell.checkbox.isChecked = true
+        }
+        
         
         let title = UILabel(frame: CGRect(x: 0, y: 0, width: cell.bounds.size.width, height: 40))
            title.textColor = UIColor.black

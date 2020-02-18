@@ -727,7 +727,7 @@ send and recieve photos!</string>
             <objects>
                 <viewController id="jEP-vy-H3s" userLabel="My Albums" customClass="AlbumsViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AEj-Ct-ZRm">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Albums" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4R2-pC-lc3">
@@ -777,7 +777,7 @@ send and recieve photos!</string>
                                 </cells>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ADB-Wj-Kar" userLabel="Create">
-                                <rect key="frame" x="348" y="69" width="46" height="30"/>
+                                <rect key="frame" x="348" y="25" width="46" height="30"/>
                                 <state key="normal" title="Create"/>
                                 <connections>
                                     <action selector="createTapped:" destination="jEP-vy-H3s" eventType="touchUpInside" id="ssZ-fr-8oB"/>
@@ -807,7 +807,7 @@ send and recieve photos!</string>
             <objects>
                 <tableViewController storyboardIdentifier="AddPpl" id="d8o-pD-pQp" customClass="AlbumFriendsTableViewController" customModule="GalleryShare" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ExF-sI-0P7">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="g17-qE-t2W">
@@ -844,15 +844,18 @@ send and recieve photos!</string>
                                             <rect key="frame" x="97" y="-21" width="179" height="85"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qq2-5C-NLc" customClass="Checkbox" customModule="GalleryShare" customModuleProvider="target">
-                                            <rect key="frame" x="284" y="-21" width="159" height="85"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qq2-5C-NLc" customClass="Checkbox" customModule="GalleryShare" customModuleProvider="target">
+                                            <rect key="frame" x="354" y="-5" width="40" height="53"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <connections>
                                                 <action selector="addTarget:" destination="W3b-Nw-aVK" eventType="valueChanged" id="ncU-j5-h6i"/>
                                             </connections>
                                         </view>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="qq2-5C-NLc" secondAttribute="trailing" constant="10" id="4Rf-yE-veJ"/>
+                                        <constraint firstItem="qq2-5C-NLc" firstAttribute="top" secondItem="5NQ-gB-7WC" secondAttribute="top" constant="20" symbolic="YES" id="C6I-6k-8zh"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="checkbox" destination="qq2-5C-NLc" id="wty-T2-jF4"/>
@@ -866,13 +869,14 @@ send and recieve photos!</string>
                             <outlet property="delegate" destination="d8o-pD-pQp" id="MVC-2I-mMY"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="Nge-9w-3xV"/>
                     <connections>
                         <outlet property="addFriends" destination="ExF-sI-0P7" id="n8E-nd-5gj"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="97A-cC-jZs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8989.855072463768" y="270.53571428571428"/>
+            <point key="canvasLocation" x="8764" y="54"/>
         </scene>
         <!--Create Album View Controller-->
         <scene sceneID="Zf1-aU-k2p">
@@ -882,42 +886,60 @@ send and recieve photos!</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YK7-sl-d0u">
-                                <rect key="frame" x="87" y="308" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3g-rI-u8h">
-                                <rect key="frame" x="184" y="593" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3g-rI-u8h">
+                                <rect key="frame" x="184" y="678" width="46" height="30"/>
                                 <state key="normal" title="Create"/>
                                 <connections>
                                     <action selector="createTapped:" destination="NZE-Fs-4zr" eventType="touchUpInside" id="T4c-XP-WcU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0g-PW-I88">
-                                <rect key="frame" x="259" y="49" width="176" height="62"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0g-PW-I88">
+                                <rect key="frame" x="266" y="20" width="128" height="30"/>
                                 <state key="normal" title="Share with Friends"/>
                                 <connections>
                                     <action selector="shareTapped:" destination="NZE-Fs-4zr" eventType="touchUpInside" id="zcl-Ab-D1r"/>
+                                    <segue destination="d8o-pD-pQp" kind="show" identifier="share" id="suq-h8-LIr"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Album Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gby-mK-5Ut">
-                                <rect key="frame" x="159" y="183" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Album Name" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gby-mK-5Ut">
+                                <rect key="frame" x="132" y="100" width="150" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="3Ee-wM-Qwm"/>
+                                    <constraint firstAttribute="width" constant="150" id="roq-QK-gW3"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3z-OU-N1h">
-                                <rect key="frame" x="86" y="485" width="193" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Add an optional cover photo"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e3z-OU-N1h">
+                                <rect key="frame" x="82" y="588" width="250" height="30"/>
+                                <state key="normal" title="Add an optional cover photo">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
                                 <connections>
                                     <action selector="addCover:" destination="NZE-Fs-4zr" eventType="touchUpInside" id="IWp-LP-IPd"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YK7-sl-d0u">
+                                <rect key="frame" x="57" y="200" width="300" height="308"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="YK7-sl-d0u" firstAttribute="top" secondItem="gby-mK-5Ut" secondAttribute="bottom" constant="65" id="1g0-Xf-NgC"/>
+                            <constraint firstItem="HDf-hp-4xY" firstAttribute="trailing" secondItem="e3z-OU-N1h" secondAttribute="trailing" constant="82" id="4Yu-Y7-TIk"/>
+                            <constraint firstItem="HDf-hp-4xY" firstAttribute="trailing" secondItem="gby-mK-5Ut" secondAttribute="trailing" constant="132" id="Adz-nC-tvO"/>
+                            <constraint firstItem="a0g-PW-I88" firstAttribute="top" secondItem="HDf-hp-4xY" secondAttribute="top" constant="20" id="BWO-qb-JxQ"/>
+                            <constraint firstItem="C3g-rI-u8h" firstAttribute="centerX" secondItem="YK7-sl-d0u" secondAttribute="centerX" id="D8y-PA-l5M"/>
+                            <constraint firstItem="e3z-OU-N1h" firstAttribute="top" secondItem="YK7-sl-d0u" secondAttribute="bottom" constant="80" id="IyR-bR-OfK"/>
+                            <constraint firstItem="HDf-hp-4xY" firstAttribute="bottom" secondItem="C3g-rI-u8h" secondAttribute="bottom" constant="100" id="KHf-gi-2jT"/>
+                            <constraint firstItem="e3z-OU-N1h" firstAttribute="leading" secondItem="HDf-hp-4xY" secondAttribute="leading" constant="82" id="Lc5-ca-3RB"/>
+                            <constraint firstItem="YK7-sl-d0u" firstAttribute="leading" secondItem="HDf-hp-4xY" secondAttribute="leading" constant="57" id="P5h-xt-goB"/>
+                            <constraint firstItem="gby-mK-5Ut" firstAttribute="leading" secondItem="HDf-hp-4xY" secondAttribute="leading" constant="132" id="QfL-Gw-JHh"/>
+                            <constraint firstItem="C3g-rI-u8h" firstAttribute="centerX" secondItem="e3z-OU-N1h" secondAttribute="centerX" id="Tun-jt-fHC"/>
+                            <constraint firstItem="gby-mK-5Ut" firstAttribute="top" secondItem="a0g-PW-I88" secondAttribute="bottom" constant="50" id="hU3-gT-gwk"/>
+                            <constraint firstAttribute="trailing" secondItem="a0g-PW-I88" secondAttribute="trailing" constant="20" id="iDA-NS-1GL"/>
+                            <constraint firstItem="C3g-rI-u8h" firstAttribute="top" secondItem="e3z-OU-N1h" secondAttribute="bottom" constant="60" id="nqz-Ll-PNP"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="HDf-hp-4xY"/>
                     </view>
                     <navigationItem key="navigationItem" id="tND-GM-CkU"/>
@@ -930,7 +952,7 @@ send and recieve photos!</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tb1-4N-iCR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7644.9275362318849" y="937.5"/>
+            <point key="canvasLocation" x="7365" y="1106"/>
         </scene>
         <!--Grid Images View Controller-->
         <scene sceneID="eLy-rM-GeH">
@@ -1168,20 +1190,20 @@ send and recieve photos!</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SendCell" id="vep-Hx-1f9" customClass="SendCell" customModule="GalleryShare" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="28" width="414" height="43"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vep-Hx-1f9" id="bKW-6C-hb1">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQW-xn-fHG">
-                                            <rect key="frame" x="50" y="11" width="42" height="21.5"/>
+                                            <rect key="frame" x="50" y="11" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mob-Yd-6b8">
-                                            <rect key="frame" x="112" y="0.0" width="205" height="85"/>
+                                            <rect key="frame" x="112" y="0.0" width="205" height="84.5"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="205" id="h8F-oD-73v"/>
                                             </constraints>
@@ -1465,7 +1487,7 @@ send and recieve photos!</string>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="umA-9U-cof"/>
+        <segue reference="1mu-v2-z5C"/>
         <segue reference="naB-DC-6kU"/>
         <segue reference="amn-oW-FUh"/>
     </inferredMetricsTieBreakers>

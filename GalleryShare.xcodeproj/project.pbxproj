@@ -216,7 +216,9 @@
 			children = (
 				678296BD23C45A4D00C2D730 /* MainPage.swift */,
 				67365DB223526B8200360D7D /* SendTableViewController.swift */,
+				67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */,
 				67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */,
+				67922A87235A4850004092C5 /* CreateAlbumViewController.swift */,
 				671BF6F8238F191400CCEDB3 /* CameraViewController.swift */,
 				67BC2296232DD7DA00653900 /* FriendRequestsTableViewController.swift */,
 				67090873238777DB0070C01C /* AddFriendsMasterViewController.swift */,
@@ -227,8 +229,6 @@
 				6734766A234125E5005469FC /* GuideViewController.swift */,
 				6792D91F2347E41A00E6159E /* MainTabViewController.swift */,
 				D8D1DC2723C503A800ECAA58 /* PrivateViewController.swift */,
-				67922A87235A4850004092C5 /* CreateAlbumViewController.swift */,
-				67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */,
 				67922A8F235F63DD004092C5 /* SendAlbumTableViewController.swift */,
 			);
 			path = "View Controllers";
@@ -240,7 +240,6 @@
 				670BEFE12325E01900A04E97 /* Constants.swift */,
 				670BEFDF2325E01200A04E97 /* Utilities.swift */,
 				67BC2290232B757100653900 /* FriendCell.swift */,
-				67922A8D235A63BE004092C5 /* AlbumCell.swift */,
 				6734766C23430FA6005469FC /* Checkbox.swift */,
 				6792D9252349D1E800E6159E /* PersonImageCell.swift */,
 				6792D927234A92A700E6159E /* PhotoItemCell.swift */,
@@ -250,6 +249,7 @@
 				67922A9523602CF4004092C5 /* AlbumItemCell.swift */,
 				67A920162367EBE400DDEB86 /* AlbumTabCell.swift */,
 				67A9201C23692BED00DDEB86 /* square.swift */,
+				67922A8D235A63BE004092C5 /* AlbumCell.swift */,
 				67BBB114237693D8007F4D3B /* AlbumPersonCell.swift */,
 			);
 			path = Helpers;

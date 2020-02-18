@@ -144,9 +144,6 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
         albums.dataSource = self
         
     }
-    
-    
-    
     @IBAction func createTapped(_ sender: Any) {
         
     }

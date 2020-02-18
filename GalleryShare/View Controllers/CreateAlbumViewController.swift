@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class CreateAlbumViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class CreateAlbumViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
     
     
     @IBOutlet weak var coverPhoto: UIImageView!
@@ -19,6 +19,16 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var share: UIButton!
     
     @IBOutlet weak var albumName: UITextField!
+    
+    var albumNameFirstTime = true
+    
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if albumNameFirstTime{
+           textField.text = ""
+           albumNameFirstTime = false
+        }
+    }
     
     var isSharedAlbum = false
     var authUsername: String?
@@ -31,12 +41,27 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        albumName.delegate = self
+        create.setTitleColor(.black, for: .normal)
+        coverPhoto.image = UIImage(named: "polaroid")
+        //coverPhoto.layer.masksToBounds = true
+       // coverPhoto.layer.borderWidth = 1.5
+       // coverPhoto.layer.borderColor = UIColor.black.cgColor
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageviewTapped))
+        coverPhoto.isUserInteractionEnabled = true
+        coverPhoto.addGestureRecognizer(tapGestureRecognizer)
     }
     
     
     @IBAction func addCover(_ sender: Any) {
-        
+     selectPhoto()
+        print("hi")
+    }
+    
+    @objc func imageviewTapped(){
+        selectPhoto()
+    }
+    func selectPhoto(){
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             
             imagePicker.delegate = self
@@ -46,8 +71,7 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
             present(imagePicker, animated: true, completion: nil)
         }
     }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[.editedImage] as? UIImage {
             selectedImage = editedImage
             self.coverPhoto.image = selectedImage!
@@ -69,7 +93,7 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
     
     @IBAction func createTapped(_ sender: Any) {
         //IF SHARE WITH SOMEONE WHO ALREADY HAS ALBUM NAMED THIS, NAME BECOMES NAME 2 FOR THAT PERSON
-        let error = validateName()
+        //let error = validateName()
         
         //DO ERROR STUFF HERE
         var picURL: String?
@@ -127,9 +151,17 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
     
     @IBAction func shareTapped(_ sender: Any) {
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+       /** let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let newController = storyboard.instantiateViewController(withIdentifier: "AddPpl") as! AlbumFriendsTableViewController
-        self.present(newController, animated: true, completion: nil)
+        self.present(newController, animated: true, completion: nil) **/
+        
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "share"{
+            let vc = segue.destination as! AlbumFriendsTableViewController
+            vc.addedFriends = self.friendsToShareWith
+        }
     }
     
     func randomString(length: Int) -> String {
