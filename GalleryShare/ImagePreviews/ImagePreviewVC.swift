@@ -34,7 +34,8 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     }()
     
     private let sendFriendButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 110, y: 0, width: 100, height: 30))
+        let button = UIButton(type: .system )
+        button.frame = CGRect(x: UIScreen.main.bounds.width - 110, y: 0, width: 100, height: 30)
         button.setTitle("Send to Friend", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = true
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
@@ -45,7 +46,8 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     }()
     
     private let gridButton: UIButton = {
-           let button = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 110, y: 0, width: 90, height: 30))
+        let button = UIButton(type: .system)
+           button.frame = CGRect(x: UIScreen.main.bounds.width - 110, y: 0, width: 90, height: 30)
            button.setTitle("Grid", for: .normal)
            button.translatesAutoresizingMaskIntoConstraints = false
            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
@@ -56,7 +58,8 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
        }()
     
     private let addAlbumButton: UIButton = {
-        let button = UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 110, y: 300, width: 90, height: 30))
+        let button = UIButton(type: .system)
+        button.frame = CGRect(x: UIScreen.main.bounds.width - 110, y: 300, width: 90, height: 30)
         button.setTitle("Add to Album", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)

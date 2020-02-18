@@ -16,7 +16,7 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
         return nameArray.count
     }
     
- 
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Alboom", for: indexPath) as! AlbumTabCell
@@ -41,7 +41,7 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
         cell.name.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
         
         cell.layer.borderColor = UIColor.black.cgColor
-        cell.layer.borderWidth = 2
+        cell.layer.borderWidth = 0.5
         
         return cell
     }
@@ -49,8 +49,8 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let vc = (storyboard?.instantiateViewController(withIdentifier: "display") as? DisplayAlbumViewController) {
-            self.definesPresentationContext = true
-            vc.modalPresentationStyle = .overCurrentContext
+            // self.definesPresentationContext = true
+            //  vc.modalPresentationStyle = .overCurrentContext
             vc.albumName = nameArray[indexPath.row]
             vc.albumID = idArray[indexPath.row]
             self.present(vc, animated: true, completion: nil)
@@ -78,20 +78,11 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     public var screenFourFifths: CGFloat {
-        return UIScreen.main.bounds.height/8
+        return UIScreen.main.bounds.height/7
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        createAlbum.translatesAutoresizingMaskIntoConstraints = false
-//        createAlbum.widthAnchor.constraint(equalToConstant: 45).isActive = true
-//        createAlbum.heightAnchor.constraint(equalToConstant: 60).isActive = true
-//        createAlbum.x
-//        
-//        createAlbum.setTitle("Create", for: .normal)
-//        createAlbum.frame.origin.y = 100
-//        createAlbum.frame.origin.x = self.view.frame.width - createAlbum.frame.width
         
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
@@ -102,9 +93,9 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         
-       /** refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
-        self.albums.addSubview(refreshControl) // not required when using UITabl **/
+        /** refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
+         self.albums.addSubview(refreshControl) // not required when using UITabl **/
         
         self.albums.frame = CGRect(x:0, y: screenFourFifths, width: self.view.frame.width, height: self.view.frame.height)
         self.albums.collectionViewLayout = layout
@@ -117,26 +108,27 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
         databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
             let myData = snapshot.value as! NSDictionary
             
-            authUsername = myData["username"] as! String
-            
-            databaseRef.child("Albums").child(authUsername!).queryOrdered(byChild: "coverPhoto").observe(.childAdded) { (snapshot) in
+            authUsername = (myData["username"] as! String)
+            databaseRef.child("Albums").child(authUsername!).queryOrdered(byChild: "timestamp").observe(.childAdded) { (snapshot) in
                 self.idArray.append(snapshot.key)
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
                     
                     if rest.key == "coverPhoto"{
                         
                         let imageURL = rest.value as! String
-                        self.picURLs.append(imageURL)
+                        //self.picURLs.append(imageURL)
+                        self.picURLs.insert(imageURL, at: 0)
                     }
                     else if rest.key == "name"{
-                        self.nameArray.append(rest.value as! String)
+                        //self.nameArray.append(rest.value as! String)
+                        self.nameArray.insert(rest.value as! String, at: 0)
                     }
                     DispatchQueue.main.async {
                         self.albums.reloadData()
                     }
                 }
-                
-                
+                //self.picURLs.reverse()
+                // self.nameArray.reverse()
             }
             
         }

@@ -38,20 +38,21 @@ class FriendGal2ViewController: UIViewController, UICollectionViewDelegate, UICo
         
         let databaseRef = Database.database().reference()
         let user = Auth.auth().currentUser
-        let uid = Auth.auth().currentUser?.uid
+        let uid = user!.uid
         
         databaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
             let myData = snapshot.value as! NSDictionary
             self.toID = (myData[self.username as Any] as! String)
             
-            databaseRef.child("sentPics").child(uid!).queryOrdered(byChild: "toID").queryEqual(toValue: self.toID).observe(.childAdded) { (snapshot) in
-                
+            databaseRef.child("sentPics").child(uid).queryOrdered(byChild: "timestamp").observe(.childAdded) { (snapshot) in
                     let dict = snapshot.value as! [String: Any]
                     let imageURL = dict["imageURL"] as! String
-                    self.picURL.append(imageURL)
+                if dict["toID"] as? String == self.toID{
+                    self.picURL.insert(imageURL, at: 0)
                     DispatchQueue.main.async {
                         self.sentPhotos?.reloadData()
                     }
+                }
         }
         }
         

@@ -215,8 +215,8 @@
 			isa = PBXGroup;
 			children = (
 				678296BD23C45A4D00C2D730 /* MainPage.swift */,
-				67365DB223526B8200360D7D /* SendTableViewController.swift */,
 				67922A8B235A6385004092C5 /* AlbumFriendsTableViewController.swift */,
+				6792D929234D8FE000E6159E /* AlbumsViewController.swift */,
 				67922A9323602C27004092C5 /* DisplayAlbumViewController.swift */,
 				67922A87235A4850004092C5 /* CreateAlbumViewController.swift */,
 				671BF6F8238F191400CCEDB3 /* CameraViewController.swift */,
@@ -225,10 +225,10 @@
 				676D2B392356744000D49B85 /* FriendViewController.swift */,
 				67BEE074238522E500D63753 /* SettingsViewController.swift */,
 				6792D9212347ECA100E6159E /* GalleryViewController.swift */,
-				6792D929234D8FE000E6159E /* AlbumsViewController.swift */,
 				6734766A234125E5005469FC /* GuideViewController.swift */,
 				6792D91F2347E41A00E6159E /* MainTabViewController.swift */,
 				D8D1DC2723C503A800ECAA58 /* PrivateViewController.swift */,
+				67365DB223526B8200360D7D /* SendTableViewController.swift */,
 				67922A8F235F63DD004092C5 /* SendAlbumTableViewController.swift */,
 			);
 			path = "View Controllers";

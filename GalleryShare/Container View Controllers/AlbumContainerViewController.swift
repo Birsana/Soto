@@ -82,7 +82,7 @@ class AlbumContainerViewController: UIViewController, UICollectionViewDelegate, 
             }
             databaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
                 let myData = snapshot.value as! NSDictionary
-                uidClicked = (myData[userClicked] as! String)
+                uidClicked = (myData[userClicked as Any] as! String)
                 databaseRef.child("Friends").child(username).observeSingleEvent(of: .value) { (snapshot) in
                     if snapshot.hasChild(uidClicked){
                          let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -128,21 +128,15 @@ class AlbumContainerViewController: UIViewController, UICollectionViewDelegate, 
          cell.username.translatesAutoresizingMaskIntoConstraints = false
          cell.username?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
          cell.username?.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
-               
-               cell.layer.borderWidth = 2
-               
-               
-               
+    
                if isSearching{
                 //print(filtered.keys)
                    let nameToUse = Array(filtered.keys)[indexPath.row]
                    cell.username?.text = nameToUse
-                   
                    let profileImageUrl = Array(filtered.values)[indexPath.row]
-                   
                    let url = URL(string: profileImageUrl)
                    
-                    cell.profilePic?.image = nil
+                   cell.profilePic?.image = nil
                    cell.profilePic?.kf.setImage(with: url)
                    
                    cell.profilePic?.asCircle()
@@ -196,17 +190,14 @@ class AlbumContainerViewController: UIViewController, UICollectionViewDelegate, 
         myCollectionView.dataSource = self
         myCollectionView.isPagingEnabled = true
         myCollectionView.collectionViewLayout = flowLayout
-        //myCollectionViewFriends.layer.borderWidth = 2
-        //myCollectionViewFriends.layer.cornerRadius = 8
-        // myCollectionViewFriends.layer.borderColor = UIColor.black.cgColor
-        
+     
         
         myCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         myCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         myCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
         
         
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y:0, width: myCollectionView.frame.width, height: 40))
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 40))
                view.addSubview(searchBar)
                searchBar.delegate = self
                searchBar.backgroundImage = UIImage()

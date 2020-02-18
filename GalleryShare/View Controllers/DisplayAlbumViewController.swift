@@ -13,6 +13,7 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
     
     @IBOutlet weak var name: UILabel!
     
+    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var members: UIView!
     
     public var screenHeightHalf: CGFloat {
@@ -52,15 +53,10 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let vc = AlbumImagePreviewVC()
-        
-        
         vc.urlArr = self.picURL
         vc.sentArray = self.whoSent
         vc.passedContentOffset = indexPath
-        
         self.present(vc, animated: true, completion: nil)
-        
-    
     }
     
     var albumName: String!
@@ -72,12 +68,10 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
-    
     var firstImage: UIImage?
     
     
     var myCollectionView: UICollectionView!
-    
     var containverVC: AlbumContainerViewController?
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -87,6 +81,11 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
         }
     }
     
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        picURL.removeAll()
+        whoSent.removeAll()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,7 +104,7 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
         
         let layout = UICollectionViewFlowLayout()
         
-        var thisFrame = CGRect(x: 0, y: screenHeightHalf, width: view.frame.width, height: view.frame.height)
+        let thisFrame = CGRect(x: 0, y: screenHeightHalf, width: view.frame.width, height: view.frame.height)
         myCollectionView = UICollectionView(frame: thisFrame, collectionViewLayout: layout)
         myCollectionView.delegate=self
         myCollectionView.dataSource=self
@@ -121,7 +120,7 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
     func grabPhotos(){
       
         let currentUser = Auth.auth().currentUser
-        let StorageRef = Storage.storage().reference()
+     //   let StorageRef = Storage.storage().reference()
         let DatabaseRef = Database.database().reference()
         let uid = currentUser!.uid
         
@@ -130,7 +129,7 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
             self.username = (dict!["username"] as? String)!
             
             
-            DatabaseRef.child("sentAlbumPics").child(self.albumID!).observe(.value) { (snapshot) in
+            DatabaseRef.child("sentAlbumPics").child(self.albumID!).queryOrdered(byChild: "timestamp").observe(.value) { (snapshot) in
                 for child in snapshot.children{
                     let snap = child as! DataSnapshot
                     let dict = snap.value as! [String: Any]
@@ -146,5 +145,10 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
             }
             
         }
+    }
+    
+    
+    @IBAction func backTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

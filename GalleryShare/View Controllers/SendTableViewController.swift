@@ -10,24 +10,6 @@ import UIKit
 import Firebase
 
 
-
-class HeaderView: UIView {
-    var sendButton: UIButton!
-    
-    override init (frame : CGRect) {
-        super.init(frame : frame)
-        sendButton = UIButton(frame: CGRect(x: 20, y: 20, width: 50, height: 50))
-        sendButton.setTitle("Send", for: .normal)
-        sendButton.setTitleColor(.black, for: .normal)
-        sendButton.addTarget(self, action: #selector(SendTableViewController.tapFunction(sender:)), for: .touchUpInside)
-        self.addSubview(sendButton)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-}
-
 extension SendTableViewController: SendCellDelegate{
     func sendPic(sendTo: String) {
         

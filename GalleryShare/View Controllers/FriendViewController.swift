@@ -73,13 +73,12 @@ class FriendViewController: UIViewController, UINavigationControllerDelegate{
     }
     
     @IBAction func dismiss(_ sender: Any) {
-        
-        //self.dismiss(animated: true, completion: nil)
-        if let vc = (storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? MainTabViewController) {
-            //self.definesPresentationContext = true
-            // vc.modalPresentationStyle = .overCurrentContext
-            self.present(vc, animated: true, completion: nil)
-        }
+        self.dismiss(animated: true, completion: nil)
+//        if let vc = (storyboard?.instantiateViewController(withIdentifier: "HomeVC") as? MainTabViewController) {
+//            //self.definesPresentationContext = true
+//            // vc.modalPresentationStyle = .overCurrentContext
+//            self.present(vc, animated: true, completion: nil)
+//        }
     }
     
 }

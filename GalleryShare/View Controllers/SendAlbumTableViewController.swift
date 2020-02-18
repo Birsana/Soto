@@ -21,6 +21,7 @@ class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdati
         let fromID = currentUser!.uid
         var toID: String?
         let picToSendStorageRef = StorageRef.child("albumMessages").child("\(imageName).jpg")
+        let timestamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
         
         if picsToSend.count > 0{
             for image in picsToSend{
@@ -47,8 +48,8 @@ class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdati
                                                return
                                        }
                                        picURL = downloadURL.absoluteString
-                                       let values = ["imageURL": picURL, "fromID": fromID]
-                                       DatabaseRef.child("sentAlbumPics").child(toID!).childByAutoId().updateChildValues(values)
+                                    let values = ["imageURL": picURL, "fromID": fromID, "timestamp": timestamp.stringValue]
+                                    DatabaseRef.child("sentAlbumPics").child(toID!).childByAutoId().updateChildValues(values as [AnyHashable : Any])
                                    }
                                    
                                }
@@ -76,8 +77,8 @@ class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdati
                                 return
                         }
                         picURL = downloadURL.absoluteString
-                        let values = ["imageURL": picURL, "fromID": fromID]
-                        DatabaseRef.child("sentAlbumPics").child(toID!).childByAutoId().updateChildValues(values)
+                        let values = ["imageURL": picURL, "fromID": fromID, "timestamp": timestamp.stringValue]
+                        DatabaseRef.child("sentAlbumPics").child(toID!).childByAutoId().updateChildValues(values as [AnyHashable : Any])
                     }
                     
                 }

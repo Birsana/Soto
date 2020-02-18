@@ -51,7 +51,7 @@ class AlbumFriendsTableViewController: UITableViewController, UISearchResultsUpd
         if let presenter = presentingViewController as? CreateAlbumViewController {
             presenter.friendsToShareWith = addedFriends
         }
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: false, completion: nil)
 
         
     }
@@ -61,9 +61,9 @@ class AlbumFriendsTableViewController: UITableViewController, UISearchResultsUpd
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var databaseRef = Database.database().reference()
+        let databaseRef = Database.database().reference()
                searchController.searchResultsUpdater = self
-               searchController.dimsBackgroundDuringPresentation = false
+               //searchController.dimsBackgroundDuringPresentation = false
                definesPresentationContext = true
                tableView.tableHeaderView = searchController.searchBar
                let user = Auth.auth().currentUser

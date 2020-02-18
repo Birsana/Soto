@@ -120,8 +120,6 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
     func grabPhotos(){
         let databaseRef = Database.database().reference()
         let uid = Auth.auth().currentUser?.uid
-        //self.picURL.removeAll()
-       // self.whoRecieves.removeAll()
         
         databaseRef.child("sentPics").child(uid!).queryOrdered(byChild: "timestamp").observe(.value) { (snapshot) in
             for child in snapshot.children{
@@ -130,8 +128,10 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 let imageURL = dict["imageURL"] as! String
                 let picReciever = dict["toID"] as! String
                 if !self.picURL.contains(imageURL){
-                self.picURL.append(imageURL)
-                self.whoRecieves.append(picReciever)
+                //self.picURL.append(imageURL)
+                self.picURL.insert(imageURL, at: 0)
+                //self.whoRecieves.append(picReciever)
+                self.whoRecieves.insert(picReciever, at: 0)
                 }
             }
             DispatchQueue.main.async {

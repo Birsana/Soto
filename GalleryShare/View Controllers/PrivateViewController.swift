@@ -26,7 +26,7 @@ class PrivateViewController: UIViewController, UICollectionViewDelegate, UIColle
     
         
         let databaseRef = Database.database().reference()
-        let user = Auth.auth().currentUser
+ //       let user = Auth.auth().currentUser
         let uid = Auth.auth().currentUser?.uid
         
         databaseRef.child("privatePics").child(uid!).observe(.childAdded, with: { (snapshot) in

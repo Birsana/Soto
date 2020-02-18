@@ -104,32 +104,18 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
     let user = Auth.auth().currentUser
     let uid = user!.uid
         
-    databaseRef.child("sentPicsRef").child(uid).observe(.value) { (snapshot) in
+        databaseRef.child("sentPicsRef").child(uid).queryOrdered(byChild: "timestamp").observe(.value) { (snapshot) in
         print(snapshot)
         for child in snapshot.children{
             let snap = child as! DataSnapshot
             let dict = snap.value as! [String: Any]
             let imageURL = dict["imageURL"] as! String
             let picSender = dict["fromID"] as! String
-           //let timestamp = dict["timestamp"] as! String
-            self.picURL.append(imageURL)
-            self.whoSent.append(picSender)
-       //     self.timestamps.append(timestamp)
+            self.picURL.insert(imageURL, at: 0)
+            //self.whoSent.append(picSender)
+            self.whoSent.insert(picSender, at: 0)
             
         }
-//        var dictImg: [String: String] = [:]
-//        var dictSent: [String: String] = [:]
-//        for (index, element) in self.timestamps.enumerated() {
-//            dictImg[element] = self.picURL[index]
-//            dictSent[element] = self.whoSent[index]
-//        }
-//        let sortedKeys = dictImg.keys.sorted()
-//        self.picURL.removeAll()
-//        self.whoSent.removeAll()
-//        for key in sortedKeys{
-//            self.picURL.append(dictImg[key]!)
-//            self.whoSent.append(dictSent[key]!)
-//        }
         DispatchQueue.main.async {
             self.myCollectionView.reloadData()
         }

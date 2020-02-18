@@ -96,7 +96,9 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
         //let error = validateName()
         
         //DO ERROR STUFF HERE
+        
         var picURL: String?
+        let timestamp: NSNumber = NSNumber(value: Int(NSDate().timeIntervalSince1970))
         let albumNameClean = albumName.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let imageName = NSUUID().uuidString
         let imageData = self.coverPhoto.image!.jpegData(compressionQuality: 1.0)
@@ -129,6 +131,7 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
                     var dict: [String: String] = [:]
                     dict["name"] = albumNameClean
                     dict["coverPhoto"] = picURL
+                    dict["timestamp"] = timestamp.stringValue
                     
                     var dict2: [String: String] = [:]
                     var counter = 1
