@@ -20,6 +20,8 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
         return UIScreen.main.bounds.height/3
     }
     
+    let defaultImage = UIImage(named: "photo")
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return picURL.count
     }
@@ -46,7 +48,7 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
         let cellImageURL = self.picURL[indexPath.row]
         let url = URL(string: cellImageURL)
         
-        cell.img.kf.setImage(with: url)
+        cell.img.kf.setImage(with: url, placeholder: defaultImage)
         
         return cell
     }
@@ -102,6 +104,8 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
         
         name.text = albumName
         
+        name.center.x = self.view.center.x
+        
         let layout = UICollectionViewFlowLayout()
         
         let thisFrame = CGRect(x: 0, y: screenHeightHalf, width: view.frame.width, height: view.frame.height)
@@ -127,7 +131,6 @@ class DisplayAlbumViewController: UIViewController, UICollectionViewDelegate, UI
         DatabaseRef.child("users").child(uid).observeSingleEvent(of: .value) { (snapshot) in
             let dict = snapshot.value as? [String: AnyObject]
             self.username = (dict!["username"] as? String)!
-            
             
             DatabaseRef.child("sentAlbumPics").child(self.albumID!).queryOrdered(byChild: "timestamp").observe(.value) { (snapshot) in
                 for child in snapshot.children{

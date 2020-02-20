@@ -33,7 +33,7 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
         cell.coverPhoto?.widthAnchor.constraint(equalToConstant: 80).isActive = true
         cell.coverPhoto?.heightAnchor.constraint(equalToConstant: 80).isActive = true
         cell.coverPhoto?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
-        cell.coverPhoto?.layer.cornerRadius = 4
+        cell.coverPhoto?.layer.cornerRadius = 6
         cell.coverPhoto?.clipsToBounds = true
         
         cell.name.translatesAutoresizingMaskIntoConstraints = false
@@ -49,33 +49,27 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let vc = (storyboard?.instantiateViewController(withIdentifier: "display") as? DisplayAlbumViewController) {
-            // self.definesPresentationContext = true
-            //  vc.modalPresentationStyle = .overCurrentContext
             vc.albumName = nameArray[indexPath.row]
-            vc.albumID = idArray[indexPath.row]
+            vc.albumID = idsToUse[indexPath.row]
             self.present(vc, animated: true, completion: nil)
             
         }
     }
     
-    @IBOutlet weak var createAlbum: UIButton!
+   
     @IBOutlet weak var albums: UICollectionView!
+    @IBOutlet weak var albumsTitle: UILabel!
     
     var imageArray = [UIImage]()
     var nameArray = [String]()
     var picURLs = [String]()
     
     var idArray = [String]()
+    var idsToUse = [String]()
     
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
-    
-    var refreshControl = UIRefreshControl()
-    
-    @objc func refresh(sender:AnyObject) {
-        self.albums.reloadData()
-    }
     
     public var screenFourFifths: CGFloat {
         return UIScreen.main.bounds.height/7
@@ -83,6 +77,8 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        albumsTitle.center.x = self.view.center.x
         
         screenSize = UIScreen.main.bounds
         screenWidth = screenSize.width
@@ -92,12 +88,9 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
         layout.itemSize = CGSize(width: screenWidth / 3, height: screenWidth / 3)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
+       
         
-        /** refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-         refreshControl.addTarget(self, action: #selector(refresh(sender:)), for: UIControl.Event.valueChanged)
-         self.albums.addSubview(refreshControl) // not required when using UITabl **/
-        
-        self.albums.frame = CGRect(x:0, y: screenFourFifths, width: self.view.frame.width, height: self.view.frame.height)
+        self.albums.frame = CGRect(x:0, y: screenFourFifths, width: self.view.frame.width, height: self.view.frame.height - 120)
         self.albums.collectionViewLayout = layout
         
         let databaseRef = Database.database().reference()
@@ -114,21 +107,18 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
                     
                     if rest.key == "coverPhoto"{
-                        
                         let imageURL = rest.value as! String
                         //self.picURLs.append(imageURL)
                         self.picURLs.insert(imageURL, at: 0)
                     }
                     else if rest.key == "name"{
-                        //self.nameArray.append(rest.value as! String)
                         self.nameArray.insert(rest.value as! String, at: 0)
                     }
                     DispatchQueue.main.async {
                         self.albums.reloadData()
+                        self.idsToUse = self.idArray.reversed()
                     }
                 }
-                //self.picURLs.reverse()
-                // self.nameArray.reverse()
             }
             
         }

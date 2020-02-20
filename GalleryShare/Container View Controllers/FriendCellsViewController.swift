@@ -73,10 +73,6 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         cell.username?.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
         cell.username?.bottomAnchor.constraint(equalTo: cell.bottomAnchor).isActive = true
         
-       // cell.layer.borderWidth = 2
-        
-        
-        
         if isSearching{
             let nameToUse = Array(filtered.keys)[indexPath.row]
             cell.username?.text = nameToUse
@@ -85,8 +81,8 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
             
             let url = URL(string: profileImageUrl)
             
-             cell.profilePic?.image = nil
-            cell.profilePic?.kf.setImage(with: url)
+            cell.profilePic?.image = nil
+            cell.profilePic?.kf.setImage(with: url, placeholder: defaultImage)
             
             cell.profilePic?.asCircle()
             return cell
@@ -102,7 +98,7 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
             
             let url = URL(string: profileImageUrl)
             cell.profilePic?.image = nil
-            cell.profilePic?.kf.setImage(with: url)
+            cell.profilePic?.kf.setImage(with: url, placeholder: defaultImage)
             cell.profilePic?.asCircle()
             
             return cell
@@ -137,6 +133,7 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
     
     var filtered: [String: String] = [:]
     var isSearching: Bool = false
+    let defaultImage = UIImage(named: "account")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -171,7 +168,7 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
         
         let databaseRef = Database.database().reference()
         let user = Auth.auth().currentUser
-        let uid = Auth.auth().currentUser?.uid
+        let uid = user?.uid
         
         databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
             if let dictionary = snapshot.value as? [String: AnyObject]{
@@ -179,7 +176,6 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
                 
                 databaseRef.child("Friends").child(self.username).queryOrdered(byChild: "username").observe(.childAdded, with: { (snapshot) in
                     //print (snapshot)
-                    let myData = snapshot.value as! NSDictionary
                     self.friendArray.append(snapshot.value as? NSDictionary)
                     DispatchQueue.main.async {
                         for friend in self.friendArray{
@@ -195,8 +191,6 @@ class FriendCellsViewController: UIViewController, UICollectionViewDelegate, UIC
                         self.myCollectionViewFriends.reloadData()
                         
                     }
-                    
-                    
                 }) { (error) in
                     print(error.localizedDescription
                     )

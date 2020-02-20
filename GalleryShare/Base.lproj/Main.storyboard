@@ -733,7 +733,7 @@ send and recieve photos!</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Albums" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4R2-pC-lc3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Albums" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4R2-pC-lc3">
                                 <rect key="frame" x="143" y="42" width="155" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
@@ -799,7 +799,7 @@ send and recieve photos!</string>
                     <navigationItem key="navigationItem" id="EUy-Ra-dtE"/>
                     <connections>
                         <outlet property="albums" destination="57x-uf-ZPa" id="Dkv-gp-y7E"/>
-                        <outlet property="createAlbum" destination="ADB-Wj-Kar" id="UV9-Uw-DSX"/>
+                        <outlet property="albumsTitle" destination="4R2-pC-lc3" id="oz7-Qf-pit"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CKc-34-i15" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1089,9 +1089,8 @@ send and recieve photos!</string>
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OId-ht-OpX">
-                                <rect key="frame" x="44" y="44" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OId-ht-OpX">
+                                <rect key="frame" x="8" y="52" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="backTapped:" destination="Imw-ff-ssq" eventType="touchUpInside" id="RyM-JI-rpN"/>
@@ -1104,9 +1103,8 @@ send and recieve photos!</string>
                                     <segue destination="zBj-Vc-8st" kind="embed" identifier="containerSegue" id="4nf-nL-lBC"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWn-pq-B3m">
-                                <rect key="frame" x="68" y="301" width="278" height="54"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VWn-pq-B3m">
+                                <rect key="frame" x="77" y="92" width="260" height="38.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="tintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
@@ -1115,6 +1113,13 @@ send and recieve photos!</string>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="OId-ht-OpX" firstAttribute="leading" secondItem="mM5-Ym-DfV" secondAttribute="leading" constant="8" id="3QA-PD-eH7"/>
+                            <constraint firstItem="VWn-pq-B3m" firstAttribute="top" secondItem="OId-ht-OpX" secondAttribute="bottom" constant="10" id="5En-jd-RTz"/>
+                            <constraint firstItem="mM5-Ym-DfV" firstAttribute="trailing" secondItem="VWn-pq-B3m" secondAttribute="trailing" constant="77" id="62e-Jj-sVx"/>
+                            <constraint firstItem="OId-ht-OpX" firstAttribute="top" secondItem="mM5-Ym-DfV" secondAttribute="top" constant="8" id="KNw-Gj-Baq"/>
+                            <constraint firstItem="VWn-pq-B3m" firstAttribute="leading" secondItem="mM5-Ym-DfV" secondAttribute="leading" constant="77" id="cts-ab-EQI"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="mM5-Ym-DfV"/>
                     </view>
                     <connections>

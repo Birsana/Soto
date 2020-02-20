@@ -35,6 +35,7 @@ class SendAlbumCell: UITableViewCell {
     
     @IBAction func addTapped(_ sender: Any) {
         delegate?.sendPic(album: albumName.text!)
+        print("tapped")
     }
     
 }

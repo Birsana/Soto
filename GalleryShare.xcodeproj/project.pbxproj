@@ -272,6 +272,7 @@
 			isa = PBXGroup;
 			children = (
 				67922A982361442C004092C5 /* FriendCellsViewController.swift */,
+				67BBB11223754E29007F4D3B /* AlbumContainerViewController.swift */,
 				67CC105A237A84F300FDC08D /* FriendGal1ViewController.swift */,
 				67CC105C237A84FE00FDC08D /* FriendGal2ViewController.swift */,
 				67CC105E237A854D00FDC08D /* FriendGalPageViewController.swift */,
@@ -279,7 +280,6 @@
 				67CC1062237DFA9D00FDC08D /* HomeGal1ViewController.swift */,
 				67CC1064237DFAA800FDC08D /* HomeGal2ViewController.swift */,
 				678296C123C5022900C2D730 /* HomeGal3ViewController.swift */,
-				67BBB11223754E29007F4D3B /* AlbumContainerViewController.swift */,
 				67BC228C2328B21400653900 /* AddFriendsTableViewController.swift */,
 			);
 			path = "Container View Controllers";
