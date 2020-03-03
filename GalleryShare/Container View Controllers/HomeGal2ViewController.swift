@@ -21,6 +21,7 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
+    let defaultImage = UIImage(named: "photo")
     
     public var screenHeightHalf: CGFloat {
         return UIScreen.main.bounds.height/2
@@ -37,7 +38,7 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
         let cellImageURL = self.picURL[indexPath.row]
         let url = URL(string: cellImageURL)
         
-        cell.img.kf.setImage(with: url)
+        cell.img.kf.setImage(with: url, placeholder: defaultImage)
         
         return cell
     }

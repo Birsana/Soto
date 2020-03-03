@@ -11,8 +11,8 @@ import UIKit
 
 func makeSquare(image: UIImage) -> UIImage{
        
-       var originalWidth  = image.size.width
-       var originalHeight = image.size.height
+       let originalWidth  = image.size.width
+       let originalHeight = image.size.height
        var x: CGFloat = 0.0
        var y: CGFloat = 0.0
        var edge: CGFloat = 0.0
@@ -32,8 +32,8 @@ func makeSquare(image: UIImage) -> UIImage{
            // square
            edge = originalWidth
        }
-       var cropSquare = CGRect(x: x, y: y, width: edge, height: edge)
-       var imageRef = image.cgImage!.cropping(to: cropSquare);
+       let cropSquare = CGRect(x: x, y: y, width: edge, height: edge)
+       let imageRef = image.cgImage!.cropping(to: cropSquare);
        
        return UIImage(cgImage: imageRef!, scale: UIScreen.main.scale, orientation: image.imageOrientation)
    }

@@ -17,7 +17,6 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
     }
     
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Alboom", for: indexPath) as! AlbumTabCell
         
@@ -93,39 +92,44 @@ class AlbumsViewController: UIViewController, UICollectionViewDelegate, UICollec
         self.albums.frame = CGRect(x:0, y: screenFourFifths, width: self.view.frame.width, height: self.view.frame.height - 120)
         self.albums.collectionViewLayout = layout
         
-        let databaseRef = Database.database().reference()
-        let user = Auth.auth().currentUser
-        let uid = user?.uid
-        var authUsername: String?
+        grabAlbums()
         
-        databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
-            let myData = snapshot.value as! NSDictionary
-            
-            authUsername = (myData["username"] as! String)
-            databaseRef.child("Albums").child(authUsername!).queryOrdered(byChild: "timestamp").observe(.childAdded) { (snapshot) in
-                self.idArray.append(snapshot.key)
-                for rest in snapshot.children.allObjects as! [DataSnapshot] {
-                    
-                    if rest.key == "coverPhoto"{
-                        let imageURL = rest.value as! String
-                        //self.picURLs.append(imageURL)
-                        self.picURLs.insert(imageURL, at: 0)
-                    }
-                    else if rest.key == "name"{
-                        self.nameArray.insert(rest.value as! String, at: 0)
-                    }
-                    DispatchQueue.main.async {
-                        self.albums.reloadData()
-                        self.idsToUse = self.idArray.reversed()
-                    }
-                }
-            }
-            
-        }
         albums.delegate = self
         albums.dataSource = self
         
     }
+    
+    func grabAlbums(){
+        let databaseRef = Database.database().reference()
+               let user = Auth.auth().currentUser
+               let uid = user?.uid
+               var authUsername: String?
+               
+               databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
+                   let myData = snapshot.value as! NSDictionary
+                   
+                   authUsername = (myData["username"] as! String)
+                   databaseRef.child("Albums").child(authUsername!).queryOrdered(byChild: "timestamp").observe(.childAdded) { (snapshot) in
+                       self.idArray.append(snapshot.key)
+                       for rest in snapshot.children.allObjects as! [DataSnapshot] {
+                           
+                           if rest.key == "coverPhoto"{
+                               let imageURL = rest.value as! String
+                               self.picURLs.insert(imageURL, at: 0)
+                           }
+                           else if rest.key == "name"{
+                               self.nameArray.insert(rest.value as! String, at: 0)
+                           }
+                           DispatchQueue.main.async {
+                               self.albums.reloadData()
+                               self.idsToUse = self.idArray.reversed()
+                           }
+                       }
+                   }
+                   
+               }
+    }
+    
     @IBAction func createTapped(_ sender: Any) {
         
     }

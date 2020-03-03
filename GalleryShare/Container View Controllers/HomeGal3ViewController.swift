@@ -27,6 +27,7 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
     var screenSize: CGRect!
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
+    let defaultImage = UIImage(named: "photo")
     @IBOutlet weak var titleLabel: UILabel!
     
     
@@ -55,7 +56,7 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
         let cellImageURL = self.picURL[indexPath.row]
         let url = URL(string: cellImageURL)
         
-        cell.img.kf.setImage(with: url)
+        cell.img.kf.setImage(with: url, placeholder: defaultImage)
         
         return cell
     }
@@ -128,9 +129,7 @@ class HomeGal3ViewController: UIViewController, UICollectionViewDelegate, UIColl
                 let imageURL = dict["imageURL"] as! String
                 let picReciever = dict["toID"] as! String
                 if !self.picURL.contains(imageURL){
-                //self.picURL.append(imageURL)
                 self.picURL.insert(imageURL, at: 0)
-                //self.whoRecieves.append(picReciever)
                 self.whoRecieves.insert(picReciever, at: 0)
                 }
             }

@@ -14,7 +14,6 @@ import Alamofire
 
 extension UIImage {
 
-
     func updateImageOrientionUpSide() -> UIImage? {
         if self.imageOrientation == .up {
             return self
@@ -37,24 +36,17 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     var previewLayer: CALayer!
     var captureDevice: AVCaptureDevice!
     var takePhoto = false
-    
     var username: String!
-    
-    
-    @IBOutlet weak var viewPics: UIImageView!
-    
-    var volumeButtonHandler: JPSVolumeButtonHandler?
-    
-    
     var counter = 1
-    
     let minimumZoom: CGFloat = 1.0
     let maximumZoom: CGFloat = 3.0
     var lastZoomFactor: CGFloat = 1.0
-    
     var photosTaken = [UIImage]()
+    var volumeButtonHandler: JPSVolumeButtonHandler?
     
     
+    @IBOutlet weak var viewPics: UIImageView!
+
     
     override func viewDidDisappear(_ animated: Bool) {
 
@@ -157,9 +149,6 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             }
             
         }
-        //PUT THE FOLLOWING IN THE FIREBASE THING, SEND ONLY FIRST 20 PICTURES
-        //http://httpbin.org/post
-        //http://soto.us-east-2.elasticbeanstalk.com/
     }
     
     @objc func handleTap(_ sender: UITapGestureRecognizer? = nil) {
@@ -174,6 +163,10 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
     
     
     func createButtons(){
+        
+        //ADD CONSTRANTS TO THE BUTTONS
+        
+        
         let captureButton = UIButton(frame: CGRect(x: 0, y: 0, width: 90, height: 90))
         captureButton.backgroundColor = UIColor.clear
         captureButton.center.x = self.view.center.x

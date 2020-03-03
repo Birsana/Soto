@@ -28,6 +28,9 @@ extension AddFriendsTableViewController: FriendCellDelegate{
 
 class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdating {
     
+    
+    //GET FIRST 10 USERS OR SOMETHING INSTEAD OF EVERYONE
+    
     var currentUsername = ""
     @IBOutlet var searchUsers: UITableView!
     
@@ -42,7 +45,7 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
 
         let databaseRef = Database.database().reference()
         searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
+       // searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         let user = Auth.auth().currentUser

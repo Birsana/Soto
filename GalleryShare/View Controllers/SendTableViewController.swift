@@ -146,7 +146,6 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.table.bounds.width, height: 43.5))
         let sendButton = UIButton(type: .system)
         sendButton.frame = CGRect(x: self.table.bounds.width/2 - 30, y: 10, width: 60, height: 43.5)
-        
         sendButton.setTitle("Send", for: .normal)
         sendButton.setTitleColor(.black, for: .normal)
         sendButton.addTarget(self, action: #selector(tapFunction(sender:)), for: .touchUpInside)
@@ -165,8 +164,9 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
         }
         
         cell.sendLabel = UILabel(frame: CGRect(x: cell.frame.maxX - 40, y: 8, width: 30, height: 30))
-        
-        cell.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -20).isActive = true
+        cell.addSubview(cell.sendLabel)
+        cell.sendLabel.translatesAutoresizingMaskIntoConstraints = false
+        cell.sendLabel.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -20).isActive = true
         cell.sendLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
         cell.sendLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
         cell.sendLabel.layer.cornerRadius = cell.sendLabel.frame.width/2
@@ -174,7 +174,7 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
         cell.sendLabel.layer.borderWidth = 1
         cell.sendLabel.layer.borderColor = UIColor.black.cgColor
         
-        cell.addSubview(cell.sendLabel)
+        
         
         cell.username.text = user?["username"] as? String
         nameAtCell = user?["username"] as? String
