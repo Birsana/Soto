@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 import Firebase
 import Photos
 import FirebaseMessaging
@@ -36,9 +37,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    fileprivate func enableFirebasePushNotifications(_ application: UIApplication) {
-        // Register for remote notifications.
+//    fileprivate func enableFirebasePushNotifications(_ application: UIApplication) {
+//        // Register for remote notifications.
+//
+//    }
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         if #available(iOS 10.0, *) {
+          
           // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self;
 
@@ -51,14 +57,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
           application.registerUserNotificationSettings(settings)
         }
-
         application.registerForRemoteNotifications()
-    }
-    
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        FirebaseApp.configure()
+        //Database.database().isPersistenceEnabled = true
+        Database.database().isPersistenceEnabled = false
+        Messaging.messaging().delegate = self
         let photos = PHPhotoLibrary.authorizationStatus()
-        
         if photos == .authorized {
             initViewControllerForAuthorizedPhotos()
         } else if photos == .notDetermined {
@@ -67,28 +72,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.initViewControllerForAuthorizedPhotos()
                 }
                 else {
-                    /**      let tempViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.firstLogIn) as? IntroPageViewController
-                     tempViewController?.modalPresentationStyle = .fullScreen
-                     self.window?.rootViewController = tempViewController
-                     self.window?.makeKeyAndVisible()
-                     let alert = UIAlertController(title: "Photos Access Denied", message: "App needs access to photos library.", preferredStyle: .alert)
-                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                     self.window?.rootViewController?.present(alert, animated: true, completion: nil)
-                     
-                     **/
+                    //temp
                 }
             })
             
         }
-        
         // Override point for customization after application launch.
-        
-        FirebaseApp.configure()
-        //Database.database().isPersistenceEnabled = true
-        Database.database().isPersistenceEnabled = false
-        
-        enableFirebasePushNotifications(application);
-        
         return true
     }
     
@@ -122,6 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // With swizzling disabled you must let Messaging know about the message, for Analytics
       // Messaging.messaging().appDidReceiveMessage(userInfo)
       // Print message ID.
+      print("you've got mail")
       if let messageID = userInfo[gcmMessageIDKey] {
         print("Message ID: \(messageID)")
       }

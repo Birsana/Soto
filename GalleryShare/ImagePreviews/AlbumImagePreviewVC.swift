@@ -152,7 +152,7 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
         self.view.addSubview(sendFriendButton)
         self.view.addSubview(addAlbumButton)
         addButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        addButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10)
+        addButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10).isActive = true
         
         //        myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
     }

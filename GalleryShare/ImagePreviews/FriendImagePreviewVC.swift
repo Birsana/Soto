@@ -126,7 +126,6 @@ class FriendImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollec
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! FriendImagePreviewFullViewCell
         
         let url = URL(string: urlArray[indexPath.row])
-        print(url)
         cell.imgView.kf.setImage(with: url)
         
         return cell
