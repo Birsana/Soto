@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
+import FirebaseMessaging
 
 class SettingsViewController: UIViewController {
 
@@ -17,8 +19,23 @@ class SettingsViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    
+    func unsubscribeAll(){
+        let databaseRef = Database.database().reference()
+        let uid = Auth.auth().currentUser!.uid
+        databaseRef.child("notifications").child(uid).observe(.value) { (snapshot) in
+            for child in snapshot.children{
+                let snap = child as! DataSnapshot
+                let dict = snap.value as! [String: Any]
+                let topic = dict["topics"] as! String
+                Messaging.messaging().unsubscribe(fromTopic: topic)
+            }
+        }
+    }
+    
+    
     @IBAction func signOut(_ sender: Any) {
-        
+        unsubscribeAll()
         do{
         try Auth.auth().signOut()
             
@@ -26,6 +43,7 @@ class SettingsViewController: UIViewController {
         } catch let logoutError{
             print (logoutError)
         }
+       
         UserDefaults.standard.set(false, forKey: "isLoggedIn")
         UserDefaults.standard.synchronize()
         let firstViewController = storyboard?.instantiateViewController(withIdentifier: Constants.Storyboard.firstViewController) as? ViewController

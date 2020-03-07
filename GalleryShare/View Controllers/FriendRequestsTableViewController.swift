@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import FirebaseDatabase
 import FirebaseFirestore
+import FirebaseMessaging
 
 extension FriendRequestsTableViewController: RequestCellDelegate{
     func declineFriend(requester: String, dbRef: DatabaseReference) {
@@ -44,20 +45,13 @@ extension FriendRequestsTableViewController: RequestCellDelegate{
             dbRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
                 let value = snapshot.value as? NSDictionary
                 let username = value?["username"] as? String
-                print(currentUser)
             
             myDataRef.observeSingleEvent(of: .value) { (snapshot) in
                 let myData = snapshot.value as! Dictionary<String, String>
                 let userFriendRequestRef = dbRef.child("Friends").child(requester).child(currentUser)
-              
-                
                 userFriendRequestRef.updateChildValues(myData)
         
-                dbRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
-                    let value = snapshot.value as? NSDictionary
-                    let username = value?["username"] as? String
                     dbRef.child("users").queryOrdered(byChild: "username").queryEqual(toValue: requester).observeSingleEvent(of: .value, with: { (snapshot) in
-                        print(snapshot)
                         let myData = snapshot.value as! NSDictionary
                         let componentArray = myData.allKeys
                         let otherUID = componentArray.first as? String
@@ -68,9 +62,10 @@ extension FriendRequestsTableViewController: RequestCellDelegate{
                         myDataRef2.observeSingleEvent(of: .value, with: { (snapshot) in
                             let myData2 = snapshot.value as! Dictionary<String, String>
                             matchingRef.updateChildValues(myData2)
+                            
+                            self.subscribeNotifications(UID: uid!, friendUID: otherUID!)
+                            
                         })
-                        
-                        
                     })
                     
                     dbRef.child("FriendRequest").child(username!).queryOrdered(byChild: "username").queryEqual(toValue: requester).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -84,7 +79,7 @@ extension FriendRequestsTableViewController: RequestCellDelegate{
                     })
                 }
                 
-            }
+        
         }
         }
         
@@ -99,12 +94,21 @@ class FriendRequestsTableViewController: UITableViewController {
     
     @IBOutlet var table: UITableView!
     var friendRequests = [NSDictionary?]()
-    var databaseRef = Database.database().reference()
+    let databaseRef = Database.database().reference()
     let user = Auth.auth().currentUser
     let uid = Auth.auth().currentUser?.uid
     var username = ""
   
    
+    func subscribeNotifications(UID: String, friendUID: String){
+        let data = ["topics": "\(UID)-\(friendUID)"]
+        let dataFriend = ["topics": "\(friendUID)-\(UID)"]
+       databaseRef.child("notifications").child(uid!).childByAutoId().updateChildValues(data)
+       databaseRef.child("notifications").child(friendUID).childByAutoId().updateChildValues(dataFriend)
+       Messaging.messaging().subscribe(toTopic: "\(UID)-\(friendUID)"){ error in
+          print("Subscribed")
+        }
+    }
     
  
     func deleteCell(cell: UITableViewCell){

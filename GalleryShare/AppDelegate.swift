@@ -13,6 +13,7 @@ import Photos
 import FirebaseMessaging
 
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
@@ -58,6 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           application.registerUserNotificationSettings(settings)
         }
         application.registerForRemoteNotifications()
+        
         
         FirebaseApp.configure()
         //Database.database().isPersistenceEnabled = true
@@ -111,7 +113,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // With swizzling disabled you must let Messaging know about the message, for Analytics
       // Messaging.messaging().appDidReceiveMessage(userInfo)
       // Print message ID.
-      print("you've got mail")
       if let messageID = userInfo[gcmMessageIDKey] {
         print("Message ID: \(messageID)")
       }
@@ -129,12 +130,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       // Messaging.messaging().appDidReceiveMessage(userInfo)
       // Print message ID.
       if let messageID = userInfo[gcmMessageIDKey] {
+        print("just got a message")
         print("Message ID: \(messageID)")
       }
 
       // Print full message.
       print(userInfo)
-
       completionHandler(UIBackgroundFetchResult.newData)
     }
     // [END receive_message]
@@ -175,7 +176,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     print(userInfo)
 
     // Change this to your preferred presentation option
-    completionHandler([])
+    completionHandler([.alert])
   }
 
   func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -183,12 +184,40 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
                               withCompletionHandler completionHandler: @escaping () -> Void) {
     let userInfo = response.notification.request.content.userInfo
     // Print message ID.
+    print("got it")
     if let messageID = userInfo[gcmMessageIDKey] {
       print("Message ID: \(messageID)")
     }
 
     // Print full message.
     print(userInfo)
+    let type = userInfo["type"] as! String
+    let homeViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainPage
+    homeViewController?.modalPresentationStyle = .fullScreen
+    self.window?.rootViewController = homeViewController
+    homeViewController?.goToNextPage()
+    self.window?.makeKeyAndVisible()
+    
+    
+//    print(type)
+//    if type == "friend"{
+//        let friend = userInfo["friend"] as! String
+//        let homeViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainPage
+//        homeViewController?.modalPresentationStyle = .fullScreen
+//        self.window?.rootViewController = homeViewController
+//        homeViewController?.goToNextPage()
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        let newController = storyboard.instantiateViewController(withIdentifier: "myFriend") as! FriendViewController
+//        newController.labelText = type
+//        newController.profilePicImage = UIImage(named: "polaroid")
+//
+//
+//        self.present(newController, animated: true, completion: nil)
+//        self.window?.makeKeyAndVisible()
+//    }
+//    else{
+//        //let album = userInfo["album"] as! String
+//    }
 
     completionHandler()
   }

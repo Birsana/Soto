@@ -170,7 +170,7 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell=collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! AlbumImagePreviewFullViewCell
-        let mainImageUrl = URL(string: (self.urlArr[indexPath.item] as! String))
+        let mainImageUrl = URL(string: (self.urlArr[indexPath.item] ))
         cell.imgView.kf.setImage(with: mainImageUrl)
         
         cell.senderView?.translatesAutoresizingMaskIntoConstraints = false
@@ -247,7 +247,7 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
                             self.present(newController, animated: true, completion: nil)
                         }
                         else{
-                            let alert = UIAlertController(title: "Not Friends", message: "You are not friends with \(userClicked)", preferredStyle: .alert)
+                            let alert = UIAlertController(title: "Not Friends", message: "You are not friends with \(String(describing: userClicked))", preferredStyle: .alert)
                             let requestAction = UIAlertAction(title: "Send Request", style: .default, handler: { action in
                                 self.sendRequest(requestTo: userClicked!)
                             } )

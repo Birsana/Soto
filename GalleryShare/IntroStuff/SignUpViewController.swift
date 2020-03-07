@@ -27,6 +27,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             if passwordFirstTime{
                 passwordFirstTime = false
                 textField.text = ""
+                textField.isSecureTextEntry = true
             }
         }
         if textField == username{

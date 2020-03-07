@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseMessaging
 
 class CreateAlbumViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextFieldDelegate {
     
@@ -91,6 +92,14 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
         return nil
     }
     
+    
+    func subscribeNotifications(albumID: String, uid: String){
+       let data = ["topics": "/topics/\(albumID)"]
+       let databaseRef = Database.database().reference()
+       databaseRef.child("notifications").child(uid).childByAutoId().updateChildValues(data)
+    }
+    
+    
     @IBAction func createTapped(_ sender: Any) {
         //IF SHARE WITH SOMEONE WHO ALREADY HAS ALBUM NAMED THIS, NAME BECOMES NAME 2 FOR THAT PERSON
         //let error = validateName()
@@ -111,14 +120,14 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
             let myData = snapshot.value as! NSDictionary
             self.authUsername = myData["username"] as? String
             self.friendsToShareWith.append(self.authUsername!)
-            let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil)
+            _ = picToSendStorageRef.putData(imageData!, metadata: nil)
             {metadata, error in
                 
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
                     return
                 }
-                let size = metadata.size
+                _ = metadata.size
                 
                 picToSendStorageRef.downloadURL { (url, error) in
                     guard let downloadURL = url
@@ -144,12 +153,27 @@ class CreateAlbumViewController: UIViewController, UINavigationControllerDelegat
                     DatabaseRef.child("AlbumsRef").child(uuid).updateChildValues(dict2)
                     
                     for friend in self.friendsToShareWith{ DatabaseRef.child("Albums").child(friend).child(uuid).updateChildValues(dict)
+                        DatabaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
+                            let myData = snapshot.value as! NSDictionary
+                            let friendID = myData[friend]
+                            self.subscribeAlbum(friend: friendID as! String, albumID: uuid)
+                            
+                        }
                     }
                 }
             }
             
         }
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func subscribeAlbum(friend: String, albumID: String){
+        let databaseRef = Database.database().reference()
+        let data = ["topics": albumID]
+        databaseRef.child("notifications").child(friend).childByAutoId().updateChildValues(data)
+        Messaging.messaging().subscribe(toTopic: albumID){ error in
+          print("Subscribed")
+        }
     }
     
     @IBAction func shareTapped(_ sender: Any) {

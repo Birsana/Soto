@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import Firebase
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
     
@@ -22,6 +23,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             if passwordFirstTime{
                 passwordFirstTime = false
                 textField.text = ""
+                textField.isSecureTextEntry = true
             }
         }
     }
@@ -31,7 +33,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var back: UIButton!
     
-   @IBOutlet weak var
+    @IBOutlet weak var
     emailLog: UITextField!
     
     @IBOutlet weak var passwordLog: UITextField!
@@ -47,28 +49,44 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         passwordLog.delegate = self
         // Do any additional setup after loading the view.
         setUpElements()
-
+        
     }
     func setUpElements(){
         errorLabel.alpha = 0
     }
-
+    
     /*
-    // MARK: - Navigation
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
+    
+    func subscribeAll(){
+        let databaseRef = Database.database().reference()
+        let uid = Auth.auth().currentUser!.uid
+        databaseRef.child("notifications").child(uid).observe(.value) { (snapshot) in
+            for child in snapshot.children{
+                let snap = child as! DataSnapshot
+                let dict = snap.value as! [String: Any]
+                let topic = dict["topics"] as! String
+                print(topic)
+                Messaging.messaging().subscribe(toTopic: topic){ error in
+                  print("Subscribed to \(topic)")
+                }
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+            }
+        }
     }
-    */
-
     
     @IBAction func loginTapped(_ sender: Any) {
         
         let email = emailLog.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         let password = passwordLog.text!.trimmingCharacters(in: .whitespacesAndNewlines)
-        
         
         // Signing in the user
         Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
@@ -87,6 +105,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
                 
                 self.view.window?.rootViewController = homeViewController
                 self.view.window?.makeKeyAndVisible()
+                self.subscribeAll()
             }
         }
     }

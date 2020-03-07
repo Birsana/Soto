@@ -52,8 +52,9 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         goNext.isEnabled = false
-        
         imageSelect.asCircle()
+        print(imageSelect.bounds.height)
+        print(imageSelect.bounds.width)
         imageSelect.isUserInteractionEnabled = true
         imageSelect.layer.borderWidth = 2
         imageSelect.layer.borderColor = UIColor.black.cgColor
@@ -64,7 +65,7 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
     
     func hasFaces(profilePic: UIImage){
         let request = VNDetectFaceRectanglesRequest { (req, error) in
-            if let error = error{
+            if error != nil{
                 
                 // print("no faces")
                 self.noFace = true

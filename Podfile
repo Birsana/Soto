@@ -19,10 +19,6 @@ pod 'JPSVolumeButtonHandler'
 pod 'Alamofire', '~> 5.0'
 
 
-
-
-
-
   target 'GalleryShareTests' do
     inherit! :search_paths
     # Pods for testing

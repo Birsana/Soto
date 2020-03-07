@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Alamofire
 
 
 extension SendTableViewController: SendCellDelegate{
@@ -34,14 +35,14 @@ extension SendTableViewController: SendCellDelegate{
                 DatabaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
                     let myData = snapshot.value as! NSDictionary
                     toID = (myData[sendTo] as! String)
-                    let uploadTask = picToSendStorageRefM.putData(imageDataM!, metadata: nil)
+                    _ = picToSendStorageRefM.putData(imageDataM!, metadata: nil)
                     {metadata, error in
                         
                         guard let metadata = metadata else {
                             // Uh-oh, an error occurred!
                             return
                         }
-                        let size = metadata.size
+                        _ = metadata.size
                         
                         picToSendStorageRefM.downloadURL { (url, error) in
                             guard let downloadURL = url
@@ -64,14 +65,14 @@ extension SendTableViewController: SendCellDelegate{
             DatabaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
                 let myData = snapshot.value as! NSDictionary
                 toID = (myData[sendTo] as! String)
-                let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil)
+                _ = picToSendStorageRef.putData(imageData!, metadata: nil)
                 {metadata, error in
                     
                     guard let metadata = metadata else {
                         // Uh-oh, an error occurred!
                         return
                     }
-                    let size = metadata.size
+                    _ = metadata.size
                     
                     picToSendStorageRef.downloadURL { (url, error) in
                         guard let downloadURL = url
@@ -91,6 +92,20 @@ extension SendTableViewController: SendCellDelegate{
         }
         self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
         reloadStuff.shouldReload = true
+        var username: String!
+        DatabaseRef.child("users").child(fromID).observeSingleEvent(of: .value) { (snapshot) in
+            let myData = snapshot.value as! NSDictionary
+            username = (myData["username"] as! String)
+            let topic = "\(toID!)-\(fromID)"
+            let parameters = ["username": username, "topic": topic]
+            AF.upload(multipartFormData: { (multipartFormData) in
+                for (key, value) in parameters{
+                    multipartFormData.append((value?.data(using: String.Encoding.utf8)!)!, withName: key)
+                }
+            }, to: "http://soto.us-east-2.elasticbeanstalk.com/image").responseString { (response) in
+                print(response)
+            }
+        }
     }
     
     

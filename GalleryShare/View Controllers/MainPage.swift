@@ -40,8 +40,9 @@ class MainPage: UIPageViewController, UIPageViewControllerDataSource, UIPageView
         if let firstViewController = viewControllerList.first{
             self.setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
         }
-
-        // Do any additional setup after loading the view.
+        
+        goToNextPage()
+        
     }
     func configurePageControl(){
         pageControl = UIPageControl(frame: CGRect(x: 0, y: UIScreen.main.bounds.maxY-50, width: UIScreen.main.bounds.width, height: 50))
@@ -88,5 +89,16 @@ class MainPage: UIPageViewController, UIPageViewControllerDataSource, UIPageView
             return nil
         }
         return viewControllerList[nextIndex]
+    }
+    
+    
+    func goToNextPage(){
+
+        guard let currentViewController = self.viewControllers?.first else { return }
+
+        guard let nextViewController = dataSource?.pageViewController( self, viewControllerAfter: currentViewController ) else { return }
+
+        setViewControllers([nextViewController], direction: .forward, animated: false, completion: nil)
+
     }
 }

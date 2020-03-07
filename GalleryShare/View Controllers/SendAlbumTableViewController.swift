@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import Alamofire
 
 
 class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdating, SendAlbumCellDelegate {
@@ -33,13 +34,13 @@ class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdati
                                let myData = snapshot.value as! NSDictionary
                                let componentArray = myData.allKeys
                                toID = componentArray.first as? String
-                               let uploadTask = picToSendStorageRefM.putData(imageDataM!, metadata: nil) { (metadata, error) in
+                    _ = picToSendStorageRefM.putData(imageDataM!, metadata: nil) { (metadata, error) in
                                    
                                    guard let metadata = metadata else {
                                        // Uh-oh, an error occurred!
                                        return
                                    }
-                                   let size = metadata.size
+                        _ = metadata.size
                                    picToSendStorageRefM.downloadURL { (url, error) in
                                        guard let downloadURL = url
                                            
@@ -62,13 +63,13 @@ class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdati
                 let myData = snapshot.value as! NSDictionary
                 let componentArray = myData.allKeys
                 toID = componentArray.first as? String
-                let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil) { (metadata, error) in
+                _ = picToSendStorageRef.putData(imageData!, metadata: nil) { (metadata, error) in
                     
                     guard let metadata = metadata else {
                         // Uh-oh, an error occurred!
                         return
                     }
-                    let size = metadata.size
+                    _ = metadata.size
                     picToSendStorageRef.downloadURL { (url, error) in
                         guard let downloadURL = url
                             
@@ -86,7 +87,22 @@ class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdati
             }
         }
         self.dismiss(animated: true, completion: nil)
-        
+        DatabaseRef.child("Albums").child(username).queryOrdered(byChild: "name").observeSingleEvent(of: .value) { (snapshot) in
+            let myData = snapshot.value as! NSDictionary
+            let componentArray = myData.allKeys
+            toID = componentArray.first as? String
+            let topic = toID!
+            Messaging.messaging().unsubscribe(fromTopic: topic)
+            let parameters = ["album": album, "topic": topic]
+            AF.upload(multipartFormData: { (multipartFormData) in
+                for (key, value) in parameters{
+                    multipartFormData.append((value.data(using: String.Encoding.utf8)!), withName: key)
+                }
+            }, to: "http://soto.us-east-2.elasticbeanstalk.com/album").responseString { (response) in
+                Messaging.messaging().subscribe(toTopic: topic)
+            }
+        }
+    
     }
     
     
