@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import Alamofire
+import Kingfisher
 
 
 extension SendTableViewController: SendCellDelegate{
@@ -133,6 +134,7 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
         //searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
@@ -181,23 +183,40 @@ class SendTableViewController: UITableViewController, UISearchResultsUpdating {
         cell.sendLabel = UILabel(frame: CGRect(x: cell.frame.maxX - 40, y: 8, width: 30, height: 30))
         cell.addSubview(cell.sendLabel)
         cell.sendLabel.translatesAutoresizingMaskIntoConstraints = false
-        cell.sendLabel.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -20).isActive = true
+        cell.sendLabel.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -10).isActive = true
         cell.sendLabel.widthAnchor.constraint(equalToConstant: 30).isActive = true
         cell.sendLabel.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        cell.sendLabel.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
         cell.sendLabel.layer.cornerRadius = cell.sendLabel.frame.width/2
         cell.sendLabel.layer.masksToBounds = true
         cell.sendLabel.layer.borderWidth = 1
         cell.sendLabel.layer.borderColor = UIColor.black.cgColor
         
+        let profileURL = user?["profilePic"] as? String
+        let url = URL(string: profileURL!)
+        
+        cell.profilePicture.kf.setImage(with: url)
+        
+        cell.profilePicture.translatesAutoresizingMaskIntoConstraints = false
+        cell.profilePicture.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        cell.profilePicture.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        cell.profilePicture.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+        cell.profilePicture.leftAnchor.constraint(equalTo: cell.leftAnchor).isActive = true
+  
         
         
         cell.username.text = user?["username"] as? String
         nameAtCell = user?["username"] as? String
         cell.delegate = self
+        cell.username.translatesAutoresizingMaskIntoConstraints = false
+        cell.username.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+        cell.username.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        cell.username.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 50).isActive = true
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+       
         //let currentCell = myCollectionView.cellForItem(at: indexPath) as! SendCell
         let currentCell = tableView.cellForRow(at: indexPath) as! SendCell
         let friend = currentCell.username.text

@@ -191,7 +191,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
     // Print full message.
     print(userInfo)
-    let type = userInfo["type"] as! String
+   // let type = userInfo["type"] as! String
     let homeViewController = self.storyboard.instantiateViewController(withIdentifier: Constants.Storyboard.homeViewController) as? MainPage
     homeViewController?.modalPresentationStyle = .fullScreen
     self.window?.rootViewController = homeViewController

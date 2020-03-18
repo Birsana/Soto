@@ -11,6 +11,7 @@ import Firebase
 
 class FriendGal2ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate{
     
+    
     @IBOutlet weak var sentPhotos: UICollectionView!
     
     var viewHeightHalf: CGFloat {
@@ -30,7 +31,6 @@ class FriendGal2ViewController: UIViewController, UICollectionViewDelegate, UICo
     var friend: String!
     var toID: String?
     var imageArray=[UIImage]()
-    
     var username: String!
     
     override func viewDidLoad() {

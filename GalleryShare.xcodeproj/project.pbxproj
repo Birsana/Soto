@@ -63,7 +63,6 @@
 		67F29EA62362D14900CA6CE5 /* AlbumImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F29EA52362D14900CA6CE5 /* AlbumImagePreviewVC.swift */; };
 		67F29EA82366077C00CA6CE5 /* GridImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67F29EA72366077C00CA6CE5 /* GridImagesViewController.swift */; };
 		957AB9A937D90C822EA0815F /* Pods_GalleryShareTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6583EC5124AC5E9D33E32B49 /* Pods_GalleryShareTests.framework */; };
-		D8D1DC2823C503A800ECAA58 /* PrivateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D1DC2723C503A800ECAA58 /* PrivateViewController.swift */; };
 		D8D1DC2A23C5042100ECAA58 /* HomeGalPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8D1DC2923C5042100ECAA58 /* HomeGalPageViewController.swift */; };
 		E800C5225CAC77320CB38881 /* Pods_GalleryShare.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969A318980184B27D02BC628 /* Pods_GalleryShare.framework */; };
 		EA307D7568FD073BB3221385 /* Pods_GalleryShareUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4BFCD1A92DBEA0B24401141 /* Pods_GalleryShareUITests.framework */; };
@@ -174,7 +173,6 @@
 		D469709E05F260F9CCC11C21 /* Pods-GalleryShare-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryShare-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-GalleryShare-OneSignalNotificationServiceExtension/Pods-GalleryShare-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		D792ECC8078F86704764FBFB /* Pods-GalleryShareUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryShareUITests.release.xcconfig"; path = "Target Support Files/Pods-GalleryShareUITests/Pods-GalleryShareUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D8056A95240D6FFF00C1EA3A /* GalleryShare.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GalleryShare.entitlements; sourceTree = "<group>"; };
-		D8D1DC2723C503A800ECAA58 /* PrivateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateViewController.swift; sourceTree = "<group>"; };
 		D8D1DC2923C5042100ECAA58 /* HomeGalPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeGalPageViewController.swift; sourceTree = "<group>"; };
 		F4BFCD1A92DBEA0B24401141 /* Pods_GalleryShareUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GalleryShareUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -246,7 +244,6 @@
 				6792D9212347ECA100E6159E /* GalleryViewController.swift */,
 				6734766A234125E5005469FC /* GuideViewController.swift */,
 				6792D91F2347E41A00E6159E /* MainTabViewController.swift */,
-				D8D1DC2723C503A800ECAA58 /* PrivateViewController.swift */,
 				67365DB223526B8200360D7D /* SendTableViewController.swift */,
 				67922A8F235F63DD004092C5 /* SendAlbumTableViewController.swift */,
 			);
@@ -638,7 +635,6 @@
 				67922A9423602C27004092C5 /* DisplayAlbumViewController.swift in Sources */,
 				678296C223C5022900C2D730 /* HomeGal3ViewController.swift in Sources */,
 				676D2B3A2356744000D49B85 /* FriendViewController.swift in Sources */,
-				D8D1DC2823C503A800ECAA58 /* PrivateViewController.swift in Sources */,
 				67BC22832327432800653900 /* ViewController.swift in Sources */,
 				67BBB115237693D8007F4D3B /* AlbumPersonCell.swift in Sources */,
 				6792D92423480C3D00E6159E /* ImagePreviewVC.swift in Sources */,

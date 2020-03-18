@@ -139,14 +139,14 @@ class ProfilePicViewController: UIViewController, UINavigationControllerDelegate
             
             let profilePicStorageRef = StorageRef.child("users/\(currentUser!.uid)/profilePics")
             
-            let uploadTask = profilePicStorageRef.putData(imageData!, metadata: nil)
+            _ = profilePicStorageRef.putData(imageData!, metadata: nil)
             {metadata, error in
                 
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
                     return
                 }
-                let size = metadata.size
+                _ = metadata.size
                 
                 profilePicStorageRef.downloadURL { (url, error) in
                     guard let downloadURL = url

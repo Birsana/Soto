@@ -58,9 +58,9 @@ class PrivImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollecti
       }
     
     @objc private func deletePic(){
-        let storage = Storage.storage()
+        _ = Storage.storage()
         let databaseRef = Database.database().reference()
-        let user = Auth.auth().currentUser
+        _ = Auth.auth().currentUser
         let uid = Auth.auth().currentUser?.uid
         
         for cell in myCollectionView.visibleCells{

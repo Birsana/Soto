@@ -47,7 +47,7 @@ class HomeGal2ViewController: UIViewController, UICollectionViewDelegate, UIColl
         let width = collectionView.frame.width
         
         if DeviceInfo.Orientation.isPortrait {
-            return CGSize(width: width/4 - 1, height: width/4 - 1)
+            return CGSize(width: width/3 - 1, height: width/3 - 1)
         } else {
             return CGSize(width: width/6 - 1, height: width/6 - 1)
         }

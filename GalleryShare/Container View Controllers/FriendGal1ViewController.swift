@@ -28,12 +28,11 @@ class FriendGal1ViewController: UIViewController, UICollectionViewDelegate, UICo
     var friend: String!
     var fromID: String?
     var imageArray=[UIImage]()
-    
+    var username: String!
     
     
     @IBOutlet weak var sentPhotos: UICollectionView!
     
-    var username: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()

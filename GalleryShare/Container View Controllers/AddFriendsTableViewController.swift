@@ -45,7 +45,7 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
 
         let databaseRef = Database.database().reference()
         searchController.searchResultsUpdater = self
-       // searchController.dimsBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         let user = Auth.auth().currentUser

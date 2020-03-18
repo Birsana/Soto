@@ -16,7 +16,6 @@ class SendAlbumCell: UITableViewCell {
     
     
     @IBOutlet weak var albumName: UILabel!
-    @IBOutlet weak var coverPhoto: UIImageView!
     @IBOutlet weak var add: UIButton!
     
     var delegate: SendAlbumCellDelegate?

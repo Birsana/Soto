@@ -71,14 +71,14 @@ class AlbumImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollect
         let imageData = pictoSend.jpegData(compressionQuality: 0.9)
         let privatePicStorageRef = StorageRef.child("users/\(currentUser!.uid)/privatePics").child("\(imageName).jpg")
         
-        let uploadTask = privatePicStorageRef.putData(imageData!, metadata: nil)
+        _ = privatePicStorageRef.putData(imageData!, metadata: nil)
         {metadata, error in
             
             guard let metadata = metadata else {
                 // Uh-oh, an error occurred!
                 return
             }
-            let size = metadata.size
+            _ = metadata.size
             
             privatePicStorageRef.downloadURL { (url, error) in
                 guard let downloadURL = url

@@ -39,6 +39,11 @@ class AlbumCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func layoutSubviews() {
+        self.profilePic.layer.cornerRadius = self.profilePic.frame.width/2.0
+        self.profilePic.clipsToBounds = true
+    }
+    
     
     @IBAction func addTarget(_ sender: Any) {
         delegate?.appendFriend(friendToAdd: username.text! , add: checkbox.isChecked)

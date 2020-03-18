@@ -11,9 +11,8 @@ import UIKit
 class FriendGalPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate{
     
     var pageControl = UIPageControl()
-    
     var username1: String?
-    //var username2: String?
+
     
     lazy var viewControllerList:[UIViewController] = {
         let sb = UIStoryboard(name: "Main", bundle: nil)

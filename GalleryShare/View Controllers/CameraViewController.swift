@@ -228,13 +228,13 @@ class CameraViewController: UIViewController, AVCaptureVideoDataOutputSampleBuff
             var picURL: String?
             let imageName = NSUUID().uuidString
             let picToSendStorageRef = StorageRef.child("users").child("takenPhotos").child("\(imageName).jpg")
-            let uploadTask = picToSendStorageRef.putData(imageData!, metadata: nil)
+            _ = picToSendStorageRef.putData(imageData!, metadata: nil)
             {metadata, error in
                 guard let metadata = metadata else {
                     // Uh-oh, an error occurred!
                     return
                 }
-                let size = metadata.size
+                _ = metadata.size
 
                 picToSendStorageRef.downloadURL { (url, error) in
                     guard let downloadURL = url

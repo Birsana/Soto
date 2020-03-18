@@ -110,9 +110,21 @@ class HomeGal1ViewController: UIViewController, UICollectionViewDelegate, UIColl
         self.present(vc, animated: true, completion: nil)
         
     }
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        myCollectionView.collectionViewLayout.invalidateLayout()
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = collectionView.frame.width
+        
+        if DeviceInfo.Orientation.isPortrait {
+            return CGSize(width: width/3 - 1, height: width/3 - 1)
+        } else {
+            return CGSize(width: width/6 - 1, height: width/6 - 1)
+        }
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1.0
+    }
 }

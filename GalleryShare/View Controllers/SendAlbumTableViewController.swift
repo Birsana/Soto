@@ -122,7 +122,7 @@ class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdati
     override func viewDidLoad() {
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
-        //searchController.dimsBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
         
@@ -168,6 +168,15 @@ class SendAlbumTableViewController: UITableViewController, UISearchResultsUpdati
         }
         cell.albumName.text = album?["name"] as? String
         cell.delegate = self
+        
+        cell.albumName.translatesAutoresizingMaskIntoConstraints = false
+        cell.albumName.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+        cell.albumName.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 10).isActive = true
+        
+        cell.add.translatesAutoresizingMaskIntoConstraints = false
+        cell.add.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+        cell.add.rightAnchor.constraint(equalTo: cell.rightAnchor, constant: -10).isActive = true
+        
         return cell
     }
     func updateSearchResults(for searchController: UISearchController) {

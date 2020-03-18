@@ -36,9 +36,8 @@ class SendCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    
- /*   @IBAction func sendPicTapped(_ sender: Any) {
-        delegate?.sendPic(sendTo: username.text!)
-    } */
-    
+    override func layoutSubviews() {
+        self.profilePicture.layer.cornerRadius = self.profilePicture.frame.width/2.0
+        self.profilePicture.clipsToBounds = true
+    }
 }

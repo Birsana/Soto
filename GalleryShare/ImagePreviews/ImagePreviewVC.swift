@@ -22,16 +22,16 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     let options = PHImageRequestOptions()
     var fetchResult: PHFetchResult<PHAsset>!
     
-    private let addButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setTitle("Add", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        //button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        button.setTitleColor(.systemPink, for: .normal)
-        button.addTarget(self, action: #selector(getPic), for: .touchUpInside)
-        return button
-    }()
+//    private let addButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.setTitle("Add", for: .normal)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        //button.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+//        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+//        button.setTitleColor(.systemPink, for: .normal)
+//        button.addTarget(self, action: #selector(getPic), for: .touchUpInside)
+//        return button
+//    }()
     
     private let sendFriendButton: UIButton = {
         let button = UIButton(type: .system )
@@ -48,7 +48,7 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
     private let gridButton: UIButton = {
         let button = UIButton(type: .system)
            button.frame = CGRect(x: UIScreen.main.bounds.width - 110, y: 0, width: 90, height: 30)
-           button.setTitle("Grid", for: .normal)
+           button.setTitle("Grid View", for: .normal)
            button.translatesAutoresizingMaskIntoConstraints = false
            button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
            button.setTitleColor(.systemPink, for: .normal)
@@ -94,14 +94,14 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
         let imageData = pictoSend.jpegData(compressionQuality: 0.9)
         let privatePicStorageRef = StorageRef.child("users/\(currentUser!.uid)/privatePics").child("\(imageName).jpg")
         
-        let uploadTask = privatePicStorageRef.putData(imageData!, metadata: nil)
+        _ = privatePicStorageRef.putData(imageData!, metadata: nil)
         {metadata, error in
             
             guard let metadata = metadata else {
                 // Uh-oh, an error occurred!
                 return
             }
-            let size = metadata.size
+            _ = metadata.size
             
             privatePicStorageRef.downloadURL { (url, error) in
                 guard let downloadURL = url
@@ -175,19 +175,22 @@ class ImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollectionVi
          
       
         self.view.addSubview(myCollectionView)
-        self.view.addSubview(addButton)
         self.view.addSubview(sendFriendButton)
         self.view.addSubview(addAlbumButton)
         self.view.addSubview(gridButton)
-        addButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        addButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10).isActive = true
+
         
+        addAlbumButton.translatesAutoresizingMaskIntoConstraints = false
+        addAlbumButton.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        addAlbumButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
         
-        //gridButton.center = self.view.center
+        sendFriendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendFriendButton.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        sendFriendButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
         
+        gridButton.translatesAutoresizingMaskIntoConstraints = false
         gridButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        //gridButton.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 750).isActive = true
-        gridButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -30).isActive = true
+        gridButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -80).isActive = true
         
        
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))

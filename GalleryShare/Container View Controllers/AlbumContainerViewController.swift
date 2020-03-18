@@ -11,6 +11,86 @@ import Firebase
 
 class AlbumContainerViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UINavigationControllerDelegate, UISearchBarDelegate {
     
+    
+    @IBOutlet weak var myCollectionView: UICollectionView!
+    
+    var username = ""
+    var friendArray = [NSDictionary?]()
+    
+    var profilePicURL = [String]()
+    var usernameArray = [String]()
+    
+    var userDictionary: [String: String] = [:]
+    
+    var filtered: [String: String] = [:]
+    var isSearching: Bool = false
+    
+    var albumID: String?
+    
+    let defaultImage = UIImage(named: "account")
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width/4 - 10, height: 100)
+        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        flowLayout.scrollDirection = .horizontal
+        flowLayout.minimumInteritemSpacing = 0.0
+        
+        myCollectionView.delegate = self
+        myCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        myCollectionView.dataSource = self
+        myCollectionView.isPagingEnabled = true
+        myCollectionView.collectionViewLayout = flowLayout
+        
+        
+        myCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        myCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        myCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
+        
+        
+        let searchBar = UISearchBar(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 40))
+        view.addSubview(searchBar)
+        searchBar.delegate = self
+        searchBar.backgroundImage = UIImage()
+        
+        viewLoadSetUp()
+    }
+    
+    func viewLoadSetUp(){
+        let databaseRef = Database.database().reference()
+        databaseRef.child("AlbumsRef").child(albumID!).observeSingleEvent(of: .value) { (snapshot) in
+            let myData = snapshot.value as! NSDictionary
+            self.usernameArray = Array(myData.allValues as! [String])
+            
+            for user in self.usernameArray{
+                databaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
+                    let myData = snapshot.value as! NSDictionary
+                    let id = myData[user] as! String
+                    databaseRef.child("users").child(id).observeSingleEvent(of: .value) { (snapshot) in
+                        let myData = snapshot.value as! NSDictionary
+                        let picURL = myData["profilePic"] as! String
+                        self.profilePicURL.append(picURL)
+                        if self.profilePicURL.count == self.usernameArray.count{
+                            self.userDictionary = self.makeDict(arr1: self.usernameArray, arr2: self.profilePicURL)
+                            DispatchQueue.main.async {
+                                self.myCollectionView.reloadData()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    func makeDict(arr1: [String], arr2: [String]) -> [String: String]{
+        var dictionary: [String: String] = [:]
+        for (index, element) in arr1.enumerated() {
+            dictionary[element] = arr2[index]
+        }
+        return dictionary
+    }
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
         isSearching = true
@@ -159,86 +239,4 @@ class AlbumContainerViewController: UIViewController, UICollectionViewDelegate, 
         }
         
     }
-    
-    
-    @IBOutlet weak var myCollectionView: UICollectionView!
-    
-    var username = ""
-    var friendArray = [NSDictionary?]()
-    
-    var profilePicURL = [String]()
-    var usernameArray = [String]()
-    
-    var userDictionary: [String: String] = [:]
-    
-    var filtered: [String: String] = [:]
-    var isSearching: Bool = false
-    
-    var albumID: String?
-    
-    let defaultImage = UIImage(named: "account")
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.itemSize = CGSize(width: UIScreen.main.bounds.width/4 - 10, height: 100)
-        flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        flowLayout.scrollDirection = .horizontal
-        flowLayout.minimumInteritemSpacing = 0.0
-        
-        myCollectionView.delegate = self
-        myCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        myCollectionView.dataSource = self
-        myCollectionView.isPagingEnabled = true
-        myCollectionView.collectionViewLayout = flowLayout
-        
-        
-        myCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        myCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        myCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor).isActive = true
-        
-        
-        let searchBar = UISearchBar(frame: CGRect(x: 0, y:0, width: UIScreen.main.bounds.width, height: 40))
-        view.addSubview(searchBar)
-        searchBar.delegate = self
-        searchBar.backgroundImage = UIImage()
-        
-        viewLoadSetUp()
-    }
-    
-    func viewLoadSetUp(){
-        let databaseRef = Database.database().reference()
-        databaseRef.child("AlbumsRef").child(albumID!).observeSingleEvent(of: .value) { (snapshot) in
-            let myData = snapshot.value as! NSDictionary
-            self.usernameArray = Array(myData.allValues as! [String])
-            
-            for user in self.usernameArray{
-                databaseRef.child("usernames").observeSingleEvent(of: .value) { (snapshot) in
-                    let myData = snapshot.value as! NSDictionary
-                    let id = myData[user] as! String
-                    databaseRef.child("users").child(id).observeSingleEvent(of: .value) { (snapshot) in
-                        let myData = snapshot.value as! NSDictionary
-                        let picURL = myData["profilePic"] as! String
-                        self.profilePicURL.append(picURL)
-                        if self.profilePicURL.count == self.usernameArray.count{
-                            self.userDictionary = self.makeDict(arr1: self.usernameArray, arr2: self.profilePicURL)
-                            DispatchQueue.main.async {
-                                self.myCollectionView.reloadData()
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
-    }
-    func makeDict(arr1: [String], arr2: [String]) -> [String: String]{
-        var dictionary: [String: String] = [:]
-        for (index, element) in arr1.enumerated() {
-            dictionary[element] = arr2[index]
-        }
-        return dictionary
-    }
-    
 }
