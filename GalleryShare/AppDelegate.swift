@@ -62,8 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
         FirebaseApp.configure()
-        //Database.database().isPersistenceEnabled = true
-        Database.database().isPersistenceEnabled = false
+        Database.database().isPersistenceEnabled = true
+        //Database.database().isPersistenceEnabled = false
         Messaging.messaging().delegate = self
         let photos = PHPhotoLibrary.authorizationStatus()
         if photos == .authorized {

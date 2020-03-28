@@ -69,10 +69,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         errorLabel.alpha = 0
     }
     func validateFields() -> String? {
+        
+        //MAKE USERNAME LOWERCASE
+        
         var emailTaken = false
-        let usernameTrim = username.text?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let usernameTrim = username.text?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
         let emailTrim = email.text?.trimmingCharacters(in: .whitespacesAndNewlines)
         let cleanedPassword = password.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        
         
         
         

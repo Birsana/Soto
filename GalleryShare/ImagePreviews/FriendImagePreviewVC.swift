@@ -108,6 +108,14 @@ class FriendImagePreviewVC: UIViewController, UICollectionViewDelegate, UICollec
         self.view.addSubview(addButton)
         self.view.addSubview(sendButton)
         
+        addButton.translatesAutoresizingMaskIntoConstraints = false
+        addButton.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        addButton.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 10).isActive = true
+        
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        sendButton.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -10).isActive = true
+        
         myCollectionView.autoresizingMask = UIView.AutoresizingMask(rawValue: UIView.AutoresizingMask.RawValue(UInt8(UIView.AutoresizingMask.flexibleWidth.rawValue) | UInt8(UIView.AutoresizingMask.flexibleHeight.rawValue)))
     }
     

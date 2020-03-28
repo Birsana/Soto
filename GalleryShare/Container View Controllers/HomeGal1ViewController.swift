@@ -31,11 +31,9 @@ class HomeGal1ViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     fileprivate let imageManager = PHCachingImageManager()
     fileprivate var thumbnailSize: CGSize!
-    //fileprivate var previousPreheatRect = CGRect.zero
     
     
     var numFetch = 0
-    
     var myCollectionView: UICollectionView!
     var imageArray=[UIImage]()
     

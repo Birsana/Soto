@@ -27,10 +27,6 @@ extension AddFriendsTableViewController: FriendCellDelegate{
 }
 
 class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdating {
-    
-    
-    //GET FIRST 10 USERS OR SOMETHING INSTEAD OF EVERYONE
-    
     var currentUsername = ""
     @IBOutlet var searchUsers: UITableView!
     
@@ -42,33 +38,13 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let databaseRef = Database.database().reference()
+        
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
-        let user = Auth.auth().currentUser
-        let uid = user?.uid
         
-        databaseRef.child("users").queryOrdered(byChild: "username").observe(.childAdded, with: { (snapshot) in
-            
-            self.usersArray.append(snapshot.value as? NSDictionary)
-            self.searchUsers.insertRows(at: [IndexPath(row:self.usersArray.count-2, section:0)], with: UITableView.RowAnimation.automatic)
-            
-        }) { (error) in
-            print(error.localizedDescription
-            )
-        }
-        databaseRef.child("users").child(uid!).observeSingleEvent(of: .value) { (snapshot) in
-            let value = snapshot.value as? NSDictionary
-            self.currentUsername = value?["username"] as! String
-            
-            databaseRef.child("Friends").child(self.currentUsername).queryOrdered(byChild: "username").observe(.childAdded) { (snapshot) in
-                self.existingFriendsArray.append(snapshot.value as? NSDictionary)
-            }
-            
-        }
+        
+        
     }
     
     // MARK: - Table view data source
@@ -85,12 +61,12 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
         }
         return self.usersArray.count
     }
-   
+    
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendCell", for: indexPath) as! FriendCell
-     
+        
         let user: NSDictionary?
         if searchController.isActive && searchController.searchBar.text != ""{
             user = filteredUsers[indexPath.row]
@@ -104,13 +80,24 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
         for user in existingFriendsArray{
             if user?["username"] as? String == cell.Person.text{
                 cell.addFriend.isHidden = true
-           
+                
             }
         }
         
-        //let picURL = URL(string:((user?["profilePic"] as? String)!))
-           // cell.profilePic.kf.setImage(with: picURL)
-         //   cell.profilePic.asCircle()
+        
+        cell.Person.translatesAutoresizingMaskIntoConstraints = false
+        cell.Person.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+        cell.Person.widthAnchor.constraint(equalToConstant: 75).isActive = true
+        cell.Person.leftAnchor.constraint(equalTo: cell.leftAnchor, constant: 50).isActive = true
+        
+        let picURL = URL(string:((user?["profilePic"] as? String)!))
+        cell.profilePic.kf.setImage(with: picURL)
+        cell.profilePic.translatesAutoresizingMaskIntoConstraints = false
+        cell.profilePic.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        cell.profilePic.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        cell.profilePic.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+        cell.profilePic.leftAnchor.constraint(equalTo: cell.leftAnchor).isActive = true
+        //cell.profilePic.asCircle()
         
         
         
@@ -123,10 +110,20 @@ class AddFriendsTableViewController: UITableViewController, UISearchResultsUpdat
         filterContent(searchText: self.searchController.searchBar.text!)
     }
     func filterContent(searchText:String){
-        self.filteredUsers = self.usersArray.filter{ user in
-            let username = user!["username"] as? String
-            return(username?.lowercased().contains(searchText.lowercased()))!
+        
+        let searchTextLower = searchText.lowercased()
+        self.filteredUsers.removeAll()
+        let databaseRef = Database.database().reference()
+        databaseRef.child("users").queryOrdered(byChild: "username").queryStarting(atValue: searchTextLower).queryEnding(atValue: "\(searchTextLower)\u{f8ff}").queryLimited(toLast: 5).observe(.childAdded, with: { (snapshot) in
+            print(snapshot)
+            self.filteredUsers.append(snapshot.value as? NSDictionary)
+            self.tableView.reloadData()
+        }) { (error) in
+            print(error.localizedDescription
+            )
         }
-        tableView.reloadData()
+        
+        
     }
+    
 }

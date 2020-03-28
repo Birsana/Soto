@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		67090872238750FB0070C01C /* picCollection.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67090871238750FB0070C01C /* picCollection.xib */; };
 		67090874238777DB0070C01C /* AddFriendsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67090873238777DB0070C01C /* AddFriendsMasterViewController.swift */; };
 		670BEFE02325E01200A04E97 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670BEFDF2325E01200A04E97 /* Utilities.swift */; };
 		670BEFE22325E01900A04E97 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 670BEFE12325E01900A04E97 /* Constants.swift */; };
@@ -103,7 +102,6 @@
 		1212F30D40EFDEBD71C9A7B0 /* Pods_GalleryShare_OneSignalNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GalleryShare_OneSignalNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F10EC9E7D7F81C29D273ECD /* Pods-GalleryShare.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GalleryShare.debug.xcconfig"; path = "Target Support Files/Pods-GalleryShare/Pods-GalleryShare.debug.xcconfig"; sourceTree = "<group>"; };
 		6583EC5124AC5E9D33E32B49 /* Pods_GalleryShareTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GalleryShareTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		67090871238750FB0070C01C /* picCollection.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = picCollection.xib; sourceTree = "<group>"; };
 		67090873238777DB0070C01C /* AddFriendsMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendsMasterViewController.swift; sourceTree = "<group>"; };
 		670BEFDF2325E01200A04E97 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		670BEFE12325E01900A04E97 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -132,14 +130,14 @@
 		6792D927234A92A700E6159E /* PhotoItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoItemCell.swift; sourceTree = "<group>"; };
 		6792D929234D8FE000E6159E /* AlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewController.swift; sourceTree = "<group>"; };
 		6792D933234ED5BD00E6159E /* PrivImagePreviewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivImagePreviewVC.swift; sourceTree = "<group>"; };
-		6797F3842322E32B006A3C0D /* GalleryShare.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GalleryShare.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6797F3842322E32B006A3C0D /* Soto.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soto.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6797F3872322E32B006A3C0D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6797F38C2322E32B006A3C0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6797F38E2322E32D006A3C0D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6797F3912322E32D006A3C0D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6797F3932322E32D006A3C0D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6797F3982322E32D006A3C0D /* GalleryShareTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GalleryShareTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		6797F3A32322E32D006A3C0D /* GalleryShareUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GalleryShareUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6797F3982322E32D006A3C0D /* SotoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SotoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6797F3A32322E32D006A3C0D /* SotoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SotoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6797F3BC23248160006A3C0D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		679BFF4C23F894A300276826 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		679BFF5023F89AA700276826 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,14 +216,6 @@
 				0B0E5ECCA3EE52C560D1C44A /* Pods-GalleryShare-OneSignalNotificationServiceExtension.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		67090870238750CD0070C01C /* ML */ = {
-			isa = PBXGroup;
-			children = (
-				67090871238750FB0070C01C /* picCollection.xib */,
-			);
-			path = ML;
 			sourceTree = "<group>";
 		};
 		670BEFDD2325DDEF00A04E97 /* View Controllers */ = {
@@ -325,9 +315,9 @@
 		6797F3852322E32B006A3C0D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6797F3842322E32B006A3C0D /* GalleryShare.app */,
-				6797F3982322E32D006A3C0D /* GalleryShareTests.xctest */,
-				6797F3A32322E32D006A3C0D /* GalleryShareUITests.xctest */,
+				6797F3842322E32B006A3C0D /* Soto.app */,
+				6797F3982322E32D006A3C0D /* SotoTests.xctest */,
+				6797F3A32322E32D006A3C0D /* SotoUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -336,7 +326,6 @@
 			isa = PBXGroup;
 			children = (
 				D8056A95240D6FFF00C1EA3A /* GalleryShare.entitlements */,
-				67090870238750CD0070C01C /* ML */,
 				67922A972361440E004092C5 /* Container View Controllers */,
 				67922A8623596110004092C5 /* ImagePreviews */,
 				6792D92F234D901400E6159E /* IntroStuff */,
@@ -378,9 +367,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6797F3832322E32B006A3C0D /* GalleryShare */ = {
+		6797F3832322E32B006A3C0D /* Soto */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6797F3AC2322E32D006A3C0D /* Build configuration list for PBXNativeTarget "GalleryShare" */;
+			buildConfigurationList = 6797F3AC2322E32D006A3C0D /* Build configuration list for PBXNativeTarget "Soto" */;
 			buildPhases = (
 				383738512B0982CBCB0396D0 /* [CP] Check Pods Manifest.lock */,
 				6797F3802322E32B006A3C0D /* Sources */,
@@ -394,14 +383,14 @@
 			);
 			dependencies = (
 			);
-			name = GalleryShare;
+			name = Soto;
 			productName = GalleryShare;
-			productReference = 6797F3842322E32B006A3C0D /* GalleryShare.app */;
+			productReference = 6797F3842322E32B006A3C0D /* Soto.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6797F3972322E32D006A3C0D /* GalleryShareTests */ = {
+		6797F3972322E32D006A3C0D /* SotoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6797F3AF2322E32D006A3C0D /* Build configuration list for PBXNativeTarget "GalleryShareTests" */;
+			buildConfigurationList = 6797F3AF2322E32D006A3C0D /* Build configuration list for PBXNativeTarget "SotoTests" */;
 			buildPhases = (
 				856F58082ECA40BF6A3C45A9 /* [CP] Check Pods Manifest.lock */,
 				6797F3942322E32D006A3C0D /* Sources */,
@@ -413,14 +402,14 @@
 			dependencies = (
 				6797F39A2322E32D006A3C0D /* PBXTargetDependency */,
 			);
-			name = GalleryShareTests;
+			name = SotoTests;
 			productName = GalleryShareTests;
-			productReference = 6797F3982322E32D006A3C0D /* GalleryShareTests.xctest */;
+			productReference = 6797F3982322E32D006A3C0D /* SotoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		6797F3A22322E32D006A3C0D /* GalleryShareUITests */ = {
+		6797F3A22322E32D006A3C0D /* SotoUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6797F3B22322E32D006A3C0D /* Build configuration list for PBXNativeTarget "GalleryShareUITests" */;
+			buildConfigurationList = 6797F3B22322E32D006A3C0D /* Build configuration list for PBXNativeTarget "SotoUITests" */;
 			buildPhases = (
 				CF4D2B7C772FC98911A3174F /* [CP] Check Pods Manifest.lock */,
 				6797F39F2322E32D006A3C0D /* Sources */,
@@ -432,9 +421,9 @@
 			dependencies = (
 				6797F3A52322E32D006A3C0D /* PBXTargetDependency */,
 			);
-			name = GalleryShareUITests;
+			name = SotoUITests;
 			productName = GalleryShareUITests;
-			productReference = 6797F3A32322E32D006A3C0D /* GalleryShareUITests.xctest */;
+			productReference = 6797F3A32322E32D006A3C0D /* SotoUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -460,7 +449,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6797F37F2322E32B006A3C0D /* Build configuration list for PBXProject "GalleryShare" */;
+			buildConfigurationList = 6797F37F2322E32B006A3C0D /* Build configuration list for PBXProject "Soto" */;
 			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -473,9 +462,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6797F3832322E32B006A3C0D /* GalleryShare */,
-				6797F3972322E32D006A3C0D /* GalleryShareTests */,
-				6797F3A22322E32D006A3C0D /* GalleryShareUITests */,
+				6797F3832322E32B006A3C0D /* Soto */,
+				6797F3972322E32D006A3C0D /* SotoTests */,
+				6797F3A22322E32D006A3C0D /* SotoUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -489,7 +478,6 @@
 				6797F3BD23248160006A3C0D /* GoogleService-Info.plist in Resources */,
 				6797F38F2322E32D006A3C0D /* Assets.xcassets in Resources */,
 				6797F38D2322E32B006A3C0D /* Main.storyboard in Resources */,
-				67090872238750FB0070C01C /* picCollection.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -690,12 +678,12 @@
 /* Begin PBXTargetDependency section */
 		6797F39A2322E32D006A3C0D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6797F3832322E32B006A3C0D /* GalleryShare */;
+			target = 6797F3832322E32B006A3C0D /* Soto */;
 			targetProxy = 6797F3992322E32D006A3C0D /* PBXContainerItemProxy */;
 		};
 		6797F3A52322E32D006A3C0D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6797F3832322E32B006A3C0D /* GalleryShare */;
+			target = 6797F3832322E32B006A3C0D /* Soto */;
 			targetProxy = 6797F3A42322E32D006A3C0D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -897,7 +885,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GalleryShare.app/GalleryShare";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Soto.app/Soto";
 			};
 			name = Debug;
 		};
@@ -918,7 +906,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GalleryShare.app/GalleryShare";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Soto.app/Soto";
 			};
 			name = Release;
 		};
@@ -965,7 +953,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6797F37F2322E32B006A3C0D /* Build configuration list for PBXProject "GalleryShare" */ = {
+		6797F37F2322E32B006A3C0D /* Build configuration list for PBXProject "Soto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6797F3AA2322E32D006A3C0D /* Debug */,
@@ -974,7 +962,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6797F3AC2322E32D006A3C0D /* Build configuration list for PBXNativeTarget "GalleryShare" */ = {
+		6797F3AC2322E32D006A3C0D /* Build configuration list for PBXNativeTarget "Soto" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6797F3AD2322E32D006A3C0D /* Debug */,
@@ -983,7 +971,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6797F3AF2322E32D006A3C0D /* Build configuration list for PBXNativeTarget "GalleryShareTests" */ = {
+		6797F3AF2322E32D006A3C0D /* Build configuration list for PBXNativeTarget "SotoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6797F3B02322E32D006A3C0D /* Debug */,
@@ -992,7 +980,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6797F3B22322E32D006A3C0D /* Build configuration list for PBXNativeTarget "GalleryShareUITests" */ = {
+		6797F3B22322E32D006A3C0D /* Build configuration list for PBXNativeTarget "SotoUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6797F3B32322E32D006A3C0D /* Debug */,
